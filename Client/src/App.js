@@ -1,18 +1,21 @@
 import React from 'react';
 import Home from './Pages/Home';
 import FilteredBuses from './Pages/FilteredBuses';
-import { BrowserRouter as Switch, Route, Router } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import './App.css';
 function App() {
 
   return (
     <div className="App">
-    <Switch>
+    
+    <Routes>
      
-        <Route exact path="/" component={Home} />
-        <Route path="/filteredBuses" component={FilteredBuses} />
+        <Route path="*" element={<Home/>} />
+        <Route path="/filteredBuses" element={<FilteredBuses/>} />
       
-      </Switch>
+      </Routes>
+      
     </div>
   );
 }
