@@ -7,12 +7,12 @@ const Table = ({ data }) => {
         <tr>
           <th>BusID</th>
           <th>Capacity</th>
-          <th>HaltNames</th>
+          
         </tr>
       </thead>
       <tbody>
         {data.map(bus => (
-          <tr key={bus.busID}>
+          <tr key={bus.id}>
             <td>{bus.busID}</td>
             <td>{bus.capacity}</td>
             <td>

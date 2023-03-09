@@ -21,6 +21,6 @@ public class Bus {
     private String capacity;
 
     private List<BusHalt> busHalts;
-    private List<BusRoute> busRoutes;
+   private List<BusRoute> busRoutes;
 
 }
