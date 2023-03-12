@@ -5,12 +5,10 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import Table from './Table.js';
 //import '../css/Home.css'
-import axios from 'axios';
+import api from './api.js';
 
 
-const api = axios.create({
-    baseURL: 'http://localhost:8080/api/v1/buses'
-});
+
 
 
 const Map = () => {
@@ -79,15 +77,16 @@ const Map = () => {
           .addTo(map.current)
     
           // add click event listener to the marker element
-         marker.getElement().addEventListener('click', () => {
-
-      
-        api.get(`/getBusbyHaltName/${haltName}`).then(res => {
-          setFilteredBuses(res.data);
-          console.log(res.data);
-        })
-      
-      });
+          marker.getElement().addEventListener('click', () => {
+            const handleClick = (haltName) => {
+              api.get(`/getBusbyHaltName/${haltName}`).then(res => {
+                setFilteredBuses(res.data);
+                console.log(res.data);
+              })
+            };
+            
+            handleClick(haltName);
+          });
   
       
   

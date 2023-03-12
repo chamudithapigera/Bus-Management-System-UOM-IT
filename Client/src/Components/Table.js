@@ -1,30 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+import api from './api';
+import { Marker, Popup } from 'react-leaflet';
 
-const Table = ({ data }) => {
+function BusHaltMarker({ haltName ,position,icon}) {
+  const [filteredBuses, setFilteredBuses] = useState([]);
+
+  const handleClick = () => {
+    api.get(`/getBusbyHaltName/${haltName}`).then(res => {
+      setFilteredBuses(res.data);
+    });
+  };
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>BusID</th>
-          <th>Capacity</th>
-          
-        </tr>
-      </thead>
-      <tbody>
-        {data.map(bus => (
-          <tr key={bus.id}>
-            <td>{bus.busID}</td>
-            <td>{bus.capacity}</td>
-            <td>
-            {bus.busHalts.map(BusHalt => (
-                <div key={BusHalt.haltName}>{BusHalt.haltName}</div>
-              ))}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <Marker position={position} icon={icon} onClick={handleClick}>
+      <Popup>
+        <h3>{haltName}</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>busID</th>
+              <th>capacity</th>
+            
+            </tr>
+          </thead>
+          <tbody>
+            {filteredBuses.map(bus => (
+              <tr key={bus.id}>
+                <td>{bus.busID}</td>
+                <td>{bus.capacity}</td>
+              
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Popup>
+    </Marker>
   );
-};
+}
 
-export default Table;
+export default BusHaltMarker;
