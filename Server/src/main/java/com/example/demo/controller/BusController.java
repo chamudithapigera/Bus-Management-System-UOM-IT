@@ -3,10 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.model.Bus;
 import com.example.demo.repository.BusRepository;
 
+import com.example.demo.service.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,20 +20,21 @@ import java.util.List;
 public class BusController {
 
     @Autowired
-    private BusRepository busRepository;
+    private BusService busService;
 
-    @PostMapping
+
     @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/addBus")
     public String saveBus(@RequestBody Bus bus){
-        busRepository.save(bus);
+        busService.save(bus);
         return "Bus saved successfully...";
     }
 
-    @GetMapping
-    @CrossOrigin(origins = "http://localhost:3000")
-    public List<Bus> getBuses(){
-        return busRepository.findAll();
 
+    @GetMapping("/viewBus")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<List<Bus>> getAllBuses(){
+        return new ResponseEntity<List<Bus>>(busService.allBuses(), HttpStatus.OK);
     }
 
     @Autowired

@@ -4,7 +4,7 @@ import Table from '../Components/Table.js';
 
 const FilteredBuses = () => {
   
- 
+
     const [data, setData] = useState([]);
   
     useEffect(() => {
