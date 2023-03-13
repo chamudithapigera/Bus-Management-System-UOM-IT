@@ -17,10 +17,9 @@ public class BusService {
         busRepository.insert(bus);
     }
 
-    public List<Bus> allBuses(){
-        System.out.println(busRepository.findAll().toString());
-        return busRepository.findAll();
-    }
+
+
+
 /*
     public Optional<Bus> singleBus(String busID){
         return busRepository.findBusBybusID(busID);
@@ -41,5 +40,6 @@ public class BusService {
 
         return filteredBuses;
     }
+
 */
 }

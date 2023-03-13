@@ -12,10 +12,6 @@ import java.util.List;
 @Repository
 public interface BusRepository extends MongoRepository<Bus, ObjectId> {
 
-
-    List<Bus> findByBusID(String busID);
-
-    @Query("{'BusHalt.haltName': ?0}")
-    List<Bus> findByBusbyHaltName(String haltName);
+    
 
 }

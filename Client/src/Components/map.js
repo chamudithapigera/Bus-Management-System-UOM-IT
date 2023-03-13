@@ -9,8 +9,6 @@ import api from './api.js';
 
 
 
-
-
 const Map = () => {
   const mapContainer = useRef(null);
   const map = useRef(null);

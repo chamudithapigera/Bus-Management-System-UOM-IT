@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "bus")
+@Document(collection = "buses")
 public class Bus {
 
     @Id
@@ -21,8 +22,12 @@ public class Bus {
     private String busID;
     private String capacity;
 
-    @DocumentReference
-    private List<BusHalt> busHalts;
-   // private List<BusRoute> busRoutes;
+    @DBRef
+    private List<BusStop> busStopID;
+
+    @DBRef
+    private List<BusRoute> busRouteID;
+
+
 
 }
