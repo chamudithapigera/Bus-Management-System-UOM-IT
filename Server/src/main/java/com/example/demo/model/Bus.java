@@ -22,12 +22,12 @@ public class Bus {
     private String capacity;
     //@DBRef
     @DocumentReference
-    private String driverID;
+    private String driver;
     //@DBRef
     @DocumentReference
-    private List<BusStop> busStopID;
+    private List<BusStop> busStop;
     //@DBRef
     @DocumentReference
-    private List<BusRoute> busRouteID;
+    private List<BusRoute> busRoute;
 
 }
