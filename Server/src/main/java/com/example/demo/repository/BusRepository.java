@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface BusRepository extends MongoRepository<Bus, ObjectId> {
 
-    
+
 
 }
