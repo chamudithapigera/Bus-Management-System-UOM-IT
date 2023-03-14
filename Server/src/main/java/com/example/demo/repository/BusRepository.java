@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface BusRepository extends MongoRepository<Bus, ObjectId> {
     Optional<Bus> findBusBybusID(String busID);
 
+    void deleteById(String busID);
 }

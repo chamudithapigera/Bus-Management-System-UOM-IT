@@ -13,7 +13,7 @@ public class BusService {
 
     @Autowired
     private BusRepository busRepository;
-    public List<Bus>allBuses(){
+    public List<Bus> findAll() {
         return busRepository.findAll();
     }
     public Optional<Bus> singleBus(String busID){
@@ -23,5 +23,10 @@ public class BusService {
     public void save(Bus bus) {
         busRepository.insert(bus);
     }
+
+    public void deleteBusById(String busID) {
+        busRepository.deleteById(busID);
+    }
+
 
 }
