@@ -36,12 +36,16 @@ const Sidebar = () => {
           </li>
           <p className="title">Features</p>
           <Link to="/users" style={{textDecoration:"none"}}>
+
+          <Link to="/driver" style={{textDecoration:"none"}}>
           <li>
             <Person2OutlinedIcon className="icon"/>
             <span>Drivers</span>
           </li>
           </Link>
           
+          </Link>
+
           <Link to="/bus" style={{textDecoration:"none"}}>
           <li>
             <ProductionQuantityLimitsOutlinedIcon className="icon"/>
@@ -56,10 +60,13 @@ const Sidebar = () => {
           </li>
           </Link>
 
+          <Link to="/busStop" style={{textDecoration:"none"}}>
           <li>
             <DeliveryDiningIcon className="icon"/>
             <span>Bus Stops</span>
           </li>
+          </Link>
+
           <li>
             <DeliveryDiningIcon className="icon"/>
             <span>Driver-Attendance</span>

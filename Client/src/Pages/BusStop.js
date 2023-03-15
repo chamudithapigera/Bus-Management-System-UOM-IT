@@ -4,17 +4,17 @@ import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 
 
-export default function BusRoute() {
+export default function BusStop() {
 
-    const [busRoutes, setBusRoutes]=useState([]);
+    const [BusStops, setBusStops]=useState([]);
     useEffect(()=>{ 
-      loadBusRoutes();
+      loadBusStops();
       
   },[]);
 
-  const loadBusRoutes = async () => {
-    const result = await axios.get("http://localhost:8080/api/v1/busRoute/viewBusRoute");
-    setBusRoutes(result.data);
+  const loadBusStops = async () => {
+    const result = await axios.get("http://localhost:8080/api/v1/busStop/viewBusStop");
+    setBusStops(result.data);
   };
   
   return (
@@ -22,7 +22,7 @@ export default function BusRoute() {
         <div className='py-4'>
         <div className='datatableTitle'>
              <Link  to='/' style={{textDecoration:"none"}}>Home</Link>
-            <Link  to="/addRoute" style={{textDecoration:"none"}}>Add BusRoute</Link>
+            <Link  to="/addStop" style={{textDecoration:"none"}}>Add BusStop</Link>
         </div>
         <table className="table border shadow">
 
@@ -30,21 +30,19 @@ export default function BusRoute() {
     <tr>
       <th>#</th>
       <th scope="col">Object ID</th>
-      <th scope="col">Route ID</th>
-      <th scope="col">Route NO</th>
-      <th scope="col">Route Name</th>
+      <th scope="col">busStopName</th>
+      <th scope="col">longitude</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
 
   <tbody>
-  {busRoutes.map((busRoute,index) => (
+  {BusStops.map((busStop,index) => (
           <tr >
           <th scope="row" key={index}>{index+1}</th>
-          <td>{busRoute.id}</td>
-          <td>{busRoute.routeID}</td>
-          <td>{busRoute.routeNO}</td>
-          <td>{busRoute.routeName}</td> 
+          <td>{busStop.id}</td>
+          <td>{busStop.busStopName}</td>
+          <td>{busStop.longitude}</td>
           <td>
               <button className='btn btn-primary mx-2'>View</button>
               <button className='btn btn-outline mx-2'>Edit</button>
@@ -61,4 +59,3 @@ export default function BusRoute() {
     </div>
   )
 }
-

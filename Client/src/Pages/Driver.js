@@ -4,17 +4,17 @@ import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 
 
-export default function BusRoute() {
+export default function Driver() {
 
-    const [busRoutes, setBusRoutes]=useState([]);
+    const [Drivers, setDrivers]=useState([]);
     useEffect(()=>{ 
-      loadBusRoutes();
+      loadDrivers();
       
   },[]);
 
-  const loadBusRoutes = async () => {
-    const result = await axios.get("http://localhost:8080/api/v1/busRoute/viewBusRoute");
-    setBusRoutes(result.data);
+  const loadDrivers = async () => {
+    const result = await axios.get("http://localhost:8080/api/v1/driver/viewDriver");
+    setDrivers(result.data);
   };
   
   return (
@@ -22,7 +22,7 @@ export default function BusRoute() {
         <div className='py-4'>
         <div className='datatableTitle'>
              <Link  to='/' style={{textDecoration:"none"}}>Home</Link>
-            <Link  to="/addRoute" style={{textDecoration:"none"}}>Add BusRoute</Link>
+            <Link  to="/addDriver" style={{textDecoration:"none"}}>Add Driver</Link>
         </div>
         <table className="table border shadow">
 
@@ -30,21 +30,21 @@ export default function BusRoute() {
     <tr>
       <th>#</th>
       <th scope="col">Object ID</th>
-      <th scope="col">Route ID</th>
-      <th scope="col">Route NO</th>
-      <th scope="col">Route Name</th>
+      <th scope="col">driverID</th>
+      <th scope="col">driverName</th>
+      <th scope="col">licenseNo</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
 
   <tbody>
-  {busRoutes.map((busRoute,index) => (
+  {Drivers.map((driver,index) => (
           <tr >
           <th scope="row" key={index}>{index+1}</th>
-          <td>{busRoute.id}</td>
-          <td>{busRoute.routeID}</td>
-          <td>{busRoute.routeNO}</td>
-          <td>{busRoute.routeName}</td> 
+          <td>{driver.id}</td>
+          <td>{driver.driverID}</td>
+          <td>{driver.driverName}</td>
+          <td>{driver.licenseNo}</td>
           <td>
               <button className='btn btn-primary mx-2'>View</button>
               <button className='btn btn-outline mx-2'>Edit</button>
@@ -61,4 +61,3 @@ export default function BusRoute() {
     </div>
   )
 }
-

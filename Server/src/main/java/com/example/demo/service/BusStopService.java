@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Bus;
+import com.example.demo.model.BusRoute;
 import com.example.demo.model.BusStop;
 import com.example.demo.repository.BusStopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BusStopService {
@@ -28,6 +31,11 @@ public class BusStopService {
         return busStop;
 
     }
+
+    public List<BusStop> findAll() {
+        return busStopRepository.findAll();
+    }
+
 
 }
 

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.BusStop;
 import com.example.demo.model.Driver;
 import com.example.demo.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class DriverController {
     }
 
     @GetMapping("/viewDriver")
-    public ResponseEntity<List<Driver>> getAllDrivers(){
-        return new ResponseEntity<List<Driver>>(driverService.allDrivers(), HttpStatus.OK);
+    public List<Driver> findAllDriversWithDetails() {
+        return driverService.findAll();
     }
 
 }

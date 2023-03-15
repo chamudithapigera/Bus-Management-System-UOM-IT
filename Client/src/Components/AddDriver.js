@@ -17,13 +17,13 @@ export default function AddBusRoute() {
     const{driverID,driverName,licenseNo, busID}=driver
 
     const onInputChange=(e)=>{
-        setBusRoute({...driver,[e.target.name]:e.target.value}
+        setDriver({...driver,[e.target.name]:e.target.value}
             )};
 
         const onSubmit= async (e)=>{
             e.preventDefault();
             await axios.post("http://localhost:8080/api/v1/driver/addDriver",driver)
-            navigate("/")
+            navigate("/driver")
         }
     
   return (
@@ -82,7 +82,7 @@ export default function AddBusRoute() {
                 </div>
                 
                 <button type="submit" className="btn btn-outline-primary">Submit</button>
-                <Link  className="btn btn-outline-danger mx-2" to="/">Cancel</Link>
+                <Link  to="/driver" style={{textDecoration:"none"}}>Cancel</Link>
                 </form>
             </div>
         </div>
