@@ -15,12 +15,8 @@ function App() {
             
             <Route path="searchbus">
               <Route index element={<SearchBus />} />
+              <Route path="filteredbus" element={<FilteredBuses />} />
             </Route>
-
-            <Route path="filteredbus">
-              <Route index element={<FilteredBuses />} />
-            </Route>
-
           
           </Route>
         </Routes>

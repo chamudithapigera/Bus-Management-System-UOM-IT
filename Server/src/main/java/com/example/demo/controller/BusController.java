@@ -27,12 +27,13 @@ public class BusController {
     @Autowired
     private BusRepository busRepository;
 
+    /*
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/addBus")
     public String saveBus(@RequestBody Bus bus){
         busService.save(bus);
         return "Bus saved successfully...";
-    }
+    }*/
 
     @Autowired
     private MongoTemplate mongoTemplate;

@@ -17,11 +17,11 @@ public class BusStopController {
 
     @Autowired
     private BusStopService busStopService;
-
+/*
     @PostMapping("/addBusStop")
     public ResponseEntity<BusStop> createBusStop(@RequestBody Map<String, String> payload){
 
         return new ResponseEntity<BusStop>(busStopService.createBusStopBy(payload.get("busStopName"),payload.get("longitude"),payload.get("busID")), HttpStatus.CREATED);
     }
-
+*/
 }

@@ -41,11 +41,8 @@ const Sidebar = () => {
             <span>Search Bus</span>
           </li>
           </Link>
-          <Link to ="/filteredbus" style={{textDecoration:"none"}}>
-          <li>
-            <TravelExploreIcon className="icon"/>
-            <span>Filtered Bus</span>
-          </li>
+          <Link to ="/searchbus/filteredbus" style={{textDecoration:"none"}}>
+          
           </Link>
           <li>
             <NotificationsNoneOutlinedIcon className="icon"/>

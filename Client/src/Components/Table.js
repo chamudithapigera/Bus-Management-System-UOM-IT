@@ -3,7 +3,8 @@ import api from './api';
 import { Marker, Popup } from 'react-leaflet';
 import { Tab } from 'react-bootstrap';
 import axios from 'axios';
-import '../Css/table.scss'
+import '../Css/table.scss';
+
 
 const Table = () => {
   
@@ -15,7 +16,7 @@ const Table = () => {
 
   const loadBuses = async ()=>{
 
-    const result = await axios.get("http://localhost:8080/api/v1/buses/viewBus");
+    const result = await axios.get("http://localhost:8080/api/v1/buses/getBusesByBusStopName/{busStopName}");
     console.log(result.data);
     setBuses(result.data);
   }

@@ -17,11 +17,11 @@ public class BusRouteController {
 
     @Autowired
     private BusRouteService busRouteService;
-
+/*
     @PostMapping("/addRoute")
     public ResponseEntity<BusRoute> createBusRoute(@RequestBody Map<String, String> payload){
 
         return new ResponseEntity<BusRoute>(busRouteService.createBusRouteBy(payload.get("routeID"),payload.get("routeNO"),payload.get("routeName"),payload.get("busID")), HttpStatus.CREATED);
     }
-
+*/
 }
