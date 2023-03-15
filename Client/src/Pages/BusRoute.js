@@ -4,17 +4,17 @@ import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 
 
-export default function Bus() {
+export default function BusRoute() {
 
-    const [buses, setBuses]=useState([]);
+    const [busRoutes, setBusRoutes]=useState([]);
     useEffect(()=>{ 
-      loadBuses();
+      loadBusRoutes();
       
   },[]);
 
-  const loadBuses = async () => {
-    const result = await axios.get("http://localhost:8080/api/v1/bus_detail/viewBus");
-    setBuses(result.data);
+  const loadBusRoutes = async () => {
+    const result = await axios.get("http://localhost:8080/api/v1/busRoute/viewBusRoute");
+    setBusRoutes(result.data);
   };
   
   return (
@@ -22,7 +22,7 @@ export default function Bus() {
         <div className='py-4'>
         <div className='datatableTitle'>
              <Link  to='/' style={{textDecoration:"none"}}>Home</Link>
-            <Link  to="/addbus" style={{textDecoration:"none"}}>Add</Link>
+            <Link  to="/addRoute" style={{textDecoration:"none"}}>Add BusRoute</Link>
         </div>
         <table className="table border shadow">
 
@@ -30,19 +30,21 @@ export default function Bus() {
     <tr>
       <th>#</th>
       <th scope="col">Object ID</th>
-      <th scope="col">Bus ID</th>
-      <th scope="col">Capacity</th>
+      <th scope="col">Route ID</th>
+      <th scope="col">Route NO</th>
+      <th scope="col">Route Name</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
 
   <tbody>
-  {buses.map((bus,index) => (
+  {busRoutes.map((busRoute,index) => (
           <tr >
           <th scope="row" key={index}>{index+1}</th>
-          <td>{bus.id}</td>
-          <td>{bus.busID}</td>
-          <td>{bus.capacity}</td> 
+          <td>{busRoute.r_id}</td>
+          <td>{busRoute.routeID}</td>
+          <td>{busRoute.routeNO}</td>
+          <td>{busRoute.routeName}</td> 
           <td>
               <button className='btn btn-primary mx-2'>View</button>
               <button className='btn btn-outline mx-2'>Edit</button>

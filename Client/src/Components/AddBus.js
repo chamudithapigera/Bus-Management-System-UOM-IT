@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function AddBus() {
-
+    //const AddBus = () => {
     let navigate = useNavigate()
     const [bus, setBus] = useState({
         
@@ -21,7 +21,7 @@ export default function AddBus() {
         const onSubmit= async (e)=>{
             e.preventDefault();
             await axios.post("http://localhost:8080/api/v1/bus_detail/addBus",bus)
-            navigate("/")
+            navigate("/bus")
         }
     
   return (
@@ -56,10 +56,12 @@ export default function AddBus() {
                 </div>
                 
                 <button type="submit" className="btn btn-outline-primary">Submit</button>
-                <Link  className="btn btn-outline-danger mx-2" to="/">Cancel</Link>
+                <Link  className="btn btn-outline-danger mx-2" to="/bus">Cancel</Link>
                 </form>
             </div>
         </div>
     </div>
   )
 }
+
+//export default AddBus;
