@@ -1,15 +1,30 @@
-import React from 'react';
-import Home from './Pages/Home';
-import FilteredBuses from './Pages/FilteredBuses';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from "./Pages/Home";
+import SearchBus from "./Pages/SearchBus";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import FilteredBuses from "./Pages/FilteredBuses";
 
-import './App.css';
+
+
 function App() {
-
   return (
     <div className="App">
-    <Home/>
-      
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Home />} />
+            
+            <Route path="searchbus">
+              <Route index element={<SearchBus />} />
+            </Route>
+
+            <Route path="filteredbus">
+              <Route index element={<FilteredBuses />} />
+            </Route>
+
+          
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

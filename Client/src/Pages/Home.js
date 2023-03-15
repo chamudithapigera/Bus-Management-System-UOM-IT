@@ -1,23 +1,20 @@
-import React,{Component} from "react";
-
-import axios from 'axios';
-
-import Map from "../Components/map";
+import Sidebar from "../Components/Sidebar";
+import Navbar from "../Components/Navbar";
+import "../Css/home.scss";
 
 
-
-function Home() {
-
-
+const Home = () => {
   return (
-    <div>
-
-      <Map/>
-      
-
+    <div className="home">
+      <Sidebar />
+      <div className="homeContainer">
+        <Navbar />
+        
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Home;
+
 
