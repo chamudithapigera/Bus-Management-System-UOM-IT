@@ -6,14 +6,19 @@ import Bus from './Pages/Bus';
 import AddBus from './Components/AddBus';
 import BusRoute from './Pages/BusRoute';
 import AddBusRoute from './Components/AddBusRoute';
+import AddBusStop from './Components/AddBusStop';
 import BusStop from './Pages/BusStop';
 import Driver from './Pages/Driver';
-import AddDriver from './Components/AddDriver';;
+import AddDriver from './Components/AddDriver';
+import { useContext, useState } from "react";
+import { DarkModeContext } from './Components/darkModeContext';
 
 
 function App() {
+  const {darkMode}= useContext(DarkModeContext);
   return (
-    <div className="App">
+    <div className= {darkMode ? "app dark" : "app"}>
+    
      <BrowserRouter>
       <Routes>
         <Route path='/'>
@@ -23,7 +28,7 @@ function App() {
             <Route path="busRoute" element={<BusRoute />} />
             <Route path="/addRoute" element={<AddBusRoute />} />
             <Route path="busStop" element={<BusStop />} />
-            <Route path="/addStop" element={<AddBusRoute />} />
+            <Route path="/addStop" element={<AddBusStop />} />
             <Route path="driver" element={<Driver />} />
             <Route path="/addDriver" element={<AddDriver />} />
             

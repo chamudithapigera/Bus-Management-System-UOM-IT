@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import '../Css/form.scss';
 
 export default function AddBusRoute() {
 
@@ -27,17 +28,17 @@ export default function AddBusRoute() {
         }
     
   return (
-    <div className='container'>
-        <div className='row'>
-            <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
+    <div className='container1'>
+        <div >
+            <div >
                 <h2 className='text-center m-4'>Add details of drivers</h2>
                 <form onSubmit={(e)=> onSubmit(e)}>
                 <div className='mb-3'>
 
-                <label htmlFor='driverID' className='form-label'>driverID</label>
+                <label htmlFor='driverID' className='label'>Driver ID</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter driver ID '
                         name='driverID'
                         value={driverID}
@@ -46,10 +47,10 @@ export default function AddBusRoute() {
                 </div>
 
                 <div className='mb-3'>
-                    <label htmlFor='driverName' className='form-label'>driverName</label>
+                    <label htmlFor='driverName' className='label'>Driver Name</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter driver name'
                         name='driverName'
                        value={driverName}
@@ -58,10 +59,10 @@ export default function AddBusRoute() {
                 </div>
 
                 <div className='mb-3'>
-                    <label htmlFor='licenseNo' className='form-label'>licenseNo</label>
+                    <label htmlFor='licenseNo' className='label'>License No</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter license number'
                         name='licenseNo'
                        value={licenseNo}
@@ -70,10 +71,10 @@ export default function AddBusRoute() {
                 </div>
 
                 <div className='mb-3'>
-                    <label htmlFor='busID' className='form-label'>Bus ID</label>
+                    <label htmlFor='busID' className='label'>Bus ID</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter bus ID'
                         name='busID'
                        value={busID}
@@ -81,7 +82,7 @@ export default function AddBusRoute() {
                     />
                 </div>
                 
-                <button type="submit" className="btn btn-outline-primary">Submit</button>
+                <button type="submit" className="button">Submit</button>
                 <Link  to="/driver" style={{textDecoration:"none"}}>Cancel</Link>
                 </form>
             </div>

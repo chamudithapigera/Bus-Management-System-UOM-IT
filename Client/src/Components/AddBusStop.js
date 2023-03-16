@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import '../Css/form.scss';
 
 export default function AddBusRoute() {
 
@@ -16,7 +17,7 @@ export default function AddBusRoute() {
     const{busStopName,longitude, busID}=busStop
 
     const onInputChange=(e)=>{
-        setBusRoute({...busStop,[e.target.name]:e.target.value}
+        setBusStop({...busStop,[e.target.name]:e.target.value}
             )};
 
         const onSubmit= async (e)=>{
@@ -26,16 +27,16 @@ export default function AddBusRoute() {
         }
     
   return (
-    <div className='container'>
-        <div className='row'>
-            <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
+    <div className='container1'>
+        <div >
+            <div >
                 <h2 className='text-center m-4'>Add details of bus-stops</h2>
                 <form onSubmit={(e)=> onSubmit(e)}>
                 <div className='mb-3'>
-                <label htmlFor='busStopName' className='form-label'>busStopName</label>
+                <label htmlFor='busStopName' className='label'>Bus Stop Name</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter bus  stop name '
                         name='busStopName'
                         value={busStopName}
@@ -44,10 +45,10 @@ export default function AddBusRoute() {
                 </div>
 
                 <div className='mb-3'>
-                    <label htmlFor='longitude' className='form-label'>longitude</label>
+                    <label htmlFor='longitude' className='label'>Longitude</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter longitude'
                         name='longitude'
                        value={longitude}
@@ -56,10 +57,10 @@ export default function AddBusRoute() {
                 </div>
 
                 <div className='mb-3'>
-                    <label htmlFor='busID' className='form-label'>Bus ID</label>
+                    <label htmlFor='busID' className='label'>Bus ID</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter bus ID'
                         name='busID'
                        value={busID}
@@ -67,7 +68,7 @@ export default function AddBusRoute() {
                     />
                 </div>
                 
-                <button type="submit" className="btn btn-outline-primary">Submit</button>
+                <button type="submit" className="button">Submit</button>
                 <Link   to="/busStop" style={{textDecoration:"none"}}>Cancel</Link>
                 </form>
             </div>

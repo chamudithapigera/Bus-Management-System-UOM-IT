@@ -10,6 +10,7 @@ import MonitorHeartOutlinedIcon from "@mui/icons-material/MonitorHeartOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from './darkModeContext';
@@ -22,20 +23,24 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="top">
-        <Link to="/" style={{textDecoration:"none"}}>
+       
+      <Link to="/" style={{textDecoration:"none"}}>
+        <AccountCircleIcon className="icontop"/>
         <spank className="logo">depo admin</spank>
-        </Link>
+      </Link>
       </div>
-      <hr />
+      <hr/>
       <div className="center">
         <ul>
-            <p className="title">MAIN</p>
+        <Link to ="/" style={{textDecoration:"none"}}>
           <li>
             <DashboardIcon className="icon"/>
             <span>Dashboard</span>
           </li>
+          </Link>
+          
           <p className="title">Features</p>
-          <Link to="/users" style={{textDecoration:"none"}}>
+         
 
           <Link to="/driver" style={{textDecoration:"none"}}>
           <li>
@@ -44,7 +49,7 @@ const Sidebar = () => {
           </li>
           </Link>
           
-          </Link>
+         
 
           <Link to="/bus" style={{textDecoration:"none"}}>
           <li>
@@ -71,37 +76,30 @@ const Sidebar = () => {
             <DeliveryDiningIcon className="icon"/>
             <span>Driver-Attendance</span>
           </li>
-          <p className="title">USEFUL</p>
-          <li>
-            <QueryStatsIcon className="icon"/>
-            <span>Stats</span>
-          </li>
+
+          
           <li>
             <NotificationsNoneOutlinedIcon className="icon"/>
-            <span>Notifications</span>
+            <span>Notification</span>
           </li>
+ 
           <p className="title">SERVICE</p>
-          <li>
-            <MonitorHeartOutlinedIcon className="icon"/>
-            <span>System Health</span>
-          </li>
-          <li>
-            <PsychologyOutlinedIcon className="icon"/>
-            <span>Logs</span>
-          </li>
+          
           <li>
             <SettingsIcon className="icon"/>
             <span>Settings</span>
           </li>
-          <p className="title">USER</p>
+          
           <li>
             <AccountCircleOutlinedIcon className="icon"/>
             <span>Profile</span>
           </li>
+
           <li>
             <ExitToAppOutlinedIcon className="icon"/>
             <span>Logout</span>
           </li>
+          
         </ul>
       </div>
       <div className="bottom">

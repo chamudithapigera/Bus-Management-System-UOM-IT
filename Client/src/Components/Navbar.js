@@ -44,7 +44,7 @@ const Navbar = () => {
           </div>
           <div className="item">
             <img
-              src="https://i1.wp.com/www.colombotelegraph.com/wp-content/uploads/2014/11/Maitre1.jpg?ssl=1"
+              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
               alt=""
               className="avatar"
             />

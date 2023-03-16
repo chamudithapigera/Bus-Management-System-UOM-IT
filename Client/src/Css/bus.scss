@@ -1,3 +1,12 @@
+.bus{
+  display: flex;
+  width: 100%;
+
+  .busContainer{
+      flex: 6;
+  }
+}
+
 table {
     border-collapse: collapse;
     width: 100%;

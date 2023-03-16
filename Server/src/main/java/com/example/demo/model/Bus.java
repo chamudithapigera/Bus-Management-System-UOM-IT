@@ -23,10 +23,10 @@ public class Bus {
     //@DBRef
     @DocumentReference
     private String driver;
-    //@DBRef
+   // @DBRef
     @DocumentReference
     private List<BusStop> busStop;
-    //@DBRef
+   //@DBRef
     @DocumentReference
     private List<BusRoute> busRoute;
 

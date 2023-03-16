@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import '../Css/form.scss';
 
 export default function AddBus() {
     //const AddBus = () => {
@@ -25,17 +26,17 @@ export default function AddBus() {
         }
     
   return (
-    <div className='container'>
-        <div className='row'>
-            <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
-                <h2 className='text-center m-4'>Add details of buses</h2>
-                <form onSubmit={(e)=> onSubmit(e)}>
+    <div className='container1'>
+        <div >
+            <div >
+                <h2 className=' m-4'>Add details of buses</h2>
+                <form onSubmit={(e)=> onSubmit(e)} >
                     
                 <div className='mb-3'>
-                    <label htmlFor='busID' className='form-label'>Bus ID</label>
+                    <label htmlFor='busID' className='label'>Bus ID</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter bus ID'
                         name='busID'
                        value={busID}
@@ -44,10 +45,10 @@ export default function AddBus() {
                 </div>
 
                 <div className='mb-3'>
-                <label htmlFor='capacity' className='form-label'>Capacity</label>
+                <label htmlFor='capacity' className='label'>Capacity</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter no of seats'
                         name='capacity'
                         value={capacity}
@@ -55,8 +56,8 @@ export default function AddBus() {
                     />
                 </div>
                 
-                <button type="submit" className="btn btn-outline-primary">Submit</button>
-                <Link  className="btn btn-outline-danger mx-2" to="/bus">Cancel</Link>
+                <button type="submit" className="button">Submit</button>
+                <Link  style={{textDecoration:"none"}} to="/bus">Cancel</Link>
                 </form>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import '../Css/form.scss';
 
 export default function AddBusRoute() {
 
@@ -27,16 +28,16 @@ export default function AddBusRoute() {
         }
     
   return (
-    <div className='container'>
-        <div className='row'>
+    <div className='container1'>
+        <div >
             <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
                 <h2 className='text-center m-4'>Add details of bus-routes</h2>
                 <form onSubmit={(e)=> onSubmit(e)}>
                 <div className='mb-3'>
-                <label htmlFor='routeID' className='form-label'>routeID</label>
+                <label htmlFor='routeID' className='label'rm>Route ID</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter no of '
                         name='routeID'
                         value={routeID}
@@ -44,10 +45,10 @@ export default function AddBusRoute() {
                     />
                 </div>
                 <div className='mb-3'>
-                    <label htmlFor='routeNO' className='form-label'>routeNO</label>
+                    <label htmlFor='routeNO' className='label'>Route NO</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter bus ID'
                         name='routeNO'
                        value={routeNO}
@@ -55,10 +56,10 @@ export default function AddBusRoute() {
                     />
                 </div>
                 <div className='mb-3'>
-                    <label htmlFor='routeName' className='form-label'>routeName</label>
+                    <label htmlFor='routeName' className='label'>Route Name</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter bus ID'
                         name='routeName'
                        value={routeName}
@@ -67,10 +68,10 @@ export default function AddBusRoute() {
                 </div>
                 
                 <div className='mb-3'>
-                    <label htmlFor='busID' className='form-label'>Bus ID</label>
+                    <label htmlFor='busID' className='label'>Bus ID</label>
                     <input
                         type={"text"}
-                        className="form-control"
+                        className="input"
                         placeholder='Enter bus ID'
                         name='busID'
                        value={busID}
@@ -80,7 +81,7 @@ export default function AddBusRoute() {
                 
                 
                 
-                <button type="submit" >Submit</button>
+                <button type="submit" className="button"  >Submit</button>
                 <Link   to="/busRoute" style={{textDecoration:"none"}}>Cancel</Link>
                 </form>
             </div>

@@ -19,7 +19,7 @@ public class BusRoute {
     private String routeNO;
     private String routeName;
 
-    // private String busID;
+
 
     public BusRoute(String routeID, String routeNO, String routeName) {
         this.routeID = routeID;

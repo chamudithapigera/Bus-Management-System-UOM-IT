@@ -26,7 +26,7 @@ public class BusRouteController {
     }
 
     @GetMapping("/viewBusRoute")
-    public List<BusRoute> findAllBusesWithDetails() {
+    public List<BusRoute> findAllBusRoutesWithDetails() {
         return busRouteService.findAll();
     }
 

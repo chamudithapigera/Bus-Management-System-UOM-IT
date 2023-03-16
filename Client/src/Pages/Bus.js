@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../Css/bus.scss';
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
+import Sidebar from '../Components/Sidebar';
+import Navbar from '../Components/Navbar';
 
 
 export default function Bus() {
@@ -15,13 +17,18 @@ export default function Bus() {
   const loadBuses = async () => {
     const result = await axios.get("http://localhost:8080/api/v1/bus_detail/viewBus");
     setBuses(result.data);
-  };
+ };
   
   return (
+    <div className='bus'>
+     <Sidebar></Sidebar>
+     <div className='busContainer'>
+      <Navbar></Navbar>
+    
     <div className='container'>
         <div className='py-4'>
         <div className='datatableTitle'>
-             <Link  to='/' style={{textDecoration:"none"}}>Home</Link>
+             
             <Link  to="/addbus" style={{textDecoration:"none"}}>Add</Link>
         </div>
         <table className="table border shadow">
@@ -44,7 +51,7 @@ export default function Bus() {
           <td>{bus.busID}</td>
           <td>{bus.capacity}</td> 
           <td>
-              <button className='btn btn-primary mx-2'>View</button>
+             
               <button className='btn btn-outline mx-2'>Edit</button>
               <button className='btn btn-danger mx-2'>Delete</button>
           </td>
@@ -56,6 +63,8 @@ export default function Bus() {
 </table>
         </div>
 
+    </div>
+    </div>
     </div>
   )
 }
