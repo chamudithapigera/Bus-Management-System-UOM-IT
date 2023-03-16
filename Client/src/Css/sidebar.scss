@@ -1,62 +1,70 @@
 .sidebar {
   flex: 1;
-  border-right: 0.5px solid rgb(16, 57, 30);
+  border-right: 1px solid rgb(8, 8, 8);
   min-height: 100vh;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(2, 8, 46);
 
   .top {
     height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    .icontop {
+      font-size: 120px;
+      color: #e7e3ee;
+    }
 
     .logo {
-      font-size: 20px;
+      display: flex;
+      font-size: 25px;
       font-weight: bold;
-      color: #7451f8;
+      color: #d2dcd1;
+      padding-top: 08px;
+     
     }
   }
 
   hr {
-    height: 2px;
-    border: 1px solid gray;
+    height: 1px;
+    border: 1px solid rgba(63, 60, 60, 0.986);
   }
 
   .center {
-    padding-left: 15px;
+    padding-left: 8px;
 
     ul {
       list-style: none;
-      margin: 15px;
-      padding: 10px;
+      margin: 20px;
+      padding: 20px;
 
       .title {
-        font-size: 10px;
+        font-size: 12px;
         font-weight: bold;
-        color: #999;
-        margin-top: 15px;
-        margin-bottom: 5px;
+        color: #766d6d;
+        margin-top: 18px;
+        margin-bottom: 10px;
       }
 
       li {
         display: flex;
         align-items: center;
-        padding: 5px;
+        padding: 10px;
         cursor: pointer;
 
         &:hover {
-          background-color: #ece8ff;
+          background-color: #2c2744;
         }
 
         .icon {
-          font-size: 18px;
-          color: #7451f8;
+          font-size: 19px;
+          color: #766e86;
         }
 
         span {
-          font-size: 13px;
-          font-weight: 600;
-          color: #888;
+          font-size: 15px;
+          font-weight: 700;
+          color: #ffffff;
           margin-left: 10px;
         }
       }
@@ -72,7 +80,7 @@
       width: 20px;
       height: 20px;
       border-radius: 5px;
-      border: 1px solid #7451f8;
+      border: 1px solid #706598;
       cursor: pointer;
       margin: 5px;
 

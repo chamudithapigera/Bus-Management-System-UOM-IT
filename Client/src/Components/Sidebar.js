@@ -2,14 +2,7 @@ import "../Css/sidebar.scss";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
-import ProductionQuantityLimitsOutlinedIcon from "@mui/icons-material/ProductionQuantityLimitsOutlined";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
-import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import MonitorHeartOutlinedIcon from "@mui/icons-material/MonitorHeartOutlined";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
@@ -23,7 +16,8 @@ const Sidebar = () => {
       <div className="top">
        
        <Link to ="/" style={{textDecoration:"none"}}>
-       <spank className="logo">Passenger</spank>
+       <AccountCircleIcon className="icontop"/>
+       <span className="logo">Passenger</span>
        </Link>
       </div>
       <hr/>

@@ -5,4 +5,73 @@
     .listContainer{
         flex: 5;
     }
+
+    .containerTable{
+        margin-left: 20px;
+        margin-right: 100px;
+        margin-top: 20px;
+
+        .text{
+            align-items: center;
+            justify-content: center;
+            margin-left: 450px;
+            color:rgb(25, 60, 108) ;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .table {
+            width: 100%;
+           border-collapse: collapse;
+            margin: 10px;
+
+            
+          
+            td {
+              padding: 15px;
+              text-align: left;
+              color: black;
+
+              
+              
+            }
+
+            .button{
+
+              .viewbutton{
+                padding: 2px 5px;
+                border-radius: 5px;
+                color: #7bd198;
+                border: 1px dotted blue;
+                
+              }
+            }
+          
+            th {
+              background-color: #7bd198;
+              font-weight: bold;
+              font-size: 15px;
+              color: black;
+              text-align: left;
+              border-bottom: 1px solid #211c1c;
+            }
+          
+          
+            ul {
+              margin: 0;
+              padding: 0;
+              list-style: none;
+            }
+          
+            li {
+              margin: 0 ;
+            }
+          }
+        
+    }
+
+    
+      
+
+    
 }

@@ -1,8 +1,13 @@
-.list{
+.searchbus{
     display: flex;
     width: 100%;
 
-    .listContainer{
+    .searchbusContainer{
         flex: 5;
+    }
+
+    .map{
+        margin: 20px;
+        border: 1px solid black;
     }
 }

@@ -6,6 +6,8 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+//import '../Css/map.scss'
+
 const Map = () => {
 
   const [buses, setBuses] = useState([]);
@@ -26,6 +28,7 @@ const Map = () => {
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl
     });
+    
     map.addControl(geocoder);
 
     const nav = new mapboxgl.NavigationControl();
@@ -46,13 +49,14 @@ const Map = () => {
         lngLat: [79.888752, 6.797505]
       },
       {
-        busStopName: 'Pansala Bus Stop',
-        lngLat: [79.893444, 6.797006]
-      },
-      {
         busStopName: 'UOM Bus Stop',
         lngLat: [79.898603, 6.795643]
       },
+      {
+        busStopName: 'Pansala Bus Stop',
+        lngLat: [79.893444, 6.797006]
+      },
+      
       {
         busStopName: 'MolpeRoad Bus Stop',
         lngLat: [79.900949, 6.794931]
@@ -76,11 +80,16 @@ const Map = () => {
          // add click event listener to the marker element
          marker.getElement().addEventListener('click', async () => {
          
-          
+          try {
             const response = await axios.get(`http://localhost:8080/api/v1/buses/getBusesByBusStopName/${busStopName}`);
             const filteredBuses = response.data;
-            
-            navigate('/searchbus/filteredbus', { state: { filteredBuses } });
+            setBuses(filteredBuses);
+            console.log(filteredBuses);
+            navigate('/searchbus/filteredbus', { state: { filteredBuses , busStopName} });
+          } catch (error) {
+            console.error('Error fetching data: ', error);
+          }
+          
           });
           
     });
@@ -102,8 +111,8 @@ const Map = () => {
 
   
   return (
-    <div>
-      <div id="map-Container" style={{ height: "100vh", width: "85vw" }} />
+    <div className='Map'>
+      <div id="map-Container" style={{ height: "90vh", width: "80vw" }} />
     </div>
   );
 };

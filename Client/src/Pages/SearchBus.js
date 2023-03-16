@@ -1,16 +1,21 @@
 import "../Css/searchbus.scss"
 import Sidebar from "../Components/Sidebar";
+import Navbar from "../Components/Navbar";
 import Map from "../Components/Map";
 import { useState } from "react";
+
 
 const SearchBus = () => {
 
   return (
-    <div className="list">
+    <div className="searchbus">
       <Sidebar />
-      <div className="listContainer">
-        
+      <div className="searchbusContainer">
+        <Navbar/>
+        <div className="map">
         <Map/>
+        </div>
+        
       </div>
     </div>
   );

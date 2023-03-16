@@ -9,6 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mapbox/mapbox-gl-geocoder": "^5.0.1",
     "@mui/material": "^5.11.12",
+    "@mui/x-data-grid": "^6.0.1",
     "@reach/combobox": "^0.18.0",
     "@react-google-maps/api": "^2.18.1",
     "@testing-library/jest-dom": "^5.16.5",
