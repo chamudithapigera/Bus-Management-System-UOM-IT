@@ -23,7 +23,7 @@ public class BusService {
         busRepository.insert(bus);
     }
 
-    //public void deleteBusById(String busID) {busRepository.deleteById(busID);}
+
 }
 
 

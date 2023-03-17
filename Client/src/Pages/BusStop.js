@@ -26,6 +26,9 @@ export default function BusStop() {
       <Navbar></Navbar>
     <div className='container'>
         <div className='py-4'>
+        <div className='title'>
+            Bus Stop 
+          </div>
         <div className='datatableTitle'>
              
             <Link  to="/addStop" style={{textDecoration:"none"}}>Add BusStop</Link>
@@ -35,7 +38,6 @@ export default function BusStop() {
   <thead>
     <tr>
       <th>#</th>
-      <th scope="col">Object ID</th>
       <th scope="col">busStopName</th>
       <th scope="col">longitude</th>
       <th scope="col">Action</th>
@@ -46,7 +48,6 @@ export default function BusStop() {
   {BusStops.map((busStop,index) => (
           <tr >
           <th scope="row" key={index}>{index+1}</th>
-          <td>{busStop.id}</td>
           <td>{busStop.busStopName}</td>
           <td>{busStop.longitude}</td>
           <td>

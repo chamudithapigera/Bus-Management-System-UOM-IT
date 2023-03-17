@@ -21,13 +21,13 @@ public class Bus {
     private String busID;
     private String capacity;
     //@DBRef
-    @DocumentReference
+   @DocumentReference
     private String driver;
-   // @DBRef
+  // @DBRef
     @DocumentReference
     private List<BusStop> busStop;
-   //@DBRef
-    @DocumentReference
+  // @DBRef
+   @DocumentReference
     private List<BusRoute> busRoute;
 
 }

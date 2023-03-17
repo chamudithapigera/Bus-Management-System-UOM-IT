@@ -3,9 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.model.Bus;
 import com.example.demo.model.Driver;
 import com.example.demo.repository.BusRepository;
+import com.example.demo.repository.BusStopRepository;
 import com.example.demo.service.BusService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +25,6 @@ public class BusController {
 
     @Autowired
     private BusRepository busRepository;
-
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -41,7 +44,7 @@ public class BusController {
         //return busService.findAll();}
 
 
-    /*@PutMapping("/updatebus/{id}")
+    @PutMapping("/updatebus/{id}")
     public ResponseEntity<String> updateBus(@PathVariable("id") ObjectId id, @RequestBody Bus bus) {
         Optional<Bus> optionalBus = busRepository.findById(id);
         if (optionalBus.isPresent()) {
@@ -56,7 +59,7 @@ public class BusController {
         } else {
             return new ResponseEntity<>("Bus not found...", HttpStatus.NOT_FOUND);
         }
-    }*/
+    }
    /* @PutMapping("/updatebus/{id}")
     Optional<Bus> updateBus(@RequestBody Bus newBus, @PathVariable String id){
         return busRepository.findBusBybusID(id)
@@ -71,14 +74,5 @@ public class BusController {
                 });
     }*/
 
-    /*@DeleteMapping("/deleteBus/{id}")
-   // public ResponseEntity<?> deleteBus(@PathVariable("busID") String busID) {
-     String deleteBus(@PathVariable ObjectId id){
-       if (!busService.existsById(id)){
-           throw new UserNotFoundException(id)
-       }
-        busService.deleteById(id);
-        return ResponseEntity.ok().build();
-    }*/
 
 }

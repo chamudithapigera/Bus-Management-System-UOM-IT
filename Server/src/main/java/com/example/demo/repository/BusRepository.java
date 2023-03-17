@@ -9,7 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface BusRepository extends MongoRepository<Bus, ObjectId> {
+    Optional<Object> findBusBybusID(String id);
 
 
-   // void deleteById(String busID);
+    // void deleteById(String busID);
 }

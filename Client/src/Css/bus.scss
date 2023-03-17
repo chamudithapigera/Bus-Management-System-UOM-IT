@@ -18,7 +18,7 @@ table {
   }
   
   th {
-    background-color: #9754c5;
+    background-color: #b682d8;
     color: white;
   }
   
@@ -27,11 +27,25 @@ table {
   }
   .datatableTitle{
     width: 100%;
-    font-size: 24px;
+    font-size: 18px;
     color: gray;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.title{
+  width: 100%;
+  font-size: 24px;
+  color: rgb(82, 46, 92);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: bold;
+}
+.icontop {
+  font-size: 200px;
+  color: rgb(82, 46, 92);
 }
   

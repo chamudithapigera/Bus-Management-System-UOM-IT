@@ -27,6 +27,9 @@ export default function Bus() {
     
     <div className='container'>
         <div className='py-4'>
+          <div className='title'>
+            Bus details
+          </div>
         <div className='datatableTitle'>
              
             <Link  to="/addbus" style={{textDecoration:"none"}}>Add</Link>
@@ -36,7 +39,6 @@ export default function Bus() {
   <thead>
     <tr>
       <th>#</th>
-      <th scope="col">Object ID</th>
       <th scope="col">Bus ID</th>
       <th scope="col">Capacity</th>
       <th scope="col">Action</th>
@@ -47,7 +49,6 @@ export default function Bus() {
   {buses.map((bus,index) => (
           <tr >
           <th scope="row" key={index}>{index+1}</th>
-          <td>{bus.id}</td>
           <td>{bus.busID}</td>
           <td>{bus.capacity}</td> 
           <td>

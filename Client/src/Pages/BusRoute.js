@@ -4,7 +4,8 @@ import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
-
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
 
 export default function BusRoute() {
 
@@ -26,16 +27,20 @@ export default function BusRoute() {
       <Navbar></Navbar>
     <div className='container'>
         <div className='py-4'>
+        <div className='title'>
+            Bus Route 
+          </div>
         <div className='datatableTitle'>
             
-            <Link  to="/addRoute" style={{textDecoration:"none"}}>Add BusRoute</Link>
+            <Link  to="/addRoute" style={{textDecoration:"none"}}>
+            <AddBoxRoundedIcon className="icontop"/>
+            </Link>
         </div>
         <table className="table border shadow">
 
   <thead>
     <tr>
       <th>#</th>
-      <th scope="col">Object ID</th>
       <th scope="col">Route ID</th>
       <th scope="col">Route NO</th>
       <th scope="col">Route Name</th>
@@ -47,7 +52,6 @@ export default function BusRoute() {
   {busRoutes.map((busRoute,index) => (
           <tr >
           <th scope="row" key={index}>{index+1}</th>
-          <td>{busRoute.id}</td>
           <td>{busRoute.routeID}</td>
           <td>{busRoute.routeNO}</td>
           <td>{busRoute.routeName}</td> 

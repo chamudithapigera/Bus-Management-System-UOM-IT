@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,8 @@ public class BusStopService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    public BusStop createBusStopBy(String busStopName, String longitude, String busID){
+   // @Query(fields = "{busID: 0}")
+    public BusStop createBusStopBy(String busStopName, String longitude,String busID){
         BusStop busStop = new BusStop(busStopName,longitude);
         busStopRepository.insert(busStop);
 

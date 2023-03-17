@@ -26,8 +26,10 @@ export default function Driver() {
       <Navbar></Navbar>
     <div className='container'>
         <div className='py-4'>
+        <div className='title'>
+            Driver 
+          </div>
         <div className='datatableTitle'>
-             
             <Link  to="/addDriver" style={{textDecoration:"none"}}>Add Driver</Link>
         </div>
         <table className="table border shadow">
@@ -35,7 +37,6 @@ export default function Driver() {
   <thead>
     <tr>
       <th>#</th>
-      <th scope="col">Object ID</th>
       <th scope="col">driverID</th>
       <th scope="col">driverName</th>
       <th scope="col">licenseNo</th>
@@ -47,7 +48,6 @@ export default function Driver() {
   {Drivers.map((driver,index) => (
           <tr >
           <th scope="row" key={index}>{index+1}</th>
-          <td>{driver.id}</td>
           <td>{driver.driverID}</td>
           <td>{driver.driverName}</td>
           <td>{driver.licenseNo}</td>
