@@ -22,9 +22,11 @@ public class Turn {
     private ObjectId id;
     private String turnNo;
     //private LocalDate turnDate;
-    private String[] turnTime;
-    private String[] routeName;
+    private String turnTime;
+    private String routeName;
     private String driverID;
 
-
 }
+
+
+

@@ -6,6 +6,8 @@ import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
+import AssignTurn from '../Components//AssignTurn';
+import ResetButton from '../Components/ResetButton';
 
 export default function TurnSchedule() {
 
@@ -35,6 +37,8 @@ export default function TurnSchedule() {
             <Link  to="/addTurn" style={{textDecoration:"none"}}>
             <AddBoxRoundedIcon className="icontop"/>
             </Link>
+<AssignTurn/>
+        
         </div>
         <table className="table border shadow">
 
@@ -54,16 +58,8 @@ export default function TurnSchedule() {
           <tr >
           <th scope="row" key={index}>{index+1}</th>
           <td>{busTurn.turnNo}</td>
-          <td>
-          {busTurn.turnTime.map((time, i) => (
-            <div key={i}>{time}</div>
-          ))}
-        </td>
-        <td>
-          {busTurn.routeName.map((route, i) => (
-            <div key={i}>{route}</div>
-          ))}
-        </td> 
+          <td> {busTurn.turnTime} </td>
+          <td>{busTurn.routeName} </td> 
           <td>{busTurn.driverID}</td> 
           <td>
               
@@ -76,6 +72,9 @@ export default function TurnSchedule() {
    
   </tbody>
 </table>
+<div> 
+  <ResetButton/>
+</div>
         </div>
         </div>
     </div>
