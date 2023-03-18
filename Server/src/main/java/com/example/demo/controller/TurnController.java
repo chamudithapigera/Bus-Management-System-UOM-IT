@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Driver;
 import com.example.demo.model.Turn;
 import com.example.demo.service.TurnService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,11 @@ public class TurnController {
         turnService.save(turn);
         return "Trun saved successfully...";
     }
+
+    @GetMapping("/viewTurn")
+    public List<Turn> findAllTurnsWithDetails() {
+        return turnService.findAll();
+    }
+
 
 }

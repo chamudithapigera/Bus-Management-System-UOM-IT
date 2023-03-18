@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.awt.*;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,9 +21,9 @@ public class Turn {
     @Id
     private ObjectId id;
     private String turnNo;
-    private LocalDate turnDate;
-    private String turnTime;
-    private String routeName;
+    //private LocalDate turnDate;
+    private String[] turnTime;
+    private String[] routeName;
     private String driverID;
 
 

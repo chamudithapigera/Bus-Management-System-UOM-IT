@@ -22,8 +22,8 @@ public class BusStopService {
     private MongoTemplate mongoTemplate;
 
    // @Query(fields = "{busID: 0}")
-    public BusStop createBusStopBy(String busStopName, String longitude,String busID){
-        BusStop busStop = new BusStop(busStopName,longitude);
+    public BusStop createBusStopBy(String busStopID,String busStopName, String longitude,String busID){
+        BusStop busStop = new BusStop( busStopID, busStopName, longitude);
         busStopRepository.insert(busStop);
 
         mongoTemplate.update(Bus.class)

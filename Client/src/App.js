@@ -12,6 +12,8 @@ import Driver from './Pages/Driver';
 import AddDriver from './Components/AddDriver';
 import { useContext, useState } from "react";
 import { DarkModeContext } from './Components/darkModeContext';
+import TurnSchedule from './Pages/TurnSchedule';
+import AddTurn from './Components/AddTurn';
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
             <Route path="/addStop" element={<AddBusStop />} />
             <Route path="driver" element={<Driver />} />
             <Route path="/addDriver" element={<AddDriver />} />
+            <Route path="turn" element={<TurnSchedule />} />
+            <Route path="/addTurn" element={<AddTurn />} />
             
         </Route>
       </Routes>

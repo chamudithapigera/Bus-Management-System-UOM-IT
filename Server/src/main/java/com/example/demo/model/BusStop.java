@@ -15,11 +15,13 @@ public class BusStop {
 
     @Id
     private ObjectId s_id;
+    private String busStopID;
     private String busStopName;
     private String longitude;
 
 
-    public BusStop(String busStopName,String longitude) {
+    public BusStop(String busStopID,String busStopName,String longitude) {
+        this.busStopID = busStopID;
         this.busStopName = busStopName;
         this.longitude = longitude;
 

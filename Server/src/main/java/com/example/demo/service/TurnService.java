@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Driver;
 import com.example.demo.model.Turn;
 import com.example.demo.repository.TurnRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,9 @@ public class TurnService {
         return driverIds;
     }
 
+    public List<Turn> findAll() {
+        return turnRepository.findAll();
+    }
 
 
 }

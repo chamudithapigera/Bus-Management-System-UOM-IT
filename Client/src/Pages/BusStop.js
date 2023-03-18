@@ -38,7 +38,8 @@ export default function BusStop() {
   <thead>
     <tr>
       <th>#</th>
-      <th scope="col">busStopName</th>
+      <th scope="col">Bus Stop ID</th>
+      <th scope="col">Bus Stop Name</th>
       <th scope="col">longitude</th>
       <th scope="col">Action</th>
     </tr>
@@ -48,6 +49,7 @@ export default function BusStop() {
   {BusStops.map((busStop,index) => (
           <tr >
           <th scope="row" key={index}>{index+1}</th>
+          <td>{busStop.busStopID}</td>
           <td>{busStop.busStopName}</td>
           <td>{busStop.longitude}</td>
           <td>

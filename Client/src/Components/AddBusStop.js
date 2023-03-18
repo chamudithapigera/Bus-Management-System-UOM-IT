@@ -8,13 +8,14 @@ export default function AddBusRoute() {
     let navigate = useNavigate()
     const [busStop, setBusStop] = useState({
         
+        busStopID: "",
         busStopName:"",
         longitude:"",
         busID: ""
          
     });
 
-    const{busStopName,longitude, busID}=busStop
+    const{busStopID,busStopName,longitude, busID}=busStop
 
     const onInputChange=(e)=>{
         setBusStop({...busStop,[e.target.name]:e.target.value}
@@ -22,7 +23,7 @@ export default function AddBusRoute() {
 
         const onSubmit= async (e)=>{
             e.preventDefault();
-            await axios.post("http://localhost:8080/api/v1/busStop/addbusStop",busStop)
+            await axios.post("http://localhost:8080/api/v1/busStop/addBusStop",busStop)
             navigate("/busStop")
         }
     
@@ -32,6 +33,19 @@ export default function AddBusRoute() {
             <div >
                 <h2 className='text-center m-4'>Add details of bus-stops</h2>
                 <form onSubmit={(e)=> onSubmit(e)}>
+
+                <div className='mb-3'>
+                <label htmlFor='busStopID' className='label'>Bus Stop ID</label>
+                    <input
+                        type={"text"}
+                        className="input"
+                        placeholder='Enter bus  stop ID '
+                        name='busStopID'
+                        value={busStopID}
+                        onChange={(e)=>onInputChange(e)}
+                    />
+                </div>
+
                 <div className='mb-3'>
                 <label htmlFor='busStopName' className='label'>Bus Stop Name</label>
                     <input

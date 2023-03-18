@@ -75,6 +75,13 @@ const Sidebar = () => {
             <span>Driver Attendance</span>
           </li>
 
+          <Link to="/turn" style={{textDecoration:"none"}}>
+          <li>
+            <FactCheckRoundedIcon className="icon"/>
+            <span>Bus Turn Schedule</span>
+          </li>
+          </Link>
+
           
           <li>
             <NotificationsNoneOutlinedIcon className="icon"/>
