@@ -1,9 +1,14 @@
 package com.example.demo.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -13,10 +18,19 @@ public class BusLocation {
 
     @Id
     private String id;
-    private String busId;
-    private double latitude;
+    private String busID;
+    private String routeName;
     private double longitude;
-    private Date timestamp;
+    private double latitude;
+    private LocalDateTime dateTime;
+
+    public BusLocation(String busID, String routeName, double longitude, double latitude) {
+        this.busID = busID;
+        this.routeName = routeName;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.dateTime = LocalDateTime.now();
+    }
 
     public String getId() {
         return id;
@@ -26,20 +40,20 @@ public class BusLocation {
         this.id = id;
     }
 
-    public String getBusId() {
-        return busId;
+    public String getBusID() {
+        return busID;
     }
 
-    public void setBusId(String busId) {
-        this.busId = busId;
+    public void setBusID(String busID) {
+        this.busID = busID;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public String getRouteName() {
+        return routeName;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setRouteName(String routeName) {
+        this.routeName = routeName;
     }
 
     public double getLongitude() {
@@ -50,11 +64,13 @@ public class BusLocation {
         this.longitude = longitude;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
+
+    // Getters and setters
 }

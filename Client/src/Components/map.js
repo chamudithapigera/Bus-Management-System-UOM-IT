@@ -1,120 +1,152 @@
-import React, { useRef, useEffect, useState } from 'react';
-import mapboxgl from 'mapbox-gl';
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  HStack,
+  IconButton,
+  Input,
+  SkeletonText,
+  Text,
+} from '@chakra-ui/react'
+import { FaLocationArrow, FaTimes } from 'react-icons/fa'
 
-//import '../Css/map.scss'
+import {
+  useJsApiLoader,
+  GoogleMap,
+  Marker,
+  Autocomplete,
+  DirectionsRenderer,
+} from '@react-google-maps/api'
+import { useRef, useState } from 'react'
 
-const Map = () => {
+const center = { lat:  6.797505, lng: 79.88875 }
 
-  const [buses, setBuses] = useState([]);
-  const navigate = useNavigate();
+function Map() {
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: "AIzaSyAmD_c6_Rnaee2j6iNcY8raxvGCMrNS3NU",
+    libraries: ['places'],
+  })
 
+  const [map, setMap] = useState(null)
+  const [directionsResponse, setDirectionsResponse] = useState(null)
+  const [distance, setDistance] = useState('')
+  const [duration, setDuration] = useState('')
 
-  useEffect(() => {
-    mapboxgl.accessToken = 'pk.eyJ1Ijoia2F2aW5kaWphZGEiLCJhIjoiY2xlY2xsYzVkMTQ1cDN4bzkyNGV6aGVqdSJ9.N8yW47-jPEVwn6mJuGnxZA';
-    const map = new mapboxgl.Map({
-      container: 'map-Container',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [79.888752, 6.797505],
-      zoom: 12
-    });
+  /** @type React.MutableRefObject<HTMLInputElement> */
+  const originRef = useRef()
+  /** @type React.MutableRefObject<HTMLInputElement> */
+  const destiantionRef = useRef()
 
+  if (!isLoaded) {
+    return <SkeletonText />
+  }
 
-    const geocoder = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-      mapboxgl: mapboxgl
-    });
-    
-    map.addControl(geocoder);
-
-    const nav = new mapboxgl.NavigationControl();
-    map.addControl(nav, 'bottom-right');
-
-    const geolocate = new mapboxgl.GeolocateControl({
-      positionOptions: {
-        enableHighAccuracy: true
-      },
-      trackUserLocation: true
-    });
-    map.addControl(geolocate, 'bottom-right');
-
-    const busStops = [
-
-      {
-        busStopName: 'Katubadda Junction Bus Stop',
-        lngLat: [79.888752, 6.797505]
-      },
-      {
-        busStopName: 'UOM Bus Stop',
-        lngLat: [79.898603, 6.795643]
-      },
-      {
-        busStopName: 'Pansala Bus Stop',
-        lngLat: [79.893444, 6.797006]
-      },
-      
-      {
-        busStopName: 'MolpeRoad Bus Stop',
-        lngLat: [79.900949, 6.794931]
-      }
-    ];
-
-    busStops.forEach(({ busStopName, lngLat }) => {
-
-      // create the popup
-      const popup = new mapboxgl.Popup({ offset: 25 }).setText(busStopName);
-
-      // Add a marker in the UOM bus halt.
-      const marker = new mapboxgl.Marker({
-        element: createMarkerElement(lngLat)
-      })
-        .setLngLat(lngLat)
-        .setPopup(popup) // sets a popup on this marker
-        .addTo(map)
-       
-
-         // add click event listener to the marker element
-         marker.getElement().addEventListener('click', async () => {
-         
-          try {
-            const response = await axios.get(`http://localhost:8080/api/v1/buses/getBusesByBusStopName/${busStopName}`);
-            const filteredBuses = response.data;
-            setBuses(filteredBuses);
-            console.log(filteredBuses);
-            navigate('/searchbus/filteredbus', { state: { filteredBuses , busStopName} });
-          } catch (error) {
-            console.error('Error fetching data: ', error);
-          }
-          
-          });
-          
-    });
-
-
-    function createMarkerElement(lngLat) {
-      const el = document.createElement('div');
-      el.style.backgroundImage = 'url(https://thumbs.dreamstime.com/b/blue-bus-stop-sign-flat-vector-icon-blue-bus-stop-sign-simple-flat-rectangular-vector-icon-isolated-117547895.jpg)';
-      el.style.backgroundSize = 'cover';
-      el.style.width = '20px';
-      el.style.height = '20px';
-      el.style.borderRadius = '50%';
-      el.style.cursor = 'pointer';
-
-      return el;
+  async function calculateRoute() {
+    if (originRef.current.value === '' || destiantionRef.current.value === '') {
+      return
     }
+    // eslint-disable-next-line no-undef
+    const directionsService = new google.maps.DirectionsService()
+    const results = await directionsService.route({
+      origin: originRef.current.value,
+      destination: destiantionRef.current.value,
+      // eslint-disable-next-line no-undef
+      travelMode: google.maps.TravelMode.DRIVING,
+    })
+    setDirectionsResponse(results)
+    setDistance(results.routes[0].legs[0].distance.text)
+    setDuration(results.routes[0].legs[0].duration.text)
+  }
 
-  }, []);
+  function clearRoute() {
+    setDirectionsResponse(null)
+    setDistance('')
+    setDuration('')
+    originRef.current.value = ''
+    destiantionRef.current.value = ''
+  }
 
-  
   return (
-    <div className='Map'>
-      <div id="map-Container" style={{ height: "90vh", width: "80vw" }} />
-    </div>
-  );
-};
+    <Flex
+      position='relative'
+      flexDirection='column'
+      alignItems='center'
+      h='87vh'
+      w='80vw'
+    >
+      <Box position='absolute' left={0} top={0} h='100%' w='100%'>
+        {/* Google Map Box */}
+        <GoogleMap
+          center={center}
+          zoom={15}
+          mapContainerStyle={{ width: '100%', height: '100%' }}
+          options={{
+            zoomControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false,
+          }}
+          onLoad={map => setMap(map)}
+        >
+          <Marker position={center} />
+          {directionsResponse && (
+            <DirectionsRenderer directions={directionsResponse} />
+          )}
+        </GoogleMap>
+      </Box>
+      <Box
+        p={4}
+        borderRadius='lg'
+        m={4}
+        bgColor='white'
+        shadow='base'
+        minW='container.md'
+        zIndex='1'
+      >
+        <HStack spacing={2} justifyContent='space-between'>
+          <Box flexGrow={1}>
+            <Autocomplete>
+              <Input type='text' placeholder='Origin' ref={originRef} />
+            </Autocomplete>
+          </Box>
+          <Box flexGrow={1}>
+            <Autocomplete>
+              <Input
+                type='text'
+                placeholder='Destination'
+                ref={destiantionRef}
+              />
+            </Autocomplete>
+          </Box>
+
+          <ButtonGroup>
+            <Button colorScheme='pink' type='submit' onClick={calculateRoute}>
+              Calculate Route
+            </Button>
+            <IconButton
+              aria-label='center back'
+              icon={<FaTimes />}
+              onClick={clearRoute}
+            />
+          </ButtonGroup>
+        </HStack>
+        <HStack spacing={4} mt={4} justifyContent='space-between'>
+          <Text>Distance: {distance} </Text>
+          <Text>Duration: {duration} </Text>
+          <IconButton
+            aria-label='center back'
+            icon={<FaLocationArrow />}
+            isRound
+            onClick={() => {
+              map.panTo(center)
+              map.setZoom(15)
+            }}
+          />
+        </HStack>
+      </Box>
+    </Flex>
+  )
+}
 
 export default Map;

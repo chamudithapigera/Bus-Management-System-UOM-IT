@@ -7,8 +7,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import {Link} from "react-router-dom";
-
-
+import image from "./BUS_MANAGEMENT_SYSTEM.jpeg";
 
 const Sidebar = () => {
   return (
@@ -16,7 +15,9 @@ const Sidebar = () => {
       <div className="top">
        
        <Link to ="/" style={{textDecoration:"none"}}>
-       <AccountCircleIcon className="icontop"/>
+        <div>
+        <img src={image} className="icontop"/>
+        </div>
        <span className="logo">Passenger</span>
        </Link>
       </div>
@@ -37,6 +38,12 @@ const Sidebar = () => {
           </Link>
           <Link to ="/searchbus/filteredbus" style={{textDecoration:"none"}}>
           
+          </Link>
+          <Link to ="/viewturn" style={{textDecoration:"none"}}>
+          <li>
+            <TravelExploreIcon className="icon"/>
+            <span>View Turn</span>
+          </li>
           </Link>
           <li>
             <NotificationsNoneOutlinedIcon className="icon"/>

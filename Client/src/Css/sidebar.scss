@@ -2,7 +2,7 @@
   flex: 1;
   border-right: 1px solid rgb(8, 8, 8);
   min-height: 100vh;
-  background-color: rgb(2, 8, 46);
+  background-color: rgb(18, 85, 53);
 
   .top {
     height: 200px;
@@ -11,8 +11,13 @@
     justify-content: center;
     
     .icontop {
-      font-size: 120px;
+      width: 100px;
+      height: 100px;
+      border-radius: 30px;
       color: #e7e3ee;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
     }
 
     .logo {

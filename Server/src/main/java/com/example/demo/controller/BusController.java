@@ -6,15 +6,11 @@ import com.example.demo.repository.BusRepository;
 import com.example.demo.service.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/buses")
@@ -46,8 +42,9 @@ public class BusController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getBusesByBusStopName/{busStopName}")
-    public List<Bus> findBusesByBusStopName(@PathVariable String busStopName) {
-        return busRepository.findByBusStopName(busStopName);
+    public ResponseEntity<List<Map>> getLatestBusesByStopName(@PathVariable String busStopName) {
+        List<Map> latestBuses = busService.getLatestBusesByStopName(busStopName);
+        return ResponseEntity.ok(latestBuses);
     }
 
 }
