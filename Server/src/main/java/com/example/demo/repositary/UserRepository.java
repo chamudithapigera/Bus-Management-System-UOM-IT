@@ -1,8 +1,8 @@
-package com.example.demo.DemoApplication.repositary;
+package com.example.demo.repositary;
 
 import java.util.List;
 
-import com.example.demo.DemoApplication.model.User;
+import com.example.demo.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

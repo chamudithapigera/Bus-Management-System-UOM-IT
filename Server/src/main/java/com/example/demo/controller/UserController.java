@@ -1,8 +1,8 @@
-package com.example.demo.DemoApplication.controller;
+package com.example.demo.controller;
 import java.util.List;
 
-import com.example.demo.DemoApplication.model.User;
-import com.example.demo.DemoApplication.service.UserService;
+import com.example.demo.model.User;
+import com.example.demo.service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
