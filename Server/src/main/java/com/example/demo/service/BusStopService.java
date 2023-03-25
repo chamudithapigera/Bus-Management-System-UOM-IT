@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Bus;
 import com.example.demo.model.BusRoute;
 import com.example.demo.model.BusStop;
@@ -94,7 +95,7 @@ public  class BusStopService {
 */
 
   public BusStop updateBusStop(ObjectId id, BusStop busStop) {
-        BusStop existingBusStop = busStopRepository.findById(id).orElseThrow(() -> new BusStopNotFoundException("Bus stop not found"));
+        BusStop existingBusStop = busStopRepository.findById(id).orElseThrow(() -> new NotFoundException("Bus stop not found"));
         existingBusStop.setBusStopID(busStop.getBusStopID());
         existingBusStop.setBusStopName(busStop.getBusStopName());
         existingBusStop.setLongitude(busStop.getLongitude());

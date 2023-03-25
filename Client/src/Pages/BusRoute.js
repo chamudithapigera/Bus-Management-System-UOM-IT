@@ -57,7 +57,12 @@ export default function BusRoute() {
           <td>{busRoute.routeName}</td> 
           <td>
               
-              <button className='btn btn-outline mx-2'>Edit</button>
+          <Link
+                    className="btn btn-outline-primary mx-2"
+                    to={`/editroute/${busRoute.id}`}
+                  >
+                    Edit
+                  </Link>
               <button className='btn btn-danger mx-2'>Delete</button>
           </td>
       </tr>

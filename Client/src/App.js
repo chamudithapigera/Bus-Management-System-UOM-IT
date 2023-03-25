@@ -17,7 +17,7 @@ import AddTurn from './Components/AddTurn';
 import DriverAttendance from './Pages/DriverAttendance';
 import EditBusStop from './Components/EditBusStop';
 import UpdateBusStop from './Components/UpdateBusStop';
-
+import UpdateBusRoute from './Components/UpdateBusRoute';
 
 function App() {
   const {darkMode}= useContext(DarkModeContext);
@@ -40,6 +40,7 @@ function App() {
             <Route path="/addTurn" element={<AddTurn />} />
             <Route path="/attendance" element={<DriverAttendance />} />
             <Route exact path="/editstop/:id" element={<EditBusStop />} />
+            <Route exact path="/editroute/:id" element={<UpdateBusRoute />} />
             
         </Route>
       </Routes>

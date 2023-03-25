@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Bus;
 import com.example.demo.model.BusStop;
 import com.example.demo.model.Driver;
@@ -53,7 +54,7 @@ public class BusService {
     private BusStopRepository busStopRepository;
 
    public Bus updateBusStop(ObjectId busId, ObjectId busStopId, BusStop busStop) {
-        Bus bus = busRepository.findById(busId).orElseThrow(() -> new BusStopNotFoundException("Bus not found"));
+        Bus bus = busRepository.findById(busId).orElseThrow(() -> new NotFoundException("Bus not found"));
         List<BusStop> busStops = bus.getBusStop();
         if (busStops == null) {busStops = new ArrayList<>();}
         BusStop updatedBusStop = busStopRepository.save(busStop);
@@ -68,12 +69,6 @@ public class BusService {
     }
 
 
-}
-
- class BusStopNotFoundException extends RuntimeException {
-    public BusStopNotFoundException(String message) {
-        super(message);
-    }
 }
 
 

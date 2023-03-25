@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Driver {
 
     @Id
-    private ObjectId d_id;
+    private ObjectId id;
     private String driverID;
     private String driverName;
     private String licenseNo;

@@ -21,8 +21,7 @@ public class BusStop {
     private String busStopID;
     private String busStopName;
     private String longitude;
-    //@DBRef
-    //private List<Bus> buses;
+
 
 
     public BusStop(String busStopID,String busStopName,String longitude) {
@@ -32,11 +31,8 @@ public class BusStop {
 
     }
 
-    public ObjectId getId() {
-        return id;
-    }
 
 
-    //public ObjectId getId() {return s_id;}
+
 
 }

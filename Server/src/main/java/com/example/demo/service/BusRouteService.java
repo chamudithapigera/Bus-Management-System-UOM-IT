@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Bus;
 import com.example.demo.model.BusRoute;
+import com.example.demo.model.BusStop;
 import com.example.demo.repository.BusRouteRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,7 @@ public class BusRouteService {
 
         mongoTemplate.update(Bus.class)
                 .matching(Criteria.where("busID").is(busID))
-                .apply(new Update().push("busRouteID").value(busRoute))
+                .apply(new Update().push("busRoute").value(busRoute))
                 .first();
         return busRoute;
 
@@ -38,6 +40,12 @@ public class BusRouteService {
     }
 
 
-
+    public BusRoute updateBusRoute(ObjectId id, BusRoute busRoute) {
+        BusRoute existingBusRoute = busRouteRepository.findById(id).orElseThrow(() -> new NotFoundException("Bus stop not found"));
+        existingBusRoute.setRouteID(busRoute.getRouteID());
+        existingBusRoute.setRouteNO(busRoute.getRouteNO());
+        existingBusRoute.setRouteName(busRoute.getRouteName());
+        return busRouteRepository.save(existingBusRoute);
+    }
 
 }

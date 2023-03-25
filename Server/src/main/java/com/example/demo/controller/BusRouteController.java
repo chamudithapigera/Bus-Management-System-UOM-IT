@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Bus;
 import com.example.demo.model.BusRoute;
 
+import com.example.demo.model.BusStop;
 import com.example.demo.repository.BusRouteRepository;
 import com.example.demo.service.BusRouteService;
 import org.bson.types.ObjectId;
@@ -41,7 +43,14 @@ public class BusRouteController {
         return busRouteService.findAll();
     }
 
-    @PutMapping("/updatebusRoute/{r_id}")
+    @GetMapping("/{id}")
+    BusRoute getBusRouteById(@PathVariable ObjectId id){
+        return busRouteRepository.findById(id)
+                .orElseThrow(()->new NotFoundException(("Bus Route not found with id: " + id)));
+    }
+
+
+    /* @PutMapping("/updatebusRoute/{id}")
     public ResponseEntity<String> updateBusRoute(@PathVariable("id") ObjectId id, @RequestBody BusRoute busRoute) {
         Optional<BusRoute> optionalBusRoute = busRouteRepository.findById(id);
         if (optionalBusRoute.isPresent()) {
@@ -56,6 +65,12 @@ public class BusRouteController {
         } else {
             return new ResponseEntity<>("BusRoute not found...", HttpStatus.NOT_FOUND);
         }
+    }*/
+    @CrossOrigin("http://localhost:3000")
+   @PutMapping("/{id}")
+    public ResponseEntity<BusRoute> updateBusRoute(@PathVariable("id") ObjectId id, @RequestBody BusRoute busRoute) {
+        BusRoute updatedBusRoute = busRouteService.updateBusRoute(id, busRoute);
+        return ResponseEntity.ok(updatedBusRoute);
     }
 
    /* @DeleteMapping("/deleteRoute/{id}")

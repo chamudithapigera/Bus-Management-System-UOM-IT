@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Bus;
 import com.example.demo.model.BusStop;
 import com.example.demo.repository.BusRepository;
@@ -50,7 +51,7 @@ public class BusStopController {
     @GetMapping("/{id}")
     BusStop getBusStopById(@PathVariable ObjectId id){
         return busStopRepository.findById(id)
-                .orElseThrow(()->new BusNotFoundException(("Bus Stop not found with id: " + id)));
+                .orElseThrow(()->new NotFoundException(("Bus Stop not found with id: " + id)));
     }
 
 
@@ -148,8 +149,4 @@ public class BusStopController {
 
 
 }
-class BusNotFoundException extends RuntimeException {
-    public BusNotFoundException(String message) {
-        super(message);
-    }
-}
+

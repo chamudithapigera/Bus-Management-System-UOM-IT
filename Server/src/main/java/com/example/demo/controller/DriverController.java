@@ -1,8 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.NotFoundException;
+import com.example.demo.model.BusRoute;
 import com.example.demo.model.BusStop;
 import com.example.demo.model.Driver;
+import com.example.demo.repository.DriverRepository;
 import com.example.demo.service.DriverService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,9 @@ public class DriverController {
     @Autowired
     private DriverService driverService;
 
+    @Autowired
+    private DriverRepository driverRepository;
+
     @PostMapping("/addDriver")
     public ResponseEntity<Driver> createDriver(@RequestBody Map<String, String> payload){
 
@@ -28,6 +35,18 @@ public class DriverController {
     @GetMapping("/viewDriver")
     public List<Driver> findAllDriversWithDetails() {
         return driverService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    Driver getDriverById(@PathVariable ObjectId id){
+        return driverRepository.findById(id)
+                .orElseThrow(()->new NotFoundException(("Driver not found with id: " + id)));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Driver> updateDriver(@PathVariable("id") ObjectId id, @RequestBody Driver driver) {
+        Driver updatedDriver = driverService.updateDriver(id, driver);
+        return ResponseEntity.ok(updatedDriver);
     }
 
 }

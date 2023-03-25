@@ -1,9 +1,12 @@
 package com.example.demo.service;
 
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Bus;
+import com.example.demo.model.BusRoute;
 import com.example.demo.model.BusStop;
 import com.example.demo.model.Driver;
 import com.example.demo.repository.DriverRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -35,6 +38,15 @@ public class DriverService {
     public List<Driver> findAll() {
         return driverRepository.findAll();
     }
+
+    public Driver updateDriver(ObjectId id, Driver driver) {
+        Driver existingDriver = driverRepository.findById(id).orElseThrow(() -> new NotFoundException("Driver not found"));
+        existingDriver.setDriverID(driver.getDriverID());
+        existingDriver.setDriverName(driver.getDriverName());
+        existingDriver.setLicenseNo(driver.getLicenseNo());
+        return driverRepository.save(existingDriver);
+    }
+
 
 
 }
