@@ -47,6 +47,12 @@ public class BusStopController {
         return busStopService.findAll();
     }
 
+    @GetMapping("/{id}")
+    BusStop getBusStopById(@PathVariable ObjectId id){
+        return busStopRepository.findById(id)
+                .orElseThrow(()->new BusNotFoundException(("Bus Stop not found with id: " + id)));
+    }
+
 
 
   /* @PutMapping("/updatebusStop/{s_id}")

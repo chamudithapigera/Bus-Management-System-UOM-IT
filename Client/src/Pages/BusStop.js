@@ -53,8 +53,13 @@ export default function BusStop() {
           <td>{busStop.busStopName}</td>
           <td>{busStop.longitude}</td>
           <td>
-              
-              <button className='btn btn-outline mx-2'>Edit</button>
+          <Link
+                    className="btn btn-outline-primary mx-2"
+                    to={`/editstop/${busStop.id}`}
+                  >
+                    Edit
+                  </Link>
+             
               <button className='btn btn-danger mx-2'>Delete</button>
           </td>
       </tr>

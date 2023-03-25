@@ -52,7 +52,7 @@ public class BusService {
     @Autowired
     private BusStopRepository busStopRepository;
 
-    public Bus updateBusStop(ObjectId busId, ObjectId busStopId, BusStop busStop) {
+   public Bus updateBusStop(ObjectId busId, ObjectId busStopId, BusStop busStop) {
         Bus bus = busRepository.findById(busId).orElseThrow(() -> new BusStopNotFoundException("Bus not found"));
         List<BusStop> busStops = bus.getBusStop();
         if (busStops == null) {busStops = new ArrayList<>();}
