@@ -18,6 +18,12 @@ export default function Driver() {
     const result = await axios.get("http://localhost:8080/api/v1/driver/viewDriver");
     setDrivers(result.data);
   };
+
+  const deleteDriver = async (id) => {
+    await axios.delete(`http://localhost:8080/api/v1/driver/deleteDriver/${id}`);
+  
+    loadDrivers();
+  };
   
   return (
     <div className='bus'>
@@ -59,7 +65,7 @@ export default function Driver() {
                         Edit
                       </Link>
               
-              <button className='btn btn-danger mx-2'>Delete</button>
+              <button className='btn btn-danger mx-2' onClick={() => deleteDriver(driver.id)}>Delete</button>
           </td>
       </tr>
       

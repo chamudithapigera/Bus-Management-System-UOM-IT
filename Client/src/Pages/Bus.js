@@ -35,15 +35,16 @@ export default function Bus() {
               <Link to="/addbus" style={{ textDecoration: "none" }}>Add</Link>
             </div>
             <table className="table border shadow">
-
-              <thead>
+            <thead>
                 <tr>
                   <th>#</th>
                   <th scope="col">Bus ID</th>
                   <th scope="col">Capacity</th>
+                 
                   <th scope="col">Action</th>
                 </tr>
               </thead>
+
 
               <tbody>
                 {buses.map((bus, index) => (
@@ -51,6 +52,7 @@ export default function Bus() {
                     <th scope="row" key={index}>{index + 1}</th>
                     <td>{bus.busID}</td>
                     <td>{bus.capacity}</td>
+                    
                     <td>
 
                       <button className='btn btn-outline mx-2'>Edit</button>
@@ -60,7 +62,7 @@ export default function Bus() {
 
                 ))}
 
-              </tbody>
+                </tbody>
             </table>
           </div>
 

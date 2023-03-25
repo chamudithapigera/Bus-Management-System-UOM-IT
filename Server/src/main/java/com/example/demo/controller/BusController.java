@@ -8,6 +8,7 @@ import com.example.demo.model.Driver;
 import com.example.demo.repository.BusRepository;
 import com.example.demo.repository.BusStopRepository;
 import com.example.demo.service.BusService;
+import com.mongodb.BasicDBObject;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -55,12 +56,9 @@ public class BusController {
 //----
 
 
-   /* @PutMapping("/{id}/update-bus-stop/{stopId}")
-    public Bus updateBusStop(@PathVariable("id") ObjectId busId, @PathVariable("stopId") ObjectId stopId, @RequestBody BusStop busStop) {
-        return busService.updateBusStop(busId, stopId, busStop);
-    }*/
 
-    /*@DeleteMapping("/deleteBus/{id}")
+
+    @DeleteMapping("/deleteBus/{id}")
     String deleteBus(@PathVariable ObjectId id){
         if (!busRepository.existsById(id)){
             throw new NotFoundException(("Bus  not found with id: " + id));
@@ -68,27 +66,75 @@ public class BusController {
         busRepository.deleteById(id);
         return "Bus  with id " +id+ "has been deleted";
 
-    }*/
-
-    @DeleteMapping("/bus/{busId}/busRoute/{busRouteId}")
-    public ResponseEntity<?> deleteBusRouteById(@PathVariable String busId, @PathVariable String busRouteId) {
-        Optional<Bus> bus = busRepository.findById(busId);
-        if (bus.isPresent()) {
-            Bus foundBus = bus.get();
-            List<BusRoute> busRoutes = foundBus.getBusRoute();
-            for (Iterator<BusRoute> iterator = busRoutes.iterator(); iterator.hasNext();) {
-                BusRoute busRoute = iterator.next();
-                if (busRoute.getId().equals(busRouteId)) {
-                    iterator.remove();
-                    busRepository.save(foundBus);
-                    return ResponseEntity.ok().build();
-                }
-            }
-        }
-        return ResponseEntity.notFound().build();
     }
 
 
+
+    @DeleteMapping("/deleteBusRoute/{busId}/{id}")
+    String deleteBusRoute(@PathVariable ObjectId busId, @PathVariable String id) {
+        Optional<Bus> optionalBus = busRepository.findById(busId);
+        if (!optionalBus.isPresent()) {
+            throw new NotFoundException("Bus not found with id: " + busId);
+        }
+        Bus bus = optionalBus.get();
+        List<BusRoute> busRoutes = bus.getBusRoute();
+        boolean removed = busRoutes.removeIf(route -> route.getId().equals(id));
+        if (removed) {
+            bus.setBusRoute(busRoutes);
+            busRepository.save(bus);
+            return "Bus route with id " + id + " deleted from bus with id " + busId;
+        } else {
+            return "Bus route with id " + id + " not found in bus with id " + busId;
+        }
+    }
+
+    @DeleteMapping("/deleteBusStop/{busId}/{id}")
+    String deleteBusStop(@PathVariable ObjectId busId, @PathVariable String id) {
+        Optional<Bus> optionalBus = busRepository.findById(busId);
+        if (!optionalBus.isPresent()) {
+            throw new NotFoundException("Bus not found with id: " + busId);
+        }
+        Bus bus = optionalBus.get();
+        List<BusStop> busStops = bus.getBusStop();
+        boolean removed = busStops.removeIf(stop -> stop.getId().equals(id));
+        if (removed) {
+            bus.setBusStop(busStops);
+            busRepository.save(bus);
+            return "Bus stop with id " + id + " deleted from bus with id " + busId;
+        } else {
+            return "Bus stop with id " + id + " not found in bus with id " + busId;
+        }
+    }
+
+    @DeleteMapping("/deleteDriver/{busId}/{id}")
+    String deleteDriver(@PathVariable ObjectId busId, @PathVariable String id) {
+        Optional<Bus> optionalBus = busRepository.findById(busId);
+        if (!optionalBus.isPresent()) {
+            throw new NotFoundException("Bus not found with id: " + busId);
+        }
+        Bus bus = optionalBus.get();
+        List<Driver> drivers = bus.getDriver();
+        boolean removed = drivers.removeIf(dri -> dri.getId().equals(id));
+        if (removed) {
+            bus.setDriver(drivers);
+            busRepository.save(bus);
+            return "Driver with id " + id + " deleted from bus with id " + busId;
+        } else {
+            return "Driver with id " + id + " not found in bus with id " + busId;
+        }
+    }
+
+
+
+
+
+
+
+
+/* @PutMapping("/{id}/update-bus-stop/{stopId}")
+    public Bus updateBusStop(@PathVariable("id") ObjectId busId, @PathVariable("stopId") ObjectId stopId, @RequestBody BusStop busStop) {
+        return busService.updateBusStop(busId, stopId, busStop);
+    }*/
 
    /* @PutMapping("/{busId}/bus-stop/{busStopId}")
     public ResponseEntity<?> updateBusStop(@PathVariable ObjectId busId, @PathVariable ObjectId busStopId, @RequestBody BusStop busStop) {

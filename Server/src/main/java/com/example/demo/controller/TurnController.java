@@ -37,15 +37,6 @@ public class TurnController {
         turnService.save(turn);
         return "Trun saved successfully...";
     }
-  /*  @GetMapping("/viewTurn")
-    public List<Turn> findAllTurnsWithDetails() {
-        return turnService.findAll();
-    }*/
-  /*@GetMapping("/viewTurn")
-  public List<Turn> getAllTurnsSortedByTime() {
-      List<Turn> turns = turnRepository.findAll(Sort.by(Sort.Direction.ASC, "turnTime"));
-      return turns;
-  }*/
 
     @GetMapping("/viewTurn")
     public List<Turn> getAllTurns() {
@@ -58,4 +49,14 @@ public class TurnController {
 
 
 
+
+/*  @GetMapping("/viewTurn")
+    public List<Turn> findAllTurnsWithDetails() {
+        return turnService.findAll();
+    }*/
+  /*@GetMapping("/viewTurn")
+  public List<Turn> getAllTurnsSortedByTime() {
+      List<Turn> turns = turnRepository.findAll(Sort.by(Sort.Direction.ASC, "turnTime"));
+      return turns;
+  }*/
 }

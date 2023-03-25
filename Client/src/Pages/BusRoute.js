@@ -25,6 +25,7 @@ export default function BusRoute() {
 
   const deleteBusRoutes = async (id) => {
     await axios.delete(`http://localhost:8080/api/v1/busRoute/deleteRoute/${id}`);
+  
     loadBusRoutes();
   };
 

@@ -23,7 +23,7 @@ public class Bus {
     private String capacity;
     @DBRef
    //@DocumentReference
-    private String driver;
+    private List<Driver> driver;
    @DBRef
    // @DocumentReference
     private List<BusStop> busStop ;
@@ -31,7 +31,7 @@ public class Bus {
   // @DocumentReference
     private List<BusRoute> busRoute;
 
-    public Bus(String busID,String capacity,String driver,List<BusStop> busStop,List<BusRoute> busRoute) {
+    public Bus(String busID,String capacity, List<Driver> driver,List<BusStop> busStop,List<BusRoute> busRoute) {
         this.busID = busID;
         this.capacity = capacity;
         this.driver = driver;

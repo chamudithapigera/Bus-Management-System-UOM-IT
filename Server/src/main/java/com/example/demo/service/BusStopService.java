@@ -58,7 +58,7 @@ public  class BusStopService {
 
         mongoTemplate.update(Bus.class)
                 .matching(Criteria.where("busID").is(busID))
-                .apply(new org.springframework.data.mongodb.core.query.Update().push("busStopID").value(busStop))
+                .apply(new org.springframework.data.mongodb.core.query.Update().push("busStop").value(busStop))
                 .first();
         return busStop;
 

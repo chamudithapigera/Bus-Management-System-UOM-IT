@@ -29,7 +29,7 @@ public class DriverService {
 
         mongoTemplate.update(Bus.class)
                 .matching(Criteria.where("busID").is(busID))
-                .apply(new Update().push("driverID").value(driver))
+                .apply(new Update().push("driver").value(driver))
                 .first();
         return driver;
 
