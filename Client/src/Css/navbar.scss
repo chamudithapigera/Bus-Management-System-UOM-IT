@@ -5,7 +5,7 @@
   align-items: center;
   font-size: 15px;
   color: #392a2a;
-  background-color: #aed1dd;
+  background-color: #5fb689;
 
   .wrapper {
     width: 100%;
@@ -17,7 +17,7 @@
     .search {
       display: flex;
       align-items: center;
-      border: 0.5px solid rgb(125, 120, 120);
+      border: 0.5px solid rgb(86, 80, 80);
       padding: 3px;
 
       input {
@@ -26,7 +26,8 @@
         background: transparent;
 
         &::placeholder {
-          font-size: 13px;
+          font-size: 14px;
+          color: #232020;
         }
       }
     }

@@ -3,9 +3,6 @@ import SearchBus from "./Pages/SearchBus";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FilteredBuses from "./Pages/FilteredBuses";
 import ViewBus from "./Pages/ViewBus";
-import ViewTurn from "./Pages/ViewTurn";
-import SaveLocation from "./Pages/SaveLocation";
-
 
 
 function App() {
@@ -22,10 +19,6 @@ function App() {
               <Route path="viewbus" element={<ViewBus/>}/>
             </Route>
           
-            <Route path="viewturn">
-              <Route index element={<ViewTurn />} />
-              <Route path="savelocation" element={<SaveLocation />} />
-            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

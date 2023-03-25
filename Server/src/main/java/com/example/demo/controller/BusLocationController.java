@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.BusLocation;
-import com.example.demo.model.BusLocationWithDistance;
+import com.example.demo.model.BusLocationWithDistanceAndDuration;
 import com.example.demo.repository.BusLocationRepository;
 import com.example.demo.service.BusLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/bus-locations")
+@CrossOrigin(origins = "http://localhost:3000") // replace with your frontend URL
 public class BusLocationController {
 
     @Autowired
@@ -26,8 +27,8 @@ public class BusLocationController {
     }
 
     @GetMapping("/nearby/{longitude}/{latitude}")
-
-    public List<BusLocationWithDistance> getNearbyBuses(@PathVariable("longitude") double longitude, @PathVariable("latitude") double latitude) {
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<BusLocationWithDistanceAndDuration> getNearbyBuses(@PathVariable("longitude") double longitude, @PathVariable("latitude") double latitude) {
         return busLocationService.getNearbyBuses(longitude, latitude);
     }
     /*

@@ -1,40 +1,37 @@
 import {
   Box,
   Button,
-  ButtonGroup,
   Flex,
-  HStack,
   IconButton,
   Input,
   InputGroup,
   InputRightElement,
   InputLeftElement,
   SkeletonText,
-  Text,
-  color,
-} from '@chakra-ui/react'
-import { FaLocationArrow, FaTimes, FaSearch } from 'react-icons/fa'
-import axios from 'axios';
+} from '@chakra-ui/react';
 
 import {
   useJsApiLoader,
   GoogleMap,
   Marker,
   Autocomplete,
-  DirectionsRenderer,
-} from '@react-google-maps/api'
-import { useRef, useState } from 'react';
-import { navigate, useNavigate } from 'react-router-dom';
+  InfoWindow,
+} from '@react-google-maps/api';
 
+import { FaLocationArrow, FaTimes, FaSearch } from 'react-icons/fa';
+import axios from 'axios';
+import busStopImage from './Bus_Stop.jpg';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const center = { lat: 6.7967578, lng: 79.88875 }
 
 const busStops = [
-  { lat: 6.7975192, lng: 79.8890269, busStopName: 'Katubadda Junction Bus Stop', routeNo: '255'},
-  { lat: 6.796842088103000, lng: 79.89383247321002, busStopName: 'Pansala Bus Stop', routeNo: '255' },
-  { lat: 6.795658427700921, lng: 79.8984747855464, busStopName: 'UOM Bus Stop', routeNo: '255' },
- 
+  { lat: 6.797515, lng: 79.8890265, busStopName: 'Katubadda Junction Bus Stop', routeNo: '255' },
+  { lat: 6.796813, lng: 79.893839, busStopName: 'Pansala Bus Stop', routeNo: '255' },
+  { lat: 6.795623, lng: 79.8984756, busStopName: 'UOM Bus Stop', routeNo: '255' },
+
 ];
 
 function Map() {
@@ -48,13 +45,10 @@ function Map() {
   const [map, setMap] = useState(null);
   const [autocomplete, setAutocomplete] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [directionsResponse, setDirectionsResponse] = useState(null);
   const [inputValue, setInputValue] = useState('');
-  const [currentLocation, setCurrentLocation] = useState(null);
-  const [buses, setBuses] = useState([]);
-
-
-
+  const [currentLocation, setCurrentLocation] = useState([]);
+  const [ setBuses] = useState([]);
+  const [selectedMarker, setSelectedMarker] = useState(null);
 
 
   if (!isLoaded) {
@@ -69,12 +63,11 @@ function Map() {
     if (autocomplete !== null) {
       const place = autocomplete.getPlace();
       if (place.geometry) {
-        setDirectionsResponse(null);
         setSelectedPlace(place.geometry.location.toJSON());
         setInputValue(place.formatted_address);
         if (map !== null) {
           map.panTo(place.geometry.location);
-          map.setZoom(14);
+          map.setZoom(16);
         }
       } else {
         console.log('No results found');
@@ -91,18 +84,26 @@ function Map() {
 
   const handleCurrentLocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
+      navigator.geolocation.watchPosition((position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
         setCurrentLocation({ lat: latitude, lng: longitude });
         if (map !== null) {
           map.panTo({ lat: latitude, lng: longitude });
-          map.setZoom(14);
+          map.setZoom(17);
         }
-      });
+
+      },
+        (error) => {
+          console.log(error);
+        },
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
+
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
   };
+
 
   return (
     <Flex
@@ -116,7 +117,7 @@ function Map() {
         {/* Google Map Box */}
         <GoogleMap
           center={center}
-          zoom={15}
+          zoom={13}
           mapContainerStyle={{ width: '100%', height: '100%' }}
           options={{
             zoomControl: true,
@@ -126,8 +127,6 @@ function Map() {
           }}
           onLoad={map => setMap(map)}
         >
-          
-          
           <Box position='absolute' left={2} top={1} h='50px' w='250px'>
 
             <Autocomplete
@@ -147,9 +146,8 @@ function Map() {
                     outline: 'none',
                     boxShadow: 'outline',
                   }}
-              
-
                 />
+
                 {selectedPlace && (
                   <InputRightElement>
                     <IconButton
@@ -159,6 +157,7 @@ function Map() {
                       size='sm'
                       onClick={clearSelectedPlace}
                     />
+
                   </InputRightElement>
                 )}
                 <InputLeftElement>
@@ -180,21 +179,38 @@ function Map() {
           </Box>
 
           {busStops.map((busStop) => (
-            
-            <Marker key={busStop.busStopName} position={busStop} onClick={ async () => {
-           
-              try {
-                const response = await axios.get(`http://localhost:8080/api/v1/buses/getBusesByBusStopName/${busStop.busStopName}`);
-                const filteredBuses = response.data;
-                const busStopName = busStop.busStopName;
-                setBuses(filteredBuses);
-                console.log(filteredBuses);
-                navigate('/searchbus/filteredbus', { state: { filteredBuses , busStopName} });
-              } catch (error) {
-                console.error('Error fetching data: ', error);
-              }
-          }} />
+            <Marker key={busStop.busStopName} position={{ lat: busStop.lat, lng: busStop.lng }}
+              icon={{
+                url: busStopImage,
+                scaledSize: new window.google.maps.Size(25, 25),
+              }}
+              onMouseOver={() => {
+                setSelectedMarker(busStop);
+              }}
+              onMouseOut={() => {
+                setSelectedMarker(null);
+              }}
+              onClick={async () => {
 
+                try {
+                  const response = await axios.get(`http://localhost:8080/api/v1/bus-locations/nearby/${busStop.lng}/${busStop.lat}`);
+                  const filteredBuses = response.data;
+                  const busStopName = busStop.busStopName;
+                  const routeNO = busStop.routeNo;
+                  setBuses(filteredBuses);
+                  console.log(filteredBuses);
+                  navigate('/searchbus/filteredbus', { state: { filteredBuses, busStopName, routeNO } });
+                } catch (error) {
+                  console.error('Error fetching data: ', error);
+                }
+              }} >
+              {selectedMarker === busStop && (
+                <InfoWindow>
+                  <div>{busStop.busStopName}</div>
+
+                </InfoWindow>
+              )}
+            </Marker>
           ))}
 
           {/* Selected Place Marker */}
@@ -210,15 +226,8 @@ function Map() {
             />
           )}
 
-          {directionsResponse && (
-            <DirectionsRenderer directions={directionsResponse} />
-          )}
-
-
         </GoogleMap>
       </Box>
-
-
     </Flex>
   )
 }
