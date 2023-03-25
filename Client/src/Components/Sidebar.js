@@ -69,11 +69,13 @@ const Sidebar = () => {
             <span>Bus Stops</span>
           </li>
           </Link>
-
+          
+          <Link to="/attendance" style={{textDecoration:"none"}}>
           <li>
             <FactCheckRoundedIcon className="icon"/>
             <span>Driver Attendance</span>
           </li>
+          </Link>
 
           <Link to="/turn" style={{textDecoration:"none"}}>
           <li>

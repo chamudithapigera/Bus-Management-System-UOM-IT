@@ -2,11 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Bus;
 import com.example.demo.model.BusRoute;
-import com.example.demo.model.BusStop;
+
 import com.example.demo.repository.BusRouteRepository;
 import com.example.demo.service.BusRouteService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,9 @@ public class BusRouteController {
     @Autowired
     private BusRouteRepository busRouteRepository;
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
     @PostMapping("/addRoute")
     public ResponseEntity<BusRoute> createBusRoute(@RequestBody Map<String, String> payload){
 
@@ -38,8 +42,8 @@ public class BusRouteController {
     }
 
     @PutMapping("/updatebusRoute/{r_id}")
-    public ResponseEntity<String> updateBusRoute(@PathVariable("r_id") ObjectId r_id, @RequestBody BusRoute busRoute) {
-        Optional<BusRoute> optionalBusRoute = busRouteRepository.findById(r_id);
+    public ResponseEntity<String> updateBusRoute(@PathVariable("id") ObjectId id, @RequestBody BusRoute busRoute) {
+        Optional<BusRoute> optionalBusRoute = busRouteRepository.findById(id);
         if (optionalBusRoute.isPresent()) {
             BusRoute existingBusRoute = optionalBusRoute.get();
             existingBusRoute.setRouteID(busRoute.getRouteID());
@@ -53,6 +57,34 @@ public class BusRouteController {
             return new ResponseEntity<>("BusRoute not found...", HttpStatus.NOT_FOUND);
         }
     }
+
+   /* @DeleteMapping("/deleteRoute/{id}")
+    String deleteRoute(@PathVariable ObjectId id){
+        return mongoTemplate.busRouteRepository.deleteById();
+
+    }*/
+
+
+   /* @DeleteMapping("/deletebusRoute/{r_id}")
+    public ResponseEntity<Void> deleteBusRoute(@PathVariable("r_id") ObjectId r_id) {
+
+         BusRoute foundBusRoute = busRouteService.findById(r_id);
+
+        if (foundBusRoute == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        busRouteService.deleteBusRoute(r_id);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }*/
+
+    /*@DeleteMapping("/deleteRoute/{routeID}")
+    public void deleteObject(@PathVariable String routeID) {
+        busRouteService.deleteById(routeID);
+    }*/
+
+
 
 
 

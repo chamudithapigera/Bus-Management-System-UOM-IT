@@ -14,6 +14,7 @@ import { useContext, useState } from "react";
 import { DarkModeContext } from './Components/darkModeContext';
 import TurnSchedule from './Pages/TurnSchedule';
 import AddTurn from './Components/AddTurn';
+import DriverAttendance from './Pages/DriverAttendance';
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
       <Routes>
         <Route path='/'>
             <Route index element={<Home />} />
-            <Route path="bus" element={<Bus />}/>
+            <Route path="bus" element={<Bus/>}/>
             <Route path="/addbus" element={<AddBus />} />
             <Route path="busRoute" element={<BusRoute />} />
             <Route path="/addRoute" element={<AddBusRoute />} />
@@ -35,6 +36,7 @@ function App() {
             <Route path="/addDriver" element={<AddDriver />} />
             <Route path="turn" element={<TurnSchedule />} />
             <Route path="/addTurn" element={<AddTurn />} />
+            <Route path="/attendance" element={<DriverAttendance />} />
             
         </Route>
       </Routes>

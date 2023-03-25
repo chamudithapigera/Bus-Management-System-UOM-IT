@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Bus;
+import com.example.demo.model.BusStop;
 import com.example.demo.model.Driver;
 import com.example.demo.repository.BusRepository;
 import com.example.demo.repository.BusStopRepository;
@@ -8,6 +9,9 @@ import com.example.demo.service.BusService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +31,8 @@ public class BusController {
     private BusRepository busRepository;
 
     @Autowired
+    private BusStopRepository busStopRepository;
+    @Autowired
     private MongoTemplate mongoTemplate;
 
     @PostMapping("/addBus")
@@ -43,23 +49,53 @@ public class BusController {
     //public List<Bus> findAllBusesWithDetails() {
         //return busService.findAll();}
 
+//----
 
-    @PutMapping("/updatebus/{id}")
-    public ResponseEntity<String> updateBus(@PathVariable("id") ObjectId id, @RequestBody Bus bus) {
-        Optional<Bus> optionalBus = busRepository.findById(id);
-        if (optionalBus.isPresent()) {
-            Bus existingBus = optionalBus.get();
-            existingBus.setBusID(bus.getBusID());
-            existingBus.setCapacity(bus.getCapacity());
-            existingBus.setDriver(bus.getDriver());
-            existingBus.setBusRoute(bus.getBusRoute());
-            existingBus.setBusStop(bus.getBusStop());
-            busRepository.save(existingBus);
-            return new ResponseEntity<>("Bus updated successfully...", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Bus not found...", HttpStatus.NOT_FOUND);
-        }
+
+    @PutMapping("/{id}/update-bus-stop/{stopId}")
+    public Bus updateBusStop(@PathVariable("id") ObjectId busId, @PathVariable("stopId") ObjectId stopId, @RequestBody BusStop busStop) {
+        return busService.updateBusStop(busId, stopId, busStop);
     }
+
+   /* @PutMapping("/{busId}/bus-stop/{busStopId}")
+    public ResponseEntity<?> updateBusStop(@PathVariable ObjectId busId, @PathVariable ObjectId busStopId, @RequestBody BusStop busStop) {
+        //Bus updatedBus = busService.updateBusStop(busId, busStopId, busStop);
+        //return ResponseEntity.ok(updatedBus);
+        Optional<BusStop> busStopData = busStopRepository.findById(new ObjectId(busStopId.getDate()));
+
+        if (busStopData.isPresent()) {
+            BusStop _busStop = busStopData.get();
+            _busStop.setBusStopID(busStop.getBusStopID());
+            _busStop.setBusStopName(busStop.getBusStopName());
+            _busStop.setLongitude(busStop.getLongitude());
+            Bus updatedBus = null;
+            List<Bus> buses = busRepository.findAll();
+
+            // loop through all buses to update the busStop field if the busStop exists
+            for (Bus bus : buses) {
+                List<BusStop> busStops = bus.getBusStop();
+                if (busStops != null) {
+                    for (int i = 0; i < busStops.size(); i++) {
+                        BusStop temp = busStops.get(i);
+                        if (temp.getId().toString().equals(busStopId)) {
+                            temp.setBusStopID(busStop.getBusStopID());
+                            temp.setBusStopName(busStop.getBusStopName());
+                            temp.setLongitude(busStop.getLongitude());
+                            busStops.set(i, temp);
+                            updatedBus = busRepository.save(bus);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            busStopRepository.save(_busStop);
+            return new ResponseEntity<>(_busStop, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }*/
+
    /* @PutMapping("/updatebus/{id}")
     Optional<Bus> updateBus(@RequestBody Bus newBus, @PathVariable String id){
         return busRepository.findBusBybusID(id)
