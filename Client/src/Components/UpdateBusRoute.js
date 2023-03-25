@@ -1,49 +1,59 @@
+import React, { useState, useEffect } from 'react';
+import {  Link,useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import React, { useEffect,useState } from 'react';
-import { Link, useNavigate,useParams } from 'react-router-dom';
-import '../Css/form.scss';
 
 export default function UpdateBusRoute() {
 
-    let navigate = useNavigate()
+    let navigate = useNavigate();
 
     const { id } = useParams();
+    
+    const [route, setRoute] = useState({
+        routeID: "",
+        routeNO : "",
+        routeName: ""
+      });
+    
+      const { routeID, routeNO,routeName  } = route;
 
-    const [busRoute, setBusRoute] = useState({
-        
-        routeID:"",
-        routeNO:"",
-        routeName: "",
-               
-    });
-
-    const{routeID,routeNO,routeName}=busRoute
-
-    const onInputChange=(e)=>{
-        setBusRoute({...busRoute,[e.target.name]:e.target.value}
-            )};
-
+      const onInputChange = (e) => {
+        setRoute({ ...route, [e.target.name]: e.target.value });
+      };
+      
     useEffect(() => {
         loadBusRoute();
     }, []);
 
-        const onSubmit= async (e)=>{
-            e.preventDefault();
-            await axios.put(`http://localhost:8080/api/v1/busRoute/${id}`,busRoute);
-            navigate("/busRoute")
-        };
-    
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        
+        await axios.put(`http://localhost:8080/api/v1/busRoute/${id}`, route)
+        .then((response) => {
+            console.log(response.data);
+            alert("Bus route updated successfully!");
+          })
+          .catch((error) => {
+            console.error(error);
+            alert("Failed to update bus route");
+          });
+        navigate('/busRoute');
+        
+    };
+
     const loadBusRoute = async () => {
         const result = await axios.get(`http://localhost:8080/api/v1/busRoute/${id}`);
-        setBusRoute(result.data);
-    };       
+        setRoute(result.data);
+    };
 
+    
 
-  return (
-    <div className='container1'>
+    return (
+        <div className='container1'>
         <div >
             <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
-                <h2 className='text-center m-4'>Update details of bus-routes</h2>
+                <h2 className='text-center m-4'>
+                    Update Bus Route
+               </h2>
                 <form onSubmit={(e)=> onSubmit(e)}>
                 <div className='mb-3'>
                 <label htmlFor='routeID' className='label'rm>Route ID</label>
@@ -78,13 +88,14 @@ export default function UpdateBusRoute() {
                        onChange={(e)=>onInputChange(e)}
                     />
                 </div>
-           
                 
-                <button type="submit" className="button"  >Submit</button>
-                <Link   to="/busRoute" style={{textDecoration:"none"}}>Cancel</Link>
+              
+                
+                    <button type='submit' className='button'>Update</button>
+                    <Link   to="/busRoute" style={{textDecoration:"none"}}>Cancel</Link>
                 </form>
             </div>
         </div>
-    </div>
-  )
+        </div>
+    );
 }

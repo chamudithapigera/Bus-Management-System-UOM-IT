@@ -1,19 +1,33 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import {  Link,useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-function UpdateBusStop() {
-  const [formValues, setFormValues] = useState({
+export default function UpdateBusStop() {
+
+  let navigate = useNavigate();
+
+  const { id } = useParams();
+
+  const [stop, setStop] = useState({
     busStopID: "",
     busStopName: "",
     longitude: ""
   });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const { busStopID, busStopName,longitude  } = stop;
 
-    // Make PUT request to update the busStop record
-    axios
-      .put(`http://localhost:8080/api/v1/busStop/{id}`, formValues)
+  const onInputChange = (e) => {
+    setStop({ ...stop, [e.target.name]: e.target.value });
+  };
+
+  useEffect(() => {
+    loadBusStop();
+}, []);
+
+const onSubmit = async (e) => {
+    e.preventDefault();
+
+    await axios.put(`http://localhost:8080/api/v1/busStop/${id}`, stop)
       .then((response) => {
         console.log(response.data);
         alert("Bus stop updated successfully!");
@@ -22,30 +36,65 @@ function UpdateBusStop() {
         console.error(error);
         alert("Failed to update bus stop");
       });
+      navigate('/busStop');
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
+  const loadBusStop = async () => {
+    const result = await axios.get(`http://localhost:8080/api/v1/busSoute/${id}`);
+    setStop(result.data);
+};
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="_id">Bus Stop ID:</label>
-      <input type="text" name="_id" onChange={handleChange} />
+    <div className='container1'>
+    <div >
+        <div >
+            <h2 className='text-center m-4'>Add details of bus-stops</h2>
+            <form onSubmit={(e)=> onSubmit(e)}>
 
-      <label htmlFor="name">Bus Stop Name:</label>
-      <input type="text" name="name" onChange={handleChange} />
+            <div className='mb-3'>
+            <label htmlFor='busStopID' className='label'>Bus Stop ID</label>
+                <input
+                    type={"text"}
+                    className="input"
+                    placeholder='Enter bus  stop ID '
+                    name='busStopID'
+                    value={busStopID}
+                    onChange={(e)=>onInputChange(e)}
+                />
+            </div>
 
-      <label htmlFor="description">Longitude:</label>
-      <textarea name="description" onChange={handleChange}></textarea>
+            <div className='mb-3'>
+            <label htmlFor='busStopName' className='label'>Bus Stop Name</label>
+                <input
+                    type={"text"}
+                    className="input"
+                    placeholder='Enter bus  stop name '
+                    name='busStopName'
+                    value={busStopName}
+                    onChange={(e)=>onInputChange(e)}
+                />
+            </div>
 
-      <button type="submit">Update Bus Stop</button>
-    </form>
+            <div className='mb-3'>
+                <label htmlFor='longitude' className='label'>Longitude</label>
+                <input
+                    type={"text"}
+                    className="input"
+                    placeholder='Enter longitude'
+                    name='longitude'
+                   value={longitude}
+                   onChange={(e)=>onInputChange(e)}
+                />
+            </div>
+
+            
+            
+            <button type="submit" className="button">Submit</button>
+            <Link   to="/busStop" style={{textDecoration:"none"}}>Cancel</Link>
+            </form>
+        </div>
+    </div>
+</div>
   );
 }
 
-export default UpdateBusStop;

@@ -54,6 +54,21 @@ public class BusStopController {
                 .orElseThrow(()->new NotFoundException(("Bus Stop not found with id: " + id)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<BusStop> updateBusStop(@PathVariable("id") ObjectId id, @RequestBody BusStop busStop) {
+        BusStop updatedBusStop = busStopService.updateBusStop(id, busStop);
+        return ResponseEntity.ok(updatedBusStop);
+    }
+
+    @DeleteMapping("/deleteStop/{id}")
+    String deleteStop(@PathVariable ObjectId id){
+        if (!busStopRepository.existsById(id)){
+            throw new NotFoundException(("Bus Stop not found with id: " + id));
+        }
+        busStopRepository.deleteById(id);
+        return "Bus Stop with id " +id+ "has been deleted";
+
+    }
 
 
   /* @PutMapping("/updatebusStop/{s_id}")
@@ -97,11 +112,7 @@ public class BusStopController {
 
 
     //new
-  @PutMapping("/{id}")
-  public ResponseEntity<BusStop> updateBusStop(@PathVariable("id") ObjectId id, @RequestBody BusStop busStop) {
-      BusStop updatedBusStop = busStopService.updateBusStop(id, busStop);
-      return ResponseEntity.ok(updatedBusStop);
-  }
+
 
   /*  @PutMapping("/{id}")
     public ResponseEntity<?> updateBusStop(@PathVariable ObjectId id, @RequestBody BusStop busStop) {

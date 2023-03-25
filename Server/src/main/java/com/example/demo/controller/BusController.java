@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Bus;
+import com.example.demo.model.BusRoute;
 import com.example.demo.model.BusStop;
 import com.example.demo.model.Driver;
 import com.example.demo.repository.BusRepository;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,10 +55,40 @@ public class BusController {
 //----
 
 
-    @PutMapping("/{id}/update-bus-stop/{stopId}")
+   /* @PutMapping("/{id}/update-bus-stop/{stopId}")
     public Bus updateBusStop(@PathVariable("id") ObjectId busId, @PathVariable("stopId") ObjectId stopId, @RequestBody BusStop busStop) {
         return busService.updateBusStop(busId, stopId, busStop);
+    }*/
+
+    /*@DeleteMapping("/deleteBus/{id}")
+    String deleteBus(@PathVariable ObjectId id){
+        if (!busRepository.existsById(id)){
+            throw new NotFoundException(("Bus  not found with id: " + id));
+        }
+        busRepository.deleteById(id);
+        return "Bus  with id " +id+ "has been deleted";
+
+    }*/
+
+    @DeleteMapping("/bus/{busId}/busRoute/{busRouteId}")
+    public ResponseEntity<?> deleteBusRouteById(@PathVariable String busId, @PathVariable String busRouteId) {
+        Optional<Bus> bus = busRepository.findById(busId);
+        if (bus.isPresent()) {
+            Bus foundBus = bus.get();
+            List<BusRoute> busRoutes = foundBus.getBusRoute();
+            for (Iterator<BusRoute> iterator = busRoutes.iterator(); iterator.hasNext();) {
+                BusRoute busRoute = iterator.next();
+                if (busRoute.getId().equals(busRouteId)) {
+                    iterator.remove();
+                    busRepository.save(foundBus);
+                    return ResponseEntity.ok().build();
+                }
+            }
+        }
+        return ResponseEntity.notFound().build();
     }
+
+
 
    /* @PutMapping("/{busId}/bus-stop/{busStopId}")
     public ResponseEntity<?> updateBusStop(@PathVariable ObjectId busId, @PathVariable ObjectId busStopId, @RequestBody BusStop busStop) {

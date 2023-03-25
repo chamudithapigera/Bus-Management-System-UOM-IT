@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './Pages/Home';
@@ -15,9 +14,9 @@ import { DarkModeContext } from './Components/darkModeContext';
 import TurnSchedule from './Pages/TurnSchedule';
 import AddTurn from './Components/AddTurn';
 import DriverAttendance from './Pages/DriverAttendance';
-import EditBusStop from './Components/EditBusStop';
 import UpdateBusStop from './Components/UpdateBusStop';
 import UpdateBusRoute from './Components/UpdateBusRoute';
+import UpdateDriver from './Components/UpdateDriver';
 
 function App() {
   const {darkMode}= useContext(DarkModeContext);
@@ -39,8 +38,10 @@ function App() {
             <Route path="turn" element={<TurnSchedule />} />
             <Route path="/addTurn" element={<AddTurn />} />
             <Route path="/attendance" element={<DriverAttendance />} />
-            <Route exact path="/editstop/:id" element={<EditBusStop />} />
-            <Route exact path="/editroute/:id" element={<UpdateBusRoute />} />
+            <Route exact path="/updateStop/:id" element={<UpdateBusStop />} />
+            <Route exact path="/updateDriver/:id" element={<UpdateDriver/>} />
+            <Route exact path="/updateRoute/:id" element={<UpdateBusRoute/>} />
+
             
         </Route>
       </Routes>

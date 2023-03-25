@@ -14,12 +14,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class BusRoute {
 
     @Id
-    private ObjectId id;
+    private String id;
     private String routeID;
     private String routeNO;
     private String routeName;
-
-
 
     public BusRoute(String routeID, String routeNO, String routeName) {
         this.routeID = routeID;

@@ -18,7 +18,7 @@ import java.util.List;
 public class Bus {
 
     @Id
-    private ObjectId id;
+    private String id;
     private String busID;
     private String capacity;
     @DBRef

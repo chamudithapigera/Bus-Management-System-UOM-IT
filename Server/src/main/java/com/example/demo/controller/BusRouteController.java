@@ -73,11 +73,15 @@ public class BusRouteController {
         return ResponseEntity.ok(updatedBusRoute);
     }
 
-   /* @DeleteMapping("/deleteRoute/{id}")
+    @DeleteMapping("/deleteRoute/{id}")
     String deleteRoute(@PathVariable ObjectId id){
-        return mongoTemplate.busRouteRepository.deleteById();
+        if (!busRouteRepository.existsById(id)){
+            throw new NotFoundException(("Bus Route not found with id: " + id));
+        }
+         busRouteRepository.deleteById(id);
+        return "Bus Route with id " +id+ "has been deleted";
 
-    }*/
+    }
 
 
    /* @DeleteMapping("/deletebusRoute/{r_id}")

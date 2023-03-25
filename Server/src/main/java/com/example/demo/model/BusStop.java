@@ -17,7 +17,7 @@ import java.util.List;
 public class BusStop {
 
     @Id
-    private ObjectId id;
+    private String id;
     private String busStopID;
     private String busStopName;
     private String longitude;

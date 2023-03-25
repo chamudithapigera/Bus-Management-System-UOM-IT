@@ -52,8 +52,13 @@ export default function Driver() {
           <td>{driver.driverName}</td>
           <td>{driver.licenseNo}</td>
           <td>
-             
-              <button className='btn btn-outline mx-2'>Edit</button>
+          <Link
+                        className='btn btn-warning mx-2'
+                        to={`/updateDriver/${driver.id}`}
+                      >
+                        Edit
+                      </Link>
+              
               <button className='btn btn-danger mx-2'>Delete</button>
           </td>
       </tr>

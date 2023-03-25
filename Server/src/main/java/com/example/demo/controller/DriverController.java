@@ -49,4 +49,13 @@ public class DriverController {
         return ResponseEntity.ok(updatedDriver);
     }
 
+    @DeleteMapping("/deleteDriver/{id}")
+    String deleteDriver(@PathVariable ObjectId id){
+        if (!driverRepository.existsById(id)){
+            throw new NotFoundException(("Driver not found with id: " + id));
+        }
+        driverRepository.deleteById(id);
+        return "Driver with id " +id+ "has been deleted";
+
+    }
 }
