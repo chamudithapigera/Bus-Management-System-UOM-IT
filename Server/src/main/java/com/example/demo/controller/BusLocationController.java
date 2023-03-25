@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.BusLocation;
+import com.example.demo.model.BusLocationWithDistance;
 import com.example.demo.repository.BusLocationRepository;
 import com.example.demo.service.BusLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,20 @@ public class BusLocationController {
         return busLocationRepository.findAll();
     }
 
+    @GetMapping("/nearby/{longitude}/{latitude}")
+
+    public List<BusLocationWithDistance> getNearbyBuses(@PathVariable("longitude") double longitude, @PathVariable("latitude") double latitude) {
+        return busLocationService.getNearbyBuses(longitude, latitude);
+    }
+    /*
+    public ResponseEntity<List<BusLocation>> getNearbyBuses(@PathVariable("longitude") double longitude,
+                                                            @PathVariable("latitude") double latitude) {
+
+        List<BusLocation> nearbyBuses = busLocationService.getNearbyBuses(longitude, latitude);
+
+        return ResponseEntity.ok().body(nearbyBuses);
+    }
+*/
 
     @PostMapping("/save")
     public ResponseEntity<?> saveBusLocation(@RequestBody BusLocation busLocation) {

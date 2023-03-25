@@ -42,9 +42,8 @@ public class BusController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getBusesByBusStopName/{busStopName}")
-    public ResponseEntity<List<Map>> getLatestBusesByStopName(@PathVariable String busStopName) {
-        List<Map> latestBuses = busService.getLatestBusesByStopName(busStopName);
-        return ResponseEntity.ok(latestBuses);
+    public List<Bus> getBusesByBusStopName(@PathVariable String busStopName) {
+        return busRepository.findByBusStopName(busStopName);
     }
 
 }

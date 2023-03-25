@@ -72,5 +72,12 @@ public class BusLocation {
         this.latitude = latitude;
     }
 
-    // Getters and setters
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+// Getters and setters
 }
