@@ -1,0 +1,8 @@
+.attendance{
+    display: flex;
+
+    .attendanceContainer{
+        // background-color: lightblue; this is for viewing flexbox sizes of sidebar and homecontainer
+        flex: 6;
+    }
+}
