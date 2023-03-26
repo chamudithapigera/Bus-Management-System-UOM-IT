@@ -47,23 +47,6 @@ public class BusRouteController {
     }
 
 
-    /* @PutMapping("/updatebusRoute/{id}")
-    public ResponseEntity<String> updateBusRoute(@PathVariable("id") ObjectId id, @RequestBody BusRoute busRoute) {
-        Optional<BusRoute> optionalBusRoute = busRouteRepository.findById(id);
-        if (optionalBusRoute.isPresent()) {
-            BusRoute existingBusRoute = optionalBusRoute.get();
-            existingBusRoute.setRouteID(busRoute.getRouteID());
-            existingBusRoute.setRouteNO(busRoute.getRouteNO());
-            existingBusRoute.setRouteName(busRoute.getRouteName());
-
-          busRouteRepository.save(existingBusRoute);
-            //busRepository.save(existingBusStop);
-            return new ResponseEntity<>("BusRoute updated successfully...", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("BusRoute not found...", HttpStatus.NOT_FOUND);
-        }
-    }*/
-
    @PutMapping("/{id}")
     public ResponseEntity<BusRoute> updateBusRoute(@PathVariable("id") ObjectId id, @RequestBody BusRoute busRoute) {
         BusRoute updatedBusRoute = busRouteService.updateBusRoute(id, busRoute);
@@ -81,25 +64,23 @@ public class BusRouteController {
     }
 
 
-   /* @DeleteMapping("/deletebusRoute/{r_id}")
-    public ResponseEntity<Void> deleteBusRoute(@PathVariable("r_id") ObjectId r_id) {
 
-         BusRoute foundBusRoute = busRouteService.findById(r_id);
+ /* @PutMapping("/updatebusRoute/{id}")
+    public ResponseEntity<String> updateBusRoute(@PathVariable("id") ObjectId id, @RequestBody BusRoute busRoute) {
+        Optional<BusRoute> optionalBusRoute = busRouteRepository.findById(id);
+        if (optionalBusRoute.isPresent()) {
+            BusRoute existingBusRoute = optionalBusRoute.get();
+            existingBusRoute.setRouteID(busRoute.getRouteID());
+            existingBusRoute.setRouteNO(busRoute.getRouteNO());
+            existingBusRoute.setRouteName(busRoute.getRouteName());
 
-        if (foundBusRoute == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+          busRouteRepository.save(existingBusRoute);
+            //busRepository.save(existingBusStop);
+            return new ResponseEntity<>("BusRoute updated successfully...", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("BusRoute not found...", HttpStatus.NOT_FOUND);
         }
-
-        busRouteService.deleteBusRoute(r_id);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }*/
-
-    /*@DeleteMapping("/deleteRoute/{routeID}")
-    public void deleteObject(@PathVariable String routeID) {
-        busRouteService.deleteById(routeID);
-    }*/
-
 
 
 

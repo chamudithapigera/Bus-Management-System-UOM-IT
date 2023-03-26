@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.exception.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,12 +20,13 @@ import java.time.LocalTime;
 public class Turn {
 
     @Id
-    private ObjectId id;
+    private String id;
     private String turnNo;
     //private LocalDate turnDate;
     private String turnTime;
     private String routeName;
     private String driverID;
+
 
 }
 

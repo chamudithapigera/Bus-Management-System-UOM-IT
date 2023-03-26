@@ -1,8 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Driver;
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Turn;
 import com.example.demo.repository.TurnRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -13,13 +14,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -39,85 +33,14 @@ public class TurnService {
         mongoTemplate.remove(new Query(), "turn");
     }
 
-    //public List<Turn> findAll() {return turnRepository.findAll();}
-
-  /*  public List<String> getPresentDriverIdsSortedByCheckInTime() {
-        Aggregation aggregation = Aggregation.newAggregation(
-                Aggregation.match(Criteria.where("status").is("present")),
-                Aggregation.sort(Sort.Direction.ASC, "checkInTime"),
-                Aggregation.project("driverID")
-        );
-        AggregationResults<String> results = mongoTemplate.aggregate(aggregation, "driverAttendance", String.class);
-        List<String> driverIds = results.getMappedResults();
-        List<Turn> turns = mongoTemplate.findAll(Turn.class);
-        int numTurns = turns.size();
-        int numDrivers = driverIds.size();
-
-        // Retrieve the first record in the turn collection
-       // Turn firstTurn = mongoTemplate.findOne(Query.query(new Criteria()).limit(1), Turn.class);
-
-// Retrieve the value of the routeName field from the first record
-        //String routeName = String.valueOf(firstTurn.getRouteName());
-
-// Get the first record in the turn collection
-        Turn firstTurn = mongoTemplate.findOne(Query.query(new Criteria()).limit(1), Turn.class);
-
-// Get the routeName field value from the first turn record
-        String firstRouteName = firstTurn.getRouteName();
-        List<Turn> turnss = mongoTemplate.findAll(Turn.class);
-        for (Turn turn : turnss) {
-            if (turn.getRouteName().equals(firstRouteName)) {
-
-            if (numTurns == numDrivers) {
-                // Distribute drivers among turns based on turn order
-                for (int i = 0; i < numTurns; i++) {
-                    Update update = new Update().set("driverID", driverIds.get(i));
-                    mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(turns.get(i).getId())), update, Turn.class);
-                }
-            } else if (numTurns > numDrivers) {
-                // Distribute drivers among all turns
-                for (int i = 0; i < numTurns; i++) {
-                    int driverIndex = i % numDrivers;
-                    Update update = new Update().set("driverID", driverIds.get(driverIndex));
-                    mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(turns.get(i).getId())), update, Turn.class);
-                }
-            } else {
-                // Distribute drivers among turns in round-robin fashion
-                int driverIndex = 0;
-                for (int i = 0; i < numTurns; i++) {
-                    Update update = new Update().set("driverID", driverIds.get(driverIndex));
-                    mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(turns.get(i).getId())), update, Turn.class);
-                    driverIndex = (driverIndex + 1) % numDrivers;
-                }
-            }
-        } else {
-            if (numTurns == numDrivers) {
-                // Distribute drivers among turns based on turn order
-                for (int i = 0; i < numTurns; i++) {
-                    Update update = new Update().set("driverID", driverIds.get(i));
-                    mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(turns.get(i).getId())), update, Turn.class);
-                }
-            } else if (numTurns > numDrivers) {
-                // Distribute drivers among all turns
-                for (int i = 0; i < numTurns; i++) {
-                    int driverIndex = i % numDrivers;
-                    Update update = new Update().set("driverID", driverIds.get(driverIndex));
-                    mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(turns.get(i).getId())), update, Turn.class);
-                }
-            } else {
-                // Distribute drivers among turns in round-robin fashion
-                int driverIndex = 0;
-                for (int i = 0; i < numTurns; i++) {
-                    Update update = new Update().set("driverID", driverIds.get(driverIndex));
-                    mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(turns.get(i).getId())), update, Turn.class);
-                    driverIndex = (driverIndex + 1) % numDrivers;
-                }
-            }
-
-        }
+    public Turn updateTurn(ObjectId id, Turn turn) {
+        Turn existingTurn = turnRepository.findById(id).orElseThrow(() -> new NotFoundException("Turn not found"));
+        existingTurn.setTurnNo(turn.getTurnNo());
+        existingTurn.setTurnTime(turn.getTurnTime());
+        existingTurn.setRouteName(turn.getRouteName());
+        return turnRepository.save(existingTurn);
     }
-        return driverIds;
-    }*/
+
 
     public List<String> getPresentDriverIdsSortedByCheckInTime() {
         Aggregation aggregation = Aggregation.newAggregation(
@@ -178,7 +101,7 @@ public class TurnService {
 
             }
         } else {
-            // Distribute drivers among turns in round-robin fashion
+            // Distribute drivers among turns
             int driverIndex = 0;
             for (int i = 0; i < differentRouteCount; i++) {
                 Update update = new Update().set("driverID", driverIds.get(driverIndex));
@@ -186,21 +109,9 @@ public class TurnService {
                 driverIndex = (driverIndex + 1) % numDrivers;
             }
         }
-       /* for (int i = 0; i < differentRouteCount; i++) {
-            Update update = new Update().set("driverID", driverIds.get(driverIndex));
-            mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(differentRouteTurns.get(i).getId())), update, Turn.class);
-            driverIndex++;
-            if (driverIndex >= driverIds.size()) {
-                driverIndex = sameRouteCount;
-            }
-        }*/
 
         return driverIds;
     }
-
-
-
-
 
 
 }

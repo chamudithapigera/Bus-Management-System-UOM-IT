@@ -15,15 +15,6 @@ public class DriverAttendanceService {
     @Autowired
     private DriverAttendanceRepository driverAttendanceRepository;
 
-  /*  public List<DriverAttendance> getAttendanceByDriverIDAndDate(String driverID, Date date) {
-        return driverAttendanceRepository.findByDriverIDAndDate(driverID, date);
-    }
-
-    public DriverAttendance markAttendance(String driverID, String status) {
-        LocalDateTime currentTime = LocalDateTime.now();
-        DriverAttendance attendance = new DriverAttendance(driverID, currentTime.toLocalDate(), currentTime.toLocalTime(), status);
-        return driverAttendanceRepository.save(attendance);
-    }*/
 
     public List<DriverAttendance> findAll() {
         return driverAttendanceRepository.findAll();

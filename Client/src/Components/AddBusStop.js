@@ -11,11 +11,12 @@ export default function AddBusRoute() {
         busStopID: "",
         busStopName:"",
         longitude:"",
+        latitude:"",
         busID: ""
          
     });
 
-    const{busStopID,busStopName,longitude, busID}=busStop
+    const{busStopID,busStopName,longitude,latitude, busID}=busStop
 
     const onInputChange=(e)=>{
         setBusStop({...busStop,[e.target.name]:e.target.value}
@@ -66,6 +67,18 @@ export default function AddBusRoute() {
                         placeholder='Enter longitude'
                         name='longitude'
                        value={longitude}
+                       onChange={(e)=>onInputChange(e)}
+                    />
+                </div>
+
+                <div className='mb-3'>
+                    <label htmlFor='latitude' className='label'>latitude</label>
+                    <input
+                        type={"text"}
+                        className="input"
+                        placeholder='Enter latitude'
+                        name='latitude'
+                       value={latitude}
                        onChange={(e)=>onInputChange(e)}
                     />
                 </div>

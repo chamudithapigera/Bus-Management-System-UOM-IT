@@ -1,42 +1,50 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../Css/form.scss';
-import '../Css/table.scss';
 
+export default function UpdateTurn() {
 
-export default function AddTurn() {
+    let navigate = useNavigate();
 
-    let navigate = useNavigate()
+    const { id } = useParams();
+
     const [busTurn, setBusTurn] = useState({
         turnNo: "",
         turnTime: "",
         routeName: ""
     });
 
-    const { turnNo, turnTime, routeName } = busTurn
+    const { turnNo, turnTime, routeName } = busTurn;
 
     const onInputChange = (e) => {
         setBusTurn({ ...busTurn, [e.target.name]: e.target.value }
         )
     };
 
+    useEffect(() => {
+        loadBusTurns();
+    }, []);
+
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.post("http://localhost:8080/api/v1/turn/addTurn", busTurn)
+
+        await axios.put(`http://localhost:8080/api/v1/turn/${id}`, busTurn)
             .then((response) => {
                 console.log(response.data);
-                alert("Bus route updated successfully!");
-
+                alert("Turn updated successfully!");
             })
             .catch((error) => {
                 console.error(error);
-                alert("Failed to update bus route");
+                alert("Failed to update turn");
             });
-        navigate("/turn")
+        navigate('/turn');
+
+    };
+
+    const loadBusTurns = async () => {
+        const result = await axios.get(`http://localhost:8080/api/v1/turn/${id}`);
+        setBusTurn(result.data);
     }
-
-
 
     return (
         <div className='container1'>
@@ -78,11 +86,9 @@ export default function AddTurn() {
                             />
                         </div>
 
-
-
-
                         <button type="submit" className="button"  >Submit</button>
-                        <Link to="/turn" style={{ textDecoration: "none" }}>Cancel</Link>
+                        <Link to="/turn" style={{ textDecoration: "none" }}> <button>Cancel</button></Link>
+
                     </form>
                 </div>
             </div>
@@ -90,4 +96,3 @@ export default function AddTurn() {
     )
 
 }
-

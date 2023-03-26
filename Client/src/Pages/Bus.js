@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../Css/bus.scss';
+import '../Css/table.scss';
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
@@ -21,7 +21,7 @@ export default function Bus() {
 
   const deleteBus = async (id) => {
     await axios.delete(`http://localhost:8080/api/v1/bus_detail/deleteBus/${id}`);
-  
+
     loadBuses();
   };
 
@@ -39,15 +39,15 @@ export default function Bus() {
             </div>
             <div className='datatableTitle'>
 
-              <Link to="/addbus" style={{ textDecoration: "none" }}>Add</Link>
+              <Link to="/addbus" ><button>Add</button></Link>
             </div>
             <table className="table border shadow">
-            <thead>
+              <thead>
                 <tr>
                   <th>#</th>
                   <th scope="col">Bus ID</th>
                   <th scope="col">Capacity</th>
-                 
+
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -59,13 +59,16 @@ export default function Bus() {
                     <th scope="row" key={index}>{index + 1}</th>
                     <td>{bus.busID}</td>
                     <td>{bus.capacity}</td>
-                    
+
                     <td>
-                    <Link
+
+                      <button >view</button>
+
+                      <Link
                         className='btn btn-warning mx-2'
                         to={`/updateBus/${bus.id}`}
                       >
-                      <button >Edit</button>
+                        <button >Edit</button>
                       </Link>
                       <button onClick={() => deleteBus(bus.id)}>Delete</button>
                     </td>
@@ -73,7 +76,7 @@ export default function Bus() {
 
                 ))}
 
-                </tbody>
+              </tbody>
             </table>
           </div>
 

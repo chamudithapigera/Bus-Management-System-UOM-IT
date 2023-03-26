@@ -14,15 +14,13 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Document(collection = "driverAttendance")
 public class DriverAttendance {
+
     @Id
     private String id;
     private String driverID;
     private LocalDate date;
     private LocalTime checkInTime;
     private String status;
-
-    
-
 
 
 }

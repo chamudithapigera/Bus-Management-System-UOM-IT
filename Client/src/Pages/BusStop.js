@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../Css/bus.scss';
+import '../Css/table.scss';
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
@@ -37,7 +37,9 @@ export default function BusStop() {
             </div>
             <div className='datatableTitle'>
 
-              <Link to="/addStop" style={{ textDecoration: "none" }}>Add BusStop</Link>
+              <Link to="/addStop" >
+              <button>Add</button>
+              </Link>
             </div>
             <table className="table border shadow">
 
@@ -47,6 +49,7 @@ export default function BusStop() {
                   <th scope="col">Bus Stop ID</th>
                   <th scope="col">Bus Stop Name</th>
                   <th scope="col">longitude</th>
+                  <th scope="col">latitude</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -58,6 +61,7 @@ export default function BusStop() {
                     <td>{busStop.busStopID}</td>
                     <td>{busStop.busStopName}</td>
                     <td>{busStop.longitude}</td>
+                    <td>{busStop.latitude}</td>
                     <td>
                       <Link
                         className='btn btn-warning mx-2'

@@ -11,10 +11,11 @@ export default function UpdateBusStop() {
   const [stop, setStop] = useState({
     busStopID: "",
     busStopName: "",
-    longitude: ""
+    longitude: "",
+    latitude: ""
   });
 
-  const { busStopID, busStopName,longitude  } = stop;
+  const { busStopID, busStopName,longitude,latitude  } = stop;
 
   const onInputChange = (e) => {
     setStop({ ...stop, [e.target.name]: e.target.value });
@@ -87,6 +88,17 @@ const onSubmit = async (e) => {
                 />
             </div>
 
+            <div className='mb-3'>
+                    <label htmlFor='latitude' className='label'>latitude</label>
+                    <input
+                        type={"text"}
+                        className="input"
+                        placeholder='Enter latitude'
+                        name='latitude'
+                       value={latitude}
+                       onChange={(e)=>onInputChange(e)}
+                    />
+                </div>
             
             
             <button type="submit" className="button">Submit</button>

@@ -1,15 +1,11 @@
 package com.example.demo.controller;
 
-
-import com.example.demo.model.BusStop;
+import com.example.demo.model.Bus;
 import com.example.demo.model.DriverAttendance;
 import com.example.demo.service.DriverAttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.List;
 @CrossOrigin("http://localhost:3000")
 @RestController
@@ -19,9 +15,17 @@ public class DriverAttendanceController {
     @Autowired
     private DriverAttendanceService driverAttendanceService;
 
-    @GetMapping("/viewAttendance")
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    /*@GetMapping("/viewAttendance")
     public List<DriverAttendance> findAllAttendanceWithDetails() {
         return driverAttendanceService.findAll();
+    }*/
+
+    @GetMapping("/viewAttendance")
+    public List<DriverAttendance> findAllAttendanceWithDetails() {
+        return mongoTemplate.findAll(DriverAttendance.class);
     }
    /* @PostMapping("/attendance")
     public ResponseEntity<DriverAttendance> markAttendance(@RequestBody DriverAttendance attendance) {

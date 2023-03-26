@@ -18,6 +18,9 @@ import UpdateBusStop from './Components/UpdateBusStop';
 import UpdateBusRoute from './Components/UpdateBusRoute';
 import UpdateDriver from './Components/UpdateDriver';
 import UpdateBus from './Components/UpdateBus';
+import UpdateTurn from './Components/UpdateTurn';
+
+
 
 function App() {
   const {darkMode}= useContext(DarkModeContext);
@@ -43,7 +46,8 @@ function App() {
             <Route exact path="/updateDriver/:id" element={<UpdateDriver/>} />
             <Route exact path="/updateRoute/:id" element={<UpdateBusRoute/>} />
             <Route exact path="/updateBus/:id" element={<UpdateBus/>} />
-            
+            <Route exact path="/updateTurn/:id" element={<UpdateTurn/>} />
+           
         </Route>
       </Routes>
      </BrowserRouter>

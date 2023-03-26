@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import '../Css/bus.scss';
+import '../Css/table.scss';
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
 
 export default function BusRoute() {
@@ -42,7 +41,7 @@ export default function BusRoute() {
             <div className='datatableTitle'>
 
               <Link to="/addRoute" style={{ textDecoration: "none" }}>
-                <AddBoxRoundedIcon className="icontop" />
+              <button>Add</button>
               </Link>
             </div>
             <table className="table border shadow">

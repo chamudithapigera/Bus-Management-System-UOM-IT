@@ -22,13 +22,16 @@ public class BusStop {
     private String busStopName;
     private String longitude;
 
+    private String latitude;
 
 
-    public BusStop(String busStopID,String busStopName,String longitude) {
+
+
+    public BusStop(String busStopID,String busStopName,String longitude, String latitude) {
         this.busStopID = busStopID;
         this.busStopName = busStopName;
         this.longitude = longitude;
-
+        this.latitude = latitude;
     }
 
 
