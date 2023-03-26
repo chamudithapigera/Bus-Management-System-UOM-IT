@@ -62,10 +62,10 @@ export default function Driver() {
                         className='btn btn-warning mx-2'
                         to={`/updateDriver/${driver.id}`}
                       >
-                        Edit
+                        <button >Edit</button>
                       </Link>
               
-              <button className='btn btn-danger mx-2' onClick={() => deleteDriver(driver.id)}>Delete</button>
+              <button onClick={() => deleteDriver(driver.id)}>Delete</button>
           </td>
       </tr>
       

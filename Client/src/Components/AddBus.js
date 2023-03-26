@@ -13,7 +13,7 @@ export default function AddBus() {
 
     });
 
-    const{busID,capacity}=bus
+    const{busID,capacity}=bus;
 
     const onInputChange=(e)=>{
         setBus({...bus,[e.target.name]:e.target.value}
@@ -65,4 +65,4 @@ export default function AddBus() {
   )
 }
 
-//export default AddBus;
+

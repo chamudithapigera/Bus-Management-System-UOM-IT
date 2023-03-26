@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.NotFoundException;
-import com.example.demo.model.Bus;
 import com.example.demo.model.BusRoute;
-
-import com.example.demo.model.BusStop;
 import com.example.demo.repository.BusRouteRepository;
 import com.example.demo.service.BusRouteService;
 import org.bson.types.ObjectId;
@@ -16,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
 
 @CrossOrigin("http://localhost:3000")
 @RestController
@@ -66,7 +63,7 @@ public class BusRouteController {
             return new ResponseEntity<>("BusRoute not found...", HttpStatus.NOT_FOUND);
         }
     }*/
-    @CrossOrigin("http://localhost:3000")
+
    @PutMapping("/{id}")
     public ResponseEntity<BusRoute> updateBusRoute(@PathVariable("id") ObjectId id, @RequestBody BusRoute busRoute) {
         BusRoute updatedBusRoute = busRouteService.updateBusRoute(id, busRoute);

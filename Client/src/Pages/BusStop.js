@@ -63,10 +63,10 @@ export default function BusStop() {
                         className='btn btn-warning mx-2'
                         to={`/updateStop/${busStop.id}`}
                       >
-                        Edit
+                        <button >Edit</button>
                       </Link>
 
-                      <button className='btn btn-danger mx-2' onClick={() => deleteBusStops(busStop.id)}>Delete</button>
+                      <button  onClick={() => deleteBusStops(busStop.id)}>Delete</button>
                     </td>
                   </tr>
 

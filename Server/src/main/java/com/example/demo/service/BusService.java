@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Bus;
+import com.example.demo.model.BusRoute;
 import com.example.demo.model.BusStop;
 import com.example.demo.model.Driver;
 import com.example.demo.repository.BusRepository;
@@ -20,13 +21,22 @@ public class BusService {
 
     @Autowired
     private BusRepository busRepository;
+
+
     public List<Bus> findAll() {
         return busRepository.findAll();
     }
-    //public Optional<Bus> singleBus(String busID){return busRepository.findBusBybusID(busID);}
+
 
     public void save(Bus bus) {
         busRepository.insert(bus);
+    }
+
+    public Bus updateBus(ObjectId id, Bus bus) {
+        Bus existingBus = busRepository.findById(id).orElseThrow(() -> new NotFoundException("Bus is not found"));
+        existingBus.setBusID(bus.getBusID());
+        existingBus.setCapacity(bus.getCapacity());
+        return busRepository.save(existingBus);
     }
 
 
@@ -50,10 +60,9 @@ public class BusService {
         return busRepository.save(existingBus);
     }*/
 
-    @Autowired
-    private BusStopRepository busStopRepository;
 
-   public Bus updateBusStop(ObjectId busId, ObjectId busStopId, BusStop busStop) {
+
+   /*public Bus updateBusStop(ObjectId busId, ObjectId busStopId, BusStop busStop) {
         Bus bus = busRepository.findById(busId).orElseThrow(() -> new NotFoundException("Bus not found"));
         List<BusStop> busStops = bus.getBusStop();
         if (busStops == null) {busStops = new ArrayList<>();}
@@ -66,7 +75,7 @@ public class BusService {
         }
         bus.setBusStop(busStops);
         return busRepository.save(bus);
-    }
+    }*/
 
 
 }

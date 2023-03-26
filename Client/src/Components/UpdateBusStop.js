@@ -40,7 +40,7 @@ const onSubmit = async (e) => {
   };
 
   const loadBusStop = async () => {
-    const result = await axios.get(`http://localhost:8080/api/v1/busSoute/${id}`);
+    const result = await axios.get(`http://localhost:8080/api/v1/busStop/${id}`);
     setStop(result.data);
 };
 

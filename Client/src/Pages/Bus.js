@@ -19,6 +19,13 @@ export default function Bus() {
     setBuses(result.data);
   };
 
+  const deleteBus = async (id) => {
+    await axios.delete(`http://localhost:8080/api/v1/bus_detail/deleteBus/${id}`);
+  
+    loadBuses();
+  };
+
+
   return (
     <div className='bus'>
       <Sidebar></Sidebar>
@@ -54,9 +61,13 @@ export default function Bus() {
                     <td>{bus.capacity}</td>
                     
                     <td>
-
-                      <button className='btn btn-outline mx-2'>Edit</button>
-                      <button className='btn btn-danger mx-2'>Delete</button>
+                    <Link
+                        className='btn btn-warning mx-2'
+                        to={`/updateBus/${bus.id}`}
+                      >
+                      <button >Edit</button>
+                      </Link>
+                      <button onClick={() => deleteBus(bus.id)}>Delete</button>
                     </td>
                   </tr>
 

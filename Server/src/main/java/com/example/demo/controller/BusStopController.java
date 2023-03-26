@@ -1,11 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.NotFoundException;
-import com.example.demo.model.Bus;
 import com.example.demo.model.BusStop;
 import com.example.demo.repository.BusRepository;
 import com.example.demo.repository.BusStopRepository;
-
 import com.example.demo.service.BusStopService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +32,7 @@ public class BusStopController {
 
     @Autowired
     private BusStopRepository busStopRepository;
+
     @Autowired
     private MongoTemplate mongoTemplate;
 
@@ -150,13 +149,6 @@ public class BusStopController {
             return new ResponseEntity<>("BusStop not found...", HttpStatus.NOT_FOUND);
         }
     }*/
-
-
-
-
-
-
-
 
 
 }

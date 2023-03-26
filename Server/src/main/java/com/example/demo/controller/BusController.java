@@ -6,20 +6,12 @@ import com.example.demo.model.BusRoute;
 import com.example.demo.model.BusStop;
 import com.example.demo.model.Driver;
 import com.example.demo.repository.BusRepository;
-import com.example.demo.repository.BusStopRepository;
 import com.example.demo.service.BusService;
-import com.mongodb.BasicDBObject;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,8 +27,6 @@ public class BusController {
     private BusRepository busRepository;
 
     @Autowired
-    private BusStopRepository busStopRepository;
-    @Autowired
     private MongoTemplate mongoTemplate;
 
     @PostMapping("/addBus")
@@ -45,18 +35,23 @@ public class BusController {
         return "Bus saved successfully...";
     }
 
-   @CrossOrigin(origins = "http://localhost:3000")
+
     @GetMapping("/viewBus")
     public List<Bus> findAllBusesWithDetails() {
         return mongoTemplate.findAll(Bus.class);
     }
-    //public List<Bus> findAllBusesWithDetails() {
-        //return busService.findAll();}
 
-//----
+    @GetMapping("/{id}")
+    Bus getBusById(@PathVariable ObjectId id){
+        return busRepository.findById(id)
+                .orElseThrow(()->new NotFoundException(("Bus Route not found with id: " + id)));
+    }
 
-
-
+    @PutMapping("/{id}")
+    public ResponseEntity<Bus> updateBus(@PathVariable("id") ObjectId id, @RequestBody Bus bus) {
+        Bus updatedBus = busService.updateBus(id, bus);
+        return ResponseEntity.ok(updatedBus);
+    }
 
     @DeleteMapping("/deleteBus/{id}")
     String deleteBus(@PathVariable ObjectId id){
@@ -67,7 +62,6 @@ public class BusController {
         return "Bus  with id " +id+ "has been deleted";
 
     }
-
 
 
     @DeleteMapping("/deleteBusRoute/{busId}/{id}")

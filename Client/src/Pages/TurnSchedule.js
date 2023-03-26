@@ -63,8 +63,8 @@ export default function TurnSchedule() {
           <td>{JSON.parse(busTurn.driverID).driverID}</td> 
           <td>
               
-              <button className='btn btn-outline mx-2'>Edit</button>
-              <button className='btn btn-danger mx-2'>Delete</button>
+          <button >Edit</button>
+              <button >Delete</button>
           </td>
       </tr>
       

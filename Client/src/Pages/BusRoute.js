@@ -70,10 +70,10 @@ export default function BusRoute() {
                         className='btn btn-warning mx-2'
                         to={`/updateRoute/${busRoute.id}`}
                       >
-                        Edit
+                        <button >Edit</button>
                       </Link>
 
-                      <button className='btn btn-danger mx-2' onClick={() => deleteBusRoutes(busRoute.id)}>Delete</button>
+                      <button  onClick={() => deleteBusRoutes(busRoute.id)}>Delete</button>
                     </td>
                   </tr>
 
