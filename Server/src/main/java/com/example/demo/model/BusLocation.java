@@ -1,16 +1,9 @@
 package com.example.demo.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
-
 
 @Data
 @Document(collection = "buslocations")
@@ -29,6 +22,7 @@ public class BusLocation {
         this.routeName = routeName;
         this.longitude = longitude;
         this.latitude = latitude;
+        //automatically set to the current time
         this.dateTime = LocalDateTime.now();
     }
 

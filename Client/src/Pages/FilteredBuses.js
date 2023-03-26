@@ -4,10 +4,12 @@ import Sidebar from "../Components/Sidebar";
 import Navbar from "../Components/Navbar";
 import { Link, useLocation } from 'react-router-dom';
 import '../Css/table.scss';
+import { useNavigate } from 'react-router-dom';
 
-const FilteredBuses = () => {
+const FilteredBuses = (props) => {
   const location = useLocation();
-  const { filteredBuses, busStopName, routeNO} = location.state;
+  const { filteredBuses, busStopName, routeNO } = location.state;
+  const navigate = useNavigate();
 
   return (
     <div className="list">
@@ -31,19 +33,29 @@ const FilteredBuses = () => {
                 </tr>
               </thead>
               <tbody>
-                {filteredBuses.map((bus,index) => (
-                  <tr key={index}>
-                    <td>{bus.busLocation.busID}</td>
-                    <td>{busStopName}</td>
-                    <td>{routeNO}</td>
-                    <td>{bus.busLocation.routeName}</td>
-                    <td>{bus.arrivalTime.substr(0, 10)}</td>
-                    <td>{bus.arrivalTime.substring(11, 19)}</td>
-                      <Link to="/searchbus/viewbus" style={{ textDecoration: "none" }}>
-                        <td ><button>View</button></td>
-                      </Link>
+                {filteredBuses.map((bus, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{bus.busLocation.busID}</td>
+                      <td>{busStopName}</td>
+                      <td>{routeNO}</td>
+                      <td>{bus.busLocation.routeName}</td>
+                      <td>{bus.arrivalTime.substr(0, 10)}</td>
+                      <td>{bus.arrivalTime.substring(11, 19)}</td>
+                      <td>
+                        <button onClick={async () => {
+                          const busID = bus.busLocation.busID;
+                          const routeName = bus.busLocation.routeName;
+                          const duration = bus.duration;
+                          const distance = bus.distance;
+                          const arrivalTime = bus.arrivalTime.substring(11, 19);
+                          navigate('/searchbus/viewbus', { state: { busID, routeName, duration,distance,arrivalTime } });
+                        }}
+                        >View</button>
+                      </td>
                     </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -55,6 +67,3 @@ const FilteredBuses = () => {
 };
 
 export default FilteredBuses;
-
-
-

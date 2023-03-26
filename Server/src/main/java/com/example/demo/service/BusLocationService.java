@@ -11,30 +11,25 @@ import com.google.maps.model.LatLng;
 import com.google.maps.model.TravelMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+//contains several methods to retrieve and manipulate bus location data.
 @Service
 public class BusLocationService {
 
     @Autowired
     private BusLocationRepository busLocationRepository;
-
-    @Autowired
-    private MongoTemplate mongoTemplate;
-
-    @Value("${google.maps.api.key}")
-    private String googleMapsApiKey; // API key for accessing the Google Maps API
-
-
+/*
     public void saveBusLocation(BusLocation busLocation) {
         busLocationRepository.save(busLocation);
     }
+*/
+    @Value("${google.maps.api.key}")
+    private String googleMapsApiKey; // API key for accessing the Google Maps API
 
 
     public List<BusLocationWithDistanceAndDuration> getNearbyBuses(double longitude, double latitude) {

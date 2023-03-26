@@ -35,6 +35,8 @@ const busStops = [
 ];
 
 function Map() {
+
+  //load the Google Maps JavaScript API
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyAmD_c6_Rnaee2j6iNcY8raxvGCMrNS3NU",
     libraries: ['places'],
@@ -47,18 +49,20 @@ function Map() {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [currentLocation, setCurrentLocation] = useState([]);
-  const [ setBuses] = useState([]);
+  const [buses, setBuses] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
 
-
+  //loading animation that indicates that the application is waiting for the API to load
   if (!isLoaded) {
     return <SkeletonText />
   }
 
+  //set up the Autocomplete component(implement the search functionality)
   const onLoad = (autocomplete) => {
     setAutocomplete(autocomplete);
   };
 
+  //handle the place search functionality
   const onPlaceChanged = () => {
     if (autocomplete !== null) {
       const place = autocomplete.getPlace();
@@ -77,11 +81,13 @@ function Map() {
     }
   };
 
+  //clear the searched place and it's marker
   const clearSelectedPlace = () => {
     setSelectedPlace(null);
     setInputValue('');
   }
 
+  //get the user's current location using navigator.geolocation API
   const handleCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.watchPosition((position) => {
@@ -92,13 +98,11 @@ function Map() {
           map.panTo({ lat: latitude, lng: longitude });
           map.setZoom(17);
         }
-
       },
         (error) => {
           console.log(error);
         },
         { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
-
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
@@ -172,25 +176,20 @@ function Map() {
             </Autocomplete>
           </Box>
 
+          {/*button that allows users to get their current location */}
           <Box position='absolute' top={2} right={2} zIndex={1} >
             <Button onClick={handleCurrentLocation} bg="blue.200" color="black.600" leftIcon={<FaLocationArrow />}>
               Get Current Location
             </Button>
           </Box>
 
+          {/* display the bus stops on the map */}
           {busStops.map((busStop) => (
             <Marker key={busStop.busStopName} position={{ lat: busStop.lat, lng: busStop.lng }}
               icon={{
                 url: busStopImage,
                 scaledSize: new window.google.maps.Size(25, 25),
-              }}
-              onMouseOver={() => {
-                setSelectedMarker(busStop);
-              }}
-              onMouseOut={() => {
-                setSelectedMarker(null);
-              }}
-              onClick={async () => {
+              }} onClick={async () => {
 
                 try {
                   const response = await axios.get(`http://localhost:8080/api/v1/bus-locations/nearby/${busStop.lng}/${busStop.lat}`);
@@ -203,14 +202,21 @@ function Map() {
                 } catch (error) {
                   console.error('Error fetching data: ', error);
                 }
-              }} >
+              }}
+              onMouseOver={() => {
+                setSelectedMarker(busStop);
+              }}
+              onMouseOut={() => {
+                setSelectedMarker(null);
+              }}>
               {selectedMarker === busStop && (
                 <InfoWindow>
                   <div>{busStop.busStopName}</div>
-
                 </InfoWindow>
               )}
+
             </Marker>
+
           ))}
 
           {/* Selected Place Marker */}
@@ -220,6 +226,7 @@ function Map() {
             />
           )}
 
+          {/* Selected current location Marker */}
           {currentLocation && (
             <Marker
               position={currentLocation}

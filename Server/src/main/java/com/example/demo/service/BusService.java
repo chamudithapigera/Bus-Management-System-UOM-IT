@@ -22,38 +22,6 @@ public class BusService {
         busRepository.insert(bus);
     }
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
-    public List<Map> getLatestBusesByStopName(String busStopName) {
-        Criteria criteria = Criteria.where("busStopID.busStopName").is(busStopName);
-
-        AggregationOperation match = Aggregation.match(criteria);
-
-        AggregationOperation sort = Aggregation.sort(Sort.Direction.DESC, "dateTime");
-
-        AggregationOperation group = Aggregation.group("busID", "busRouteID", "busStopID.busStopName")
-                .first("busID").as("busID")
-                .first("busRouteID").as("busRouteID")
-                .first("busStopID.busStopName").as("busStopName")
-                .first("routeName").as("routeName")
-                .first("longitude").as("longitude")
-                .first("latitude").as("latitude");
-
-        AggregationOperation project = Aggregation.project()
-                .and("busID").as("busID")
-                .and("busRouteID").as("busRouteID")
-                .and("busStopName").as("busStopName")
-                .and("routeName").as("routeName")
-                .and("longitude").as("longitude")
-                .and("latitude").as("latitude");
-
-        Aggregation aggregation = Aggregation.newAggregation(match, sort, group, project);
-
-        return mongoTemplate.aggregate(aggregation, "buslocations", Map.class).getMappedResults();
-    }
-
-
-
 /*
     public Optional<Bus> singleBus(String busID){
         return busRepository.findBusBybusID(busID);

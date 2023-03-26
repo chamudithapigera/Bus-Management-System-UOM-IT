@@ -18,7 +18,7 @@ import java.util.Map;
 public class BusController {
 
     @Autowired
-    private BusService busService;
+    private MongoTemplate mongoTemplate;
 
     @Autowired
     private BusRepository busRepository;
@@ -30,9 +30,6 @@ public class BusController {
         busService.save(bus);
         return "Bus saved successfully...";
     }*/
-
-    @Autowired
-    private MongoTemplate mongoTemplate;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/viewBus")
