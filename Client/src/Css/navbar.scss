@@ -1,10 +1,11 @@
 .navbar {
   height: 50px;
-  border-bottom: 1px solid rgb(231, 228, 228);
+  border-bottom: 1px solid rgb(81, 78, 156);
   display: flex;
   align-items: center;
   font-size: 15px;
-  color: #555;
+  color: #392a2a;
+  background-color: #5fb689;
  
 
   .wrapper {
@@ -17,7 +18,7 @@
     .search {
       display: flex;
       align-items: center;
-      border: 0.5px solid lightgray;
+      border: 0.5px solid rgb(86, 80, 80);
       padding: 3px;
 
       input {
@@ -27,6 +28,7 @@
 
         &::placeholder {
           font-size: 12px;
+          color: #232020;
         }
       }
     }

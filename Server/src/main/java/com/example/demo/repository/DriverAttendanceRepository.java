@@ -11,4 +11,3 @@ import java.util.List;
 public interface DriverAttendanceRepository extends MongoRepository<DriverAttendance, String> {
     List<DriverAttendance> findByDriverIDAndDate(String driverID, Date date);
 }
-
