@@ -1,8 +1,129 @@
+body {
+  background-image: url("./bg.jpg");
+  background-size: cover; /* or 'contain', depending on your preference */
+  background-position: center;
+}
+
+
+
 .attendance{
     display: flex;
+    position: relative; /* set the position property to relative */
+    z-index: 1;
+    
 
     .attendanceContainer{
         // background-color: lightblue; this is for viewing flexbox sizes of sidebar and homecontainer
         flex: 6;
+        
+        
+
+        .attendanceMark{
+            background-color: rgba(174, 245, 174, 0.807);
+            position: relative;
+            margin-left: 30vw;
+            margin-top: 15vh;
+            height: 60vh;
+            width: 30vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10%;
+            -webkit-border-radius: 10%;
+            -moz-border-radius: 10%;
+            -ms-border-radius: 10%;
+            -o-border-radius: 10%;
+            border: 0.5px solid rgb(151, 232, 151);
+            text-align: center;
+            font-weight: bold;
+            justify-content: space-between;
+
+            h1{
+                font-weight: bold;
+                color: #171515;
+                margin-top: 15px;
+
+            }
+
+            .id{
+                display: flex;
+                flex-direction: column;
+
+                label{
+                  font-size: large;
+                  margin-bottom: 10px;
+                }
+
+                #driverid{
+                    width: 250px;
+                    border-color: #339256;
+                    height: 30px;
+                    font-size: large;
+                    background-color: #9bdbb4;
+                    
+                }
+
+                #driverid:hover, #driverid:focus, #driverid:active{
+                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+                    -webkit-transform: scale(1.1);
+                    transform: scale(1.1);
+                }
+            }
+
+            .btn{
+                font-family: "Roboto", sans-serif;
+                font-size: 18px;
+                font-weight: bold;
+                background: #085224;
+                width: 160px;
+                padding: 20px;
+                text-align: center;
+                text-decoration: none;
+                text-transform: uppercase;
+                color: #fff;
+                border-radius: 5px;
+                cursor: pointer;
+                box-shadow: 0 0 10px rgba(133, 214, 103, 0.1);
+                -webkit-transition-duration: 0.3s;
+                transition-duration: 0.3s;
+                -webkit-transition-property: box-shadow, transform;
+                transition-property: box-shadow, transform;
+            }
+            .btn:hover, .btn:focus, .btn:active{
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+                -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+            }
+
+            .submit{
+                cursor: pointer;
+                font-size: 18px;
+                font-weight: bold;
+                background: #022f13;
+                height: 50px;
+                width: 220px;
+                text-align: center;
+                text-decoration: none;
+                color: #fff;
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                -ms-border-radius: 5px;
+                -o-border-radius: 5px;
+                box-shadow: 0 0 10px rgba(133, 214, 103, 0.1);
+                -webkit-transition-duration: 0.3s;
+                transition-duration: 0.3s;
+                -webkit-transition-property: box-shadow;
+                transition-property: box-shadow;
+
+              
+}
+
+            .submit:hover, .submit:focus, .submit:active{
+              box-shadow: 0 0 20px rgba(2, 77, 2, 0.907);
+              
+          }
+        
+        }
     }
 }
