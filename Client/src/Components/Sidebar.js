@@ -16,102 +16,102 @@ import FactCheckRoundedIcon from '@mui/icons-material/FactCheckRounded';
 
 const Sidebar = () => {
 
-  const {dispatch}= useContext(DarkModeContext);
+  const { dispatch } = useContext(DarkModeContext);
 
   return (
     <div className="sidebar">
       <div className="top">
-       
-      <Link to="/" style={{textDecoration:"none"}}>
-        <AccountCircleIcon className="icontop"/>
-        <spank className="logo">depo admin</spank>
-      </Link>
+
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <AccountCircleIcon className="icontop" />
+          <spank className="logo">depo admin</spank>
+        </Link>
       </div>
-      <hr/>
+      <hr />
       <div className="center">
         <ul>
-        <Link to ="/" style={{textDecoration:"none"}}>
-          <li>
-            <DashboardIcon className="icon"/>
-            <span>Dashboard</span>
-          </li>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Dashboard</span>
+            </li>
           </Link>
-          
+
           <p className="title">Features</p>
-         
 
-          <Link to="/driver" style={{textDecoration:"none"}}>
-          <li>
-            <PersonAddAlt1Icon className="icon"/>
-            <span>Drivers</span>
-          </li>
-          </Link>
-          
-         
 
-          <Link to="/bus" style={{textDecoration:"none"}}>
-          <li>
-            <DirectionsBusFilledRoundedIcon className="icon"/>
-            <span>Bus</span>
-          </li>
+          <Link to="/driver" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonAddAlt1Icon className="icon" />
+              <span>Drivers</span>
+            </li>
           </Link>
 
-          <Link to="/busRoute" style={{textDecoration:"none"}}>
-          <li>
-            <AddRoadRoundedIcon className="icon"/>
-            <span>Bus Routes</span>
-          </li>
+
+
+          <Link to="/bus" style={{ textDecoration: "none" }}>
+            <li>
+              <DirectionsBusFilledRoundedIcon className="icon" />
+              <span>Bus</span>
+            </li>
           </Link>
 
-          <Link to="/busStop" style={{textDecoration:"none"}}>
-          <li>
-            <BlockRoundedIcon className="icon"/>
-            <span>Bus Stops</span>
-          </li>
-          </Link>
-          
-          <Link to="/attendance" style={{textDecoration:"none"}}>
-          <li>
-            <FactCheckRoundedIcon className="icon"/>
-            <span>Driver Attendance</span>
-          </li>
+          <Link to="/busRoute" style={{ textDecoration: "none" }}>
+            <li>
+              <AddRoadRoundedIcon className="icon" />
+              <span>Bus Routes</span>
+            </li>
           </Link>
 
-          <Link to="/turn" style={{textDecoration:"none"}}>
-          <li>
-            <FactCheckRoundedIcon className="icon"/>
-            <span>Bus Turn Schedule</span>
-          </li>
+          <Link to="/busStop" style={{ textDecoration: "none" }}>
+            <li>
+              <BlockRoundedIcon className="icon" />
+              <span>Bus Stops</span>
+            </li>
           </Link>
 
-          
+          <Link to="/attendance" style={{ textDecoration: "none" }}>
+            <li>
+              <FactCheckRoundedIcon className="icon" />
+              <span>Driver Attendance</span>
+            </li>
+          </Link>
+
+          <Link to="/turn" style={{ textDecoration: "none" }}>
+            <li>
+              <FactCheckRoundedIcon className="icon" />
+              <span>Bus Turn Schedule</span>
+            </li>
+          </Link>
+
+
           <li>
-            <NotificationsNoneOutlinedIcon className="icon"/>
+            <NotificationsNoneOutlinedIcon className="icon" />
             <span>Notification</span>
           </li>
- 
+
           <p className="title">SERVICE</p>
-          
+
           <li>
-            <SettingsIcon className="icon"/>
+            <SettingsIcon className="icon" />
             <span>Settings</span>
           </li>
-          
+
           <li>
-            <AccountCircleOutlinedIcon className="icon"/>
+            <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
 
           <li>
-            <ExitToAppOutlinedIcon className="icon"/>
+            <ExitToAppOutlinedIcon className="icon" />
             <span>Logout</span>
           </li>
-          
+
         </ul>
       </div>
       <div className="bottom">
-        <div className="colorOption" onClick={() => dispatch({type: "LIGHT"})}></div>
-        <div className="colorOption" onClick={() => dispatch({type: "DARK"})}></div>
+        <div className="colorOption" onClick={() => dispatch({ type: "LIGHT" })}></div>
+        <div className="colorOption" onClick={() => dispatch({ type: "DARK" })}></div>
       </div>
     </div>
   );

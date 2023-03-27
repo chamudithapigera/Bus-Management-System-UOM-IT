@@ -78,11 +78,9 @@ export default function AddTurn() {
                             />
                         </div>
 
-
-
-
                         <button type="submit" className="button"  >Submit</button>
-                        <Link to="/turn" style={{ textDecoration: "none" }}>Cancel</Link>
+                        <Link to="/turn" style={{ textDecoration: "none" }}><button>Cancel</button></Link>
+
                     </form>
                 </div>
             </div>

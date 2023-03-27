@@ -19,11 +19,9 @@ public class BusService {
     @Autowired
     private BusRepository busRepository;
 
-
     public List<Bus> findAll() {
         return busRepository.findAll();
     }
-
 
     public void save(Bus bus) {
         busRepository.insert(bus);

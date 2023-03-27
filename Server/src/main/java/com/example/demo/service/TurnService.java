@@ -29,9 +29,7 @@ public class TurnService {
         turnRepository.insert(turn);
     }
 
-    public void resetTurnCollection() {
-        mongoTemplate.remove(new Query(), "turn");
-    }
+
 
     public Turn updateTurn(ObjectId id, Turn turn) {
         Turn existingTurn = turnRepository.findById(id).orElseThrow(() -> new NotFoundException("Turn not found"));
@@ -41,7 +39,7 @@ public class TurnService {
         return turnRepository.save(existingTurn);
     }
 
-
+    //assign filtered driverIDs to daily turns
     public List<String> getPresentDriverIdsSortedByCheckInTime() {
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.match(Criteria.where("status").is("present")),
@@ -73,7 +71,7 @@ public class TurnService {
 
             }
         } else {
-            // Distribute drivers among turns in round-robin fashion
+            // Distribute drivers among turns
             int driverIndex = 0;
             for (int i = 0; i < sameRouteCount; i++) {
                 Update update = new Update().set("driverID", driverIds.get(driverIndex));
@@ -115,3 +113,6 @@ public class TurnService {
 
 
 }
+// public void resetTurnCollection() {
+//        mongoTemplate.remove(new Query(), "turn");
+//    }

@@ -33,18 +33,20 @@ public class TurnController {
     @Autowired
     private TurnRepository turnRepository;
 
-
+    //get presnt driver IDs
     @GetMapping("/present/driverIds")
     public List<String> getPresentDriverIdsSortedByCheckInTime() {
         return turnService.getPresentDriverIdsSortedByCheckInTime();
     }
 
+    //add new turn
     @PostMapping("/addTurn")
     public String saveTurn(@RequestBody Turn turn){
         turnService.save(turn);
         return "Trun saved successfully...";
     }
 
+    //get all turns
     @GetMapping("/viewTurn")
     public List<Turn> getAllTurns() {
         Query query = new Query();
@@ -53,18 +55,21 @@ public class TurnController {
         return turns;
     }
 
+    //get only one turn with given id
     @GetMapping("/{id}")
     Turn getTurnById(@PathVariable ObjectId id){
         return turnRepository.findById(id)
                 .orElseThrow(()->new NotFoundException(("Turn not found with id: " + id)));
     }
 
+    //update turn
     @PutMapping("/{id}")
     public ResponseEntity<Turn> updateTurn(@PathVariable("id") ObjectId id, @RequestBody Turn turn) {
         Turn updatedTurn = turnService.updateTurn(id, turn);
         return ResponseEntity.ok(updatedTurn);
     }
 
+    //remove turn
     @DeleteMapping("/deleteTurn/{id}")
     String deleteTurn(@PathVariable ObjectId id){
         if (!turnRepository.existsById(id)){

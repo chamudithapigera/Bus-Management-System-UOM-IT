@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/bus_detail")
-@CrossOrigin(origins = "http://localhost:3000") // replace with your frontend URL
+@CrossOrigin(origins = "http://localhost:3000")
 public class BusController {
 
     @Autowired
@@ -29,17 +29,19 @@ public class BusController {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    // add bus data to collection
     @PostMapping("/addBus")
     public String saveBus(@RequestBody Bus bus){
         busService.save(bus);
         return "Bus saved successfully...";
     }
 
-
+    //get all document data of collection
     @GetMapping("/viewBus")
     public List<Bus> findAllBusesWithDetails() {
         return mongoTemplate.findAll(Bus.class);
     }
+
 
     @GetMapping("/{id}")
     Bus getBusById(@PathVariable ObjectId id){
@@ -63,7 +65,7 @@ public class BusController {
 
     }
 
-
+    //delete data of busRote field by matching given busRouteID
     @DeleteMapping("/deleteBusRoute/{busId}/{id}")
     String deleteBusRoute(@PathVariable ObjectId busId, @PathVariable String id) {
         Optional<Bus> optionalBus = busRepository.findById(busId);
@@ -82,6 +84,7 @@ public class BusController {
         }
     }
 
+    //delete data of busStop field by matching given busStopID
     @DeleteMapping("/deleteBusStop/{busId}/{id}")
     String deleteBusStop(@PathVariable ObjectId busId, @PathVariable String id) {
         Optional<Bus> optionalBus = busRepository.findById(busId);
@@ -100,6 +103,7 @@ public class BusController {
         }
     }
 
+    //delete data of driver field by matching given driverID
     @DeleteMapping("/deleteDriver/{busId}/{id}")
     String deleteDriver(@PathVariable ObjectId busId, @PathVariable String id) {
         Optional<Bus> optionalBus = busRepository.findById(busId);
