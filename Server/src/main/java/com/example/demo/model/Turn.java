@@ -1,17 +1,11 @@
 package com.example.demo.model;
 
-import com.example.demo.exception.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.awt.*;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Document(collection = "turn")
 @Data

@@ -7,9 +7,14 @@ import com.example.demo.model.BusStop;
 import com.example.demo.model.Driver;
 import com.example.demo.repository.BusRepository;
 import com.example.demo.service.BusService;
+import com.mongodb.BasicDBObject;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -42,7 +47,7 @@ public class BusController {
         return mongoTemplate.findAll(Bus.class);
     }
 
-
+    //get one document data of collection
     @GetMapping("/{id}")
     Bus getBusById(@PathVariable ObjectId id){
         return busRepository.findById(id)
@@ -121,6 +126,30 @@ public class BusController {
             return "Driver with id " + id + " not found in bus with id " + busId;
         }
     }
+
+
+    @DeleteMapping("/busRoute/{id}")
+    public ResponseEntity<String> deleteBusRoute(@PathVariable("id") String id) {
+        try {
+            List<Bus> buses = busRepository.findAll();
+            for (Bus bus : buses) {
+                List<BusRoute> busRoutes = bus.getBusRoute();
+                for (BusRoute busRoute : busRoutes) {
+                    if (busRoute.getId().equals(id)) {
+                        busRoutes.remove(busRoute);
+                        bus.setBusRoute(busRoutes);
+                        busRepository.save(bus);
+                        return ResponseEntity.status(HttpStatus.OK).body("Bus route with ID " + id + " has been deleted successfully.");
+                    }
+                }
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bus route with ID " + id + " does not exist.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting bus route with ID " + id + ": " + e.getMessage());
+        }
+    }
+
+
 
 
 

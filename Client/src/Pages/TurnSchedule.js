@@ -66,8 +66,8 @@ export default function TurnSchedule() {
                     <td>{busTurn.turnNo}</td>
                     <td> {busTurn.turnTime} </td>
                     <td>{busTurn.routeName} </td>
-                    <td>{busTurn.driverID}</td>
-                    {/* <td>{JSON.parse(busTurn.driverID).driverID}</td> */}
+                    
+                    <td>{JSON.parse(busTurn.driverID).driverID}</td> 
                     <td>
 
                       <Link to={`/updateTurn/${busTurn.id}`}>

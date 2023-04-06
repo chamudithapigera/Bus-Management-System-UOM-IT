@@ -10,6 +10,8 @@ export default function BusRoute() {
 
   const [busRoutes, setBusRoutes] = useState([]);
 
+  
+
   const { id } = useParams()
 
   useEffect(() => {
@@ -17,16 +19,26 @@ export default function BusRoute() {
 
   }, []);
 
+ 
+
   const loadBusRoutes = async () => {
     const result = await axios.get("http://localhost:8080/api/v1/busRoute/viewBusRoute");
     setBusRoutes(result.data);
   };
 
+  
+
   const deleteBusRoutes = async (id) => {
+    
     await axios.delete(`http://localhost:8080/api/v1/busRoute/deleteRoute/${id}`);
+    await axios.delete(`http://localhost:8080/api/v1/bus_detail/busRoute/${id}`);
   
     loadBusRoutes();
   };
+
+  
+
+
 
   return (
     <div className='bus'>
@@ -72,7 +84,9 @@ export default function BusRoute() {
                         <button >Edit</button>
                       </Link>
 
-                      <button  onClick={() => deleteBusRoutes(busRoute.id)}>Delete</button>
+                    <button  onClick={() => {deleteBusRoutes(busRoute.id)}}>Delete</button>
+                    
+
                     </td>
                   </tr>
 
