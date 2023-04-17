@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.NotFoundException;
+import com.example.demo.model.Bus;
 import com.example.demo.model.BusRoute;
+import com.example.demo.repository.BusRepository;
 import com.example.demo.repository.BusRouteRepository;
 import com.example.demo.service.BusRouteService;
 import org.bson.types.ObjectId;
@@ -62,10 +64,37 @@ public class BusRouteController {
         if (!busRouteRepository.existsById(id)){
             throw new NotFoundException(("Bus Route not found with id: " + id));
         }
-         busRouteRepository.deleteById(id);
+        busRouteRepository.deleteById(id);
         return "Bus Route with id " +id+ "has been deleted";
 
     }
+   /* @DeleteMapping("/deleteRoute/{id}")
+    String deleteRoute(@PathVariable ObjectId id){
+        if (!busRouteRepository.existsById(id)){
+            throw new NotFoundException(("Bus Route not found with id: " + id));
+        }
+        try {
+            List<Bus> buses = busRepository.findAll();
+            for (Bus bus : buses) {
+                List<BusRoute> busRoutes = bus.getBusRoute();
+                for (BusRoute busRoute : busRoutes) {
+                    if (busRoute.getId().equals(String.valueOf(id))) {
+                        busRoutes.remove(busRoute);
+                        bus.setBusRoute(busRoutes);
+                        busRepository.save(bus);
+                        busRouteRepository.deleteById(id);
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        // busRouteRepository.deleteById(id);
+
+        //deleteBusRoute(String.valueOf(id));
+        return "Bus Route with id " +id+ "has been deleted";
+    }*/
 
 
 
@@ -85,7 +114,33 @@ public class BusRouteController {
             return new ResponseEntity<>("BusRoute not found...", HttpStatus.NOT_FOUND);
         }
     }*/
+ @Autowired
+ private BusRepository busRepository;
+    @DeleteMapping("/busRoute/{id}")
+    public ResponseEntity<String> deleteBusRoute( String id) {
 
+
+        try {
+            List<Bus> buses = busRepository.findAll();
+            for (Bus bus : buses) {
+                List<BusRoute> busRoutes = bus.getBusRoute();
+                for (BusRoute busRoute : busRoutes) {
+                    if (busRoute.getId().equals(id)) {
+                        busRoutes.remove(busRoute);
+                        bus.setBusRoute(busRoutes);
+                        busRepository.save(bus);
+
+
+                        return ResponseEntity.status(HttpStatus.OK).body("Bus route with ID " + id + " has been deleted successfully.");
+                    }
+                }
+            }
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bus route with ID " + id + " does not exist.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting bus route with ID " + id + ": " + e.getMessage());
+        }
+    }
 
 
 

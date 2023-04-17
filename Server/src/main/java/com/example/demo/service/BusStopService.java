@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -26,6 +27,9 @@ public  class BusStopService {
 
 
     public BusStop createBusStopBy(String busStopID,String busStopName, String longitude,String latitude, String busID){
+        if (!mongoTemplate.exists(Query.query(Criteria.where("busID").is(busID)), Bus.class)) {
+            throw new IllegalArgumentException("Bus with busID " + busID + " does not exist,please enter correct busID");
+        }
         BusStop busStop = new BusStop( busStopID, busStopName, longitude,latitude);
         busStopRepository.insert(busStop);
 

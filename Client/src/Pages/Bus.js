@@ -20,9 +20,9 @@ export default function Bus() {
   };
 
   const deleteBus = async (id) => {
+    if (window.confirm("Are you sure you want to delete this bus ?")) {
     await axios.delete(`http://localhost:8080/api/v1/bus_detail/deleteBus/${id}`);
-
-    loadBuses();
+    loadBuses();}
   };
 
 

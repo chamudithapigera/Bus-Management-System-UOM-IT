@@ -20,9 +20,10 @@ export default function BusStop() {
   };
 
   const deleteBusStops = async (id) => {
-    await axios.delete(`http://localhost:8080/api/v1/busStop/deleteStop/${id}`);
-  
-    loadBusStops();
+    if (window.confirm("Are you sure you want to delete this bus stop?")) {
+      await axios.delete(`http://localhost:8080/api/v1/busStop/deleteStop/${id}`);
+      loadBusStops();
+    }
   };
 
   return (
@@ -38,7 +39,7 @@ export default function BusStop() {
             <div className='datatableTitle'>
 
               <Link to="/addStop" >
-              <button>Add</button>
+                <button>Add</button>
               </Link>
             </div>
             <table className="table border shadow">
@@ -70,7 +71,7 @@ export default function BusStop() {
                         <button >Edit</button>
                       </Link>
 
-                      <button  onClick={() => deleteBusStops(busStop.id)}>Delete</button>
+                      <button onClick={() => deleteBusStops(busStop.id)}>Delete</button>
                     </td>
                   </tr>
 

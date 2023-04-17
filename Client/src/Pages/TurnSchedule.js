@@ -28,6 +28,18 @@ export default function TurnSchedule() {
     loadBusTurns();
   };
 
+  
+
+  const handleDeleteAllTurns = () => {
+    if (window.confirm("Are you sure you want to delete all bus turns?")) {
+       axios.delete("http://localhost:8080/api/v1/turn/deleteAllTurns");
+       loadBusTurns();
+      
+  }
+
+    
+  }  
+
   return (
     <div className='bus'>
       <Sidebar></Sidebar>
@@ -66,8 +78,8 @@ export default function TurnSchedule() {
                     <td>{busTurn.turnNo}</td>
                     <td> {busTurn.turnTime} </td>
                     <td>{busTurn.routeName} </td>
-                    
-                    <td>{JSON.parse(busTurn.driverID).driverID}</td> 
+                    <td>{busTurn.driverID}</td> 
+                    {/*<td>{JSON.parse(busTurn.driverID).driverID}</td> */}
                     <td>
 
                       <Link to={`/updateTurn/${busTurn.id}`}>
@@ -83,7 +95,9 @@ export default function TurnSchedule() {
             </table>
 
             <div>
-              <ResetButton />
+            <button onClick={handleDeleteAllTurns}>Delete All Turns</button>
+        
+    
             </div>
 
           </div>

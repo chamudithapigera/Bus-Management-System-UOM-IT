@@ -1,19 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.NotFoundException;
-import com.example.demo.model.Bus;
-import com.example.demo.model.BusRoute;
-import com.example.demo.model.Driver;
 import com.example.demo.model.Turn;
 import com.example.demo.repository.TurnRepository;
 import com.example.demo.service.TurnService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.convert.DurationFormat;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,13 +42,23 @@ public class TurnController {
     }
 
     //get all turns
-    @GetMapping("/viewTurn")
+
+   @GetMapping("/viewTurn")
     public List<Turn> getAllTurns() {
         Query query = new Query();
+      //  query.fields().exclude("driverID");
         query.with(Sort.by(Sort.Direction.ASC, "routeName"));
         List<Turn> turns = mongoTemplate.find(query, Turn.class);
         return turns;
     }
+//to reset turn collection
+    @DeleteMapping("/deleteAllTurns")
+    public String deleteAllTurns() {
+        mongoTemplate.remove(new Query(), "turn");
+        return "All turns have been deleted.";
+    }
+
+
 
     //get only one turn with given id
     @GetMapping("/{id}")

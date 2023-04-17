@@ -23,8 +23,18 @@ export default function AddBusRoute() {
 
         const onSubmit= async (e)=>{
             e.preventDefault();
-            await axios.post("http://localhost:8080/api/v1/driver/addDriver",driver)
-            navigate("/driver")
+            if (!busID) {
+                alert("Please enter a value for Bus ID.")
+            } else {
+                try {
+                    await axios.post("http://localhost:8080/api/v1/driver/addDriver",driver)
+                    navigate("/driver")
+                } catch (error) {
+                    alert(error.response.data.message)
+                }
+                
+            }
+            
         }
     
   return (

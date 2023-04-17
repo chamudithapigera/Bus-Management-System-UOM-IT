@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,11 @@ public class BusRouteService {
     private MongoTemplate mongoTemplate;
 
     public BusRoute createBusRouteBy(String routeID, String routeNO, String routeName, String busID){
+        // Check if a document with the given busID exists in the "busses" collection
+        if (!mongoTemplate.exists(Query.query(Criteria.where("busID").is(busID)), Bus.class)) {
+            throw new IllegalArgumentException("Bus with busID " + busID + " does not exist,please enter correct busID");
+        }
+
         BusRoute busRoute = new BusRoute(routeID, routeNO, routeName);
         busRouteRepository.insert(busRoute);
 

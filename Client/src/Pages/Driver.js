@@ -20,9 +20,9 @@ export default function Driver() {
   };
 
   const deleteDriver = async (id) => {
+    if (window.confirm("Are you sure you want to delete driver record?")) {
     await axios.delete(`http://localhost:8080/api/v1/driver/deleteDriver/${id}`);
-
-    loadDrivers();
+    loadDrivers();}
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../Css/table.scss';
 import axios from "axios";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams,useNavigate } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
 import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
@@ -9,35 +9,43 @@ import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
 export default function BusRoute() {
 
   const [busRoutes, setBusRoutes] = useState([]);
-
+  
+  let navigate = useNavigate()
   
 
   const { id } = useParams()
 
   useEffect(() => {
     loadBusRoutes();
-
   }, []);
 
- 
+  
 
+ 
   const loadBusRoutes = async () => {
     const result = await axios.get("http://localhost:8080/api/v1/busRoute/viewBusRoute");
     setBusRoutes(result.data);
   };
 
-  
+  const deleteBusRoutes = async (id) => {
+    if (window.confirm("Are you sure you want to delete this bus route?")) {
+        await axios.delete(`http://localhost:8080/api/v1/busRoute/deleteRoute/${id}`);
+        loadBusRoutes();
+       
+    }
+};
 
+  
+{/*
   const deleteBusRoutes = async (id) => {
     
-    await axios.delete(`http://localhost:8080/api/v1/busRoute/deleteRoute/${id}`);
+    await axios.delete(`http://localhost:8080/api/v1/busRoute/deleteRoute/${id}`); 
     await axios.delete(`http://localhost:8080/api/v1/bus_detail/busRoute/${id}`);
-  
     loadBusRoutes();
+    loadBus();
   };
 
-  
-
+*/}
 
 
   return (

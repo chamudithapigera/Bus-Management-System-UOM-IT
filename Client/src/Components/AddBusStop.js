@@ -24,8 +24,19 @@ export default function AddBusRoute() {
 
         const onSubmit= async (e)=>{
             e.preventDefault();
-            await axios.post("http://localhost:8080/api/v1/busStop/addBusStop",busStop)
-            navigate("/busStop")
+            if (!busID) {
+                alert("Please enter a value for Bus ID.")
+            } else {
+                try {
+                    await axios.post("http://localhost:8080/api/v1/busStop/addBusStop",busStop)
+                    navigate("/busStop")
+                } catch (error) {
+                    alert(error.response.data.message)
+                }
+                
+            }
+            
+            
         }
     
   return (
