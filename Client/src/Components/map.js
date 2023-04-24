@@ -8,6 +8,7 @@ import {
   InputRightElement,
   InputLeftElement,
   SkeletonText,
+  color,
 } from '@chakra-ui/react';
 
 import {
@@ -31,7 +32,6 @@ const busStops = [
   { lat: 6.797515, lng: 79.8890265, busStopName: 'Katubadda Junction Bus Stop', routeNo: '255' },
   { lat: 6.796813, lng: 79.893839, busStopName: 'Pansala Bus Stop', routeNo: '255' },
   { lat: 6.795623, lng: 79.8984756, busStopName: 'UOM Bus Stop', routeNo: '255' },
-
 ];
 
 function Map() {
@@ -84,7 +84,13 @@ function Map() {
   //clear the searched place and it's marker
   const clearSelectedPlace = () => {
     setSelectedPlace(null);
+    if (map == null) {
+      map.panTo(center);
+      map.setZoom(5);
+    }
     setInputValue('');
+
+
   }
 
   //get the user's current location using navigator.geolocation API
@@ -160,6 +166,7 @@ function Map() {
                       variant='ghost'
                       size='sm'
                       onClick={clearSelectedPlace}
+                      
                     />
 
                   </InputRightElement>
@@ -188,7 +195,7 @@ function Map() {
             <Marker key={busStop.busStopName} position={{ lat: busStop.lat, lng: busStop.lng }}
               icon={{
                 url: busStopImage,
-                scaledSize: new window.google.maps.Size(25, 25),
+                scaledSize: new window.google.maps.Size(15, 15),
               }} onClick={async () => {
 
                 try {
@@ -211,7 +218,12 @@ function Map() {
               }}>
               {selectedMarker === busStop && (
                 <InfoWindow>
-                  <div>{busStop.busStopName}</div>
+                  <div >
+                    {busStop.busStopName}
+                    <div>
+                      {busStop.routeNo}
+                    </div>
+                  </div>
                 </InfoWindow>
               )}
 

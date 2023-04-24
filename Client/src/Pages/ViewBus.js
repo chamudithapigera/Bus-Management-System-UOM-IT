@@ -35,7 +35,7 @@ const ViewBus = (props) => {
             <div className="detailsBox">
               <table>
                 <tr className="row1">
-                  <td class="route-name">{routeName}</td>
+                  <td class="route-name">{busID}- {routeName}</td>
                   <td class="icon-column"><NotificationsNoneOutlinedIcon className="icon"  onClick={handleNotificationClick} /></td>
                 </tr>
                 <tr className="row2">
