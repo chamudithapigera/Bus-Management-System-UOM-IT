@@ -37,7 +37,7 @@ const Attendance = () => {
         console.error(error);
         alert('Failed to update attendance');
       });
-    navigate('/turns');
+    navigate('/turns/${driverID}'); // navigate to Turns route with driverID as parameter
   };
   
 
