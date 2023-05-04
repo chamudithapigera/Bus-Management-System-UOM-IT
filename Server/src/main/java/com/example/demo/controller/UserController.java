@@ -1,4 +1,6 @@
 package com.example.demo.controller;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import com.example.demo.model.User;
@@ -44,6 +46,9 @@ public class UserController {
         } else {
             user.setUserRole("passenger");
 
+            String hashPassword = doHashing(user.getPassword());
+            user.setPassword(hashPassword);
+
             user = service.createNewUser(user);
             return user.toString();
         }
@@ -51,7 +56,8 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@RequestBody User user){
-        List<User> userList =  service.getUserByEmailPassword(user.getEmail(), user.getPassword());
+        String hashPassword = doHashing(user.getPassword());    // to get hashed password
+        List<User> userList =  service.getUserByEmailPassword(user.getEmail(), hashPassword);
         if(userList.size() != 0){
             return userList.get(0).getUserRole();
         } else {
@@ -68,5 +74,28 @@ public class UserController {
         List<User> userList = service.getUserByTelephone(telephone);
         return userList.size();
     }
+
+    public static String doHashing (String password) {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+
+            messageDigest.update(password.getBytes());
+
+            byte[] resultByteArray = messageDigest.digest();
+
+            StringBuilder sb = new StringBuilder();
+
+            for (byte b : resultByteArray) {
+                sb.append(String.format("%02x", b));
+            }
+
+            return sb.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+      }
 }
 
