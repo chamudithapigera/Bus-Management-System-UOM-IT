@@ -6,9 +6,12 @@ import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
 
 
+
 export default function Bus() {
 
   const [buses, setBuses] = useState([]);
+  
+
   useEffect(() => {
     loadBuses();
 
@@ -24,7 +27,7 @@ export default function Bus() {
     await axios.delete(`http://localhost:8080/api/v1/bus_detail/deleteBus/${id}`);
     loadBuses();}
   };
-
+  
 
   return (
     <div className='bus'>
@@ -61,8 +64,12 @@ export default function Bus() {
                     <td>{bus.capacity}</td>
 
                     <td>
-
-                      <button >view</button>
+                    <Link
+                        className='btn btn-warning mx-2'
+                        to={`/viewbus/${bus.id}`}
+                      >
+                    <button >View</button>
+                    </Link>
 
                       <Link
                         className='btn btn-warning mx-2'

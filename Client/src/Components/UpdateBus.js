@@ -28,7 +28,7 @@ export default function UpdateBusRoute() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
+        if (window.confirm("Are you sure you want to update this bus ?")) {
         await axios.put(`http://localhost:8080/api/v1/bus_detail/${id}`, bus)
             .then((response) => {
                 console.log(response.data);
@@ -37,7 +37,7 @@ export default function UpdateBusRoute() {
             .catch((error) => {
                 console.error(error);
                 alert("Failed to update bus ");
-            });
+            });}
         navigate('/bus');
 
     };

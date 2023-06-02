@@ -28,7 +28,7 @@ export default function UpdateDriver() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        
+        if (window.confirm("Are you sure you want to update this driver?")) {
         await axios.put(`http://localhost:8080/api/v1/driver/${id}`, driver)
         .then((response) => {
             console.log(response.data);
@@ -37,7 +37,7 @@ export default function UpdateDriver() {
           .catch((error) => {
             console.error(error);
             alert("Failed to update driver");
-          });
+          });}
         navigate('/driver');
         
     };

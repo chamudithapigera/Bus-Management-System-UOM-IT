@@ -27,7 +27,7 @@ export default function UpdateBusStop() {
 
 const onSubmit = async (e) => {
     e.preventDefault();
-
+    if (window.confirm("Are you sure you want to update this bus stop?")) {
     await axios.put(`http://localhost:8080/api/v1/busStop/${id}`, stop)
       .then((response) => {
         console.log(response.data);
@@ -37,7 +37,7 @@ const onSubmit = async (e) => {
         console.error(error);
         alert("Failed to update bus stop");
       });
-      navigate('/busStop');
+      navigate('/busStop');}
   };
 
   const loadBusStop = async () => {

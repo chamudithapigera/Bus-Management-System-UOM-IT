@@ -27,7 +27,7 @@ export default function UpdateTurn() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
+        if (window.confirm("Are you sure you want to update this turn record?")) {
         await axios.put(`http://localhost:8080/api/v1/turn/${id}`, busTurn)
             .then((response) => {
                 console.log(response.data);
@@ -36,7 +36,7 @@ export default function UpdateTurn() {
             .catch((error) => {
                 console.error(error);
                 alert("Failed to update turn");
-            });
+            });}
         navigate('/turn');
 
     };

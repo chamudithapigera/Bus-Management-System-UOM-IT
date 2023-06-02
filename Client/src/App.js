@@ -19,6 +19,7 @@ import UpdateBusRoute from './Components/UpdateBusRoute';
 import UpdateDriver from './Components/UpdateDriver';
 import UpdateBus from './Components/UpdateBus';
 import UpdateTurn from './Components/UpdateTurn';
+import ViewBus from './Components/ViewBus';
 
 
 
@@ -47,6 +48,7 @@ function App() {
             <Route exact path="/updateRoute/:id" element={<UpdateBusRoute/>} />
             <Route exact path="/updateBus/:id" element={<UpdateBus/>} />
             <Route exact path="/updateTurn/:id" element={<UpdateTurn/>} />
+            <Route exact path="/viewbus/:id" element={<ViewBus/>} />
            
         </Route>
       </Routes>
