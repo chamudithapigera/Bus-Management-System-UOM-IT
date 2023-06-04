@@ -4,7 +4,7 @@ import '../Css/notification.scss'
 
 
 
-const Home = () => {
+const Notification = () => {
   return (
     <div className="notification">
       <Sidebar />
@@ -15,6 +15,6 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Notification;
 
 

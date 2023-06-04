@@ -13,35 +13,40 @@ const ViewBus = (props) => {
   const location = useLocation();
   const { busID, routeName, duration, distance, arrivalTime } = location.state;
   const navigate = useNavigate();
-/*
-  //requests permission to send notifications and navigates to the notification page if permission is granted.
-  const handleNotificationClick = () => {
-    Notification.requestPermission().then(permission => {
-      if (permission === "granted") {
-        window.alert("Notification is ON");
-        navigate('/notification')
-      }
-    });
-  };
-*/
+
 
 // Assuming you have an endpoint to fetch the user's information
 const checkUserRegistration = async () => {
   try {
-    const passengerEmail = window.prompt('Enter your email');
-    if (passengerEmail) {
-      const response = await axios.get(`/api/user?email=${passengerEmail}`);
+    let passengerEmail = window.prompt('Enter your email');
+    let isNotificationShown = false; // Flag to track if the notification has been shown
+    while (passengerEmail) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(passengerEmail)) {
+        window.alert("Invalid email. Please enter a valid email address.");
+        passengerEmail = window.prompt('Enter your email');
+        continue;
+      }
+
+      const response = await axios.get(`http://localhost:8080/api/v1/passenger/users/${passengerEmail}`);
       const user = response.data;
-      if (user.isRegistered) {
-        // User is registered, enable the notification and navigate to the notification page
-        window.alert("Notification is ON");
-        navigate('/notification');
+      if (user) {
+        //(user.isRegistered) check flag is true or false..........................
+
+        if (!isNotificationShown) {
+          // User is registered, enable the notification and navigate to the notification page
+          window.alert("Notification is ON");
+          let notifyDistance = window.prompt('Enter the distance that you want to get the bus arrival notification(km)');
+          navigate('/notification');
+          isNotificationShown = true; // Set the flag to true so that the notification is not shown again
+        }
       } else {
         // User is not registered, show an appropriate message or redirect to the registration page
         window.alert("Please register to enable notifications.");
         // Redirect to the registration page
         navigate('/register');
       }
+      passengerEmail = null; // Stop the loop since email is valid
     }
   } catch (error) {
     console.error('Error fetching user information: ', error);
