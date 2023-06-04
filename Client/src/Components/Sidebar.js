@@ -25,14 +25,8 @@ const Sidebar = () => {
       <div className="center">
         <ul>
 
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <li>
-              <DashboardIcon className="icon" />
-              <span>Dashboard</span>
-            </li>
-          </Link>
 
-          <Link to="/searchbus" style={{ textDecoration: "none" }}>
+          <Link to="/" style={{ textDecoration: "none" }}>
             <li>
               <TravelExploreIcon className="icon" />
               <span>Search Bus</span>

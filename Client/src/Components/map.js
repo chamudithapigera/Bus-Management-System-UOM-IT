@@ -10,6 +10,7 @@ import {
   SkeletonText,
   color,
 } from '@chakra-ui/react';
+import { geolocated } from "react-geolocated";
 
 import {
   useJsApiLoader,
@@ -43,12 +44,15 @@ function Map() {
 
   })
 
+
   const navigate = useNavigate();
   const [map, setMap] = useState(null);
   const [autocomplete, setAutocomplete] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(null);
   const [currentLocation, setCurrentLocation] = useState([]);
+  const [currentLocationObtained, setCurrentLocationObtained] = useState(false);
+  const [showClearButton, setShowClearButton] = useState(false);
   const [buses, setBuses] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
 
@@ -84,36 +88,74 @@ function Map() {
   //clear the searched place and it's marker
   const clearSelectedPlace = () => {
     setSelectedPlace(null);
-    if (map == null) {
+    if (map != null) {
       map.panTo(center);
-      map.setZoom(5);
+      map.setZoom(13);
     }
     setInputValue('');
 
-
   }
 
+
+
+
   //get the user's current location using navigator.geolocation API
-  const handleCurrentLocation = () => {
+  async function handleCurrentLocation() {
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+
+      const { latitude, longitude } = position.coords;
+      setCurrentLocation({ lat: latitude, lng: longitude });
+
+      if (map !== null) {
+        map.panTo({ lat: latitude, lng: longitude });
+        map.setZoom(17);
+      }
+
+      setCurrentLocationObtained(true); // Set the currentLocationObtained state to true
+      setShowClearButton(true); // Set showClearButton to true
+      console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+    } catch (error) {
+      console.log("Unable to retrieve your location:", error);
+    }
+  }
+
+  //clear the location and it's marker
+  const clearCurrentLocation = () => {
+    setCurrentLocation(null);
+    if (map != null) {
+      map.panTo(center);
+      map.setZoom(13);
+    }
+  }
+
+  /*
+  function handleCurrentLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition((position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        setCurrentLocation({ lat: latitude, lng: longitude });
-        if (map !== null) {
-          map.panTo({ lat: latitude, lng: longitude });
-          map.setZoom(17);
-        }
-      },
-        (error) => {
-          console.log(error);
-        },
-        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
-    } else {
+      navigator.geolocation.getCurrentPosition(success,error);
+      }
+      else {
       console.log("Geolocation is not supported by this browser.");
     }
-  };
+}
 
+function success(position) {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+  setCurrentLocation({ lat: latitude, lng: longitude });
+  if (map !== null) {
+    map.panTo({ lat: latitude, lng: longitude });
+    map.setZoom(17);
+  }
+  console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+}
+
+function error() {
+  console.log("Unable to retrieve your location");
+}
+*/
 
   return (
     <Flex
@@ -166,7 +208,7 @@ function Map() {
                       variant='ghost'
                       size='sm'
                       onClick={clearSelectedPlace}
-                      
+
                     />
 
                   </InputRightElement>
@@ -183,13 +225,32 @@ function Map() {
             </Autocomplete>
           </Box>
 
-          {/*button that allows users to get their current location */}
-          <Box position='absolute' top={2} right={2} zIndex={1} >
-            <Button onClick={handleCurrentLocation} bg="blue.200" color="black.600" leftIcon={<FaLocationArrow />}>
-              Get Current Location
-            </Button>
-          </Box>
 
+          {/*button that allows users to get their current location */}
+
+
+          <Box position='absolute' top={2} right={2} zIndex={1}>
+            <Button
+              onClick={handleCurrentLocation}
+              bg='blue.200'
+              color='black.600'
+              leftIcon={<FaLocationArrow />}
+            >
+              Get Location
+            </Button>
+            {showClearButton && ( // Render the "Clear Location" button if showClearButton is true
+    <Button
+      onClick={() => {
+        clearCurrentLocation();
+        setShowClearButton(false); // Set showClearButton to false on click
+      }}
+      bg="blue.200"
+      color="black.600"
+      leftIcon={<FaTimes />}
+    >
+    </Button>
+  )}
+          </Box>
           {/* display the bus stops on the map */}
           {busStops.map((busStop) => (
             <Marker key={busStop.busStopName} position={{ lat: busStop.lat, lng: busStop.lng }}

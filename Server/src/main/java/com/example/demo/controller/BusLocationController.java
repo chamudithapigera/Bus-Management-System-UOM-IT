@@ -5,7 +5,6 @@ import com.example.demo.model.BusLocationWithDistanceAndDuration;
 import com.example.demo.repository.BusLocationRepository;
 import com.example.demo.service.BusLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import java.util.List;
 @RequestMapping("/api/v1/bus-locations")
 @CrossOrigin(origins = "http://localhost:3000") // replace with your frontend URL
 public class BusLocationController {
-
     @Autowired
     private BusLocationRepository busLocationRepository;
 
