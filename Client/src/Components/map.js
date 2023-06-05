@@ -35,6 +35,8 @@ const busStops = [
   { lat: 6.795623, lng: 79.8984756, busStopName: 'UOM Bus Stop', routeNo: '255' },
 ];
 
+
+
 function Map() {
 
   //load the Google Maps JavaScript API
@@ -98,6 +100,7 @@ function Map() {
 
 
 
+ 
 
   //get the user's current location using navigator.geolocation API
   async function handleCurrentLocation() {
@@ -131,31 +134,7 @@ function Map() {
     }
   }
 
-  /*
-  function handleCurrentLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(success,error);
-      }
-      else {
-      console.log("Geolocation is not supported by this browser.");
-    }
-}
-
-function success(position) {
-  const latitude = position.coords.latitude;
-  const longitude = position.coords.longitude;
-  setCurrentLocation({ lat: latitude, lng: longitude });
-  if (map !== null) {
-    map.panTo({ lat: latitude, lng: longitude });
-    map.setZoom(17);
-  }
-  console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-}
-
-function error() {
-  console.log("Unable to retrieve your location");
-}
-*/
+  
 
   return (
     <Flex
@@ -311,5 +290,6 @@ function error() {
     </Flex>
   )
 }
+
 
 export default Map;

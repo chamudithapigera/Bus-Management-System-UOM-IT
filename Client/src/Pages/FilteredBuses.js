@@ -2,9 +2,10 @@ import React from 'react';
 import "../Css/filteredbus.scss"
 import Sidebar from "../Components/Sidebar";
 import Navbar from "../Components/Navbar";
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import '../Css/table.scss';
 import { useNavigate } from 'react-router-dom';
+import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 
 const FilteredBuses = (props) => {
   const location = useLocation();
@@ -19,10 +20,11 @@ const FilteredBuses = (props) => {
 
         <div className='containerTable'>
           <p className='text'>Available Buses</p>
-          <div >
+          <div>
             <table className="table">
               <thead>
                 <tr>
+                  <th>#</th>
                   <th scope="col">Bus ID</th>
                   <th>Bus_Stop</th>
                   <th>Bus_RouteNO</th>
@@ -35,7 +37,8 @@ const FilteredBuses = (props) => {
               <tbody>
                 {filteredBuses.map((bus, index) => {
                   return (
-                    <tr key={index}>
+                    <tr>
+                      <th scope="row" key={index}>{index + 1}</th>
                       <td>{bus.busLocation.busID}</td>
                       <td>{busStopName}</td>
                       <td>{routeNO}</td>
@@ -43,15 +46,15 @@ const FilteredBuses = (props) => {
                       <td>{bus.arrivalTime.substr(0, 10)}</td>
                       <td>{bus.arrivalTime.substring(11, 19)}</td>
                       <td>
-                        <button onClick={async () => {
+                        <RemoveRedEyeRoundedIcon onClick={async () => {
                           const busID = bus.busLocation.busID;
                           const routeName = bus.busLocation.routeName;
                           const duration = bus.duration;
                           const distance = bus.distance;
                           const arrivalTime = bus.arrivalTime.substring(11, 19);
-                          navigate('/searchbus/viewbus', { state: { busID, routeName, duration,distance,arrivalTime } });
+                          navigate('/searchbus/viewbus', { state: { busID, routeName, duration, distance, arrivalTime } });
                         }}
-                        >View</button>
+                        />
                       </td>
                     </tr>
                   );

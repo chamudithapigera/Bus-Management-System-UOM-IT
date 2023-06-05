@@ -1,13 +1,12 @@
 .profile {
-    display: flex;
-    width: 100%;
-  
-    .profileContainer {
-      flex: 5;
-    }
-}
+  display: flex;
+  width: 100%;
 
-.userprofile {
+  .profileContainer {
+    flex: 5;
+  }
+
+  .userprofile {
     display: flex;
     flex-direction: column;
 }
@@ -125,3 +124,6 @@
         min-height: 0;
     }
 }
+}
+
+

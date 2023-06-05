@@ -1,0 +1,134 @@
+.app.dark {
+    background-color: #222;
+    color: rgb(156, 156, 156);
+
+    .table,
+    td {
+        background-color: #111;
+
+        th {
+            background-color: #111;
+            color: rgb(142, 140, 140);
+        }
+
+        td {
+            color: gray;
+
+            button{
+                color: gray;
+                border-color: white;
+            }
+        }
+    }
+
+    .text {
+        color: gray;
+    }
+
+    .navbar {
+        background-color: #222;
+        border-bottom: 0.5px solid rgb(76, 74, 74);
+        color: #999;
+
+        .search {
+            border-color: gray;
+
+            input {
+
+                &::placeholder {
+                    font-size: 14px;
+                    color: gray;
+                }
+            }
+        }
+
+    }
+
+    .sidebar {
+        background-color: #222;
+        border-color: #333;
+
+        .top {
+            .logo {
+                color: #999;
+            }
+        }
+
+        ul {
+            li {
+
+                &:hover {
+                    background-color: #333;
+                }
+
+                .icon {
+                    color: #999;
+                }
+
+                span {
+                    color: gray;
+                }
+            }
+        }
+    }
+
+    .imageOverlay {
+        background-color: rgba(0, 0, 0, 0.5);
+        /* change the color and opacity as needed */
+      }
+  
+      .detailsBox {
+        background-color: #111;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        
+      }
+      .route-name {
+        color: gray;
+      }
+  
+  
+      .row2{
+        
+        .distance {
+          color: gray;
+        }
+  
+        .arrival-time {
+          color: gray;
+        }
+  
+        .duration {
+          color: gray;
+        }
+    }
+
+    .top{
+        .editInput {
+            border: 1px solid #5a5757;
+            background-color: #333;
+          }
+          
+          .saveButton {
+            background-color: rgb(56, 53, 53);
+            color: gray;
+            border-color: 1px solid #968080;
+
+          }
+          .saveButton:hover {
+            background-color: #363936;
+        }
+          
+        .imageUpload{
+            background-color: #222;
+         }
+    
+    }
+   
+
+
+
+    
+      
+}

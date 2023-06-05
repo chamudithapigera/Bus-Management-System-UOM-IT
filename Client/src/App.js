@@ -1,4 +1,4 @@
-import Home from "./Pages/Home";
+
 import SearchBus from "./Pages/SearchBus";
 import FilteredBuses from "./Pages/FilteredBuses";
 import ViewBus from "./Pages/ViewBus";
@@ -10,11 +10,16 @@ import AccountSettings from "./Components/AccountSettings";
 import ChangePassword from "./Components/ChangePassword";
 import LegalNotice from "./Components/LegalNotice";
 import UserAddress from "./Components/UserAddress";
+import { DarkModeContext } from "./Components/darkModeContext";
+import "./Css/dark.scss"
+import { useContext } from "react";
 
 
 function App() {
+  const { darkMode } = useContext(DarkModeContext);
   return (
-    <div className="App">
+
+    <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
@@ -36,11 +41,10 @@ function App() {
           
             <Route path="profile">
               <Route index element={<Profile />} />
-              <Route path="accountsettings" element={<AccountSettings />} />
+              <Route path='/profile/:activepage' element={<AccountSettings />} />
               <Route path="changepassword" element={<ChangePassword />} />
               <Route path="useraddress" element={<UserAddress />} />
               <Route path="legalnotice" element={<LegalNotice />} />
-
 
             </Route>
           
