@@ -13,6 +13,7 @@ import DirectionsBusFilledRoundedIcon from '@mui/icons-material/DirectionsBusFil
 import AddRoadRoundedIcon from '@mui/icons-material/AddRoadRounded';
 import BlockRoundedIcon from '@mui/icons-material/BlockRounded';
 import FactCheckRoundedIcon from '@mui/icons-material/FactCheckRounded';
+import image from '../Css/busIcon.jpg'
 
 const Sidebar = () => {
 
@@ -23,19 +24,16 @@ const Sidebar = () => {
       <div className="top">
 
         <Link to="/" style={{ textDecoration: "none" }}>
-          <AccountCircleIcon className="icontop" />
+        <div>
+            <img src={image} className="icontop" />
+          </div>
           <spank className="logo">depo admin</spank>
         </Link>
       </div>
       <hr />
       <div className="center">
         <ul>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <li>
-              <DashboardIcon className="icon" />
-              <span>Dashboard</span>
-            </li>
-          </Link>
+          
 
           <p className="title">Features</p>
 
@@ -84,13 +82,21 @@ const Sidebar = () => {
             </li>
           </Link>
 
+          <Link to="/viewreport" style={{ textDecoration: "none" }}>
+            <li>
+              <FactCheckRoundedIcon className="icon" />
+              <span>Monthly Report</span>
+            </li>
+          </Link>
+
+
 
           <li>
             <NotificationsNoneOutlinedIcon className="icon" />
             <span>Notification</span>
           </li>
 
-          <p className="title">SERVICE</p>
+          <p className="title">Service</p>
 
           <li>
             <SettingsIcon className="icon" />

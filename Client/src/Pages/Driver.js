@@ -4,7 +4,8 @@ import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
 export default function Driver() {
 
@@ -40,7 +41,8 @@ export default function Driver() {
               <button>Add</button>
               </Link>
             </div>
-            <table className="table border shadow">
+            <div className="tableBorderShadow">
+            <table >
 
               <thead>
                 <tr>
@@ -62,10 +64,10 @@ export default function Driver() {
                     <td>
 
                       <Link to={`/updateDriver/${driver.id}`}>
-                        <button >Edit</button>
+                        <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon ></button>
                       </Link>
 
-                      <button onClick={() => deleteDriver(driver.id)}>Delete</button>
+                      <button onClick={() => deleteDriver(driver.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
                       
                     </td>
                   </tr>
@@ -74,6 +76,7 @@ export default function Driver() {
 
               </tbody>
             </table>
+            </div>
           </div>
         </div>
       </div>

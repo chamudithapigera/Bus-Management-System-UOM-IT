@@ -11,8 +11,13 @@
     justify-content: center;
     
     .icontop {
-      font-size: 120px;
+      width: 100px;
+      height: 100px;
+      border-radius: 30px;
       color: #e7e3ee;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
     }
 
     .logo {
@@ -39,9 +44,9 @@
       padding: 0;
 
       .title {
-        font-size: 12px;
+        font-size: 15px;
         font-weight: bold;
-        color: #766d6d;
+        color: #e7dede;
         margin-top: 18px;
         margin-bottom: 10px;
       }

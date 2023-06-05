@@ -8,6 +8,8 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
 import AssignTurn from '../Components//AssignTurn';
 import ResetButton from '../Components/ResetButton';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
 export default function TurnSchedule() {
 
@@ -23,9 +25,10 @@ export default function TurnSchedule() {
   };
 
   const deleteTurn = async (id) => {
-    await axios.delete(`http://localhost:8080/api/v1/turn/deleteTurn/${id}`);
-
-    loadBusTurns();
+    if (window.confirm("Are you sure you want to delete turn?")) {
+      await axios.delete(`http://localhost:8080/api/v1/turn/deleteTurn/${id}`);
+      loadBusTurns();
+    }
   };
 
   
@@ -53,12 +56,13 @@ export default function TurnSchedule() {
             <div className='datatableTitle'>
 
               <Link to="/addTurn" >
-                <button>Add</button>
+             <button>add</button>
               </Link>
 
               <AssignTurn />
             </div>
-            <table className="table border shadow">
+            <div className="tableBorderShadow">
+            <table>
 
               <thead>
                 <tr>
@@ -83,9 +87,9 @@ export default function TurnSchedule() {
                     <td>
 
                       <Link to={`/updateTurn/${busTurn.id}`}>
-                        <button >Edit</button>
+                        <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon ></button>
                       </Link>
-                      <button onClick={() => deleteTurn(busTurn.id)}>Delete</button>
+                      <button onClick={() => deleteTurn(busTurn.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
                     </td>
                   </tr>
 
@@ -93,7 +97,7 @@ export default function TurnSchedule() {
 
               </tbody>
             </table>
-
+</div>
             <div>
             <button onClick={handleDeleteAllTurns}>Delete All Turns</button>
         

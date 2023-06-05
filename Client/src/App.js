@@ -20,19 +20,21 @@ import UpdateDriver from './Components/UpdateDriver';
 import UpdateBus from './Components/UpdateBus';
 import UpdateTurn from './Components/UpdateTurn';
 import ViewBus from './Components/ViewBus';
-
+import ReportGenerationForm from './Pages/ReportGenerationForm';
+import './Css/dark.scss'
 
 
 function App() {
   const {darkMode}= useContext(DarkModeContext);
   return (
+  
     <div className= {darkMode ? "app dark" : "app"}>
     
      <BrowserRouter>
       <Routes>
         <Route path='/'>
-            <Route index element={<Home />} />
-            <Route path="bus" element={<Bus/>}/>
+        <Route index element={<Home />} />
+        <Route path="bus" element={<Bus/>}/>
             <Route path="/addbus" element={<AddBus />} />
             <Route path="busRoute" element={<BusRoute />} />
             <Route path="/addRoute" element={<AddBusRoute />} />
@@ -49,6 +51,8 @@ function App() {
             <Route exact path="/updateBus/:id" element={<UpdateBus/>} />
             <Route exact path="/updateTurn/:id" element={<UpdateTurn/>} />
             <Route exact path="/viewbus/:id" element={<ViewBus/>} />
+            <Route path="/viewreport" element={<ReportGenerationForm />} />
+            
            
         </Route>
       </Routes>

@@ -4,6 +4,8 @@ import axios from "axios";
 import { Link, useParams,useNavigate } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
 
 export default function BusRoute() {
@@ -64,7 +66,8 @@ export default function BusRoute() {
               <button>Add</button>
               </Link>
             </div>
-            <table className="table border shadow">
+            <div className="tableBorderShadow">
+            <table >
 
               <thead>
                 <tr>
@@ -89,10 +92,10 @@ export default function BusRoute() {
                         className='btn btn-warning mx-2'
                         to={`/updateRoute/${busRoute.id}`}
                       >
-                        <button >Edit</button>
+                        <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
                       </Link>
 
-                    <button  onClick={() => {deleteBusRoutes(busRoute.id)}}>Delete</button>
+                    <button  onClick={() => {deleteBusRoutes(busRoute.id)}}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
                     
 
                     </td>
@@ -102,6 +105,7 @@ export default function BusRoute() {
 
               </tbody>
             </table>
+            </div>
           </div>
         </div>
       </div>

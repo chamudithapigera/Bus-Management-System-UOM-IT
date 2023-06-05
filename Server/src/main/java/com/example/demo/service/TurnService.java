@@ -14,6 +14,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -41,8 +43,10 @@ public class TurnService {
 
     //assign filtered driverIDs to daily turns
     public List<String> getPresentDriverIdsSortedByCheckInTime() {
+        LocalDate today = LocalDate.now();
         Aggregation aggregation = Aggregation.newAggregation(
-                Aggregation.match(Criteria.where("status").is("present")),
+                Aggregation.match(Criteria.where("status").is("present").and("date").is("today")),
+                //Aggregation.match(Criteria.where("status").is("present")),
                 Aggregation.sort(Sort.Direction.ASC, "checkInTime"),
                 Aggregation.project("driverID")
         );

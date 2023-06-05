@@ -4,8 +4,9 @@ import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
-
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 
 export default function Bus() {
 
@@ -44,7 +45,8 @@ export default function Bus() {
 
               <Link to="/addbus" ><button>Add</button></Link>
             </div>
-            <table className="table border shadow">
+            <div className="tableBorderShadow">
+            <table >
               <thead>
                 <tr>
                   <th>#</th>
@@ -68,16 +70,16 @@ export default function Bus() {
                         className='btn btn-warning mx-2'
                         to={`/viewbus/${bus.id}`}
                       >
-                    <button >View</button>
+                    <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
                     </Link>
 
                       <Link
                         className='btn btn-warning mx-2'
                         to={`/updateBus/${bus.id}`}
                       >
-                        <button >Edit</button>
+                        <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
                       </Link>
-                      <button onClick={() => deleteBus(bus.id)}>Delete</button>
+                      <button onClick={() => deleteBus(bus.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
                     </td>
                   </tr>
 
@@ -85,6 +87,7 @@ export default function Bus() {
 
               </tbody>
             </table>
+            </div>
           </div>
 
         </div>

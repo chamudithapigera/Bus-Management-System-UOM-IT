@@ -29,8 +29,8 @@ export default function DriverAttendance() {
         <div className='title'>
             Driver Attendance
           </div>
-       
-        <table className="table border shadow">
+          <div className="tableBorderShadow">
+        <table >
 
   <thead>
     <tr>
@@ -61,6 +61,7 @@ export default function DriverAttendance() {
    
   </tbody>
 </table>
+</div>
         </div>
         </div>
     </div>

@@ -4,7 +4,8 @@ import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
 export default function BusStop() {
 
@@ -42,7 +43,8 @@ export default function BusStop() {
                 <button>Add</button>
               </Link>
             </div>
-            <table className="table border shadow">
+            <div className="tableBorderShadow">
+            <table >
 
               <thead>
                 <tr>
@@ -68,10 +70,10 @@ export default function BusStop() {
                         className='btn btn-warning mx-2'
                         to={`/updateStop/${busStop.id}`}
                       >
-                        <button >Edit</button>
+                        <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
                       </Link>
 
-                      <button onClick={() => deleteBusStops(busStop.id)}>Delete</button>
+                      <button onClick={() => deleteBusStops(busStop.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
                     </td>
                   </tr>
 
@@ -79,6 +81,7 @@ export default function BusStop() {
 
               </tbody>
             </table>
+            </div>
           </div>
         </div>
       </div>

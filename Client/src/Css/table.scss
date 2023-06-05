@@ -1,31 +1,43 @@
-.bus{
+.bus {
   display: flex;
   width: 100%;
 
-  .busContainer{
-      flex: 6;
+  .tableBorderShadow {
+    margin-top: 10px;
   }
-}
 
-table {
+  .busContainer {
+    flex: 6;
+
+  }
+
+  table {
+
     border-collapse: collapse;
     width: 100%;
+
   }
-  
-  th, td {
+
+  th,
+  td {
     text-align: left;
     padding: 8px;
+
+    .icon {
+      font-size: 17px;
+    }
   }
-  
+
   th {
     background-color: #050008;
     color: white;
   }
-  
+
   tr:nth-child(even) {
     background-color: #f2f2f2;
   }
-  .datatableTitle{
+
+  .datatableTitle {
     width: 100%;
     font-size: 18px;
     color: gray;
@@ -33,19 +45,22 @@ table {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .title {
+    width: 100%;
+    font-size: 20px;
+    color: rgb(82, 46, 92);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .icontop {
+    font-size: 200px;
+    color: rgb(82, 46, 92);
+  }
+
 }
-.title{
-  width: 100%;
-  font-size: 20px;
-  color: rgb(82, 46, 92);
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-.icontop {
-  font-size: 200px;
-  color: rgb(82, 46, 92);
-}
-  

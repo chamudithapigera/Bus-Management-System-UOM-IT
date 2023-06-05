@@ -40,7 +40,7 @@ export default function AddBusRoute() {
   return (
     <div className='container1'>
         <div >
-            <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
+            <div >
                 <h2 className='text-center m-4'>Add details of bus-routes</h2>
                 <form onSubmit={(e)=> onSubmit(e)}>
                 <div className='mb-3'>

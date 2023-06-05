@@ -1,0 +1,90 @@
+
+  .bus{
+    display: flex;
+    width: 100%;
+
+    .busContainer{
+      flex: 5;
+    }
+
+  
+      
+  
+      .detailsBox {
+        margin-top: 100px;
+      margin-left: 200px ;
+      margin-right: 200px;
+      background-color: rgb(174, 227, 203);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  
+      
+    }
+    
+
+    .h {
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+  
+    .button {
+      background-color: #052752;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-right: 2rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+  
+      &:hover {
+        background-color: #94adbe;
+      }
+    }
+    .date{
+      text-align: left;
+      
+    }
+    .toDate{
+      color: #000000;
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+  
+    .fromDate{
+      color: #000000;
+      text-align: center;
+      padding-top: 1rem;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+  
+    .fromInput{
+      color: #000000;
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      padding-right: 2rem;
+      
+    }
+  
+    .toInput{
+      color: #000000;
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      padding-right: 2rem;
+      
+    }
+    
+  
+   
+  }
+
+  
