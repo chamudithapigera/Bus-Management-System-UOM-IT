@@ -22,6 +22,7 @@ import UpdateTurn from './Components/UpdateTurn';
 import ViewBus from './Components/ViewBus';
 import ReportGenerationForm from './Pages/ReportGenerationForm';
 import './Css/dark.scss'
+import Profile from './Pages/Profile';
 
 
 function App() {
@@ -52,7 +53,7 @@ function App() {
             <Route exact path="/updateTurn/:id" element={<UpdateTurn/>} />
             <Route exact path="/viewbus/:id" element={<ViewBus/>} />
             <Route path="/viewreport" element={<ReportGenerationForm />} />
-            
+            <Route path="/profile" element={<Profile />} />
            
         </Route>
       </Routes>

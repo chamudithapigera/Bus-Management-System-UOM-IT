@@ -1,0 +1,114 @@
+.accountsettings{
+    .top {
+    
+      padding-left: 200px;
+      padding-right: 200px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      display: flex;
+      
+  
+      .left {
+        background-color: #f6f5f5;
+        flex: 1;
+        -webkit-box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.47);
+        box-shadow: 4px 6px 10px 2px rgba(201, 201, 201, 0.47);
+        padding: 20px;
+        position: relative;
+  
+        
+        
+  
+        .editButton {
+          position: absolute;
+          bottom: 0;
+          margin-left: 300px;
+          margin-bottom: 5px;
+          padding: 5px;
+          font-size: 20px;
+          color: #7451f8;
+          background-color: #7551f818;
+          cursor: pointer;
+          border-radius: 0px 0px 0px 5px;
+        }
+  
+        .item {
+          display: flex;
+         
+  
+          .itemImg {
+            width: 300px;
+            height: 300px;
+            margin-left: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+          .details {
+            .itemTitle {
+              margin-top: 30px;
+              margin-bottom: 10px;
+              color: #555;
+            }
+  
+            .detailItem {
+              margin-bottom: 10px;
+              font-size: 14px;
+  
+              .itemKey {
+                font-weight: bold;
+                color: gray;
+                margin-right: 5px;
+              }
+  
+              .itemValue {
+                font-weight: 300;
+              }
+            }
+          }
+        }
+      }
+  
+      .right {
+        flex: 2;
+      }
+      .editInput {
+          margin-bottom: 10px;
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          width: 100%;
+        }
+        
+        .saveButton {
+          padding: 8px 16px;
+          background-color: #4caf50;
+          color: white;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        .saveButton:hover {
+          background-color: #45a049;
+        }
+        
+        .itemValue {
+          font-weight: bold;
+        }
+    }
+  
+    .bottom {
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      padding: 20px;
+      margin: 10px 20px;
+    }
+  
+    .title {
+      font-size: 16px;
+      color: lightgray;
+      margin-bottom: 20px;
+    }
+  
+  
+  
