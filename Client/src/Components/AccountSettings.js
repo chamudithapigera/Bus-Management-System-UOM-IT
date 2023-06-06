@@ -1,7 +1,7 @@
 import React from 'react'
 import '../Css/accountsettings.scss'
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
+import { Link,useState } from "react";
 
 const AccountSettings = () => {
   
@@ -98,6 +98,7 @@ const AccountSettings = () => {
                       onChange={handleImageChange}
                     />
                     <button className="saveButton" onClick={handleSave}>Save</button>
+                    
                   </>
                 ) : (
                   <>

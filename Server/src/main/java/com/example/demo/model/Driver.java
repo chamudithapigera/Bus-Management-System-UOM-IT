@@ -17,12 +17,26 @@ public class Driver {
     private String driverID;
     private String driverName;
     private String licenseNo;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String telephone;
+    private String userRole;
+    private String driverId;
+    private String busId;
 
     public Driver(String driverID, String driverName, String licenseNo) {
         this.driverID = driverID;
         this.driverName = driverName;
         this.licenseNo = licenseNo;
     }
+
+
+
+
+
+
 
 }
 
