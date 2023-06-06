@@ -1,11 +1,20 @@
-import React from "react";
-function Homepage(){
+import React from 'react'
+import '../Css/home.scss'
 
-    return(
-        <div>
-            <p>This is Homepage</p>
+import Navbar from './Navbar';
+
+
+
+const Home = () => {
+  return (
+    <div className="home">
+
+        <Navbar />
+        
         </div>
-    );
+    
+    
+  );
+};
 
-}
-export default Homepage;
+export default Home;

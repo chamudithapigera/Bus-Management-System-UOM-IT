@@ -1,20 +1,26 @@
-import React from 'react';
-import './App.css';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Homepage from './pages/Homepage';
-import Aboutus from './pages/Aboutus';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from './Pages/Home';
+import Navbar from "./Pages/Navbar";
+
+
+
+
 
 function App() {
+  
   return (
-    <Router>
-      <NavBar/> 
-      <Switch>
-        <Route path="/" exact component={Homepage}/>
-        <Route path="/Aboutus" component={Aboutus}/>
-
-      </Switch>
-
-    </Router>
+  
+     <BrowserRouter>
+      <Routes>
+        <Route path='/navbar'>
+        <Route index element={<Navbar />} />
+            
+           
+        </Route>
+      </Routes>
+     </BrowserRouter>
+    
   );
 }
+
 export default App;
