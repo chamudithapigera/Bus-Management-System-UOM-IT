@@ -1,176 +1,65 @@
-import React, { useState, useRef } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
+import React, {useState} from 'react'
+import {useNavigate} from "react-router-dom";
 
-import AuthService from "../services/auth.service";
+const Register = () => {
+    const[name, setName]=useState('');
+    const[email, setEmail]=useState('');
+    const[password, setPassword]=useState('');
+    const[confPassword, setConfPassword]=useState('');
+    const[msg, setMsg] = useState('');
+    const navigate = useNavigate();
 
-const required = (value) => {
-  if (!value) {
+    
     return (
-      <div className="invalid-feedback d-block">
-        This field is required!
-      </div>
-    );
-  }
-};
-
-const validEmail = (value) => {
-  if (!isEmail(value)) {
-    return (
-      <div className="invalid-feedback d-block">
-        This is not a valid email.
-      </div>
-    );
-  }
-};
-
-const vusername = (value) => {
-  if (value.length < 3 || value.length > 20) {
-    return (
-      <div className="invalid-feedback d-block">
-        The username must be between 3 and 20 characters.
-      </div>
-    );
-  }
-};
-
-const vpassword = (value) => {
-  if (value.length < 6 || value.length > 40) {
-    return (
-      <div className="invalid-feedback d-block">
-        The password must be between 6 and 40 characters.
-      </div>
-    );
-  }
-};
-
-const Register = (props) => {
-  const form = useRef();
-  const checkBtn = useRef();
-
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
-
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    setUsername(username);
-  };
-
-  const onChangeEmail = (e) => {
-    const email = e.target.value;
-    setEmail(email);
-  };
-
-  const onChangePassword = (e) => {
-    const password = e.target.value;
-    setPassword(password);
-  };
-
-  const handleRegister = (e) => {
-    e.preventDefault();
-
-    setMessage("");
-    setSuccessful(false);
-
-    form.current.validateAll();
-
-    if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(username, email, password).then(
-        (response) => {
-          setMessage(response.data.message);
-          setSuccessful(true);
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          setMessage(resMessage);
-          setSuccessful(false);
-        }
-      );
-    }
-  };
-
-  return (
-    <div className="col-md-12">
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
-
-        <Form onSubmit={handleRegister} ref={form}>
-          {!successful && (
-            <div>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <Input
-                  type="text"
-                  className="form-control"
-                  name="username"
-                  value={username}
-                  onChange={onChangeUsername}
-                  validations={[required, vusername]}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <Input
-                  type="text"
-                  className="form-control"
-                  name="email"
-                  value={email}
-                  onChange={onChangeEmail}
-                  validations={[required, validEmail]}
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <Input
-                  type="password"
-                  className="form-control"
-                  name="password"
-                  value={password}
-                  onChange={onChangePassword}
-                  validations={[required, vpassword]}
-                />
-              </div>
-
-              <div className="form-group">
-                <button className="btn btn-primary btn-block">Sign Up</button>
-              </div>
+    <div>
+      <section className="hero has-background-grey-light is-fullheight is-fullwidth">
+        <div className="hero-body">
+          <div className="container">
+            <div className="columns is-centered">
+                <div className="column is-4-desktop">
+                    <form  className="box">
+                        <h1 className="is-size-4 has-text-centered">Register</h1>
+                        <div className="field mt-5">
+                            <label className="label">Name</label>
+                            <div className="controls">
+                                <input type="text" className="input" placeholder="Name"
+                                value={name} onChange={(e)=> setName(e.target.value)}/>
+                            </div>
+                        </div>
+                        <div className="field mt-5">
+                            <label className="label">Email</label>
+                            <div className="controls">
+                                <input type="text" className="input" placeholder="Email"
+                                value={email} onChange={(e)=> setEmail(e.target.value)}/>
+                            </div>
+                        </div>
+                        <div className="field mt-5">
+                            <label className="label">Password</label>
+                            <div className="controls">
+                                <input type="password" className="input" placeholder="******"
+                                value={password} onChange={(e)=> setPassword(e.target.value)}/>
+                            </div>
+                        </div>
+                        <div className="field mt-5">
+                            <label className="label">Confirm Password</label>
+                            <div className="controls">
+                                <input type="password" className="input" placeholder="******"
+                                 value={confPassword} onChange={(e)=> setConfPassword(e.target.value)}/>
+                            </div>
+                        </div>
+                        <div className="field mt-5">
+                            <p className="is-italic has-text-danger has-text-right">{msg}</p>
+                            <button className="button is-success is-fullwidth">Register</button>
+                           
+                        </div>
+                    </form>
+                </div>
             </div>
-          )}
-
-          {message && (
-            <div className="form-group">
-              <div
-                className={
-                  successful ? "alert alert-success" : "alert alert-danger"
-                }
-                role="alert"
-              >
-                {message}
-              </div>
-            </div>
-          )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
-        </Form>
-      </div>
+          </div>
+        </div>
+      </section>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register
