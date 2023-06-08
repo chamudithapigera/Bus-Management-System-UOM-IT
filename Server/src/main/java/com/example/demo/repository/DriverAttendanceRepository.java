@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface DriverAttendanceRepository extends MongoRepository<DriverAttendance, String> {
-
+    List<DriverAttendance> findByDateBetween(Date fromDate, Date toDate);
 }

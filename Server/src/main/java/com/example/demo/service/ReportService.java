@@ -21,7 +21,7 @@ import java.util.Map;
 @Service
 public class ReportService {
 
-    @Autowired
+   /* @Autowired
     private MongoTemplate mongoTemplate;
     private final DriverAttendanceRepository driverAttendanceRepository;
 
@@ -56,9 +56,9 @@ public class ReportService {
                 aggregation, "driverAttendance", Report.class
         );
 
-        // Get the monthly report as a map of driverID to the count of "status" as "present"
+        Get the monthly report as a map of driverID to the count of "status" as "present"
         Map<String, Long> report = new HashMap<>();
         result.getMappedResults().forEach(r -> report.put(r.getDriverID(), r.getCount()));
         return report;
-    }
+    }*/
 }

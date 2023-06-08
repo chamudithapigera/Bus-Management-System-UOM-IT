@@ -4,53 +4,48 @@ import Navbar from '../Components/Navbar';
 import '../Css/report.scss';
 import { format } from 'date-fns';
 import jsPDF from 'jspdf';
-import image from "../Css/bus.jpg"
+import image from "../Css/bus.jpg";
 import ReactToPrint from "react-to-print";
 import axios from "axios";
 
-
-
 export default function ReportGenerationForm() {
-
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
-  const [tableActive, settableActive] = useState(false);
-  const [reportActive, setreportActive] = useState(true);
+  const [tableActive, setTableActive] = useState(false);
+  const [reportActive, setReportActive] = useState(true);
+  const [attendance, setAttendance] = useState([]);
 
   function Cancel() {
-    setreportActive(!reportActive);
-    settableActive(!tableActive);
+    setReportActive(!reportActive);
+    setTableActive(!tableActive);
   }
 
-  function generateReport() {
-    setreportActive(!reportActive);
-    settableActive(!tableActive);
-    // Create a new jsPDF instance
-    const doc = new jsPDF();
-    // Generate the report content
-    doc.text('Monthly Report', 10, 10);
-    doc.text(`From: ${format(fromDate, 'dd/MM/yyyy')}`, 10, 20);
-    doc.text(`To: ${format(toDate, 'dd/MM/yyyy')}`, 10, 30);
+  async function generateReport() {
+    setReportActive(!reportActive);
+    setTableActive(!tableActive);
 
-    // Save the PDF
-    doc.save('monthly_report.pdf');
+    try {
+      const response = await axios.get("http://localhost:8080/api/v1/attendance/filter", {
+      params: {
+        fromDate: fromDate,
+        toDate: toDate
+      }
+
+    
+      });
+
+      const filteredAttendance = response.data;
+      setAttendance(filteredAttendance);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  const componentRef = useRef()
-  const [attendance, setAttendance] = useState([]);
-  useEffect(() => {
-    loadAttendance();
-
-  }, []);
-
-  const loadAttendance = async () => {
-    const result = await axios.get("http://localhost:8080/api/v1/attendance/viewAttendance");
-    setAttendance(result.data);
-  };
+ 
+  const componentRef = useRef();
 
 
   return (
-
     <div className='bus'>
       <Sidebar></Sidebar>
       <div className='busContainer'>
@@ -89,7 +84,7 @@ export default function ReportGenerationForm() {
             </div>
           )}
 
-          {tableActive && (
+{tableActive && (
             <div className='container'>
               <div className='py-4'>
                 <div className='title'>

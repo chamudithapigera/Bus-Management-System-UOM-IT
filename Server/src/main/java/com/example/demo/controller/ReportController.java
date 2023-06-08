@@ -14,7 +14,7 @@ import java.util.Map;
 @RequestMapping("/api/v1/reports")
 public class ReportController {
 
-    @Autowired
+ /*   @Autowired
     private ReportService reportService;
 
     @GetMapping
@@ -26,5 +26,5 @@ public class ReportController {
         Map<String, Long> report = reportService.generateMonthlyReport(month, year);
 
         return ResponseEntity.ok(report);
-    }
+    }*/
 }

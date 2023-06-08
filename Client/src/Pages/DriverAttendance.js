@@ -39,7 +39,7 @@ export default function DriverAttendance() {
                     <th scope="col">Date</th>
                     <th scope="col">CheckIn Time</th>
                     <th scope="col"> Status</th>
-                    <th scope="col">Action</th>
+                    
                   </tr>
                 </thead>
 
@@ -51,10 +51,7 @@ export default function DriverAttendance() {
                       <td>{attendance.date}</td>
                       <td>{attendance.checkInTime}</td>
                       <td>{attendance.status}</td>
-                      <td>
-                        <button className='btn btn-outline mx-2'>Edit</button>
-                        <button className='btn btn-danger mx-2'>Delete</button>
-                      </td>
+                      
                     </tr>
 
                   ))}

@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -17,5 +18,7 @@ public class Report {
     @Id
     private String id;
     private String driverID;
-    private Long count;
+    private LocalDate date;
+    private LocalTime checkInTime;
+    private String status;
 }
