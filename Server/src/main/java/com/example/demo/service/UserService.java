@@ -18,8 +18,27 @@ public class UserService {
         return repository.findAll();
     }
 
-    public User getUserByEmail(String email) {
+    public User getUserByEmailTest(String email) {
         return repository.findByEmail(email);
     }
 
+    public List<User> getUserByEmail(String email){
+        return repository.getUserByEmail(email);
+    }
+
+    public List<User> getUserByTelephone(String telephone){
+        return repository.getUserByEmail(telephone);
+    }
+
+    public List<User> getUserByEmailPassword(String email, String password){
+        return repository.getUserByEmailPassword(email, password);
+    }
+
+    public User createNewUser(User user){
+        return repository.save(user);
+    }
+
+    public User updateUser(User user){
+        return repository.save(user);
+    }
 }

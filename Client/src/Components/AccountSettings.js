@@ -1,20 +1,28 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import '../Css/accountsettings.scss'
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from '../Components/UserContext';
+import { ProfileImageContext } from '../Components/ProfileImageContext';
 
-const AccountSettings = () => {
-  
+const AccountSettings = ({username}) => {
+
+  const { userData } = useContext(UserContext);
+  const { userName1, userName2, email,phone } = userData || {};
+  const concatenatedUserName = userName1 + " " + userName2;
+  const { profileImage, setProfileImage } = useContext(ProfileImageContext);
+
   // User details from the user login
-  const [name, setName] = useState('Jane Doe');
-  const [email, setEmail] = useState('janedoe@gmail.com');
-  const [phone, setPhone] = useState('+1 2345 67 89');
-  const [address, setAddress] = useState('Elton St. 234 Garden Yd. NewYork');
-  const [country, setCountry] = useState('USA');
-  const [image, setImage] = useState('https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg');
+  const [name, setName] = useState('ahinsa');
+  const [email1, setEmail] = useState('kavindya124@gmail.com');
+  const [phone1, setPhone] = useState('+94 772 458 464');
+  const [country, setCountry] = useState('Sri Lanka');
+  const [image, setImage] = useState("https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
 
   // Edit mode state variable
   const [isEditing, setIsEditing] = useState(false);
+  
 
   // Event handler for saving the edited user details
   const handleSave = () => {
@@ -31,7 +39,9 @@ const AccountSettings = () => {
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      setImage(e.target.result);
+      const newImage = e.target.result;
+      setImage(newImage);
+      setProfileImage(newImage);
     };
 
     if (file) {
@@ -63,7 +73,7 @@ const AccountSettings = () => {
                     <input
                       className="editInput"
                       type="text"
-                      value={name}
+                      value={concatenatedUserName}
                       onChange={(e) => setName(e.target.value)}
                     />
                     <input
@@ -78,12 +88,7 @@ const AccountSettings = () => {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                     />
-                    <input
-                      className="editInput"
-                      type="text"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                    />
+                   
                     <input
                       className="editInput"
                       type="text"
@@ -98,10 +103,11 @@ const AccountSettings = () => {
                       onChange={handleImageChange}
                     />
                     <button className="saveButton" onClick={handleSave}>Save</button>
+                    
                   </>
                 ) : (
                   <>
-                    <h1 className="itemTitle">{name}</h1>
+                    <h1 className="itemTitle">{concatenatedUserName}</h1>
                     <div className="detailItem">
                       <span className="itemKey">Email:</span>
                       <span className="itemValue">{email}</span>
@@ -109,10 +115,6 @@ const AccountSettings = () => {
                     <div className="detailItem">
                       <span className="itemKey">Phone:</span>
                       <span className="itemValue">{phone}</span>
-                    </div>
-                    <div className="detailItem">
-                      <span className="itemKey">Address:</span>
-                      <span className="itemValue">{address}</span>
                     </div>
                     <div className="detailItem">
                       <span className="itemKey">Country:</span>

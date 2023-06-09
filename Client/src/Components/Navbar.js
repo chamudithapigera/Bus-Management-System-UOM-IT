@@ -8,49 +8,44 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../Components/darkModeContext"
 import { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import { ProfileImageContext } from "../Components/ProfileImageContext";
 
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { profileImage } = useContext(ProfileImageContext);
+
   const { dispatch } = useContext(DarkModeContext);
 
   return (
     <div className="navbar">
       <div className="wrapper">
-        <div className="search">
-          <input type="text" placeholder="Search..." />
-          <SearchOutlinedIcon />
-        </div>
+        <div className="search"></div>
         <div className="items">
-          <div className="item">
-            <LanguageOutlinedIcon className="icon" />
-            English
-          </div>
+        
           <div className="item">
             <DarkModeOutlinedIcon 
             className="icon" 
             onClick={() => dispatch({ type: "TOGGLE" })} />
           </div>
+
           <div className="item">
-            <FullscreenExitOutlinedIcon className="icon" />
-          </div>
-          <div className="item">
-            <NotificationsNoneOutlinedIcon className="icon" />
+            <NotificationsNoneOutlinedIcon className="icon" 
+            onClick={()=> {navigate('/notification')}}/>
             <div className="counter">1</div>
           </div>
-          <div className="item">
-            <ChatBubbleOutlineOutlinedIcon className="icon" />
-            <div className="counter">2</div>
-          </div>
-          <div className="item">
-            <ListOutlinedIcon className="icon" />
-          </div>
+          
           <div className="item">
             <img
-              src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+              src={profileImage}
               alt=""
               className="avatar"
+              onClick={()=> {navigate('/profile')}}
             />
           </div>
+          
+          
         </div>
       </div>
     </div>

@@ -6,33 +6,43 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 //links to different pages
 import { Link } from "react-router-dom";
-import image from "./BUS_MANAGEMENT_SYSTEM.jpeg";
+import image from "../Css/BUS_MANAGEMENT_SYSTEM.jpeg"
 import { DarkModeContext } from "../Components/darkModeContext";
 import { useContext } from "react";
+import { UserContext } from '../Components/UserContext';
 
 
-const Sidebar = () => {
+const Sidebar = ( ) => {
+
+  const { userData } = useContext(UserContext);
+  const { userName1, userName2 } = userData || {};
+  const concatenatedUserName = userName1 + " " + userName2;
+
   const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="sidebar">
       <div className="top">
 
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/searchbus" style={{ textDecoration: "none" }}>
           <div>
             <img src={image} className="icontop" />
           </div>
-          <span className="logo">Passenger</span>
+         <span className="logo">Welcome !</span> 
+         <div className="name">{concatenatedUserName}</div> 
         </Link>
       </div>
-      <hr />
+     <hr/>
+
       <div className="center">
+        
         <ul>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/searchbus" style={{ textDecoration: "none" }}>
             <li>
               <TravelExploreIcon className="icon" />
               <span>Search Bus</span>
             </li>
           </Link>
+          
 
           <Link to="/notification" style={{ textDecoration: "none" }}>
             <li>
@@ -41,28 +51,29 @@ const Sidebar = () => {
             </li>
           </Link>
 
-          <Link to="/settings" style={{ textDecoration: "none" }}>
-          <li>
-            <SettingsIcon className="icon" />
-            <span>Settings</span>
-          </li>
-          </Link>
-
-          <p className="title">USER</p>
-
-          <Link to="/profile" style={{ textDecoration: "none" }}>
+          <Link to="/profile" style={{ textDecoration: "none" } } >
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
           </Link>
+          <Link to="/" style={{ textDecoration: "none" }}>
           <li>
             <ExitToAppOutlinedIcon className="icon" />
             <span>Logout</span>
           </li>
-        </ul>
+          </Link>
+          
+        </ul>  
+        
       </div>
+      
+
+   
+      <p className="title">Theme</p>
+
       <div className="bottom">
+      
         <div
           className="colorOption"
           onClick={() => dispatch({ type: "LIGHT" })}

@@ -17,8 +17,15 @@ public class User {
     private String driverId;
     private String busId;
 
-    public User() {
-
+    public User( String firstName, String lastName, String email, String password, String telephone, String userRole, String driverId, String busId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.telephone = telephone;
+        this.userRole = userRole;
+        this.driverId = driverId;
+        this.busId = busId;
     }
 
     public ObjectId getId() {

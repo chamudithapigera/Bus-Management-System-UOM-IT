@@ -13,5 +13,16 @@ public interface UserRepository extends MongoRepository<User, String>{
 
    User findByEmail(String email);
 
+   @Query("{email: ?0}")
+   List<User> getUserByEmail(String email);
+
+   // check telephone already exists
+   @Query("{telephone: ?0}")
+   List<User> getUserByTelephone(String telephone);
+
+   // check for users with given email and password
+   @Query("{email: ?0, password: ?1}")
+   List<User> getUserByEmailPassword(String email, String password);
+
 
 }

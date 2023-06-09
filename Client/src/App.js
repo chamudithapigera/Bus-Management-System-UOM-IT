@@ -13,6 +13,11 @@ import UserAddress from "./Components/UserAddress";
 import { DarkModeContext } from "./Components/darkModeContext";
 import "./Css/dark.scss"
 import { useContext } from "react";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
+import Home from "./Pages/Home";
+import UnRegFilteredBuses from "./Pages/UnRegFilteredBuses";
+import UnRegViewBus from "./Pages/UnRegViewBus";
 
 
 function App() {
@@ -23,11 +28,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={<SearchBus />} />
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login/>}/>
+            <Route path="register" element={<Register/>}/>
             
             <Route path="searchbus">
               <Route index element={<SearchBus />} />
+              <Route path="unregfilteredbus" element={<UnRegFilteredBuses />} />
               <Route path="filteredbus" element={<FilteredBuses />} />
+              <Route path="unregviewbus" element={<UnRegViewBus/>}/>
               <Route path="viewbus" element={<ViewBus/>}/>
             </Route>
 

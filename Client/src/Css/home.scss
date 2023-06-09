@@ -1,34 +1,262 @@
 .home {
     display: flex;
+    width: 100%;
+    height: 750px;
+    background-color: rgb(255, 255, 255);
+
+    .homeContainer {
+        width: 100%;
+        height: 60px;
+        border-bottom: 1px solid rgb(81, 78, 156);
+        color: #392a2a;
+        background-color: rgb(18, 85, 53);
+        position: relative;
+        justify-content: space-between;
 
 
-    .homeContainer{
-        flex: 5;
 
-
-        .widgets, .charts{
+        .items {
             display: flex;
-            padding: 20px;
-            gap: 20px;
-        }
+            align-items: center;
 
-        .charts{
-            padding: 5px 20px;
-        }
+            .item {
+                display: flex;
+                //align-items: center;
+                margin-right: 20px;
+                position: relative;
 
-        .listContainer{
-            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-            padding: 20px;
-            margin: 20px;
+                .icontop {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 10px;
+                    color: #e7e3ee;
+                    justify-content: center;
+                    margin-left: 15px;
+                    margin-top: 8px;
+
+                }
+
+                .name {
+                    font-size: 37px;
+                    font-weight: bold;
+                    padding-left: 12px;
+                    font-style: italic;
+                    font-family: 'Times New Roman', Times, serif;
+                    color: rgb(35, 34, 34);
+                    padding-right: 850px;
+                }
+
+                button {
+
+                    width: 150px;
+                    padding: 5px;
+                    border-radius: 25px;
+                    font-weight: bold;
+                    border: 2px solid #009688;
+                    background: transparent;
+                    color: #fff;
+                    cursor: pointer;
+                    position: relative;
+                    overflow: hidden;
 
 
-            .listTitle{
-                font-weight: 500;
-                color: grey;
-                margin-bottom: 15px;
+                }
+
+                span {
+                  background: #1c550d;
+                  height: 100%;
+                  width: 0;
+                  border-radius: 25px;
+                  position: absolute;
+                  left: 0;
+                  bottom: 0;
+                  z-index: -1;
+                  transition: 0.5s;
+
+              }
+
+              button:hover span {
+                width: 100%;
+              }
+                
+                button:hover {
+                    border: none;
+                }
+
+
+
+
             }
+
+
+
         }
+
+        .map{
+            
+            margin: 15px;
+            
+        }
+
+        .containerTable{
+            margin-left: 50px;
+            margin-right: 100px;
+            margin-top: 70px;
+    
+            .text{
+                align-items: center;
+                justify-content: center;
+                margin-left: 570px;
+                color:rgb(25, 60, 108) ;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            
+            .table {
+                width: 100%;
+               border-collapse: collapse;
+                margin: 10px;
+    
+                
+              
+                td {
+                  padding: 15px;
+                  text-align: left;
+                  color: black;
+    
+                  button{
+                    padding: 0px 5px;
+                    border-radius: 5px;
+                    margin: 2px 1px;
+                    color: #0b5323;
+                    border: 1px dotted rgb(24, 130, 104);
+                    
+                }
+                  
+                }
+    
+                
+              
+                th {
+                  background-color: #7bd198;
+                  font-weight: bold;
+                  font-size: 15px;
+                  color: black;
+                  text-align: left;
+                  border-bottom: 1px solid #211c1c;
+                }
+              
+              
+                ul {
+                  margin: 0;
+                  padding: 0;
+                  list-style: none;
+                }
+              
+                li {
+                  margin: 0 ;
+                }
+              }
+            
+        }
+
+        .imageWrapper {
+            margin: 15px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        
+            .imageOverlay {
+              position: absolute;
+              width: 98%;
+              height: 670px;
+              background-color: rgba(67, 224, 67, 0.5);
+              /* change the color and opacity as needed */
+            }
+        
+            .detailsBox {
+              margin: 200px 410px;
+              background-color: rgb(174, 227, 203);
+              border-radius: 20px;
+              padding: 20px;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        
+              
+            }
+        
+            .route-name {
+              font-size: 30px;
+              font-weight: bold;
+              color: #333;
+            }
+        
+        
+            .row2{
+              background-color: rgb(174, 227, 203);
+              
+              .distance {
+                padding-left: 40px;
+                font-size: 15px;
+                color: #100e0e;
+               
+                
+                font-weight: bold;
+              }
+        
+              .arrival-time {
+                font-size: 15px;
+                color: #191717;
+                margin-left: 70px;
+                font-weight: bold;
+                padding-left: 40px;
+              }
+        
+              .duration {
+                font-size: 15px;
+                color: #161313;
+                margin-left: 320px;
+                font-weight: bold;
+                padding-left: 40px;
+              }
+          
+            }
+        
+        
+            .icon-wrapper {
+              margin-left: 5px;
+        
+            }
+        
+            .icon {
+              width: 60px;
+              height: 60px;
+            }
+        
+          }
+        
+          img {
+            width: 100%;
+            height: 670px;
+          }
+        
+        
+        
+          .contentWrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        
+        
+          }
+
+
+
     }
+
+   
+
+
 
 }
