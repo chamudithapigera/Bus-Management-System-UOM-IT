@@ -10,6 +10,7 @@ import AssignTurn from '../Components//AssignTurn';
 import ResetButton from '../Components/ResetButton';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 
 export default function TurnSchedule() {
 
@@ -85,7 +86,9 @@ export default function TurnSchedule() {
                     <td>{busTurn.driverID}</td> 
                     {/*<td>{JSON.parse(busTurn.driverID).driverID}</td> */}
                     <td>
-
+                    <Link to={`/viewbusturn/${busTurn.id}`}>
+                    <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
+                    </Link>
                       <Link to={`/updateTurn/${busTurn.id}`}>
                         <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon ></button>
                       </Link>

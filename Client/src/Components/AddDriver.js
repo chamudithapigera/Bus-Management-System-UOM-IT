@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../Css/form.scss';
+import '../Css/forms.scss';
 
 export default function AddBusRoute() {
 
@@ -41,7 +41,7 @@ export default function AddBusRoute() {
     
       return (
         <div className="registerContainer">
-          <div className="form">
+          <div className='detailsBox'>
           
       <div class="container">
         <h1>Sign Up</h1>

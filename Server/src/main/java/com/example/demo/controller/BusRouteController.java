@@ -44,7 +44,7 @@ public class BusRouteController {
     }
 
     //get only one  documents matched with given id
-    @GetMapping("/{id}")
+    @GetMapping("viewone/{id}")
     BusRoute getBusRouteById(@PathVariable ObjectId id){
         return busRouteRepository.findById(id)
                 .orElseThrow(()->new NotFoundException(("Bus Route not found with id: " + id)));

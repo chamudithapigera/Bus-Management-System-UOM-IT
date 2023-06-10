@@ -1,89 +1,83 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import '../Css/viewpage.scss';
 
 export default function ViewBus() {
+  const [bus, setBus] = useState(null);
 
-    const [bus, setBus] = useState({
-        busID: "",
-        capacity: "",
-        driverName: "",
-        licenseNo:"",
-      });
-    
-      const { id } = useParams();
-    
-      useEffect(() => {
-        loadBus();
-      }, []);
-    
-      const loadBus = async () => {
-        const result = await axios.get(`http://localhost:8080/api/v1/bus_detail/${id}`);
-        setBus(result.data);
-      };
+  const { id } = useParams();
 
-      
+  useEffect(() => {
+    loadBus();
+  }, []);
+
+  const loadBus = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/v1/bus_detail/${id}`);
+      setBus(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!bus) {
+    return <div>Loading...</div>;
+  }
+
   return (
-
-    <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">BusID</th>
-                  <th>Bus_Stop</th>
-                  <th>Bus_RouteID</th>
-                  <th>Bus_RouteNO</th>
-                  <th>Bus_RouteName</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {bus.map((bus) => (
-                  <React.Fragment key={bus.id.timestamp}>
-                    <tr>
-                      <td >{bus.busID}</td>
-                      <td>{bus.busStopName}</td>
-                      <td>{bus.busRouteID[0].routeID}</td>
-                      <td>{bus.busRouteID[0].routeNO}</td>
-                      <td>{bus.busRouteID[0].routeName}</td>
-                      
-                      
-                    </tr>
-                    {bus.busRouteID.slice(1).map((route) => (
-                      <tr key={route.r_id.timestamp}>
-                        <td >{bus.busID}</td>
-                        <td>{bus.busStopName}</td>
-                        <td>{route.routeID}</td>
-                        <td>{route.routeNO}</td>
-                        <td>{route.routeName}</td>
-                        
-                      </tr>
-                    ))}
-                  </React.Fragment>
+    <div>
+      <div className="detailsBox">
+        <div className='h'>
+          <h1>Bus - {bus.busID}</h1>
+        </div>
+        <div className='form'>
+          <p>
+            <strong>Bus ID:</strong> {bus.busID}
+          </p>
+          <p>
+            <strong>Capacity:</strong> {bus.capacity}
+          </p>
+          {bus.driver && bus.driver.length >= 0 && (
+            <React.Fragment>
+              <p>
+                <strong>Driver Name:</strong> {bus.driver[0].driverName}
+              </p>
+              <p>
+                <strong>License No:</strong> {bus.driver[0].licenseNo}
+              </p>
+            </React.Fragment>
+          )}
+          {bus.busStop && bus.busStop.length >= 0 && (
+            <React.Fragment>
+              <p>
+                <strong>Bus Stops:</strong>
+              </p>
+              <ul>
+                {bus.busStop.map((stop) => (
+                  <li key={stop.id}>
+                    {stop.busStopName} - {stop.latitude}, {stop.longitude}
+                  </li>
                 ))}
-              </tbody>
-            </table>
-
-
-    
-        
+              </ul>
+            </React.Fragment>
+          )}
+          {bus.busRoute && bus.busRoute.length >= 0 && (
+            <React.Fragment>
+              <p>
+                <strong>Bus Route:</strong>
+              </p>
+              <ul>
+                {bus.busRoute.map((route) => (
+                  <li key={route.id}>
+                    {route.routeName} - {route.routeNO}
+                  </li>
+                ))}
+              </ul>
+            </React.Fragment>
+          )}
+        </div>
+      </div>
+    </div>
   );
-};
-
-{/*<div>
-      
-      <p><strong>Bus ID:</strong> {bus.busID}</p>
-      <p><strong>Capacity:</strong> {bus.capacity}</p>
-      <p><strong>Driver Name:</strong> {bus.driver[0].driverName}</p>
-      <p><strong>License No:</strong> {bus.driver[0].licenseNo}</p>
-      <p><strong>Bus Stops:</strong></p>
-      <ul>
-        {bus.busStop.map(stop => (
-          <li key={stop.id}>{stop.busStopName}</li>
-        ))}
-      </ul>
-      <p><strong>Bus Route:</strong> {bus.busRoute[0].routeName}</p>
-      
-        </div>*/}
-
-
-
+}

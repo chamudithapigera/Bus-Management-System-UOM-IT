@@ -6,6 +6,8 @@ import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+
 
 export default function Driver() {
 
@@ -62,7 +64,7 @@ export default function Driver() {
                     <td>{driver.driverName}</td>
                     <td>{driver.licenseNo}</td>
                     <td>
-
+                    <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
                       <Link to={`/updateDriver/${driver.id}`}>
                         <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon ></button>
                       </Link>

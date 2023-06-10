@@ -6,6 +6,8 @@ import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+
 
 export default function BusStop() {
 
@@ -44,43 +46,49 @@ export default function BusStop() {
               </Link>
             </div>
             <div className="tableBorderShadow">
-            <table >
+              <table >
 
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th scope="col">Bus Stop ID</th>
-                  <th scope="col">Bus Stop Name</th>
-                  <th scope="col">longitude</th>
-                  <th scope="col">latitude</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {BusStops.map((busStop, index) => (
-                  <tr >
-                    <th scope="row" key={index}>{index + 1}</th>
-                    <td>{busStop.busStopID}</td>
-                    <td>{busStop.busStopName}</td>
-                    <td>{busStop.longitude}</td>
-                    <td>{busStop.latitude}</td>
-                    <td>
-                      <Link
-                        className='btn btn-warning mx-2'
-                        to={`/updateStop/${busStop.id}`}
-                      >
-                        <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
-                      </Link>
-
-                      <button onClick={() => deleteBusStops(busStop.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
-                    </td>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th scope="col">Bus Stop ID</th>
+                    <th scope="col">Bus Stop Name</th>
+                    {/*} <th scope="col">longitude</th>
+                  <th scope="col">latitude</th>*/}
+                    <th scope="col">Action</th>
                   </tr>
+                </thead>
 
-                ))}
+                <tbody>
+                  {BusStops.map((busStop, index) => (
+                    <tr >
+                      <th scope="row" key={index}>{index + 1}</th>
+                      <td>{busStop.busStopID}</td>
+                      <td>{busStop.busStopName}</td>
+                      {/*<td>{busStop.longitude}</td>
+                    <td>{busStop.latitude}</td>*/}
+                      <td>
+                        <Link
+                          className='btn btn-warning mx-2'
+                          to={`/viewbusstop/${busStop.id}`}
+                        >
+                          <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
+                        </Link>
+                        <Link
+                          className='btn btn-warning mx-2'
+                          to={`/updateStop/${busStop.id}`}
+                        >
+                          <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
+                        </Link>
 
-              </tbody>
-            </table>
+                        <button onClick={() => deleteBusStops(busStop.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
+                      </td>
+                    </tr>
+
+                  ))}
+
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

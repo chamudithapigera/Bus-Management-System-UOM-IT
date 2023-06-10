@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../Css/form.scss';
 import '../Css/table.scss';
+import '../Css/forms.scss';
 
 
 export default function AddTurn() {
@@ -40,7 +40,7 @@ export default function AddTurn() {
 
     return (
         <div className='container1'>
-            <div >
+            <div className='detailsBox'>
                 <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
                     <h2 className='text-center m-4'>Add details of bus-turns</h2>
                     <form onSubmit={(e) => onSubmit(e)}>

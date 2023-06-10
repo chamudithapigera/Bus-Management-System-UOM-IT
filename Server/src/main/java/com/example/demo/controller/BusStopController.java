@@ -38,7 +38,7 @@ public class BusStopController {
     }
 
     //get only one  documents matched with given id
-    @GetMapping("/{id}")
+    @GetMapping("/viewone/{id}")
     BusStop getBusStopById(@PathVariable ObjectId id){
         return busStopRepository.findById(id)
                 .orElseThrow(()->new NotFoundException(("Bus Stop not found with id: " + id)));

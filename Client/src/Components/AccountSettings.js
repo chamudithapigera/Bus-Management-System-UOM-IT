@@ -11,7 +11,7 @@ const AccountSettings = () => {
   const [phone, setPhone] = useState('+1 2345 67 89');
   const [address, setAddress] = useState('Elton St. 234 Garden Yd. NewYork');
   const [country, setCountry] = useState('USA');
-  const [image, setImage] = useState('https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg');
+  const [image, setImage] = useState('https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
 
   // Edit mode state variable
   const [isEditing, setIsEditing] = useState(false);

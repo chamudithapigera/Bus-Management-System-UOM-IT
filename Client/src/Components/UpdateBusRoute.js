@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {  Link,useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../Css/form.scss';
 
 export default function UpdateBusRoute() {
 
@@ -48,9 +49,10 @@ export default function UpdateBusRoute() {
     
 
     return (
-        <div className='container1'>
-        <div >
-            <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
+     
+        <div className='contrainer' >
+             <div className="detailsBox">
+           
                 <h2 className='text-center m-4'>
                     Update Bus Route
                </h2>
@@ -96,6 +98,6 @@ export default function UpdateBusRoute() {
                 </form>
             </div>
         </div>
-        </div>
+      
     );
 }

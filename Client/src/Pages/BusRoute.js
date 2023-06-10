@@ -7,6 +7,8 @@ import Navbar from '../Components/Navbar';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
+import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+
 
 export default function BusRoute() {
 
@@ -88,6 +90,12 @@ export default function BusRoute() {
                     <td>{busRoute.routeName}</td>
                     <td>
 
+                    <Link
+                        className='btn btn-warning mx-2'
+                        to={`/viewbusroute/${busRoute.id}`}
+                      >
+                    <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
+                    </Link>
                       <Link
                         className='btn btn-warning mx-2'
                         to={`/updateRoute/${busRoute.id}`}

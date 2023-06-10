@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,13 +46,15 @@ public class TurnService {
     public List<String> getPresentDriverIdsSortedByCheckInTime() {
         LocalDate today = LocalDate.now();
         Aggregation aggregation = Aggregation.newAggregation(
-                Aggregation.match(Criteria.where("status").is("present").and("date").is("today")),
+                Aggregation.match(Criteria.where("status").is("present").and("date").is(today)),
                 //Aggregation.match(Criteria.where("status").is("present")),
                 Aggregation.sort(Sort.Direction.ASC, "checkInTime"),
-                Aggregation.project("driverID")
+                Aggregation.project("driverID").andExclude("_id")
         );
         AggregationResults<String> results = mongoTemplate.aggregate(aggregation, "driverAttendance", String.class);
         List<String> driverIds = results.getMappedResults();
+
+
 
         // Get the first record in the "turn" collection to compare routeNames
         Turn firstTurn = mongoTemplate.findOne(Query.query(new Criteria()).with(Sort.by(Sort.Direction.ASC, "turnTime")), Turn.class);

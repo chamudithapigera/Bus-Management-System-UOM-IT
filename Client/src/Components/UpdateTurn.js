@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../Css/form.scss';
 
 export default function UpdateTurn() {
 
@@ -28,15 +29,16 @@ export default function UpdateTurn() {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (window.confirm("Are you sure you want to update this turn record?")) {
-        await axios.put(`http://localhost:8080/api/v1/turn/${id}`, busTurn)
-            .then((response) => {
-                console.log(response.data);
-                alert("Turn updated successfully!");
-            })
-            .catch((error) => {
-                console.error(error);
-                alert("Failed to update turn");
-            });}
+            await axios.put(`http://localhost:8080/api/v1/turn/${id}`, busTurn)
+                .then((response) => {
+                    console.log(response.data);
+                    alert("Turn updated successfully!");
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert("Failed to update turn");
+                });
+        }
         navigate('/turn');
 
     };
@@ -47,8 +49,8 @@ export default function UpdateTurn() {
     }
 
     return (
-        <div className='container1'>
-            <div >
+        <div className='contrainer'>
+            <div className="detailsBox">
                 <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
                     <h2 className='text-center m-4'>Add details of bus-turns</h2>
                     <form onSubmit={(e) => onSubmit(e)}>

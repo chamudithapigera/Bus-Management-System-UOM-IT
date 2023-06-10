@@ -23,6 +23,10 @@ import ViewBus from './Components/ViewBus';
 import ReportGenerationForm from './Pages/ReportGenerationForm';
 import './Css/dark.scss'
 import Profile from './Pages/Profile';
+import ViewBusRoute from './Components/ViewBusRoute';
+import ViewBusStop from './Components/ViewBusStop';
+import ViewBusTurn from './Components/ViewTurn';
+
 
 
 function App() {
@@ -54,7 +58,9 @@ function App() {
             <Route exact path="/viewbus/:id" element={<ViewBus/>} />
             <Route path="/viewreport" element={<ReportGenerationForm />} />
             <Route path="/profile" element={<Profile />} />
-           
+            <Route exact path="/viewbusroute/:id" element={<ViewBusRoute/>} />
+            <Route exact path="/viewbusstop/:id" element={<ViewBusStop/>} />
+            <Route exact path="/viewbusturn/:id" element={<ViewBusTurn/>} />
         </Route>
       </Routes>
      </BrowserRouter>
