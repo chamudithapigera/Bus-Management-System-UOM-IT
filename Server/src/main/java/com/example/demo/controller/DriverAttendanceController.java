@@ -54,11 +54,11 @@ public class DriverAttendanceController {
 
         return mongoTemplate.find(query, DriverAttendance.class);
     }
-    /*
-    @GetMapping("/viewAttendance")
-    public List<DriverAttendance> findAllAttendanceWithDetails() {
+
+    @GetMapping("/viewAll")
+    public List<DriverAttendance> findAttendanceWithDetails() {
         return mongoTemplate.findAll(DriverAttendance.class);
-    }*/
+    }
 
    /* @PostMapping("/attendance")
     public ResponseEntity<DriverAttendance> markAttendance(@RequestBody DriverAttendance attendance) {

@@ -63,7 +63,7 @@ export default function Driver() {
                     <tr >
                       <th scope="row" key={index}>{index + 1}</th>
                       <td>{driver.driverId}</td>
-                      <td>{driver.firstName}</td>
+                      <td>{driver.firstName}  {driver.lastName}</td>
                       <td>{driver.busId}</td>
                       <td>{driver.telephone}</td>
                       <td>

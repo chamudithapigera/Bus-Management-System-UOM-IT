@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import '../Css/home.scss';
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
-import Widget from '../Components/Widget';
 import axios from "axios";
 import WidgetDriver from '../Components/WidgetDriver';
 import WidgetBus from '../Components/WidgetBus';
 import WidgetTurn from '../Components/WidgetTurn';
+import ChartComponent from '../Components/ChartComponent';
 
 const Home = () => {
   const [driverCount, setDriverCount] = useState(0);
@@ -34,35 +34,21 @@ const Home = () => {
     }
   };
 
+  {/*
+  const [driverAttendanceData, setDriverAttendanceData] = useState([]);
 
-  {/*useEffect(() => {
-    // Fetch driver count from the backend
-    fetch('http://localhost:8080/api/v1/drivers/count')
-      .then((response) => response.json())
-      .then((data) => setDriverCount(data.driverCount))
+  useEffect(() => {
+    // Fetch driver attendance data from the backend API
+    axios.get('http://localhost:8080/api/v1/attendance/viewAll')
+      .then((response) => {
+        setDriverAttendanceData(response.data);
+      })
       .catch((error) => {
-        console.error('Error fetching driver count:', error);
-      });
-
-    
-    // Fetch bus count from the backend
-    fetch('http://localhost:8080/api/v1/bus_detail/count')
-      .then((response) => response.json())
-      .then((data) => setBusCount(data.busCount))
-      .catch((error) => {
-        console.error('Error fetching bus count:', error);
-      });
-
-    // Fetch turns count from the backend
-    fetch('http://localhost:8080/api/v1/turn/count')
-      .then((response) => response.json())
-      .then((data) => setTurnsCount(data.turnsCount))
-      .catch((error) => {
-        console.error('Error fetching turns count:', error);
+        console.error('Error fetching driver attendance data:', error);
       });
   }, []);
-
 */}
+
 
   return (
     <div className="home">
@@ -73,6 +59,9 @@ const Home = () => {
           <WidgetDriver />
           < WidgetBus />
           <WidgetTurn />
+        </div>
+        <div>
+        
         </div>
         </div>
 

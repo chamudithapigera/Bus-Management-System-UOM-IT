@@ -20,7 +20,7 @@ const WidgetDriver = () => {
 
     <div className="widget">
       <div className="left">
-        <span className="title">Driver Attendance</span>
+        <span className="title">Driver Information</span>
         <span className="title">No of Drivers</span>
       </div>
       <div className="right">
