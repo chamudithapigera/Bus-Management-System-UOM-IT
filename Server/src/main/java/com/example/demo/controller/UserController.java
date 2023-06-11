@@ -8,6 +8,8 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -30,12 +32,11 @@ public class UserController {
     }
 
 
-    @PatchMapping("/update/{id}")
-    public String updateUser(@PathVariable ObjectId id, @RequestBody User user){
-        user = service.updateUser(user);
-        return user.toString();
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUserDetails(@PathVariable("id") String id, @RequestBody User updatedUser) {
+        User user = service.updateUserDetails(new ObjectId(id), updatedUser);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
-
     @PostMapping("/register")
     public String registerUser(@RequestBody User user){
         int emailExist = checkEmailExists(user.getEmail());

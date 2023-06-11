@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import Sidebar from "../Components/Sidebar";
 import Navbar from "../Components/Navbar";
 import "../Css/viewbus.scss"
@@ -6,10 +6,14 @@ import image from "../Css/Bus_background.png"
 import { Link, useLocation } from 'react-router-dom';
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../Components/UserContext';
+
 import axios from 'axios';
 
 
 const ViewBus = (props) => {
+  const { userData } = useContext(UserContext);
+  const { email } = userData || {};
   const location = useLocation();
   const { busID, routeName, duration, distance, arrivalTime } = location.state;
   const navigate = useNavigate();
@@ -18,17 +22,9 @@ const ViewBus = (props) => {
 // Assuming you have an endpoint to fetch the user's information
 const checkUserRegistration = async () => {
   try {
-    let passengerEmail = window.prompt('Enter your email');
     let isNotificationShown = false; // Flag to track if the notification has been shown
-    while (passengerEmail) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(passengerEmail)) {
-        window.alert("Invalid email. Please enter a valid email address.");
-        passengerEmail = window.prompt('Enter your email');
-        continue;
-      }
-
-      const response = await axios.get(`http://localhost:8080/api/v1/passenger/users/${passengerEmail}`);
+    
+      const response = await axios.get(`http://localhost:8080/api/v1/passenger/users/${email}`);
       const user = response.data;
       if (user) {
         //(user.isRegistered) check flag is true or false..........................
@@ -46,9 +42,9 @@ const checkUserRegistration = async () => {
         // Redirect to the registration page
         navigate('/register');
       }
-      passengerEmail = null; // Stop the loop since email is valid
+      
     }
-  } catch (error) {
+   catch (error) {
     console.error('Error fetching user information: ', error);
   }
 };

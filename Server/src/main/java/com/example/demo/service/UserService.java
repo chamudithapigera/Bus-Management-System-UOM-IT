@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,23 @@ public class UserService {
         return repository.save(user);
     }
 
-    public User updateUser(User user){
+    public User updateUserDetails(ObjectId id, User updatedUser) {
+        User user = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        // Update specific fields
+        if (updatedUser.getFirstName() != null) {
+            user.setFirstName(updatedUser.getFirstName());
+        }
+        if (updatedUser.getLastName() != null) {
+            user.setLastName(updatedUser.getLastName());
+        }
+        if (updatedUser.getEmail() != null) {
+            user.setEmail(updatedUser.getEmail());
+        }
+        if (updatedUser.getTelephone() != null) {
+            user.setTelephone(updatedUser.getTelephone());
+        }
+
         return repository.save(user);
     }
 }

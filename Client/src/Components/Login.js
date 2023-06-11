@@ -38,13 +38,15 @@ function Login() {
         const userName1 = userRes.data.firstName;
         const userName2 = userRes.data.lastName;
         const phone = userRes.data.telephone;
+        const userId = userRes.data.id;
 
 
         setUserData({
           userName1,
           userName2,
           email,
-          phone
+          phone,
+          userId
         });
 
       
@@ -69,7 +71,7 @@ function Login() {
     <div className="logincontainer">
       <div className="form">
         <form>
-          <div class="imgcontainer">
+          <div className="imgcontainer">
 
             <img src={image} alt="Avatar" class="avatar" />
           </div>
@@ -102,7 +104,7 @@ function Login() {
             </label>
 
           </div>
-          <div class="container" >
+          <div className="container" >
             <Link to="/" style={{ textDecoration: "none" }}>
               <button type="button" class="cancelbtn">Cancel</button>
             </Link>

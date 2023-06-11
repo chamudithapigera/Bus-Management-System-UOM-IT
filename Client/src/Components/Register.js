@@ -52,7 +52,7 @@ function Register() {
     <div className="registerContainer">
       <div className="form">
         <form>
-          <div class="container">
+          <div className="container">
             <h1>Sign Up</h1>
             <p className="h">Already have an account?
               <Link to="/login" style={{ textDecoration: "none" }}>
@@ -94,15 +94,14 @@ function Register() {
 
             <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
-            <div class="clearfix">
+            <div className="clearfix">
             <Link to="/" style={{ textDecoration: "none" }}>
-              <button type="button" class="cancelbtn">Cancel</button>
+              <button type="button" className="cancelbtn">Cancel</button>
               </Link>
-              <button type="submit" class="signupbtn" onClick={save}> Sign Up</button>
+              <button type="submit" className="signupbtn" onClick={save}> Sign Up</button>
             </div>
           </div>
         </form>
-
       </div>
     </div>
 
