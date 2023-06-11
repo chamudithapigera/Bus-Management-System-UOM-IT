@@ -67,13 +67,16 @@ export default function BusStop() {
                       <td>{busStop.busStopName}</td>
                       {/*<td>{busStop.longitude}</td>
                     <td>{busStop.latitude}</td>*/}
+
                       <td>
+
                         <Link
                           className='btn btn-warning mx-2'
                           to={`/viewbusstop/${busStop.id}`}
                         >
                           <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
                         </Link>
+
                         <Link
                           className='btn btn-warning mx-2'
                           to={`/updateStop/${busStop.id}`}

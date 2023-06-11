@@ -11,13 +11,17 @@ export default function UpdateDriver() {
 
     const [driver, setDriver] = useState({
 
-        driverID: "",
-        driverName: "",
-        licenseNo: ""
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        telephone: "",
+        driverId: "",
+        busId: ""
 
     });
 
-    const { driverID, driverName, licenseNo } = driver
+    const { firstName, lastName, email, password, telephone, driverId, busId } = driver
 
     const onInputChange = (e) => {
         setDriver({ ...driver, [e.target.name]: e.target.value }
@@ -31,7 +35,7 @@ export default function UpdateDriver() {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (window.confirm("Are you sure you want to update this driver?")) {
-            await axios.put(`http://localhost:8080/api/v1/driver/${id}`, driver)
+            await axios.put(`http://localhost:8080/api/v1/drivers/update/${id}`, driver)
                 .then((response) => {
                     console.log(response.data);
                     alert("Driver updated successfully!");
@@ -46,7 +50,7 @@ export default function UpdateDriver() {
     };
 
     const loadDriver = async () => {
-        const result = await axios.get(`http://localhost:8080/api/v1/driver/${id}`);
+        const result = await axios.get(`http://localhost:8080/api/v1/drivers/${id}`);
         setDriver(result.data);
     };
 
@@ -55,45 +59,92 @@ export default function UpdateDriver() {
         <div className='contrainer'>
             <div className="detailsBox">
                 <div >
-                    <h2 className='text-center m-4'>Add details of drivers</h2>
+                    <h2 className='text-center m-4'>Update details of drivers</h2>
                     <form onSubmit={(e) => onSubmit(e)}>
                         <div className='mb-3'>
 
-                            <label htmlFor='driverID' className='label'>Driver ID</label>
+                            <label htmlFor='firstName' className='label'>First Name </label>
                             <input
                                 type={"text"}
                                 className="input"
-                                placeholder='Enter driver ID '
-                                name='driverID'
-                                value={driverID}
+                                placeholder='Enter First Name '
+                                name='firstName'
+                                value={firstName}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
 
                         <div className='mb-3'>
-                            <label htmlFor='driverName' className='label'>Driver Name</label>
+                            <label htmlFor='lastName' className='label'>Last Name </label>
                             <input
                                 type={"text"}
                                 className="input"
-                                placeholder='Enter driver name'
-                                name='driverName'
-                                value={driverName}
+                                placeholder='Enter Last Name '
+                                name='lastName'
+                                value={lastName}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
 
                         <div className='mb-3'>
-                            <label htmlFor='licenseNo' className='label'>License No</label>
+                            <label htmlFor='email' className='label'>Email</label>
                             <input
                                 type={"text"}
                                 className="input"
-                                placeholder='Enter license number'
-                                name='licenseNo'
-                                value={licenseNo}
+                                placeholder='Enter email '
+                                name='email'
+                                value={email}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
 
+                        <div className='mb-3'>
+                            <label htmlFor='password' className='label'>Password</label>
+                            <input
+                                type={"text"}
+                                className="input"
+                                placeholder='Enter password '
+                                name='password'
+                                value={password}
+                                onChange={(e) => onInputChange(e)}
+                            />
+                        </div>
+
+                        <div className='mb-3'>
+                            <label htmlFor='telephone' className='label'>Phone No</label>
+                            <input
+                                type={"text"}
+                                className="input"
+                                placeholder='Enter phone no'
+                                name='telephone'
+                                value={telephone}
+                                onChange={(e) => onInputChange(e)}
+                            />
+                        </div>
+
+                        <div className='mb-3'>
+                            <label htmlFor='driverId' className='label'>Driver ID </label>
+                            <input
+                                type={"text"}
+                                className="input"
+                                placeholder='Enter Driver ID '
+                                name='driverId'
+                                value={driverId}
+                                onChange={(e) => onInputChange(e)}
+                            />
+                        </div>
+
+                        <div className='mb-3'>
+                            <label htmlFor='busId' className='label'>Bus ID </label>
+                            <input
+                                type={"text"}
+                                className="input"
+                                placeholder='Enter Bus ID '
+                                name='busId'
+                                value={busId}
+                                onChange={(e) => onInputChange(e)}
+                            />
+                        </div>
 
                         <button type="submit" className="button">Submit</button>
                         <Link to="/driver" style={{ textDecoration: "none" }}>Cancel</Link>

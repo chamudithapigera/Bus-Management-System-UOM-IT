@@ -4,10 +4,10 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "Driver")
+@Document(collection = "Drivers")
 public class User {
     @Id
-    private ObjectId id;
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -17,15 +17,22 @@ public class User {
     private String driverId;
     private String busId;
 
-    public User() {
-
+    public User( String firstName, String lastName, String email, String password, String telephone, String userRole, String driverId, String busId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.telephone = telephone;
+        this.userRole = userRole;
+        this.driverId = driverId;
+        this.busId = busId;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -93,7 +100,6 @@ public class User {
         this.busId = busId;
     }
 
-
     @Override
     public String toString() {
         return "{" +
@@ -108,5 +114,5 @@ public class User {
                 ", busId='" + getBusId() + "'" +
                 "}";
     }
-}
 
+}

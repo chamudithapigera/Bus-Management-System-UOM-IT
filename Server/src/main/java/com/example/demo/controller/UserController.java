@@ -1,9 +1,18 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.NotFoundException;
+import com.example.demo.model.Bus;
+import com.example.demo.model.BusRoute;
+import com.example.demo.model.Driver;
 import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.MessageDigest;
@@ -19,35 +28,20 @@ public class UserController {
     @Autowired
     UserService service;
 
-    @GetMapping("/users")
-    public List<User> getAllUsers(){
-        return service.getAllUsers();
-    }
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
-    @PostMapping("/users")
-    public String creatNewUser(@RequestBody User user){
-        int emailExist = checkEmailExists(user.getEmail());
-        if(emailExist > 0){
-            return "Email already exists.";
-        } else {
-            user = service.createNewUser(user);
-            return user.toString();
-        }
-    }
-
-    @PatchMapping("/update/{id}")
-    public String updateUser(@PathVariable ObjectId id, @RequestBody User user){
-        user = service.updateUser(user);
-        return user.toString();
-    }
+    @Autowired
+    UserRepository userRepository;
 
     @PostMapping("/register")
     public String registerUser(@RequestBody User user){
+
         int emailExist = checkEmailExists(user.getEmail());
         if(emailExist > 0){
             return "Email already exists.";
         } else {
-            user.setUserRole("passenger");
+            user.setUserRole("driver");
 
             String hashPassword = doHashing(user.getPassword());
             user.setPassword(hashPassword);
@@ -56,6 +50,57 @@ public class UserController {
             return user.toString();
         }
     }
+
+    //get all documents in collection
+    @GetMapping("/viewDrivers")
+    public List<User> findAllBusRoutesWithDetails() {
+        return service.findAll();
+    }
+
+
+    @GetMapping("viewone/{id}")
+    User getDriverById(@PathVariable String id){
+        return userRepository.findById(id)
+                .orElseThrow(()->new NotFoundException(("Driver not found with id: " + id)));
+    }
+
+    @PutMapping("update/{id}")
+    public ResponseEntity<User> updateDriver(@PathVariable("id") String id, @RequestBody User user) {
+        User updatedDriver = service.updateDriver(id, user);
+        return ResponseEntity.ok(updatedDriver);
+    }
+
+    @DeleteMapping("/deleteDriver/{id}")
+    String deleteDriver(@PathVariable String id){
+        if (!userRepository.existsById(id)){
+            throw new NotFoundException(("Driver not found with id: " + id));
+        }
+        userRepository.deleteById(id);
+        return "Driver with id " +id+ "has been deleted";
+
+    }
+
+    //get count of drivers
+    @GetMapping("/count")
+    public long getDriverCount() {
+        return service.getDriverCount();
+    }
+
+    ///////
+
+
+    @GetMapping("/users/{email}")
+    public User getUserByEmail(@PathVariable String email) {
+        return service.getUserByEmailTest(email);
+    }
+
+
+    @PatchMapping("/update/{id}")
+    public String updateUser(@PathVariable ObjectId id, @RequestBody User user){
+        user = service.updateUser(user);
+        return user.toString();
+    }
+
 
     @PostMapping("/login")
     public String login(@RequestBody User user){
@@ -100,5 +145,8 @@ public class UserController {
 
         return null;
     }
-}
 
+
+
+
+}

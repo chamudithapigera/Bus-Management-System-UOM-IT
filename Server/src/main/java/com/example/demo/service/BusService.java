@@ -34,6 +34,19 @@ public class BusService {
         return busRepository.save(existingBus);
     }
 
+    //get driver count in collection
+    public long getBusCount() {
+        return busRepository.count();
+    }
+
+
+
+
+
+
+
+
+
 
    /* public List<Bus> findByBusStop(BusStop busStop) {
         return busRepository.findByBusStop(busStop);

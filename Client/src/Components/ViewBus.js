@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {Link, useEffect, useState } from 'react';
 import axios from "axios";
 import { useParams } from 'react-router-dom';
 import '../Css/viewpage.scss';
@@ -76,7 +76,9 @@ export default function ViewBus() {
               </ul>
             </React.Fragment>
           )}
+         
         </div>
+     
       </div>
     </div>
   );

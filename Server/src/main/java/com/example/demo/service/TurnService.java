@@ -119,6 +119,10 @@ public class TurnService {
     }
 
 
+    //get driver count in collection
+    public long getTurnCount() {
+        return turnRepository.count();
+    }
 }
 // public void resetTurnCollection() {
 //        mongoTemplate.remove(new Query(), "turn");

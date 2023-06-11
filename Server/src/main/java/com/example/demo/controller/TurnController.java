@@ -85,6 +85,12 @@ public class TurnController {
 
     }
 
+    //get count of turns
+    @GetMapping("/count")
+    public long geTurnCount() {
+        return turnService.getTurnCount();
+    }
+
 
 /*  @GetMapping("/viewTurn")
     public List<Turn> findAllTurnsWithDetails() {

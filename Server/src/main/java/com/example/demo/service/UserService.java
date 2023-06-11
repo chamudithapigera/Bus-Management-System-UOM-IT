@@ -1,9 +1,13 @@
 package com.example.demo.service;
 
 
+import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Bus;
+import com.example.demo.model.BusRoute;
+import com.example.demo.model.BusStop;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,14 +20,28 @@ import java.util.List;
 @Service
 public class UserService {
     @Autowired
-    UserRepository userrepository;
-    @Autowired
-    private MongoTemplate mongoTemplate;
-    @Autowired
     UserRepository repository;
 
-    public List<User> getAllUsers(){
+    public List<User> findAll() {
         return repository.findAll();
+    }
+
+    public User updateDriver(String id, User user) {
+        User existingUser = repository.findById(id).orElseThrow(() -> new NotFoundException("Driver not found"));
+        existingUser.setDriverId(user.getDriverId());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setBusId(user.getBusId());
+        existingUser.setUserRole(user.getUserRole());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setTelephone(user.getTelephone());
+        return repository.save(existingUser);
+    }
+
+
+    public User getUserByEmailTest(String email) {
+        return repository.findByEmail(email);
     }
 
     public List<User> getUserByEmail(String email){
@@ -46,4 +64,9 @@ public class UserService {
         return repository.save(user);
     }
 
+    //get driver count in collection
+    public long getDriverCount() {
+        return repository.count();
+
+    }
 }

@@ -18,14 +18,15 @@ export default function Driver() {
   }, []);
 
   const loadDrivers = async () => {
-    const result = await axios.get("http://localhost:8080/api/v1/driver/viewDriver");
+    const result = await axios.get("http://localhost:8080/api/v1/drivers/viewDrivers");
     setDrivers(result.data);
   };
 
   const deleteDriver = async (id) => {
     if (window.confirm("Are you sure you want to delete driver record?")) {
-    await axios.delete(`http://localhost:8080/api/v1/driver/deleteDriver/${id}`);
-    loadDrivers();}
+      await axios.delete(`http://localhost:8080/api/v1/drivers/deleteDriver/${id}`);
+      loadDrivers();
+    }
   };
 
   return (
@@ -39,45 +40,52 @@ export default function Driver() {
               Driver
             </div>
             <div className='datatableTitle'>
-              <Link to="/addDriver" >
-              <button>Add</button>
+              <Link to="/register" >
+                <button>Add</button>
               </Link>
             </div>
             <div className="tableBorderShadow">
-            <table >
+              <table >
 
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th scope="col">driverID</th>
-                  <th scope="col">driverName</th>
-                  <th scope="col">licenseNo</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {Drivers.map((driver, index) => (
-                  <tr >
-                    <th scope="row" key={index}>{index + 1}</th>
-                    <td>{driver.driverID}</td>
-                    <td>{driver.driverName}</td>
-                    <td>{driver.licenseNo}</td>
-                    <td>
-                    <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
-                      <Link to={`/updateDriver/${driver.id}`}>
-                        <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon ></button>
-                      </Link>
-
-                      <button onClick={() => deleteDriver(driver.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
-                      
-                    </td>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th scope="col">Driver ID</th>
+                    <th scope="col">Driver Name</th>
+                    <th scope="col">Bus ID</th>
+                    <th scope="col">Phone No</th>
+                    <th scope="col">Action</th>
                   </tr>
+                </thead>
 
-                ))}
+                <tbody>
+                  {Drivers.map((driver, index) => (
+                    <tr >
+                      <th scope="row" key={index}>{index + 1}</th>
+                      <td>{driver.driverId}</td>
+                      <td>{driver.firstName}</td>
+                      <td>{driver.busId}</td>
+                      <td>{driver.telephone}</td>
+                      <td>
 
-              </tbody>
-            </table>
+
+                        <Link className='btn btn-warning mx-2' to={`/viewdriver/${driver.id}`}>
+                          <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
+                        </Link>
+
+                        <Link to={`/updateDriver/${driver.id}`}>
+                          <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon ></button>
+                        </Link>
+
+                        <button onClick={() => deleteDriver(driver.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
+
+                      </td>
+                    </tr>
+
+                  ))}
+
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

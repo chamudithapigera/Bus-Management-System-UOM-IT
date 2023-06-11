@@ -1,11 +1,12 @@
 import "../Css/widget.scss"
-import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
-import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
-import DirectionsBusFilledRoundedIcon from '@mui/icons-material/DirectionsBusFilledRounded';
 
-const Widget = ({type}) => {
+
+
+
+
+const Widget = ({ title, count }) => {
 let data;
-
+{/*
 //temp
 const amount=100;
 const diff=20;
@@ -45,22 +46,20 @@ const diff=20;
             default:
                 break;
     }
-    return (
-        <div className="widget"> 
+*/}
+return (
+  
+        <div className="widget">
           <div className="left">
-                <span className="title">{data.title}</span>
-                <span className="counter"> {data.amount}</span>
-                <span className="link">{data.link}</span>
+            <span className="title">{title}</span>
+            <span className="counter">{count}</span>
+            <span className="link">View Details</span>
           </div>
           <div className="right">
-            <div className="icon">
-            {data.icon}
-               
-            </div>
-            
+            {/* Add any additional content for the right section of the card */}
           </div>
         </div>
-    )
+      );
 }
 
 export default Widget

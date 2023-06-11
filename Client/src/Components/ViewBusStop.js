@@ -28,14 +28,14 @@ export default function ViewBusStop() {
   return (
     <div>
       <div className="detailsBox">
-              <div className='h'>
-                <h1>Bus Stop - {BusStops.busStopID}</h1>
-              </div>
-      <p><strong>Bus StopID  :</strong> {BusStops.busStopID}</p>
-      <p><strong>Bus Stop Name:</strong> {BusStops.busStopName}</p>
-      <p><strong>Longitude:</strong> {BusStops.longitude}</p>
-      <p><strong>Latitude:</strong> {BusStops.latitude}</p>
-      
+        <div className='h'>
+          <h1>Bus Stop - {BusStops.busStopID}</h1>
+        </div>
+        <p><strong>Bus StopID  :</strong> {BusStops.busStopID}</p>
+        <p><strong>Bus Stop Name:</strong> {BusStops.busStopName}</p>
+        <p><strong>Longitude:</strong> {BusStops.longitude}</p>
+        <p><strong>Latitude:</strong> {BusStops.latitude}</p>
+
       </div>
     </div>
   );

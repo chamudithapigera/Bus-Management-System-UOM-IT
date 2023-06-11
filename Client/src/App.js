@@ -8,7 +8,7 @@ import AddBusRoute from './Components/AddBusRoute';
 import AddBusStop from './Components/AddBusStop';
 import BusStop from './Pages/BusStop';
 import Driver from './Pages/Driver';
-import AddDriver from './Components/AddDriver';
+
 import { useContext, useState } from "react";
 import { DarkModeContext } from './Components/darkModeContext';
 import TurnSchedule from './Pages/TurnSchedule';
@@ -26,6 +26,9 @@ import Profile from './Pages/Profile';
 import ViewBusRoute from './Components/ViewBusRoute';
 import ViewBusStop from './Components/ViewBusStop';
 import ViewBusTurn from './Components/ViewTurn';
+import ViewDriver from './Components/ViewDriver';
+import Register from './Components/Register';
+import Login from './Components/Login';
 
 
 
@@ -45,8 +48,9 @@ function App() {
             <Route path="/addRoute" element={<AddBusRoute />} />
             <Route path="busStop" element={<BusStop />} />
             <Route path="/addStop" element={<AddBusStop />} />
-            <Route path="driver" element={<Driver />} />
-            <Route path="/addDriver" element={<AddDriver />} />
+            <Route path="/driver" element={<Driver />} />
+            <Route path="/register" element={<Register />} />
+            
             <Route path="turn" element={<TurnSchedule />} />
             <Route path="/addTurn" element={<AddTurn />} />
             <Route path="/attendance" element={<DriverAttendance />} />
@@ -61,6 +65,9 @@ function App() {
             <Route exact path="/viewbusroute/:id" element={<ViewBusRoute/>} />
             <Route exact path="/viewbusstop/:id" element={<ViewBusStop/>} />
             <Route exact path="/viewbusturn/:id" element={<ViewBusTurn/>} />
+            <Route exact path="/viewdriver/:id" element={<ViewDriver/>} />
+           
+            
         </Route>
       </Routes>
      </BrowserRouter>

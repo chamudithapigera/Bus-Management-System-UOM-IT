@@ -149,7 +149,11 @@ public class BusController {
         }
     }
 
-
+    //get count of busses
+    @GetMapping("/count")
+    public long geBusCount() {
+        return busService.getBusCount();
+    }
 
 
 

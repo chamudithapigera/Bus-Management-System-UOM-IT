@@ -13,6 +13,9 @@ import DirectionsBusFilledRoundedIcon from '@mui/icons-material/DirectionsBusFil
 import AddRoadRoundedIcon from '@mui/icons-material/AddRoadRounded';
 import BlockRoundedIcon from '@mui/icons-material/BlockRounded';
 import FactCheckRoundedIcon from '@mui/icons-material/FactCheckRounded';
+import GridViewTwoToneIcon from '@mui/icons-material/GridViewTwoTone';
+import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
+import SaveAsRoundedIcon from '@mui/icons-material/SaveAsRounded';
 import image from '../Css/busIcon.jpg'
 
 const Sidebar = () => {
@@ -33,10 +36,35 @@ const Sidebar = () => {
       <hr />
       <div className="center">
         <ul>
-          
+        <Link to="/" style={{ textDecoration: "none" }}>
+            <li>
+              <GridViewTwoToneIcon className="icon" />
+              <span>Dashboard</span>
+            </li>
+          </Link>
 
           <p className="title">Features</p>
 
+          <Link to="/attendance" style={{ textDecoration: "none" }}>
+            <li>
+              <FactCheckRoundedIcon className="icon" />
+              <span>Driver Attendance</span>
+            </li>
+          </Link>
+
+          <Link to="/turn" style={{ textDecoration: "none" }}>
+            <li>
+              <SaveAsRoundedIcon className="icon" />
+              <span>Bus Turn Schedule</span>
+            </li>
+          </Link>
+
+          <Link to="/bus" style={{ textDecoration: "none" }}>
+            <li>
+              <DirectionsBusFilledRoundedIcon className="icon" />
+              <span>Bus</span>
+            </li>
+          </Link>
 
           <Link to="/driver" style={{ textDecoration: "none" }}>
             <li>
@@ -45,14 +73,6 @@ const Sidebar = () => {
             </li>
           </Link>
 
-
-
-          <Link to="/bus" style={{ textDecoration: "none" }}>
-            <li>
-              <DirectionsBusFilledRoundedIcon className="icon" />
-              <span>Bus</span>
-            </li>
-          </Link>
 
           <Link to="/busRoute" style={{ textDecoration: "none" }}>
             <li>
@@ -68,34 +88,21 @@ const Sidebar = () => {
             </li>
           </Link>
 
-          <Link to="/attendance" style={{ textDecoration: "none" }}>
-            <li>
-              <FactCheckRoundedIcon className="icon" />
-              <span>Driver Attendance</span>
-            </li>
-          </Link>
-
-          <Link to="/turn" style={{ textDecoration: "none" }}>
-            <li>
-              <FactCheckRoundedIcon className="icon" />
-              <span>Bus Turn Schedule</span>
-            </li>
-          </Link>
 
           <Link to="/viewreport" style={{ textDecoration: "none" }}>
             <li>
-              <FactCheckRoundedIcon className="icon" />
+              <EventNoteRoundedIcon className="icon" />
               <span>Monthly Report</span>
             </li>
           </Link>
 
 
-
+{/*}
           <li>
             <NotificationsNoneOutlinedIcon className="icon" />
             <span>Notification</span>
           </li>
-
+  */}
           <p className="title">Service</p>
 
           <li>
