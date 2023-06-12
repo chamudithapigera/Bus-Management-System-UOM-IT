@@ -24,10 +24,10 @@ const Sidebar = ( ) => {
       <div className="top">
 
         <Link to="/searchbus" style={{ textDecoration: "none" }}>
-          <div>
+          <div className="icon">
             <img src={image} className="icontop" />
           </div>
-         <span className="logo">Welcome !</span> 
+         <div className="logo">Welcome !</div> 
          <div className="name">{concatenatedUserName}</div> 
         </Link>
       </div>

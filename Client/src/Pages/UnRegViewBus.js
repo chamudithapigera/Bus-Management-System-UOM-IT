@@ -34,7 +34,9 @@ const checkUserRegistration = async () => {
         <div className="items">
         <div className="item">
         <div>
+        <Link to="/" style={{ textDecoration: "none" }}>
             <img src={image2} className="icontop" />
+            </Link>
           </div>
           <div className="name"><p>TRAVO</p></div>
         </div>

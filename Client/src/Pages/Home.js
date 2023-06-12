@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar";
 import "../Css/home.scss";
 import image from '../Css/back 3.jpeg'
 import image2 from "../Css/BUS_MANAGEMENT_SYSTEM.jpeg";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import UnRegMap from "../Components/UnRegMap";
 
 
@@ -17,7 +17,9 @@ const Home = () => {
         <div className="items">
         <div className="item">
         <div>
+        <Link to="/" style={{ textDecoration: "none" }}>
             <img src={image2} className="icontop" />
+            </Link>
           </div>
           <div className="name"><p>TRAVO</p></div>
         </div>
