@@ -1,32 +1,26 @@
 .home {
-    display: flex;
+  display: flex;
 
 
-    .homeContainer {
-        flex: 6;
+  .homeContainer {
+    flex: 6;
 
-       
-        .widgets-container {
-            padding-top: 20px;
-            display: flex;
-            justify-content: space-between;
-     
-          }
-          
-          .widgets-container > * {
-            margin-right: 100px; /* Add margin-right for horizontal spacing between the cards */
-          }
-          
-          .widgets-container > *:last-child {
-            margin-right: 0; /* Remove margin-right for the last card to avoid extra gap */
-          }
-          
-          
-        .widgets {
-            display: flex;
-            padding: 20px;
-            gap: 20px;
-        }
 
+    .widgets-container {
+      padding-top: 40px;
+      padding-left: 200px;
+      padding-right: 200px;
+      
+      // display: flex;
+      
+      .widgets-driver,
+      .widgets-turn{
+        padding-bottom: 30px;
+      }
     }
+
+    
+
+
+  }
 }

@@ -39,7 +39,7 @@ const Sidebar = () => {
         <Link to="/" style={{ textDecoration: "none" }}>
             <li>
               <GridViewTwoToneIcon className="icon" />
-              <span>Dashboard</span>
+              <span>Home</span>
             </li>
           </Link>
 
@@ -105,10 +105,6 @@ const Sidebar = () => {
   */}
           <p className="title">Service</p>
 
-          <li>
-            <SettingsIcon className="icon" />
-            <span>Settings</span>
-          </li>
 
           <Link to="/profile" style={{ textDecoration: "none" }}>
           <li> 

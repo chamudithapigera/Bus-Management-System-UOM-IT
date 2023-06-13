@@ -2,9 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
 import '../Css/report.scss';
-import { format } from 'date-fns';
-import jsPDF from 'jspdf';
-import image from "../Css/bus.jpg";
 import ReactToPrint from "react-to-print";
 import axios from "axios";
 
