@@ -27,8 +27,13 @@ public class UserController {
         if(emailExist > 0){
             return "Email already exists.";
         } else {
+            String hashPassword = doHashing(user.getPassword());
+            user.setPassword(hashPassword);
+
             user = service.createNewUser(user);
             return user.toString();
+
+
         }
     }
 
