@@ -10,4 +10,8 @@ import java.util.List;
 @Repository
 public interface DriverAttendanceRepository extends MongoRepository<DriverAttendance, String> {
     List<DriverAttendance> findByDateBetween(Date fromDate, Date toDate);
+
+    //for home page to get count
+    List<DriverAttendance> findByDateAndStatus(Date date, String status);
+    List<DriverAttendance> findByDate(Date date);
 }

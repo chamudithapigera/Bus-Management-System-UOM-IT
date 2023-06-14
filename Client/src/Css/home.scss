@@ -5,18 +5,30 @@
   .homeContainer {
     flex: 6;
 
-
     .widgets-container {
-      padding-top: 40px;
-      padding-left: 200px;
-      padding-right: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 50px;
 
-      // display: flex;
+      .widgets-turn-attendance {
+        display: flex;
+        padding-bottom: 40px;
 
-      .widgets-driver,
-      .widgets-turn {
-        padding-bottom: 30px;
+        .widgets-turn {
+          padding-right: 100px;
+        }
       }
+
+      .widgets-bus-driver {
+        display: flex;
+
+        .widgets-driver {
+          padding-right: 100px;
+        }
+      }
+
     }
 
 

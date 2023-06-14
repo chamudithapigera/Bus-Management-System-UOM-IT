@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,13 +38,7 @@ public class DriverAttendanceController {
         return driverAttendanceRepository.findByDateBetween(fromDate, toDate);
     }
 
-
-
-
-    /*@GetMapping("/viewAttendance")
-    public List<DriverAttendance> findAllAttendanceWithDetails() {
-        return driverAttendanceService.findAll();
-    }*/
+    //get only today driver attendance
     @GetMapping("/viewAttendance")
     public List<DriverAttendance> findAllAttendanceWithDetails() {
         LocalDate today = LocalDate.now();
@@ -60,10 +55,22 @@ public class DriverAttendanceController {
         return mongoTemplate.findAll(DriverAttendance.class);
     }
 
-   /* @PostMapping("/attendance")
+
+    @GetMapping("/present-driver-count")
+    public int getPresentDriverCountToday() {
+        return driverAttendanceService.getPresentDriverCountToday();
+    }
+
+   @PostMapping("/attendance")
     public ResponseEntity<DriverAttendance> markAttendance(@RequestBody DriverAttendance attendance) {
         DriverAttendance savedAttendance = driverAttendanceService.markAttendance(attendance.getDriverID(),
                 attendance.getStatus());
         return new ResponseEntity<>(savedAttendance, HttpStatus.CREATED);
+    }
+
+
+    /*@GetMapping("/viewAttendance")
+    public List<DriverAttendance> findAllAttendanceWithDetails() {
+        return driverAttendanceService.findAll();
     }*/
 }

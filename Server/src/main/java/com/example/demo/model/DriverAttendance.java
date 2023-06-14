@@ -22,4 +22,12 @@ public class DriverAttendance {
     private String status;
 
 
+
+
+    public DriverAttendance(String driverID, LocalDate date, LocalTime checkInTime, String status) {
+        this.driverID = driverID;
+        this.date = date;
+        this.checkInTime = checkInTime;
+        this.status = status;
+    }
 }
