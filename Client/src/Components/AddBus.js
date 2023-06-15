@@ -30,7 +30,7 @@ export default function AddBus() {
         <div className='container1'>
             <div className='detailsBox' >
                 <div >
-                    <h2 className=' m-4'>Add details of buses</h2>
+                    <h2>Add details of buses</h2>
                     <form onSubmit={(e) => onSubmit(e)} >
 
                         <div className='mb-3'>

@@ -31,7 +31,7 @@
         border-color: #333;
         border-bottom: 1px solid rgb(1, 1, 1);
         color: #999;
-        background-color: #000000;
+        background-color: #252424;
 
 
         .search {
@@ -102,6 +102,31 @@
         }
     }
 
+    .bus {
+        .busContainer {
+            .print {
+                .print-btn {
+                    background-color: rgb(90, 96, 94);
+                    color: #cac4c4;
+                }
+            }
+        }
+
+        .detailsBox {
+            background-color: rgb(22, 22, 22);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+        }
+    }
+
+    .cancel {
+        .cancel-btn {
+            background-color: rgb(90, 96, 94);
+            color: #cac4c4;
+        }
+
+    }
+
     .toDate {
         color: #aea8a8;
     }
@@ -127,11 +152,30 @@
         th {
             color: rgb(240, 234, 234);
         }
+    }
 
-        .datatableTitle {
-            color: gray;
+    .datatableTitle {
+        color: gray;
+
+        .btn-outline {
+            background-color: rgb(90, 96, 94);
+            color: #cac4c4;
         }
     }
+
+    .busContainer {
+        flex: 6;
+
+        .container {
+            .delete-turn {
+                .deleteTurn-btn {
+                    background-color: rgb(90, 96, 94);
+                    color: #cac4c4;
+                }
+            }
+        }
+    }
+
 
 
     .title {
@@ -165,5 +209,42 @@
         }
     }
 
+    .container2 {
+
+        .assign-btn {
+            background-color: rgb(90, 96, 94);
+            color: #cac4c4;
+        }
+
+    }
+
+    .container1 {
+ 
+        .detailsBox {
+            background-color: rgb(22, 22, 22);
+            box-shadow: 0 0 10px rgb(22, 22, 22);
+
+            .mb-3 {
+                .label {
+                    color: #f3f3f3;
+                }
+                .input {
+                    border: 1px solid #0a0909;
+                }
+            }
+            .button {
+                background-color: #49494b;
+                color: #b7b5b5;
+            }
+            a {
+                color: #474b4b;
+            }
+        }
+    }
+
+    .detailsBox {
+      background-color: rgb(55, 56, 55);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
 
 }

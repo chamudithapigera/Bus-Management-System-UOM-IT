@@ -8,35 +8,36 @@
 
   .busContainer {
     flex: 6;
-    .container{
 
-      .title{
+    .container {
+
+      .title {
         font-weight: bolder;
-       font-size: 30px;
-       padding-top: 10px;
+        font-size: 30px;
+        padding-top: 10px;
       }
 
-      .datatableTitle{
+      .datatableTitle {
         padding-left: 1px;
       }
-      .delete-turn{
+
+      .delete-turn {
         padding-top: 10px;
         padding-left: 1px;
 
-        .deleteTurn-btn{
-
-          background-color:#5fb689;
-          color:#413e3e;
-          font-weight:bold;
+        .deleteTurn-btn {
+          background-color: rgb(23, 99, 62);
+          color: #cac4c4;
+          font-weight: bold;
           font-size: 15px;
-          border:none;
-          border-radius:10px;
-          padding-top:3px;
+          border: none;
+          border-radius: 10px;
+          padding-top: 3px;
           padding-bottom: 3px;
-         
-          text-align:center;
-          width :150px;
-          height:35px
+
+          text-align: center;
+          width: 150px;
+          height: 35px
         }
       }
     }
@@ -77,19 +78,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .btn-outline{
 
-      background-color:#5fb689;
-      color:#413e3e;
-      font-weight:bold;
+    .btn-outline {
+      background-color: rgb(23, 99, 62);
+      color: #cac4c4;
+      font-weight: bold;
       font-size: 17px;
-      border:none;
-      border-radius:10px;
-      padding-top:3px;
+      border: none;
+      border-radius: 10px;
+      padding-top: 3px;
       padding-bottom: 3px;
-      text-align:center;
-      width :80px;
-      height:35px
+      text-align: center;
+      width: 80px;
+      height: 35px
     }
   }
 

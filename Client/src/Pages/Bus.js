@@ -42,7 +42,6 @@ export default function Bus() {
               Bus details
             </div>
             <div className='datatableTitle'>
-
               <Link to="/addbus" ><button type="button" class="btn-outline">Add</button></Link>
             </div>
             <div className="tableBorderShadow">
