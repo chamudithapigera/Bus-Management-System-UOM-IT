@@ -38,6 +38,7 @@ export default function ViewBus() {
           <p>
             <strong>Capacity:</strong> {bus.capacity}
           </p>
+          {/*
           {bus.driver && bus.driver.length >= 0 && (
             <React.Fragment>
               <p>
@@ -48,6 +49,8 @@ export default function ViewBus() {
               </p>
             </React.Fragment>
           )}
+
+          */}
           {bus.busStop && bus.busStop.length >= 0 && (
             <React.Fragment>
               <p>
