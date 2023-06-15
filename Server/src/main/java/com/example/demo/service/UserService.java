@@ -39,23 +39,23 @@ public class UserService {
         return repository.save(user);
     }
 
-    public User updateUserDetails(ObjectId id, User updatedUser) {
-        User user = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+    public User updateUserDetailsByEmail(String email, User updatedUser) {
+        User user = repository.findByEmail(email);
 
-        // Update specific fields
-        if (updatedUser.getFirstName() != null) {
-            user.setFirstName(updatedUser.getFirstName());
-        }
-        if (updatedUser.getLastName() != null) {
-            user.setLastName(updatedUser.getLastName());
-        }
-        if (updatedUser.getEmail() != null) {
-            user.setEmail(updatedUser.getEmail());
-        }
-        if (updatedUser.getTelephone() != null) {
-            user.setTelephone(updatedUser.getTelephone());
-        }
+            if (updatedUser.getFirstName() != null) {
+                user.setFirstName(updatedUser.getFirstName());
+            }
+            if (updatedUser.getLastName() != null) {
+                user.setLastName(updatedUser.getLastName());
+            }
+            if (updatedUser.getEmail() != null) {
+                user.setEmail(updatedUser.getEmail());
+            }
+            if (updatedUser.getTelephone() != null) {
+                user.setTelephone(updatedUser.getTelephone());
+            }
+            return repository.save(user);
 
-        return repository.save(user);
     }
+
 }

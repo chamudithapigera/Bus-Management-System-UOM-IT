@@ -1,54 +1,42 @@
-import Sidebar from "../Components/Sidebar";
-import Navbar from "../Components/Navbar";
 import "../Css/home.scss";
 import image2 from "../Css/BUS_MANAGEMENT_SYSTEM.jpeg";
-import UnRegMap from "../Components/UnRegMap";
-import "../Css/viewbus.scss"
+//import "../Css/viewbus.scss"
 import image from "../Css/Bus_background.png"
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
-const Home = () => {
+const UnRegViewBus = () => {
+  const location = useLocation();
+  const { busID, routeName, duration, distance, arrivalTime } = location.state;
+  const navigate = useNavigate();
 
-    const location = useLocation();
-    const { busID, routeName, duration, distance, arrivalTime } = location.state;
-    const navigate = useNavigate();
 
-    // Assuming you have an endpoint to fetch the user's information
-const checkUserRegistration = async () => {
-    try {
-      // User is not registered, show an appropriate message or redirect to the registration page
-      window.alert("Please LOGIN to enable notifications.");
-      // Redirect to the registration page
-      navigate('/login');
-    } catch (error) {
-      console.error('Error fetching user information: ', error);
-    }
+  const checkUserRegistration = () => {
+    window.alert("Please LOGIN to enable notifications.");
+    navigate('/login');
   };
 
   return (
     <div className="home">
       <div className="homeContainer">
         <div className="items">
-        <div className="item">
-        <div>
-        <Link to="/" style={{ textDecoration: "none" }}>
-            <img src={image2} className="icontop" />
-            </Link>
+          <div className="item">
+            <div>
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <img src={image2} className="icontop" />
+              </Link>
+            </div>
+            <div className="name"><p>TRAVO</p></div>
           </div>
-          <div className="name"><p>TRAVO</p></div>
-        </div>
-    
-        <div className="item">
-            <button  onClick={()=> {navigate('/login')}}><span></span>Login</button>
+
+          <div className="item">
+            <button onClick={() => { navigate('/login') }}><span></span>Login</button>
           </div>
           <div className="item">
-            <button  onClick={()=> {navigate('/register')}}><span></span>Sign Up</button>
+            <button onClick={() => { navigate('/register') }}><span></span>Sign Up</button>
           </div>
         </div>
-       
+
         <div className="imageWrapper">
           <img src={image} alt="Background Image" />
           <div className="imageOverlay">
@@ -56,12 +44,12 @@ const checkUserRegistration = async () => {
               <table>
                 <tr className="row1">
                   <td class="route-name">{busID}- {routeName}</td>
-                  <td class="icon-column"><NotificationsNoneOutlinedIcon className="icon" onClick={checkUserRegistration}/></td>
+                  <td class="icon-column"><NotificationsNoneOutlinedIcon className="icon" onClick={checkUserRegistration} /></td>
                 </tr>
                 <tr className="row2">
-                <td class="arrival-time">Arrival_Time: {arrivalTime}</td>
+                  <td class="arrival-time">Arrival_Time: {arrivalTime}</td>
                 </tr>
-                {/* The distance are converted from meters to kilometers */}
+                {/* The distance are converted from meters to kilometers and formatted to 2 decimal places */}
                 <tr className="row2">
                   <td class="distance">Distance: {(distance / 1000).toFixed(2)} km</td>
                 </tr>
@@ -74,15 +62,15 @@ const checkUserRegistration = async () => {
           </div>
         </div>
 
-            
+
       </div>
 
-      
-      
+
+
     </div>
   );
 };
 
-export default Home;
+export default UnRegViewBus;
 
 

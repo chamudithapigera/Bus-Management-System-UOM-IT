@@ -11,7 +11,6 @@ import {
 } from '@chakra-ui/react';
 import { useGeolocated } from 'react-geolocated';
 import {
-  LoadScript,
   useJsApiLoader,
   GoogleMap,
   Marker,

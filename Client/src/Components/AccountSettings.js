@@ -1,14 +1,12 @@
 import React, { useContext, useState } from 'react';
 import '../Css/accountsettings.scss';
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { Link } from "react-router-dom";
 import { UserContext } from '../Components/UserContext';
 import { ProfileImageContext } from '../Components/ProfileImageContext';
 import axios from 'axios';
 
 const AccountSettings = () => {
   const { userData } = useContext(UserContext);
-  const { userName1, userName2, email, phone, userId } = userData || {};
+  const { userName1, userName2, email, phone } = userData || {};
   const concatenatedUserName = `${userName1} ${userName2}`;
   const { profileImage, setProfileImage } = useContext(ProfileImageContext);
 
@@ -16,7 +14,7 @@ const AccountSettings = () => {
   const [email1, setEmail] = useState(email);
   const [phone1, setPhone] = useState(phone);
   const [country, setCountry] = useState('Sri Lanka');
-  const [image, setImage] = useState("https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+  const [image, setImage] = useState(profileImage);
   const [isEditing, setIsEditing] = useState(false);
 
   const handleSave = async () => {
@@ -26,11 +24,7 @@ const AccountSettings = () => {
         phone: phone1,
       };
 
-      await axios.put(`http://localhost:8080/api/v1/passenger/${userId}`, {
-        
-        email: email1,
-        telephone: phone1,
-      });
+      await axios.put(`http://localhost:8080/api/v1/passenger/${email}`, updatedDetails);
 
       setIsEditing(false);
     } catch (error) {

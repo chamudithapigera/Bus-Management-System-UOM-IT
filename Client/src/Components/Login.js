@@ -34,24 +34,28 @@ function Login() {
 
         // Fetch the user's name after login
         const userRes = await axios.get(`http://localhost:8080/api/v1/passenger/users/${email}`);
-        
+console.log(userRes.data);
         const userName1 = userRes.data.firstName;
         const userName2 = userRes.data.lastName;
         const phone = userRes.data.telephone;
-        const userId = userRes.data.id;
-
 
         setUserData({
           userName1,
           userName2,
           email,
           phone,
-          userId
+        
         });
 
-      
-
         navigate('/searchbus', { state: { userName1, userName2} });
+      }
+      else if(res.data == "driver"){
+        alert("Login Successfully !");
+        navigate('/driver');
+      }
+      else if(res.data == "depo admin"){
+        alert("Login Successfully !");
+        navigate('/depoadmin');
       }
       else {
         alert("Incorrect Email and Password not match");

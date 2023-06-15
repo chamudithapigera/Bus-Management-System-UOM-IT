@@ -2,9 +2,8 @@ import React from 'react';
 import "../Css/filteredbus.scss"
 import Sidebar from "../Components/Sidebar";
 import Navbar from "../Components/Navbar";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import '../Css/table.scss';
-import { useNavigate } from 'react-router-dom';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 
 const FilteredBuses = (props) => {

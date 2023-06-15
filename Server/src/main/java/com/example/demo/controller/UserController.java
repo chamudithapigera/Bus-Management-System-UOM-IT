@@ -31,11 +31,30 @@ public class UserController {
         return service.getUserByEmailTest(email);
     }
 
+    @PostMapping("/users")
+    public String creatNewUser(@RequestBody User user){
+        int emailExist = checkEmailExists(user.getEmail());
+        if(emailExist > 0){
+            return "Email already exists.";
+        } else {
+            String hashPassword = doHashing(user.getPassword());
+            user.setPassword(hashPassword);
 
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUserDetails(@PathVariable("id") String id, @RequestBody User updatedUser) {
-        User user = service.updateUserDetails(new ObjectId(id), updatedUser);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+            user = service.createNewUser(user);
+            return user.toString();
+
+
+        }
+    }
+
+    @PutMapping("/{email}")
+    public ResponseEntity<User> updateUserDetails(@PathVariable("email") String email, @RequestBody User updatedUser) {
+        User user = service.updateUserDetailsByEmail(email, updatedUser);
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     @PostMapping("/register")
     public String registerUser(@RequestBody User user){
