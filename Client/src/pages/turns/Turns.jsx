@@ -1,70 +1,95 @@
-import React from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
-import "./Turns.scss"
-
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import "./Turns.scss"
+import { DriverContext } from '../driver/DriverContext';
+import ErrorBoundary from '../../components/error/ErrorBoundary';
+import Map from '../../components/map/Map';
+import { Link } from 'react-router-dom';
 
 const Turns = () => {
-  const [busTurns, setBusTurns] = useState([]);
-  const { driverID } = useParams();
+  const { driverId } = useContext(DriverContext); 
+  console.log("Driver ID: ", driverId); 
+
+  const [turns, setTurns] = useState([
+    { id: 1, startTime: "9:00 AM", endTime: "12:00 PM", startPoint: "", endPoint: "" },
+    { id: 2, startTime: "2:00 PM", endTime: "5:00 PM", startPoint: "", endPoint: "" },
+    { id: 3, startTime: "7:00 PM", endTime: "10:00 PM", startPoint: "", endPoint: "" }
+  ]);
 
   useEffect(() => {
-    loadBusTurns(driverID);
-  }, [driverID]);
+    const fetchTurns = async () => {
+      for (let i = 0; i < turns.length; i++) {
+        const turnId = turns[i].id;
+        const start = await axios.get(`http://localhost:8080/api/turns/${turnId}/startpoint`);
+        const end = await axios.get(`http://localhost:8080/api/turns/${turnId}/endpoint`);
+        turns[i].startPoint = start.data.startPoint;
+        turns[i].endPoint = end.data.endPoint;
+      }
 
-  const loadBusTurns = async (driverID) => {
-    const result = await axios.get(`http://localhost:8080/api/viewTurn?driverID=${driverID}`);
-    setBusTurns(result.data.filter((turn) => turn.driverID === driverID));
+      setTurns([...turns]);
+    };
+
+    fetchTurns();
+  }, []);
+
+  const handleStartChange = (e, turnId) => {
+    const newTurns = turns.map(turn => turn.id === turnId ? { ...turn, startPoint: e.target.value } : turn);
+    setTurns(newTurns);
   };
-  
+
+  const handleEndChange = (e, turnId) => {
+    const newTurns = turns.map(turn => turn.id === turnId ? { ...turn, endPoint: e.target.value } : turn);
+    setTurns(newTurns);
+  };
+
+  const handleSubmit = async (e, turnId) => {
+    e.preventDefault();
+
+    // find the turn with the given ID
+    const turn = turns.find(turn => turn.id === turnId);
+
+    // update start and end points in the database
+    await axios.patch(`http://localhost:8080/api/turns/${turnId}/startpoint`, {startPoint: turn.startPoint});
+    await axios.patch(`http://localhost:8080/api/turns/${turnId}/endpoint`, {endPoint: turn.endPoint});
+    window.alert("Successfully updated!");
+  };
+
   return (
-    <div>
-      <div className='turns'>
-      <Sidebar/>
+    <div className='turns'>
+      <Sidebar />
       <div className="turnsContainer">
-        <Navbar/>
-        
-        <div className='container'>
-          <div className='py-4'>
-            <div className='title'>
-              <h1>Bus Turn Schedule</h1>
-            </div>
-            <table className="table border shadow">
-
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th scope="col"> Turn No</th>
-                  <th scope="col">Turn Time</th>
-                  <th scope="col">Route Name</th>
-                  <th scope="col">Driver ID</th>
-                  
-                </tr>
-              </thead>
-
-              <tbody>
-                {busTurns.map((busTurn, index) => (
-                  <tr key={index}>
-                    <th scope="row">{index + 1}</th>
-                    <td>{busTurn.turnNo}</td>
-                    <td> {busTurn.turnTime} </td>
-                    <td>{busTurn.routeName} </td>
-                    <td>{busTurn.driverID}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            
+        <Navbar />
+        <div className="driver-turns">
+          <h1 className="page-title">My Turns</h1>
+          <div className="turns-list">
+            {turns.map(turn => (
+              <div className="turn" key={turn.id}>
+                <h2 className="turn-title">Turn {turn.id}</h2>
+                <p className="turn-info">Start Time: {turn.startTime}</p>
+                <p className="turn-info">End Time: {turn.endTime}</p>
+                <form onSubmit={(e) => handleSubmit(e, turn.id)}>
+                  <label>
+                    Start point:
+                    <input type="text" value={turn.startPoint} onChange={(e) => handleStartChange(e, turn.id)} />
+                  </label>
+                  <label>
+                    End point:
+                    <input type="text" value={turn.endPoint} onChange={(e) => handleEndChange(e, turn.id)} />
+                  </label>
+                  <button type="submit">Save</button>
+                </form>
+                <p>Start point: {turn.startPoint}</p>
+                <p>End point: {turn.endPoint}</p>
+                <Link to={{ pathname: "/map", state: { start: turn.startPoint, end: turn.endPoint } }}>
+                  <div className="viewButton">Start</div>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
-
-        <button className='btn'>Start Route</button>
       </div>
-    </div>
     </div>
   )
 }

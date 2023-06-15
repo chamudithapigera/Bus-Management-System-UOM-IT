@@ -1,9 +1,59 @@
 .home{
     display: flex;
     background-color: aqua;
-
-    .homeContainer{
-        // background-color: lightblue; this is for viewing flexbox sizes of sidebar and homecontainer
-        flex: 6;
+  
+    .sidebar {
+      flex: 1;
     }
-}
+  
+    .homeContainer{
+      flex: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f0f8ff;
+  
+      .navbar {
+        width: 100%;
+      }
+  
+      .dashboard-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: start;
+        gap: 1em;
+        width: 100%;
+        margin-top: 1em;
+        
+        .dashboard {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5em;
+          width: 100%;
+          max-width: 300px;
+          padding: 1em;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          background-color: #fff;
+  
+          h2 {
+            font-size: 1.2em;
+            color: #4a4a4a;
+          }
+  
+          p {
+            color: #707070;
+          }
+  
+          .widget {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+          }
+        }
+      }
+    }
+  }
+  

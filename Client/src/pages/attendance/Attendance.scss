@@ -1,23 +1,18 @@
 body {
-//   background-image: url("./bg.jpg");
+  background-image: url("./bg.jpg");
   background-size: cover; /* or 'contain', depending on your preference */
   background-position: center;
 }
-
-
 
 .attendance{
     display: flex;
     position: relative; /* set the position property to relative */
     z-index: 1;
     
-
     .attendanceContainer{
         // background-color: lightblue; this is for viewing flexbox sizes of sidebar and homecontainer
         flex: 6;
         
-        
-
         .attendanceMark{
             background-color: rgba(174, 245, 174, 0.807);
             position: relative;

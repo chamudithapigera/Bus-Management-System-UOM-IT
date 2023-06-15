@@ -1,9 +1,118 @@
-.breakdown{
-    display: flex;
-    background-color: aquamarine;
+.breakdown {
+  display: flex;
+  background-color: aquamarine;
 
-    .breakdownContainer{
-        // background-color: lightblue; this is for viewing flexbox sizes of sidebar and homecontainer
-        flex: 6;
+  .breakdownContainer {
+      flex: 6;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .breakdownContent {
+      h1 {
+          font-size: 1.5rem;
+          color: black;
+          margin-top: 2rem;
+      }
+
+      p {
+          font-size: 1.2rem;
+          color: black;
+          margin-bottom: 1rem;
+      }
+
+      button {
+          padding: 0.5rem;
+          margin: 1rem;
+          font-size: 1rem;
+          cursor: pointer;
+      }
+  }
+
+  .chat-window {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 500px;
+      height: 300px;
+      background-color: #ffffff;
+      border: 1px solid #000000;
+      border-radius: 10px;
+      padding: 20px;
+      margin: auto;
+    
+      p {
+          font-size: 16px;
+          margin-bottom: 20px;
+      }
+    
+      button {
+          width: 80px;
+          height: 40px;
+          border: none;
+          border-radius: 5px;
+          margin: 10px;
+          font-size: 16px;
+          cursor: pointer;
+          
+          &:first-child {
+              background-color: #4CAF50; /* Green */
+              color: white;
+          }
+      
+          &:last-child {
+              background-color: #f44336; /* Red */
+              color: white;
+          }
+      
+          &:hover {
+              opacity: 0.8;
+          }
+      }
+  }
+  .breakdownContent {
+    text-align: center;  /* Center the text */
+    margin-top: 50px;
+
+    h1 {
+      font-size: 2rem;  /* Make the title a bit bigger */
+      color: #424242;  /* Dark grey color for the text */
+      margin-bottom: 1rem;  /* Add some space below the title */
     }
+
+    p {
+      font-size: 1.2rem;
+      color: #616161;  /* Light grey color for the text */
+      margin-bottom: 2rem;  /* Add some space below the text */
+    }
+
+    button {
+      padding: 0.8rem 1.5rem;  /* Increase padding to make buttons larger */
+      margin: 0.5rem;  /* Decrease margin to reduce space between buttons */
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 4px;  /* Rounded corners for the buttons */
+      border: none;  /* Remove default button border */
+      color: black;  /* White text */
+      transition: all 0.3s ease;  /* Smooth transition for hover effects */
+      
+      &:first-child {
+        background-color: #f44336; /* Green */
+        
+        &:hover {
+          background-color: #f44336;  /* Darken color on hover */
+        }
+      }
+
+      &:last-child {
+        background-color: #f44336; /* Red */
+        
+        &:hover {
+          background-color: #e63c22;  /* Darken color on hover */
+        }
+      }
+    }
+  }
+
 }

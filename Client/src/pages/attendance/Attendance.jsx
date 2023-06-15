@@ -6,9 +6,8 @@ import "./Attendance.scss";
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-
-
+import { DriverContext } from '../driver/DriverContext';
+import { useContext } from 'react';
 
 
 const Attendance = () => {
@@ -17,7 +16,8 @@ const Attendance = () => {
     driverID: '',
     status: '',
   });
-
+  const { setDriverID } = useContext(DriverContext);
+  
   const { driverID, status } = attendance;
 
   const onInputChange = (e) => {
@@ -32,12 +32,14 @@ const Attendance = () => {
       .then((response) => {
         console.log(response.data);
         alert('Attendance saved successfully!');
+        setDriverID(driverID); // store driverID in context
+        console.log("Driver ID to be saved: ", driverID); // This will help you verify the driverID being saved
       })
       .catch((error) => {
         console.error(error);
         alert('Failed to update attendance');
       });
-    navigate('/turns/${driverID}'); // navigate to Turns route with driverID as parameter
+    navigate('/turns');
   };
   
 
@@ -48,6 +50,7 @@ const Attendance = () => {
   const onAbsentClick = () => {
     setAttendance({ ...attendance, status: 'absent' });
   };
+
 
   return (
     <div className='attendance'>
