@@ -51,6 +51,7 @@ public class TurnController {
         List<Turn> turns = mongoTemplate.find(query, Turn.class);
         return turns;
     }
+
 //to reset turn collection
     @DeleteMapping("/deleteAllTurns")
     public String deleteAllTurns() {

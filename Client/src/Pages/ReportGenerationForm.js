@@ -23,12 +23,12 @@ export default function ReportGenerationForm() {
 
     try {
       const response = await axios.get("http://localhost:8080/api/v1/attendance/filter", {
-      params: {
-        fromDate: fromDate,
-        toDate: toDate
-      }
+        params: {
+          fromDate: fromDate,
+          toDate: toDate
+        }
 
-    
+
       });
 
       const filteredAttendance = response.data;
@@ -38,7 +38,7 @@ export default function ReportGenerationForm() {
     }
   }
 
- 
+
   const componentRef = useRef();
 
 
@@ -47,10 +47,12 @@ export default function ReportGenerationForm() {
       <Sidebar></Sidebar>
       <div className='busContainer'>
         <Navbar></Navbar>
-        <ReactToPrint
-          trigger={() => <button variant="primary">Print</button>}
-          content={() => componentRef.current}
-        />
+        <div className='print'>
+          <ReactToPrint
+            trigger={() => <button variant="primary" className='print-btn'>Print</button>}
+            content={() => componentRef.current}
+          />
+        </div>
         <div responsive ref={componentRef} className="imageWrapper">
           {reportActive && (
             <div className="detailsBox">
@@ -81,9 +83,9 @@ export default function ReportGenerationForm() {
             </div>
           )}
 
-{tableActive && (
+          {tableActive && (
             <div className='container'>
-              <div className='py-4'>
+              <div >
                 <div className='title'>
                   Driver Attendance
                 </div>
@@ -115,10 +117,11 @@ export default function ReportGenerationForm() {
                     </tbody>
                   </table>
                 </div>
-                <button onClick={Cancel} style={{ float: 'right' }}>
-                  Cancel
-                </button>
-
+                <div className='cancel'>
+                  <button onClick={Cancel} style={{ float: 'right' }} className='cancel-btn'>
+                    Cancel
+                  </button>
+                </div>
               </div>
             </div>
           )}

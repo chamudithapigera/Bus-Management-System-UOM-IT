@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "../Css/assignTurn.scss";
 
 function AssignTurn() {
     const [buttonEnabled, setButtonEnabled] = useState(true);
@@ -17,8 +18,8 @@ function AssignTurn() {
     }
   
     return (
-      <div>
-        <button onClick={handleClick} disabled={!buttonEnabled}>
+      <div className='container2'>
+        <button onClick={handleClick} disabled={!buttonEnabled} className='assign-btn'>
           {buttonEnabled ? "Assign" : "Disabled"}
         </button>
       </div>

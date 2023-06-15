@@ -37,13 +37,13 @@ export default function Bus() {
         <Navbar></Navbar>
 
         <div className='container'>
-          <div className='py-4'>
+          <div >
             <div className='title'>
               Bus details
             </div>
             <div className='datatableTitle'>
 
-              <Link to="/addbus" ><button>Add</button></Link>
+              <Link to="/addbus" ><button type="button" class="btn-outline">Add</button></Link>
             </div>
             <div className="tableBorderShadow">
             <table >

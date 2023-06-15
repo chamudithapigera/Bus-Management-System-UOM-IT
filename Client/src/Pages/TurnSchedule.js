@@ -32,17 +32,17 @@ export default function TurnSchedule() {
     }
   };
 
-  
+
 
   const handleDeleteAllTurns = () => {
     if (window.confirm("Are you sure you want to delete all bus turns?")) {
-       axios.delete("http://localhost:8080/api/v1/turn/deleteAllTurns");
-       loadBusTurns();
-      
-  }
+      axios.delete("http://localhost:8080/api/v1/turn/deleteAllTurns");
+      loadBusTurns();
 
-    
-  }  
+    }
+
+
+  }
 
   return (
     <div className='bus'>
@@ -50,61 +50,61 @@ export default function TurnSchedule() {
       <div className='busContainer'>
         <Navbar></Navbar>
         <div className='container'>
-          <div className='py-4'>
+          <div >
             <div className='title'>
               Bus Turn Schedule
             </div>
             <div className='datatableTitle'>
 
               <Link to="/addTurn" >
-             <button>add</button>
+                <button type="button" class="btn-outline">Add</button>
               </Link>
 
               <AssignTurn />
             </div>
             <div className="tableBorderShadow">
-            <table>
+              <table>
 
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th scope="col"> Turn No</th>
-                  <th scope="col">Turn Time</th>
-                  <th scope="col">Route Name</th>
-                  <th scope="col">Driver ID</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {busTurns.map((busTurn, index) => (
-                  <tr >
-                    <th scope="row" key={index}>{index + 1}</th>
-                    <td>{busTurn.turnNo}</td>
-                    <td> {busTurn.turnTime} </td>
-                    <td>{busTurn.routeName} </td>
-                    <td>{busTurn.driverID}</td> 
-                    {/*<td>{JSON.parse(busTurn.driverID).driverID}</td> */}
-                    <td>
-                    <Link to={`/viewbusturn/${busTurn.id}`}>
-                    <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
-                    </Link>
-                      <Link to={`/updateTurn/${busTurn.id}`}>
-                        <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon ></button>
-                      </Link>
-                      <button onClick={() => deleteTurn(busTurn.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
-                    </td>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th scope="col"> Turn No</th>
+                    <th scope="col">Turn Time</th>
+                    <th scope="col">Route Name</th>
+                    <th scope="col">Driver ID</th>
+                    <th scope="col">Action</th>
                   </tr>
+                </thead>
 
-                ))}
+                <tbody>
+                  {busTurns.map((busTurn, index) => (
+                    <tr >
+                      <th scope="row" key={index}>{index + 1}</th>
+                      <td>{busTurn.turnNo}</td>
+                      <td> {busTurn.turnTime} </td>
+                      <td>{busTurn.routeName} </td>
+                      <td>{busTurn.driverID}</td>
+                      {/*<td>{JSON.parse(busTurn.driverID).driverID}</td> */}
+                      <td>
+                        <Link to={`/viewbusturn/${busTurn.id}`}>
+                          <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
+                        </Link>
+                        <Link to={`/updateTurn/${busTurn.id}`}>
+                          <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon ></button>
+                        </Link>
+                        <button onClick={() => deleteTurn(busTurn.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
+                      </td>
+                    </tr>
 
-              </tbody>
-            </table>
-</div>
-            <div>
-            <button onClick={handleDeleteAllTurns}>Delete All Turns</button>
-        
-    
+                  ))}
+
+                </tbody>
+              </table>
+            </div>
+            <div className='delete-turn'>
+              <button onClick={handleDeleteAllTurns} className='deleteTurn-btn'>Delete All Turns</button>
+
+
             </div>
 
           </div>

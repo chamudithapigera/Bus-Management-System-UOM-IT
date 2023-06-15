@@ -5,6 +5,28 @@
 
     .busContainer{
       flex: 5;
+
+      .print{
+        padding-top: 10px;
+        padding-left: 1px;
+        padding-bottom: 2px;
+
+        .print-btn{
+          background-color:#5fb689;
+          color:#413e3e;
+          font-weight:bold;
+          font-size: 17px;
+          border:none;
+          border-radius:10px;
+          padding-top:3px;
+          padding-bottom: 3px;
+          text-align:center;
+          width :80px;
+          height:35px
+        }
+
+       
+      }
     }
 
   
@@ -18,11 +40,25 @@
       border-radius: 20px;
       padding: 20px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  
       
     }
     
-
+    .cancel{
+      padding-top: 10px;
+      .cancel-btn{
+        background-color:#5fb689;
+      color:#413e3e;
+      font-weight:bold;
+      font-size: 17px;
+      border:none;
+      border-radius:10px;
+      padding-top:3px;
+      padding-bottom: 3px;
+      text-align:center;
+      width :80px;
+      height:35px
+      }
+    }
     .h {
       text-align: center;
       margin-top: 1rem;

@@ -65,7 +65,7 @@ export default function BusRoute() {
             <div className='datatableTitle'>
 
               <Link to="/addRoute" style={{ textDecoration: "none" }}>
-              <button>Add</button>
+              <button type="button" class="btn-outline">Add</button>
               </Link>
             </div>
             <div className="tableBorderShadow">
