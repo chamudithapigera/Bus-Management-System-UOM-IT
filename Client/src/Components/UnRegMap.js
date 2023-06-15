@@ -8,10 +8,8 @@ import {
     InputRightElement,
     InputLeftElement,
     SkeletonText,
-    color,
   } from '@chakra-ui/react';
-  import { geolocated } from "react-geolocated";
-  
+
   import {
     useJsApiLoader,
     GoogleMap,
@@ -26,7 +24,7 @@ import {
   import { useState } from 'react';
   import { useNavigate } from 'react-router-dom';
   
-  
+ //defines the initial center coordinates of the map 
   const center = { lat: 6.7967578, lng: 79.88875 }
   
   const busStops = [
@@ -43,10 +41,10 @@ import {
     const { isLoaded } = useJsApiLoader({
       googleMapsApiKey: "AIzaSyAmD_c6_Rnaee2j6iNcY8raxvGCMrNS3NU",
       libraries: ['places'],
-  
+
     })
   
-  
+  //state variables
     const navigate = useNavigate();
     const [map, setMap] = useState(null);
     const [autocomplete, setAutocomplete] = useState(null);
