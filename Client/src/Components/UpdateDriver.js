@@ -50,7 +50,7 @@ export default function UpdateDriver() {
     };
 
     const loadDriver = async () => {
-        const result = await axios.get(`http://localhost:8080/api/v1/drivers/${id}`);
+        const result = await axios.get(`http://localhost:8080/api/v1/drivers/viewone/${id}`);
         setDriver(result.data);
     };
 

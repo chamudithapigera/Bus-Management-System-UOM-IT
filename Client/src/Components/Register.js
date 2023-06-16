@@ -40,11 +40,15 @@ function Register() {
         if (res.data == "Email already exists.") {
           alert("Email already exists");
         }
+        else if (res.data === 'Invalid busId.') {
+          alert('Invalid busId');
+        }
         else {
-          alert("User Registation Successfully !");
-          navigate('/driver');
-          return res.data;
-
+          
+            alert("User Registation Successfully !");
+            navigate('/driver');
+            return res.data;
+          
         }
 
       } catch (err) {

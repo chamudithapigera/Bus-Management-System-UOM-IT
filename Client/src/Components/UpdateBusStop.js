@@ -43,7 +43,7 @@ export default function UpdateBusStop() {
   };
 
   const loadBusStop = async () => {
-    const result = await axios.get(`http://localhost:8080/api/v1/busStop/${id}`);
+    const result = await axios.get(`http://localhost:8080/api/v1/busStop/viewone/${id}`);
     setStop(result.data);
   };
 
@@ -52,7 +52,7 @@ export default function UpdateBusStop() {
     <div className='contrainer'>
       <div className="detailsBox">
         <div >
-          <h2 className='text-center m-4'>Add details of bus-stops</h2>
+          <h2 className='text-center m-4'>Update details of bus-stops</h2>
           <form onSubmit={(e) => onSubmit(e)}>
 
             <div className='mb-3'>

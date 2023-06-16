@@ -96,10 +96,7 @@ export default function BusRoute() {
                       >
                     <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
                     </Link>
-                      <Link
-                        className='btn btn-warning mx-2'
-                        to={`/updateRoute/${busRoute.id}`}
-                      >
+                      <Link className='btn btn-warning mx-2' to={`/updateRoute/${busRoute.id}`} >
                         <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
                       </Link>
 

@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../Css/form.scss';
 
 
-export default function UpdateBusRoute() {
+export default function UpdateBus() {
 
     let navigate = useNavigate();
 
@@ -56,7 +56,7 @@ export default function UpdateBusRoute() {
             <div className="detailsBox">
 
                 <div >
-                    <h2 className=' m-4'>Add details of buses</h2>
+                    <h2 className=' m-4'>Update details of buses</h2>
                     <form onSubmit={(e) => onSubmit(e)} >
 
                         <div className='mb-3'>

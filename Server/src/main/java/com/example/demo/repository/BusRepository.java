@@ -12,8 +12,10 @@ public interface BusRepository extends MongoRepository<Bus, ObjectId> {
     Optional<Bus> findById(String busId);
 
     Bus findByBusRouteId(String busRouteID);
+//check busid is in driver collection
+    boolean existsByBusID(String busId);
 
-    //boolean existsById(String busId);
+
 
     // List<Bus> findByBusStop(BusStop busStop);
 

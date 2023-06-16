@@ -5,13 +5,12 @@ import com.example.demo.model.Bus;
 import com.example.demo.model.BusRoute;
 import com.example.demo.model.Driver;
 import com.example.demo.model.User;
+import com.example.demo.repository.BusRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,11 +33,13 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/register")
-    public String registerUser(@RequestBody User user){
+    @Autowired
+    private BusRepository busRepository;
 
+    @PostMapping("/register")
+    public String registerUser(@RequestBody User user) {
         int emailExist = checkEmailExists(user.getEmail());
-        if(emailExist > 0){
+        if (emailExist > 0) {
             return "Email already exists.";
         } else {
             user.setUserRole("driver");
@@ -46,10 +47,17 @@ public class UserController {
             String hashPassword = doHashing(user.getPassword());
             user.setPassword(hashPassword);
 
+            // Check if busId exists in the buses collection
+            boolean busIdExists = busRepository.existsByBusID(user.getBusId());
+            if (!busIdExists) {
+                return "Invalid busId.";
+            }
+
             user = service.createNewUser(user);
             return user.toString();
         }
     }
+
 
     //get all documents in collection
     @GetMapping("/viewDrivers")

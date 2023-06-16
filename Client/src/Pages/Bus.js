@@ -11,7 +11,7 @@ import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 export default function Bus() {
 
   const [buses, setBuses] = useState([]);
-  
+
 
   useEffect(() => {
     loadBuses();
@@ -25,10 +25,11 @@ export default function Bus() {
 
   const deleteBus = async (id) => {
     if (window.confirm("Are you sure you want to delete this bus ?")) {
-    await axios.delete(`http://localhost:8080/api/v1/bus_detail/deleteBus/${id}`);
-    loadBuses();}
+      await axios.delete(`http://localhost:8080/api/v1/bus_detail/deleteBus/${id}`);
+      loadBuses();
+    }
   };
-  
+
 
   return (
     <div className='bus'>
@@ -45,47 +46,46 @@ export default function Bus() {
               <Link to="/addbus" ><button type="button" class="btn-outline">Add</button></Link>
             </div>
             <div className="tableBorderShadow">
-            <table >
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th scope="col">Bus ID</th>
-                  <th scope="col">Capacity</th>
+              <table >
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th scope="col">Bus ID</th>
+                    <th scope="col">Capacity</th>
 
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-
-
-              <tbody>
-                {buses.map((bus, index) => (
-                  <tr >
-                    <th scope="row" key={index}>{index + 1}</th>
-                    <td>{bus.busID}</td>
-                    <td>{bus.capacity}</td>
-
-                    <td>
-                    <Link
-                        className='btn btn-warning mx-2'
-                        to={`/viewbus/${bus.id}`}
-                      >
-                    <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
-                    </Link>
-
-                      <Link
-                        className='btn btn-warning mx-2'
-                        to={`/updateBus/${bus.id}`}
-                      >
-                        <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
-                      </Link>
-                      <button onClick={() => deleteBus(bus.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
-                    </td>
+                    <th scope="col">Action</th>
                   </tr>
+                </thead>
 
-                ))}
 
-              </tbody>
-            </table>
+                <tbody>
+                  {buses.map((bus, index) => (
+                    <tr >
+                      <th scope="row" key={index}>{index + 1}</th>
+                      <td>{bus.busID}</td>
+                      <td>{bus.capacity}</td>
+
+                      <td>
+                        <Link
+                          className='btn btn-warning mx-2'
+                          to={`/viewbus/${bus.id}`}
+                        >
+                          <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
+                        </Link>
+
+                        <Link className='btn btn-warning mx-2' to={`/updateBus/${bus.id}`}>
+                          <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
+                        </Link>
+
+                        <button onClick={() => deleteBus(bus.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
+
+                      </td>
+                    </tr>
+
+                  ))}
+
+                </tbody>
+              </table>
             </div>
           </div>
 

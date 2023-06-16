@@ -52,7 +52,7 @@ export default function UpdateTurn() {
         <div className='contrainer'>
             <div className="detailsBox">
                 <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
-                    <h2 className='text-center m-4'>Add details of bus-turns</h2>
+                    <h2 className='text-center m-4'>Update details of bus-turns</h2>
                     <form onSubmit={(e) => onSubmit(e)}>
                         <div className='mb-3'>
                             <label htmlFor='turnNo' className='label' rm>Turn No</label>
