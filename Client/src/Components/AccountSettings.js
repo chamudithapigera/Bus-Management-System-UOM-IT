@@ -10,13 +10,14 @@ const AccountSettings = () => {
   const concatenatedUserName = `${userName1} ${userName2}`;
   const { profileImage, setProfileImage } = useContext(ProfileImageContext);
 
-  const [name, setName] = useState(userName1);
+  const [name, setName] = useState(concatenatedUserName);
   const [email1, setEmail] = useState(email);
   const [phone1, setPhone] = useState(phone);
   const [country, setCountry] = useState('Sri Lanka');
   const [image, setImage] = useState(profileImage);
   const [isEditing, setIsEditing] = useState(false);
 
+  //updating the user details by making a PUT request to the backend API endpoint
   const handleSave = async () => {
     try {
       const updatedDetails = {
@@ -24,24 +25,32 @@ const AccountSettings = () => {
         phone: phone1,
       };
 
+      //The updatedDetails object is passed as the request payload
       await axios.put(`http://localhost:8080/api/v1/passenger/${email}`, updatedDetails);
 
-      setIsEditing(false);
+      setIsEditing(false);//indicating that the user has finished editing the profile
     } catch (error) {
       console.error(error);
     }
   };
 
+  //change profile picture( 'e' is a parameter which contains information about the selected file)
   const handleImageChange = (e) => {
+
+    //retrieves the first file from the e.target.files array
     const file = e.target.files[0];
+
+    //The FileReader API allows reading the contents of the file asynchronously
     const reader = new FileReader();
 
     reader.onload = (e) => {
+      // retrieves the image data URL
       const newImage = e.target.result;
       setImage(newImage);
       setProfileImage(newImage);
     };
 
+    //if file exists, start reading the contents of the file as a data URL
     if (file) {
       reader.readAsDataURL(file);
     }
@@ -53,15 +62,17 @@ const AccountSettings = () => {
         <div className="left">
           {!isEditing && (
             <div className="editButton">
+              {/* enabling the editing mode */}
               <button onClick={() => setIsEditing(true)}>Edit Profile</button>
             </div>
           )}
           <h1 className="title"></h1>
           <div className="item">
             <img
-              src={image}
+              src={profileImage}
               alt=""
               className="itemImg"
+              //allows the user to select a new profile picture by clicking on the image
               onClick={() => isEditing && document.getElementById('imageInput').click()}
             />
           </div>
@@ -71,7 +82,7 @@ const AccountSettings = () => {
                 <input
                   className="editInput"
                   type="text"
-                  value={concatenatedUserName}
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
                 <input

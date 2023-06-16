@@ -19,6 +19,7 @@ const Sidebar = ( ) => {
   const concatenatedUserName = userName1 + " " + userName2;
 
   const { dispatch } = useContext(DarkModeContext);
+  
   return (
     <div className="sidebar">
       <div className="top">

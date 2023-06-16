@@ -16,6 +16,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { profileImage } = useContext(ProfileImageContext);
 
+  //used to dispatch actions to the reducer, triggering state updates based on the specified action type
   const { dispatch } = useContext(DarkModeContext);
 
   return (

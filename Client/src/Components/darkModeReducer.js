@@ -1,3 +1,5 @@
+
+//switch statement is used to determine the appropriate state update
 const DarkModeReducer = (state, action) => {
     switch (action.type) {
       case "LIGHT": {
@@ -10,6 +12,7 @@ const DarkModeReducer = (state, action) => {
           darkMode: true,
         };
       }
+      // allows toggling between light and dark mode.
       case "TOGGLE": {
         return {
           darkMode: !state.darkMode,
