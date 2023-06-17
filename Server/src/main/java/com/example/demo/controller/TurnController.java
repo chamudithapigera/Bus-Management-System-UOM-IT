@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.NotFoundException;
+import com.example.demo.model.BusStop;
 import com.example.demo.model.Turn;
 import com.example.demo.repository.TurnRepository;
 import com.example.demo.service.TurnService;
@@ -9,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @CrossOrigin("http://localhost:3000")
@@ -40,6 +43,8 @@ public class TurnController {
         turnService.save(turn);
         return "Trun saved successfully...";
     }
+
+
 
     //get all turns
 

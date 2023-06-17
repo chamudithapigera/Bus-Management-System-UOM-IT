@@ -35,5 +35,8 @@ public class Bus {
         this.busRoute = busRoute;
     }
 
-
+    public Bus(String busID, String capacity) {
+        this.busID = busID;
+        this.capacity = capacity;
+    }
 }

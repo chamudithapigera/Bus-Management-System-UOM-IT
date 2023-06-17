@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.exception.NotFoundException;
+import com.example.demo.model.Bus;
+import com.example.demo.model.BusStop;
 import com.example.demo.model.Turn;
 import com.example.demo.repository.TurnRepository;
 import org.bson.types.ObjectId;

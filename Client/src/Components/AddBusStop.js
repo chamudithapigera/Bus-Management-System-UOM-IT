@@ -27,12 +27,20 @@ export default function AddBusRoute() {
         e.preventDefault();
         if (!busID) {
             alert("Please enter a value for Bus ID.")
-        } else {
+        }
+        else if(!busStopID){
+            alert("Please enter a value for Bus Stop ID.")
+        }
+         else {
             try {
                 await axios.post("http://localhost:8080/api/v1/busStop/addBusStop", busStop)
                 navigate("/busStop")
             } catch (error) {
-                alert(error.response.data.message)
+                if (error.response && error.response.data && error.response.data.message) {
+                    alert(error.response.data.message);
+                } else {
+                    alert("An error occurred while adding the bus route.");
+                }
             }
 
         }

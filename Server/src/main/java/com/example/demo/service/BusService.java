@@ -9,6 +9,9 @@ import com.example.demo.repository.BusRepository;
 import com.example.demo.repository.BusStopRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -18,15 +21,32 @@ public class BusService {
 
     @Autowired
     private BusRepository busRepository;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public List<Bus> findAll() {
         return busRepository.findAll();
     }
 
     public void save(Bus bus) {
+
         busRepository.insert(bus);
     }
+    public Bus createBusBy(String busID,String capacity){
 
+
+        // Check if a document with the given routeID already exists in the "BusRoute" collection
+        if (mongoTemplate.exists(Query.query(Criteria.where("busID").is(busID)), Bus.class)) {
+            throw new IllegalArgumentException("Bus with busID " + busID + " already exist,please enter correct busID");
+        }
+
+        Bus bus = new Bus( busID,capacity );
+        busRepository.insert(bus);
+
+
+        return bus;
+
+    }
     public Bus updateBus(ObjectId id, Bus bus) {
         Bus existingBus = busRepository.findById(id).orElseThrow(() -> new NotFoundException("Bus is not found"));
         existingBus.setBusID(bus.getBusID());

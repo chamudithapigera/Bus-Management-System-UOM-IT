@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -30,12 +31,21 @@ public class BusController {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+
+
     // add bus data to collection
-    @PostMapping("/addBus")
+    /* @PostMapping("/addBus")
     public String saveBus(@RequestBody Bus bus){
         busService.save(bus);
         return "Bus saved successfully...";
+    }*/
+
+    @PostMapping("/addBus")
+    public ResponseEntity<Bus> createBus(@RequestBody Map<String, String> payload){
+
+        return new ResponseEntity<Bus>(busService.createBusBy(payload.get("busID"),payload.get("capacity")), HttpStatus.CREATED);
     }
+
 
     //get all document data of collection
     @GetMapping("/viewBus")

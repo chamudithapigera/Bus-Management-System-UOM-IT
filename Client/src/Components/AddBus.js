@@ -22,8 +22,21 @@ export default function AddBus() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        await axios.post("http://localhost:8080/api/v1/bus_detail/addBus", bus)
-        navigate("/bus")
+        if (!busID) {
+            alert("Please enter a value for Bus ID.")
+        }
+        else{
+      try {
+            await axios.post("http://localhost:8080/api/v1/bus_detail/addBus", bus)
+            navigate("/bus")
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("An error occurred while adding the bus route.");
+            }
+        }
+    }
     }
 
     return (

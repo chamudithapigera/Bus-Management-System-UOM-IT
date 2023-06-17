@@ -23,6 +23,16 @@ export default function AddTurn() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        if (!turnNo) {
+            alert("Please enter a value for Turn No.")
+        }
+        else if(!turnTime){
+            alert("Please enter a value for Turn Time.")
+        }
+        else if(!routeName){
+            alert("Please enter a value for Route Name.")
+        }
+        else{
         await axios.post("http://localhost:8080/api/v1/turn/addTurn", busTurn)
             .then((response) => {
                 console.log(response.data);
@@ -34,6 +44,7 @@ export default function AddTurn() {
                 alert("Failed to update bus route");
             });
         navigate("/turn")
+        }
     }
 
 

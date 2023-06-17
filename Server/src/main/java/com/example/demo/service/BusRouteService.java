@@ -24,10 +24,17 @@ public class BusRouteService {
     private MongoTemplate mongoTemplate;
 
     public BusRoute createBusRouteBy(String routeID, String routeNO, String routeName, String busID){
+
         // Check if a document with the given busID exists in the "busses" collection
         if (!mongoTemplate.exists(Query.query(Criteria.where("busID").is(busID)), Bus.class)) {
             throw new IllegalArgumentException("Bus with busID " + busID + " does not exist,please enter correct busID");
         }
+
+        // Check if a document with the given routeID already exists in the "BusRoute" collection
+        if (mongoTemplate.exists(Query.query(Criteria.where("routeID").is(routeID)), BusRoute.class)) {
+            throw new IllegalArgumentException("Bus Route  with routeID " + routeID + " already exist,please enter correct routeID");
+        }
+
 
         BusRoute busRoute = new BusRoute(routeID, routeNO, routeName);
         busRouteRepository.insert(busRoute);

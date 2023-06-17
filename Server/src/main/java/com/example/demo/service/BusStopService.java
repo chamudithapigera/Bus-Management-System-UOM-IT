@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Bus;
+import com.example.demo.model.BusRoute;
 import com.example.demo.model.BusStop;
 import com.example.demo.repository.BusRepository;
 import com.example.demo.repository.BusStopRepository;
@@ -30,6 +31,12 @@ public  class BusStopService {
         if (!mongoTemplate.exists(Query.query(Criteria.where("busID").is(busID)), Bus.class)) {
             throw new IllegalArgumentException("Bus with busID " + busID + " does not exist,please enter correct busID");
         }
+
+        // Check if a document with the given routeID already exists in the "BusRoute" collection
+        if (mongoTemplate.exists(Query.query(Criteria.where("busStopID").is(busStopID)), BusStop.class)) {
+            throw new IllegalArgumentException("Bus Stop  with busStopID " + busStopID + " already exist,please enter correct busStopID");
+        }
+
         BusStop busStop = new BusStop( busStopID, busStopName, longitude,latitude);
         busStopRepository.insert(busStop);
 
