@@ -59,13 +59,6 @@ const Sidebar = () => {
             </li>
           </Link>
 
-          <Link to="/bus" style={{ textDecoration: "none" }}>
-            <li>
-              <DirectionsBusFilledRoundedIcon className="icon" />
-              <span>Bus</span>
-            </li>
-          </Link>
-
           <Link to="/driver" style={{ textDecoration: "none" }}>
             <li>
               <PersonAddAlt1Icon className="icon" />
@@ -73,7 +66,13 @@ const Sidebar = () => {
             </li>
           </Link>
 
-
+          <Link to="/bus" style={{ textDecoration: "none" }}>
+            <li>
+              <DirectionsBusFilledRoundedIcon className="icon" />
+              <span>Bus</span>
+            </li>
+          </Link>
+          
           <Link to="/busRoute" style={{ textDecoration: "none" }}>
             <li>
               <AddRoadRoundedIcon className="icon" />

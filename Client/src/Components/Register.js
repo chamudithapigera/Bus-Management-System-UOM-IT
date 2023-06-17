@@ -120,7 +120,7 @@ function Register() {
               <Link to="/driver" style={{ textDecoration: "none" }}>
                 <button type="button" class="cancelbtn">Cancel</button>
               </Link>
-              <button type="submit" class="signupbtn" onClick={save}> Sign Up</button>
+              <button type="submit" class="signupbtn" onClick={save}>Register</button>
             </div>
           </div>
         </form>
