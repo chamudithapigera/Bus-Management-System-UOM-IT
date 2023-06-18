@@ -12,10 +12,19 @@ import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 export default function Driver() {
 
   const [Drivers, setDrivers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchColumn, setSearchColumn] = useState("driverId");
+
   useEffect(() => {
     loadDrivers();
 
   }, []);
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      loadDrivers();
+    }
+  }, [searchTerm]);
 
   const loadDrivers = async () => {
     const result = await axios.get("http://localhost:8080/api/v1/drivers/viewDrivers");
@@ -29,6 +38,21 @@ export default function Driver() {
     }
   };
 
+  const handleSearchTerm = (value) => {
+    setSearchTerm(value);
+  };
+  
+  const handleSearchColumn = (value) => {
+    setSearchColumn(value);
+  };
+  
+  const performSearch = () => {
+    const filteredDrivers = Drivers.filter((driver) =>
+      driver[searchColumn].toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setDrivers(filteredDrivers);
+  };
+
   return (
     <div className='bus'>
       <Sidebar></Sidebar>
@@ -40,9 +64,22 @@ export default function Driver() {
               Driver
             </div>
             <div className='datatableTitle'>
+
               <Link to="/register" >
                 <button type="button" class="btn-outline">Add</button>
               </Link>
+
+              <div className="searchBarContainer">
+              <input className="searchInput" type="text" placeholder="Search..." onChange={(e) => handleSearchTerm(e.target.value)} />
+                <select className="searchColumn" onChange={(e) => handleSearchColumn(e.target.value)}>
+                  <option value="driverId">Driver ID</option>
+                  <option value="firstName">Driver Name</option>
+                  <option value="busId">Bus ID</option>
+                  <option value="telephone">Phone No</option>
+                </select>
+                <button className="searchButton" onClick={performSearch}>Search</button>
+              </div>
+
             </div>
             <div className="tableBorderShadow">
               <table >

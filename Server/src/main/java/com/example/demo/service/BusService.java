@@ -34,8 +34,7 @@ public class BusService {
     }
     public Bus createBusBy(String busID,String capacity){
 
-
-        // Check if a document with the given routeID already exists in the "BusRoute" collection
+        // Check if a document with the given  busID already exists in the "Bus" collection
         if (mongoTemplate.exists(Query.query(Criteria.where("busID").is(busID)), Bus.class)) {
             throw new IllegalArgumentException("Bus with busID " + busID + " already exist,please enter correct busID");
         }
@@ -47,8 +46,11 @@ public class BusService {
         return bus;
 
     }
-    public Bus updateBus(ObjectId id, Bus bus) {
+    public Bus updateBus(ObjectId id, Bus bus, String busID) {
         Bus existingBus = busRepository.findById(id).orElseThrow(() -> new NotFoundException("Bus is not found"));
+        if (mongoTemplate.exists(Query.query(Criteria.where("busID").is(busID)), Bus.class)) {
+            throw new IllegalArgumentException("Bus with busID " + busID + " already exist,please enter correct busID");
+        }
         existingBus.setBusID(bus.getBusID());
         existingBus.setCapacity(bus.getCapacity());
         return busRepository.save(existingBus);

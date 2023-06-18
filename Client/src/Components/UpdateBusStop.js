@@ -12,11 +12,9 @@ export default function UpdateBusStop() {
   const [stop, setStop] = useState({
     busStopID: "",
     busStopName: "",
-    longitude: "",
-    latitude: ""
   });
 
-  const { busStopID, busStopName, longitude, latitude } = stop;
+  const { busStopID, busStopName } = stop;
 
   const onInputChange = (e) => {
     setStop({ ...stop, [e.target.name]: e.target.value });
@@ -28,6 +26,19 @@ export default function UpdateBusStop() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (!busStopID) {
+      alert("Please enter a value for Bus Stop ID.")
+    }
+    else if (!/^B\d{1,4}-S\d{1,2}$/.test(busStopID)) {
+      alert("Bus Stop ID should be in the format B#-R#.(e.g., B8-S3) ");
+    }
+    else if (!busStopName) {
+      alert("Please enter a value for Bus Stop Name.");
+    }
+    else if (!/^[A-Za-z ]{1,100}$/.test(busStopName)) {
+      alert("Bus Stop Name should only contain letters and have a maximum length of 100 characters.");
+    }
+    else{
     if (window.confirm("Are you sure you want to update this bus stop?")) {
       await axios.put(`http://localhost:8080/api/v1/busStop/${id}`, stop)
         .then((response) => {
@@ -40,6 +51,7 @@ export default function UpdateBusStop() {
         });
       navigate('/busStop');
     }
+  }
   };
 
   const loadBusStop = async () => {
@@ -78,31 +90,6 @@ export default function UpdateBusStop() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
-
-            <div className='mb-3'>
-              <label htmlFor='longitude' className='label'>Longitude</label>
-              <input
-                type={"text"}
-                className="input"
-                placeholder='Enter longitude'
-                name='longitude'
-                value={longitude}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-
-            <div className='mb-3'>
-              <label htmlFor='latitude' className='label'>latitude</label>
-              <input
-                type={"text"}
-                className="input"
-                placeholder='Enter latitude'
-                name='latitude'
-                value={latitude}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-
 
             <button type="submit" className="button">Submit</button>
             <Link to="/busStop" style={{ textDecoration: "none" }}>Cancel</Link>

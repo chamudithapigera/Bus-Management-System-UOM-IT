@@ -57,7 +57,7 @@ export default function ReportGenerationForm() {
           {reportActive && (
             <div className="detailsBox">
               <div className='h'>
-                <h1>Monthly Report of Drivers</h1>
+                <h1>Report of Drivers</h1>
               </div>
               <div className='date'>
                 <div>

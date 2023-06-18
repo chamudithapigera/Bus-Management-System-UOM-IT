@@ -33,9 +33,6 @@ export default function ViewBusStop() {
         </div>
         <p><strong>Bus StopID  :</strong> {BusStops.busStopID}</p>
         <p><strong>Bus Stop Name:</strong> {BusStops.busStopName}</p>
-        <p><strong>Longitude:</strong> {BusStops.longitude}</p>
-        <p><strong>Latitude:</strong> {BusStops.latitude}</p>
-
       </div>
     </div>
   );

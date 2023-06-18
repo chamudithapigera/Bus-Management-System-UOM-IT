@@ -6,17 +6,17 @@ import '../Css/forms.scss';
 export default function AddBusRoute() {
 
     let navigate = useNavigate()
+
+
     const [busStop, setBusStop] = useState({
 
         busStopID: "",
         busStopName: "",
-        longitude: "",
-        latitude: "",
         busID: ""
 
     });
 
-    const { busStopID, busStopName, longitude, latitude, busID } = busStop
+    const { busStopID, busStopName, busID } = busStop
 
     const onInputChange = (e) => {
         setBusStop({ ...busStop, [e.target.name]: e.target.value }
@@ -28,12 +28,25 @@ export default function AddBusRoute() {
         if (!busID) {
             alert("Please enter a value for Bus ID.")
         }
-        else if(!busStopID){
+        else if (!busStopID) {
             alert("Please enter a value for Bus Stop ID.")
         }
-         else {
+        else if (!/^B\d{1,4}-S\d{1,2}$/.test(busStopID)) {
+            alert("Bus Stop ID should be in the format B#-R#.(e.g., B8-S3) ");
+        }
+        else if (!busStopName) {
+            alert("Please enter a value for Bus Stop Name.");
+        } 
+        else if (!/^[A-Za-z ]{1,100}$/.test(busStopName)) {
+            alert("Bus Stop Name should only contain letters and have a maximum length of 100 characters.");
+          }
+        else {
             try {
                 await axios.post("http://localhost:8080/api/v1/busStop/addBusStop", busStop)
+                    .then((response) => {
+                        console.log(response.data);
+                        alert("Bus added successfully!");
+                    })
                 navigate("/busStop")
             } catch (error) {
                 if (error.response && error.response.data && error.response.data.message) {
@@ -75,30 +88,6 @@ export default function AddBusRoute() {
                                 placeholder='Enter bus  stop name '
                                 name='busStopName'
                                 value={busStopName}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-
-                        <div className='mb-3'>
-                            <label htmlFor='longitude' className='label'>Longitude</label>
-                            <input
-                                type={"text"}
-                                className="input"
-                                placeholder='Enter longitude'
-                                name='longitude'
-                                value={longitude}
-                                onChange={(e) => onInputChange(e)}
-                            />
-                        </div>
-
-                        <div className='mb-3'>
-                            <label htmlFor='latitude' className='label'>latitude</label>
-                            <input
-                                type={"text"}
-                                className="input"
-                                placeholder='Enter latitude'
-                                name='latitude'
-                                value={latitude}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>

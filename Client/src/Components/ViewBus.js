@@ -59,7 +59,7 @@ export default function ViewBus() {
               <ul>
                 {bus.busStop.map((stop) => (
                   <li key={stop.id}>
-                    {stop.busStopName} - {stop.latitude}, {stop.longitude}
+                    {stop.busStopID}    {stop.busStopName} 
                   </li>
                 ))}
               </ul>
@@ -73,7 +73,7 @@ export default function ViewBus() {
               <ul>
                 {bus.busRoute.map((route) => (
                   <li key={route.id}>
-                    {route.routeName} - {route.routeNO}
+                    {route.routeID}    {route.routeName}
                   </li>
                 ))}
               </ul>

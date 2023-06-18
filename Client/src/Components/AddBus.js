@@ -6,6 +6,7 @@ import '../Css/forms.scss';
 export default function AddBus() {
     //const AddBus = () => {
     let navigate = useNavigate()
+
     const [bus, setBus] = useState({
 
         busID: "",
@@ -25,18 +26,30 @@ export default function AddBus() {
         if (!busID) {
             alert("Please enter a value for Bus ID.")
         }
-        else{
-      try {
-            await axios.post("http://localhost:8080/api/v1/bus_detail/addBus", bus)
-            navigate("/bus")
-        } catch (error) {
-            if (error.response && error.response.data && error.response.data.message) {
-                alert(error.response.data.message);
-            } else {
-                alert("An error occurred while adding the bus route.");
-            }
+        else if (!/^B\d{1,4}$/.test(busID)) {
+            alert("Bus ID should be in the format B#### with a maximum length of 5 characters. (e.g., B8)");
         }
-    }
+        else if (capacity && (!/^\d+$/.test(capacity) || Number(capacity) >= 100)) {
+            alert("Capacity should be a number less than 100.");
+        }
+        else {
+           
+           try {
+                await axios.post("http://localhost:8080/api/v1/bus_detail/addBus", bus)
+                .then((response) => {
+                        console.log(response.data);
+                        alert("Bus added successfully!");
+                    })
+                navigate("/bus")
+            } catch (error) {
+                if (error.response && error.response.data && error.response.data.message) {
+                    alert(error.response.data.message);
+                } else {
+                    alert("An error occurred while adding the bus.");
+                }
+            }
+       
+        }
     }
 
     return (

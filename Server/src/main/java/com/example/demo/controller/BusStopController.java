@@ -28,7 +28,7 @@ public class BusStopController {
     @PostMapping("/addBusStop")
     public ResponseEntity<BusStop> createBusStop(@RequestBody Map<String, String> payload){
 
-        return new ResponseEntity<BusStop>(busStopService.createBusStopBy(payload.get("busStopID"),payload.get("busStopName"),payload.get("longitude"),payload.get("latitude"),payload.get("busID")), HttpStatus.CREATED);
+        return new ResponseEntity<BusStop>(busStopService.createBusStopBy(payload.get("busStopID"),payload.get("busStopName"),payload.get("busID")), HttpStatus.CREATED);
     }
 
     //get all documents in collection

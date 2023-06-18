@@ -30,19 +30,31 @@ export default function UpdateBus() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        if (window.confirm("Are you sure you want to update this bus ?")) {
-            await axios.put(`http://localhost:8080/api/v1/bus_detail/${id}`, bus)
-                .then((response) => {
-                    console.log(response.data);
-                    alert("Bus  updated successfully!");
-                })
-                .catch((error) => {
-                    console.error(error);
-                    alert("Failed to update bus ");
-                });
+        if (!busID) {
+            alert("Please enter a value for Bus ID.")
         }
-        navigate('/bus');
-
+        else if (!/^B\d{1,4}$/.test(busID)) {
+            alert("Bus ID should be in the format B#### with a maximum length of 5 characters. (e.g., B8)");
+        }
+        else if (capacity && (!/^\d+$/.test(capacity) || Number(capacity) >= 100)) {
+            alert("Capacity should be a number less than 100.");
+        }
+        else {
+            if
+            (window.confirm("Are you sure you want to update this bus ?")) {
+                await axios.put(`http://localhost:8080/api/v1/bus_detail/${id}`, bus)
+                    .then((response) => {
+                        console.log(response.data);
+                        alert("Bus  updated successfully!");
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        alert("Failed to update bus ");
+                    });
+            }
+            navigate('/bus');
+        
+        }
     };
 
     const loadBus = async () => {

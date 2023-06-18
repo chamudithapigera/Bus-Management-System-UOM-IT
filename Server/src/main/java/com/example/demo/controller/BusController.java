@@ -61,8 +61,8 @@ public class BusController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Bus> updateBus(@PathVariable("id") ObjectId id, @RequestBody Bus bus) {
-        Bus updatedBus = busService.updateBus(id, bus);
+    public ResponseEntity<Bus> updateBus(@PathVariable("id") ObjectId id, @RequestBody Bus bus,String busID) {
+        Bus updatedBus = busService.updateBus(id, bus,busID);
         return ResponseEntity.ok(updatedBus);
     }
 

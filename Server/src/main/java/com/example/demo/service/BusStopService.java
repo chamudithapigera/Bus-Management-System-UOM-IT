@@ -27,7 +27,7 @@ public  class BusStopService {
     private BusRepository busRepository;
 
 
-    public BusStop createBusStopBy(String busStopID,String busStopName, String longitude,String latitude, String busID){
+    public BusStop createBusStopBy(String busStopID,String busStopName,  String busID){
         if (!mongoTemplate.exists(Query.query(Criteria.where("busID").is(busID)), Bus.class)) {
             throw new IllegalArgumentException("Bus with busID " + busID + " does not exist,please enter correct busID");
         }
@@ -37,7 +37,7 @@ public  class BusStopService {
             throw new IllegalArgumentException("Bus Stop  with busStopID " + busStopID + " already exist,please enter correct busStopID");
         }
 
-        BusStop busStop = new BusStop( busStopID, busStopName, longitude,latitude);
+        BusStop busStop = new BusStop( busStopID, busStopName);
         busStopRepository.insert(busStop);
 
         mongoTemplate.update(Bus.class)
@@ -57,7 +57,6 @@ public  class BusStopService {
         BusStop existingBusStop = busStopRepository.findById(id).orElseThrow(() -> new NotFoundException("Bus stop not found"));
         existingBusStop.setBusStopID(busStop.getBusStopID());
         existingBusStop.setBusStopName(busStop.getBusStopName());
-        existingBusStop.setLongitude(busStop.getLongitude());
         return busStopRepository.save(existingBusStop);
     }
 

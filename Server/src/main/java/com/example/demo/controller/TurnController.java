@@ -51,7 +51,7 @@ public class TurnController {
    @GetMapping("/viewTurn")
     public List<Turn> getAllTurns() {
         Query query = new Query();
-      //  query.fields().exclude("driverID");
+
         query.with(Sort.by(Sort.Direction.ASC, "routeName"));
         List<Turn> turns = mongoTemplate.find(query, Turn.class);
         return turns;

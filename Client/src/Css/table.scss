@@ -19,6 +19,37 @@
 
       .datatableTitle {
         padding-left: 1px;
+        .searchBarContainer {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          margin-top: 10px;
+        }
+        
+        .searchColumn,
+        .searchInput,
+        .searchButton {
+          height: 30px;
+          margin-left: 10px;
+          padding: 5px 10px;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          outline: none;
+          font-size: 14px;
+          //font-weight: bold;
+        }
+        
+        .searchButton {
+          background-color: rgb(23, 99, 62);
+          color: white;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+        
+        .searchButton:hover {
+          background-color: #45a049;
+        }
+        
       }
 
       .delete-turn {
@@ -64,7 +95,11 @@
   th {
     background-color: #050008;
     color: white;
+    position: relative;
+  //cursor: pointer;
+ 
   }
+ 
 
   tr:nth-child(even) {
     background-color: #f2f2f2;
@@ -90,7 +125,18 @@
       padding-bottom: 3px;
       text-align: center;
       width: 80px;
-      height: 35px
+      height: 30px;
+      cursor: pointer;
+    }
+    .btn-outline:hover{
+      background-color: #3f7c42;
+    }
+    
+    .sortIcon {
+      margin-left: 5px;
+      font-size: 16px;
+      color: #808080;
+      pointer-events: none;
     }
   }
 
@@ -109,5 +155,6 @@
     font-size: 200px;
     color: rgb(82, 46, 92);
   }
-
+ 
+  
 }

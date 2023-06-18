@@ -7,6 +7,8 @@ export default function UpdateBusRoute() {
 
     let navigate = useNavigate();
 
+    const routeNameRegex = /^[a-z]+(?:-[a-z]+)*$/;
+
     const { id } = useParams();
 
     const [route, setRoute] = useState({
@@ -27,20 +29,42 @@ export default function UpdateBusRoute() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        if (window.confirm("Are you sure you want to update this bus route?")) {
-            await axios.put(`http://localhost:8080/api/v1/busRoute/${id}`, route)
-                .then((response) => {
-                    console.log(response.data);
-                    alert("Bus route updated successfully!");
-                })
-                .catch((error) => {
-                    console.error(error);
-                    alert("Failed to update bus route");
-                });
+        if (!routeID) {
+            alert("Please enter a value for Bus Route ID.")
         }
-        navigate('/busRoute');
-
+        else if (!/^B\d{1,4}-R\d{1,2}$/.test(routeID)) {
+            alert("Bus Route ID should be in the format B#-R#.(e.g., B8-R3) ");
+        }
+        else if (routeNO && (!/^\d{1,3}$/.test(routeNO))) {
+            alert("Route Number should be a number with a maximum of three digits.");
+        }
+        else if (!routeName) {
+            alert("Please enter a value for Route Name.")
+        }
+        else if (
+            routeName.length >= 100 || !routeNameRegex.test(routeName)) {
+            alert(
+                "Route Name should only contain simple letters and a hyphen (-), with a maximum length of 100 characters.(e.g., katubedda-moratuwa)"
+            );
+        } else {
+            if (window.confirm("Are you sure you want to update this bus route?")) {
+                await axios.put(`http://localhost:8080/api/v1/busRoute/${id}`, route)
+                    .then((response) => {
+                        console.log(response.data);
+                        alert("Bus route updated successfully!");
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        alert("Failed to update bus stop");
+                      });
+            }
+            navigate('/busRoute');
+    
+        }
     };
+
+
+
 
     const loadBusRoute = async () => {
         const result = await axios.get(`http://localhost:8080/api/v1/busRoute/viewone/${id}`);

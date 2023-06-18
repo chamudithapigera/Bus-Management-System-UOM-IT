@@ -7,16 +7,26 @@ import Navbar from '../Components/Navbar';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 
 export default function Bus() {
 
   const [buses, setBuses] = useState([]);
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchColumn, setSearchColumn] = useState("busID");
+  const [sortColumn, setSortColumn] = useState('busID');
+  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
     loadBuses();
 
   }, []);
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      loadBuses();
+    }
+  }, [searchTerm]);
 
   const loadBuses = async () => {
     const result = await axios.get("http://localhost:8080/api/v1/bus_detail/viewBus");
@@ -30,6 +40,29 @@ export default function Bus() {
     }
   };
 
+  const handleSearchTerm = (value) => {
+    setSearchTerm(value);
+  };
+
+  const handleSearchColumn = (value) => {
+    setSearchColumn(value);
+  };
+
+  const performSearch = () => {
+    const filteredBus = buses.filter((bus) =>
+      bus[searchColumn].toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setBuses(filteredBus);
+  };
+
+  const handleSort = (column) => {
+    if (column === sortColumn) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortColumn(column);
+      setSortOrder('asc');
+    }
+  };
 
   return (
     <div className='bus'>
@@ -44,51 +77,69 @@ export default function Bus() {
             </div>
             <div className='datatableTitle'>
               <Link to="/addbus" ><button type="button" class="btn-outline">Add</button></Link>
+
+              <div className="searchBarContainer">
+                <input className="searchInput" type="text" placeholder="Search..." onChange={(e) => handleSearchTerm(e.target.value)} />
+                <select className="searchColumn" onChange={(e) => handleSearchColumn(e.target.value)}>
+                  <option value="busID">Bus ID</option>
+                  <option value="capacity">Capacity</option>
+                </select>
+                <button className="searchButton" onClick={performSearch}>Search</button>
+              </div>
+
             </div>
             <div className="tableBorderShadow">
+
               <table >
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th scope="col">Bus ID</th>
-                    <th scope="col">Capacity</th>
-
+                    <th scope="col" onClick={() => handleSort('busID')}>
+                      Bus ID
+                      {sortColumn === 'busID' && sortOrder === 'asc' && <ArrowUpward />}
+                      {sortColumn === 'busID' && sortOrder === 'desc' && <ArrowDownward />}
+                    </th>
+                    <th scope="col" onClick={() => handleSort('capacity')}>
+                      Capacity
+                      {sortColumn === 'capacity' && sortOrder === 'asc' && <ArrowUpward />}
+                      {sortColumn === 'capacity' && sortOrder === 'desc' && <ArrowDownward />}
+                    </th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
-
-
                 <tbody>
-                  {buses.map((bus, index) => (
-                    <tr >
-                      <th scope="row" key={index}>{index + 1}</th>
-                      <td>{bus.busID}</td>
-                      <td>{bus.capacity}</td>
+                  {buses
+                    .sort((a, b) => {
+                      if (sortOrder === 'asc') {
+                        return a[sortColumn].localeCompare(b[sortColumn]);
+                      } else {
+                        return b[sortColumn].localeCompare(a[sortColumn]);
+                      }
+                    })
+                    .map((bus, index) => (
+                      <tr >
+                        <th scope="row" key={index}>{index + 1}</th>
+                        <td>{bus.busID}</td>
+                        <td>{bus.capacity}</td>
 
-                      <td>
-                        <Link
-                          className='btn btn-warning mx-2'
-                          to={`/viewbus/${bus.id}`}
-                        >
-                          <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
-                        </Link>
+                        <td>
+                          <Link className='btn btn-warning mx-2' to={`/viewbus/${bus.id}`} >
+                            <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
+                          </Link>
 
-                        <Link className='btn btn-warning mx-2' to={`/updateBus/${bus.id}`}>
-                          <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
-                        </Link>
+                          <Link className='btn btn-warning mx-2' to={`/updateBus/${bus.id}`}>
+                            <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
+                          </Link>
 
-                        <button onClick={() => deleteBus(bus.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
-
-                      </td>
-                    </tr>
-
-                  ))}
-
+                          <button onClick={() => deleteBus(bus.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
+
             </div>
           </div>
-
         </div>
       </div>
     </div>

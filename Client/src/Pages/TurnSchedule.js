@@ -14,10 +14,19 @@ import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 export default function TurnSchedule() {
 
   const [busTurns, setBusTurns] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchColumn, setSearchColumn] = useState("turnNo");
+
   useEffect(() => {
     loadBusTurns();
 
   }, []);
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      loadBusTurns();
+    }
+  }, [searchTerm]);
 
   const loadBusTurns = async () => {
     const result = await axios.get("http://localhost:8080/api/v1/turn/viewTurn");
@@ -31,17 +40,28 @@ export default function TurnSchedule() {
     }
   };
 
-
-
   const handleDeleteAllTurns = () => {
     if (window.confirm("Are you sure you want to delete all bus turns?")) {
       axios.delete("http://localhost:8080/api/v1/turn/deleteAllTurns");
       loadBusTurns();
 
     }
-
-
   }
+
+  const handleSearchTerm = (value) => {
+    setSearchTerm(value);
+  };
+  
+  const handleSearchColumn = (value) => {
+    setSearchColumn(value);
+  };
+  
+  const performSearch = () => {
+    const filteredTurns = busTurns.filter((turn) =>
+    turn[searchColumn].toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setBusTurns(filteredTurns);
+  };
 
   return (
     <div className='bus'>
@@ -59,8 +79,18 @@ export default function TurnSchedule() {
                 <button type="button" class="btn-outline">Add</button>
               </Link>
 
-              <AssignTurn />
+              <div className="searchBarContainer">
+              <input className="searchInput" type="text" placeholder="Search..." onChange={(e) => handleSearchTerm(e.target.value)} />
+                <select className="searchColumn" onChange={(e) => handleSearchColumn(e.target.value)}>
+                  <option value="turnNo">Turn No</option>
+                  <option value="turnTime">Turn Time</option>
+                  <option value="routeName">Route Name</option>
+                </select>
+                <button className="searchButton" onClick={performSearch}>Search</button>
+              </div>
+              
             </div>
+            <AssignTurn />
             <div className="tableBorderShadow">
               <table>
 
