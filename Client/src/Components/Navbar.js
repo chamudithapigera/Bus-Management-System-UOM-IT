@@ -26,14 +26,19 @@ const Navbar = () => {
             <DarkModeOutlinedIcon className="icon" onClick={() => dispatch({type: "TOGGLE"})}/>
           </div>
           
+          <Link to="/notification" >
           <div className="item">
             <NotificationsNoneOutlinedIcon className="icon" />
             <div className="counter">1</div>
           </div>
+          </Link>
+          
+          <Link to="/chat" >
           <div className="item">
             <ChatBubbleOutlineOutlinedIcon className="icon" />
             <div className="counter">2</div>
           </div>
+          </Link>
 
           <Link to="/profile" >
           <div className="item">

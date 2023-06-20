@@ -1,7 +1,7 @@
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
 
-const Notification = () => {
+const Chat = () => {
 
     return (
   
@@ -17,5 +17,5 @@ const Notification = () => {
     );
   };
   
-  export default Notification;
+  export default Chat;
   

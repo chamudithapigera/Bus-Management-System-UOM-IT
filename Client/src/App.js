@@ -8,7 +8,7 @@ import AddBusRoute from './Components/AddBusRoute';
 import AddBusStop from './Components/AddBusStop';
 import BusStop from './Pages/BusStop';
 import Driver from './Pages/Driver';
-
+import Notification from './Pages/Notification';
 import { useContext, useState } from "react";
 import { DarkModeContext } from './Components/darkModeContext';
 import TurnSchedule from './Pages/TurnSchedule';
@@ -28,7 +28,7 @@ import ViewBusStop from './Components/ViewBusStop';
 import ViewBusTurn from './Components/ViewTurn';
 import ViewDriver from './Components/ViewDriver';
 import Register from './Components/Register';
-
+import Chat from './Pages/Chat';
 
 function App() {
   const {darkMode}= useContext(DarkModeContext);
@@ -59,11 +59,13 @@ function App() {
             <Route exact path="/viewbus/:id" element={<ViewBus/>} />
             <Route path="/viewreport" element={<ReportGenerationForm />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/notification" element={<Notification />} />
             <Route exact path="/viewbusroute/:id" element={<ViewBusRoute/>} />
             <Route exact path="/viewbusstop/:id" element={<ViewBusStop/>} />
             <Route exact path="/viewbusturn/:id" element={<ViewBusTurn/>} />
             <Route exact path="/viewdriver/:id" element={<ViewDriver/>} />
-            
+            <Route path="/chat" element={<Chat />} />
+
         </Route>
       </Routes>
      </BrowserRouter>
