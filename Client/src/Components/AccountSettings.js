@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const AccountSettings = () => {
   const { userData } = useContext(UserContext);
+  // If userData is undefined or null, prevents errors from occurring when trying to access properties of undefined or null objects
   const { userName1, userName2, email, phone } = userData || {};
   const concatenatedUserName = `${userName1} ${userName2}`;
   const { profileImage, setProfileImage } = useContext(ProfileImageContext);
@@ -56,6 +57,7 @@ const AccountSettings = () => {
     }
   };
 
+  
   return (
     <div className='accountsettings'>
       <div className="top">

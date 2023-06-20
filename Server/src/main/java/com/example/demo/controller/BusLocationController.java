@@ -36,7 +36,6 @@ public class BusLocationController {
 */
 
     //GET Request - returns a list of nearby buses based on the user's location
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/nearby/{longitude}/{latitude}")
     public List<BusLocationWithDistanceAndDuration> getNearbyBuses(@PathVariable("longitude") double longitude, @PathVariable("latitude") double latitude) {
         return busLocationService.getNearbyBuses(longitude, latitude);

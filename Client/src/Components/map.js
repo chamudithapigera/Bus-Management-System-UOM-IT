@@ -54,10 +54,13 @@ function Map() {
     return <SkeletonText />;
   }
 
+  
+// sets up a reference to the Autocomplete instance
   const onLoad = (autocomplete) => {
     setAutocomplete(autocomplete);
   };
 
+  //search for places on the map by typing in a search query
   const onPlaceChanged = () => {
     if (autocomplete !== null) {
       const place = autocomplete.getPlace();
