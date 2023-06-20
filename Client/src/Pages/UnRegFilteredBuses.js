@@ -5,6 +5,7 @@ import image2 from "../Css/BUS_MANAGEMENT_SYSTEM.jpeg";
 import { useLocation,Link,useNavigate } from 'react-router-dom';
 import '../Css/table.scss';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 
 
 
@@ -30,7 +31,11 @@ const UnRegFilteredBuses = () => {
           </div>
           <div className="name"><p>TRAVO</p></div>
         </div>
-    
+        <div className="item">
+            <ChatBubbleOutlineOutlinedIcon className="icon"
+            onClick={()=> {navigate('/chat')}} />
+            <div className="counter">2</div>
+          </div>
         <div className="item">
             <button  onClick={()=> {navigate('/login')}}><span></span>Login</button>
           </div>

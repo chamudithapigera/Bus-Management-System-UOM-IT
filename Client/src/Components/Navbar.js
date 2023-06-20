@@ -38,6 +38,12 @@ const Navbar = () => {
           </div>
           
           <div className="item">
+            <ChatBubbleOutlineOutlinedIcon className="icon"
+            onClick={()=> {navigate('/chat')}} />
+            <div className="counter">2</div>
+          </div>
+          
+          <div className="item">
             <img
               src={profileImage}
               alt=""

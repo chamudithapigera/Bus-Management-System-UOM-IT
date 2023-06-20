@@ -22,8 +22,30 @@
             .item {
                 display: flex;
                 //align-items: center;
-                margin-right: 20px;
+                margin-right: 17px;
                 position: relative;
+
+                .icon {
+                  font-size: 30px;
+                  color: #e3e3e3;
+                  margin-top: 5px;
+              }
+
+              .counter {
+                width: 15px;
+                height: 15px;
+                background-color: red;
+                border-radius: 50%;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 10px;
+                font-weight: bold;
+                position: absolute;
+                top: 0px;
+                right: -5px;
+            }
 
                 .icontop {
                     width: 40px;

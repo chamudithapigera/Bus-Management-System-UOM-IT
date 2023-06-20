@@ -4,6 +4,9 @@ import image2 from "../Css/BUS_MANAGEMENT_SYSTEM.jpeg";
 import image from "../Css/Bus_background.png"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
+
+
 
 const UnRegViewBus = () => {
   const location = useLocation();
@@ -28,7 +31,11 @@ const UnRegViewBus = () => {
             </div>
             <div className="name"><p>TRAVO</p></div>
           </div>
-
+          <div className="item">
+            <ChatBubbleOutlineOutlinedIcon className="icon"
+            onClick={()=> {navigate('/chat')}} />
+            <div className="counter">2</div>
+          </div>
           <div className="item">
             <button onClick={() => { navigate('/login') }}><span></span>Login</button>
           </div>

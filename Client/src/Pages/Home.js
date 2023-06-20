@@ -2,12 +2,16 @@ import "../Css/home.scss";
 import image2 from "../Css/BUS_MANAGEMENT_SYSTEM.jpeg";
 import { useNavigate } from 'react-router-dom';
 import UnRegMap from "../Components/UnRegMap";
+import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
+
 
 const Home = () => {
 
   const navigate = useNavigate();
 
   return (
+    
+    <div className="container">
     <div className="home">
       <div className="homeContainer">
         <div className="items">
@@ -18,6 +22,12 @@ const Home = () => {
               <img src={image2} className="icontop" />
             </div>
             <div className="name"><p>TRAVO</p></div>
+          </div>
+
+          <div className="item">
+            <ChatBubbleOutlineOutlinedIcon className="icon"
+            onClick={()=> {navigate('/chat')}} />
+            <div className="counter">2</div>
           </div>
 
           <div className="item">
@@ -36,7 +46,7 @@ const Home = () => {
 
       </div>
 
-
+      </div>
 
     </div>
   );

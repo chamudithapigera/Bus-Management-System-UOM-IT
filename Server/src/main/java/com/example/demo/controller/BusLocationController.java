@@ -5,6 +5,7 @@ import com.example.demo.model.BusLocationWithDistanceAndDuration;
 import com.example.demo.repository.BusLocationRepository;
 import com.example.demo.service.BusLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -26,14 +27,14 @@ public class BusLocationController {
         return busLocationRepository.findAll();
     }
 
-/*
+
     //POST Request - saves a new bus location
     @PostMapping("/save")
     public ResponseEntity<?> saveBusLocation(@RequestBody BusLocation busLocation) {
         busLocationService.saveBusLocation(busLocation);
         return ResponseEntity.ok("Bus location saved successfully");
     }
-*/
+
 
     //GET Request - returns a list of nearby buses based on the user's location
     @GetMapping("/nearby/{longitude}/{latitude}")
