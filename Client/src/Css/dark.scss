@@ -219,7 +219,7 @@
     }
 
     .container1 {
- 
+
         .detailsBox {
             background-color: rgb(22, 22, 22);
             box-shadow: 0 0 10px rgb(22, 22, 22);
@@ -228,14 +228,17 @@
                 .label {
                     color: #f3f3f3;
                 }
+
                 .input {
                     border: 1px solid #0a0909;
                 }
             }
+
             .button {
                 background-color: #49494b;
                 color: #b7b5b5;
             }
+
             a {
                 color: #474b4b;
             }
@@ -243,8 +246,60 @@
     }
 
     .detailsBox {
-      background-color: rgb(55, 56, 55);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        background-color: rgb(55, 56, 55);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
+
+    .accountsettings {
+        .top {
+            .left {
+                background-color: #282727;
+                -webkit-box-shadow: 4px 4px 10px 2px rgba(20, 19, 19, 0.47);
+                box-shadow: 4px 6px 10px 2px rgba(87, 85, 85, 0.47);
+
+                .editButton {
+                    color: #707072;
+                    background-color: rgba(20, 19, 19, 0.47);
+                }
+
+                .details {
+                    .itemTitle {
+                        color: #555;
+                    }
+
+                    .detailItem {
+                        .itemKey {
+                            color: rgb(90, 87, 87);
+                        }
+                    }
+                }
+            }
+        }
+
+        .editInput {
+            border: 1px solid #262525;
+        }
+
+        .saveButton {
+            background-color: #5c605c;
+            color: rgb(174, 169, 169);
+        }
+
+        .saveButton:hover {
+            background-color: #454545;
+        }
+
+    }
+
+    .bottom {
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    }
+
+    .title {
+        color: lightgray;
+    }
+
+
 
 }

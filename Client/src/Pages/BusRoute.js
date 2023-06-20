@@ -17,10 +17,14 @@ export default function BusRoute() {
   const [searchColumn, setSearchColumn] = useState("routeName");
   const [sortColumn, setSortColumn] = useState('routeID');
   const [sortOrder, setSortOrder] = useState('asc');
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
     loadBusRoutes();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (searchTerm === "") {

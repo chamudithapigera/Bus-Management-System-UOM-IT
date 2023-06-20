@@ -112,11 +112,6 @@ const Sidebar = () => {
           </li>
           </Link>
 
-          <li>
-            <ExitToAppOutlinedIcon className="icon" />
-            <span>Logout</span>
-          </li>
-
         </ul>
       </div>
       <div className="bottom">

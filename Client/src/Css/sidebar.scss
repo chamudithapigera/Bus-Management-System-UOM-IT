@@ -79,7 +79,7 @@
   .bottom {
     display: flex;
     align-items: center;
-    margin: 10px;
+    margin: 5px;
 
     .colorOption {
       width: 20px;
@@ -87,7 +87,7 @@
       border-radius: 5px;
       border: 1px solid #706598;
       cursor: pointer;
-      margin: 5px;
+      margin: 1px;
 
       &:nth-child(1) {
         background-color: whitesmoke;

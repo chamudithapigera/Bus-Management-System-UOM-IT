@@ -1,0 +1,147 @@
+/* responsive.scss */
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .datatableTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .searchBarContainer {
+    display: flex;
+    align-items: center;
+  
+    .searchInput {
+      width: 200px;
+      margin-right: 10px;
+    }
+  
+    .searchColumn {
+      width: 120px;
+      margin-right: 10px;
+    }
+  
+    .searchButton {
+      background-color: #007bff;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+  
+  .tableBorderShadow {
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        vertical-align: middle;
+      }
+  
+      th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+        cursor: pointer;
+      }
+  
+      tbody {
+        tr {
+          &:hover {
+            background-color: #f2f2f2;
+          }
+  
+          &:nth-child(even) {
+            background-color: #f8f9fa;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Media query for tablets (min-width: 768px) */
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  
+    .title {
+      font-size: 32px;
+    }
+  
+    .datatableTitle {
+      margin-bottom: 20px;
+    }
+  
+    .searchBarContainer {
+      .searchInput {
+        width: 300px;
+      }
+  
+      .searchColumn {
+        width: 150px;
+      }
+    }
+  
+    .tableBorderShadow {
+      th,
+      td {
+        padding: 12px;
+      }
+    }
+  }
+  
+  /* Media query for desktop screens (min-width: 992px) */
+  @media (min-width: 992px) {
+    .container {
+      max-width: 992px;
+    }
+  
+    .title {
+      font-size: 40px;
+    }
+  
+    .datatableTitle {
+      margin-bottom: 30px;
+    }
+  
+    .searchBarContainer {
+      .searchInput {
+        width: 400px;
+      }
+  
+      .searchColumn {
+        width: 180px;
+      }
+    }
+  
+    .tableBorderShadow {
+      th,
+      td {
+        padding: 14px;
+      }
+    }
+  }
+  

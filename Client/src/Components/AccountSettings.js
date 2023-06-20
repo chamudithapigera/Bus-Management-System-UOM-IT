@@ -6,12 +6,12 @@ import { Link,useState } from "react";
 const AccountSettings = () => {
   
   // User details from the user login
-  const [name, setName] = useState('Jane Doe');
-  const [email, setEmail] = useState('janedoe@gmail.com');
-  const [phone, setPhone] = useState('+1 2345 67 89');
-  const [address, setAddress] = useState('Elton St. 234 Garden Yd. NewYork');
-  const [country, setCountry] = useState('USA');
-  const [image, setImage] = useState('https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+  const [name, setName] = useState('Sahan Perera');
+  const [email, setEmail] = useState('sahanperera@gmail.com');
+  const [phone, setPhone] = useState('+94 774 573 999');
+  const [address, setAddress] = useState('N0.18, Green Park, Kadawatha');
+  const [adminID, setadminID] = useState('D1');
+  const [image, setImage] = useState('https://th.bing.com/th/id/OIP.Gt3FCsTLbyw8ZygkTjTzhwAAAA?pid=ImgDet&w=347&h=346&rs=1');
 
   // Edit mode state variable
   const [isEditing, setIsEditing] = useState(false);
@@ -87,8 +87,8 @@ const AccountSettings = () => {
                     <input
                       className="editInput"
                       type="text"
-                      value={country}
-                      onChange={(e) => setCountry(e.target.value)}
+                      value={adminID}
+                      onChange={(e) => setadminID(e.target.value)}
                     />
                     <input
                       id="imageInput"
@@ -116,8 +116,8 @@ const AccountSettings = () => {
                       <span className="itemValue">{address}</span>
                     </div>
                     <div className="detailItem">
-                      <span className="itemKey">Country:</span>
-                      <span className="itemValue">{country}</span>
+                      <span className="itemKey">Depo Admin ID:</span>
+                      <span className="itemValue">{adminID}</span>
                     </div>
                   </>
                 )}

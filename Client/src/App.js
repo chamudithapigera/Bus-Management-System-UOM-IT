@@ -28,9 +28,6 @@ import ViewBusStop from './Components/ViewBusStop';
 import ViewBusTurn from './Components/ViewTurn';
 import ViewDriver from './Components/ViewDriver';
 import Register from './Components/Register';
-import Login from './Components/Login';
-import EditBusStop from './Components/EditBusStop';
-
 
 
 function App() {
@@ -51,7 +48,6 @@ function App() {
             <Route path="/addStop" element={<AddBusStop />} />
             <Route path="/driver" element={<Driver />} />
             <Route path="/register" element={<Register />} />
-            
             <Route path="turn" element={<TurnSchedule />} />
             <Route path="/addTurn" element={<AddTurn />} />
             <Route path="/attendance" element={<DriverAttendance />} />
@@ -67,7 +63,6 @@ function App() {
             <Route exact path="/viewbusstop/:id" element={<ViewBusStop/>} />
             <Route exact path="/viewbusturn/:id" element={<ViewBusTurn/>} />
             <Route exact path="/viewdriver/:id" element={<ViewDriver/>} />
-           
             
         </Route>
       </Routes>
