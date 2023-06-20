@@ -77,7 +77,7 @@ export default function AddTurn() {
                             <input
                                 type={"text"}
                                 className="input"
-                                placeholder='Enter turn no: "T5"  '
+                                placeholder='e.g. "T5"  '
                                 name='turnNo'
                                 value={turnNo}
                                 onChange={(e) => onInputChange(e)}
@@ -88,7 +88,7 @@ export default function AddTurn() {
                             <input
                                 type={"text"}
                                 className="input"
-                                placeholder='Enter turn time'
+                                placeholder='time format HH:MM.  (16.30)'
                                 name='turnTime'
                                 value={turnTime}
                                 onChange={(e) => onInputChange(e)}
@@ -99,7 +99,7 @@ export default function AddTurn() {
                             <input
                                 type={"text"}
                                 className="input"
-                                placeholder='Enter route name'
+                                placeholder='use simple letters  "katubedda-moratuwa"'
                                 name='routeName'
                                 value={routeName}
                                 onChange={(e) => onInputChange(e)}

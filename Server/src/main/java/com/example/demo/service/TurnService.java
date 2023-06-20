@@ -34,8 +34,6 @@ public class TurnService {
         turnRepository.insert(turn);
     }
 
-
-
     public Turn updateTurn(ObjectId id, Turn turn) {
         Turn existingTurn = turnRepository.findById(id).orElseThrow(() -> new NotFoundException("Turn not found"));
         existingTurn.setTurnNo(turn.getTurnNo());
@@ -49,13 +47,11 @@ public class TurnService {
         LocalDate today = LocalDate.now();
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.match(Criteria.where("status").is("present").and("date").is(today)),
-                //Aggregation.match(Criteria.where("status").is("present")),
                 Aggregation.sort(Sort.Direction.ASC, "checkInTime"),
                 Aggregation.project("driverID").andExclude("_id")
         );
         AggregationResults<String> results = mongoTemplate.aggregate(aggregation, "driverAttendance", String.class);
-        List<String> driverIds = results.getMappedResults();
-
+        List<String> driverIds = results.getMappedResults();  // retrieve  mapped results of  aggregation query
 
 
         // Get the first record in the "turn" collection to compare routeNames
@@ -92,8 +88,7 @@ public class TurnService {
         // Assign filtered driverIDs to records that have a different routeName
         List<Turn> differentRouteTurns = mongoTemplate.find(Query.query(Criteria.where("routeName").ne(firstRouteName)), Turn.class);
         int differentRouteCount = differentRouteTurns.size();
-      //  int driverIndex = sameRouteCount;
-        //int numDrivers = driverIds.size();
+
         if (differentRouteCount == numDrivers) {
             for (int i = 0; i < differentRouteCount; i++) {
                 Update update = new Update().set("driverID", driverIds.get(i));
@@ -126,6 +121,3 @@ public class TurnService {
         return turnRepository.count();
     }
 }
-// public void resetTurnCollection() {
-//        mongoTemplate.remove(new Query(), "turn");
-//    }

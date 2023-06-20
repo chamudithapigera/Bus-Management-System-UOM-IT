@@ -9,15 +9,26 @@ import java.util.Optional;
 @Repository
 public interface BusRepository extends MongoRepository<Bus, ObjectId> {
 
-    Optional<Bus> findById(String busId);
+    //get one document data of collection
+   Optional<Bus> findById(String busId);
 
-    Bus findByBusRouteId(String busRouteID);
 //check busid is in driver collection
     boolean existsByBusID(String busId);
 
 
 
-    // List<Bus> findByBusStop(BusStop busStop);
 
+
+
+
+
+
+
+
+
+
+
+
+    Bus findByBusRouteId(String busRouteID);
 
 }

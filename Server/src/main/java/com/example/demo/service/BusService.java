@@ -2,9 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.model.Bus;
-import com.example.demo.model.BusRoute;
-import com.example.demo.model.BusStop;
-import com.example.demo.model.Driver;
 import com.example.demo.repository.BusRepository;
 import com.example.demo.repository.BusStopRepository;
 import org.bson.types.ObjectId;
@@ -42,23 +39,20 @@ public class BusService {
         Bus bus = new Bus( busID,capacity );
         busRepository.insert(bus);
 
-
         return bus;
 
     }
-    public Bus updateBus(ObjectId id, Bus bus, String busID) {
+    public Bus updateBus(ObjectId id, Bus bus) {
         Bus existingBus = busRepository.findById(id).orElseThrow(() -> new NotFoundException("Bus is not found"));
-        if (mongoTemplate.exists(Query.query(Criteria.where("busID").is(busID)), Bus.class)) {
-            throw new IllegalArgumentException("Bus with busID " + busID + " already exist,please enter correct busID");
-        }
+
         existingBus.setBusID(bus.getBusID());
         existingBus.setCapacity(bus.getCapacity());
         return busRepository.save(existingBus);
     }
 
-    //get driver count in collection
-    public long getBusCount() {
-        return busRepository.count();
+    //get bus count in collection
+    public int getBusCount() {
+        return (int) busRepository.count();
     }
 
 

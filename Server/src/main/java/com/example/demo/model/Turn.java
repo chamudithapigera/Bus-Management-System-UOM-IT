@@ -16,7 +16,6 @@ public class Turn {
     @Id
     private String id;
     private String turnNo;
-    //private LocalDate turnDate;
     private String turnTime;
     private String routeName;
     private String driverID;

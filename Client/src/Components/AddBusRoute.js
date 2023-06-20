@@ -82,7 +82,7 @@ export default function AddBusRoute() {
                             <input
                                 type={"text"}
                                 className="input"
-                                placeholder='Enter route ID '
+                                placeholder='e.g., B8-R3 '
                                 name='routeID'
                                 value={routeID}
                                 onChange={(e) => onInputChange(e)}
@@ -104,7 +104,7 @@ export default function AddBusRoute() {
                             <input
                                 type={"text"}
                                 className="input"
-                                placeholder='Enter route name'
+                                placeholder='use simple letters  "katubedda-moratuwa'
                                 name='routeName'
                                 value={routeName}
                                 onChange={(e) => onInputChange(e)}
@@ -116,7 +116,7 @@ export default function AddBusRoute() {
                             <input
                                 type={"text"}
                                 className="input"
-                                placeholder='Enter bus ID'
+                                placeholder='e.g., B8'
                                 name='busID'
                                 value={busID}
                                 onChange={(e) => onInputChange(e)}

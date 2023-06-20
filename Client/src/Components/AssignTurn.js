@@ -9,7 +9,6 @@ function AssignTurn() {
       if (buttonEnabled) {
         setButtonEnabled(false);
   
-       
         fetch('http://localhost:8080/api/v1/turn/present/driverIds')
           .then(response => response.json())
           .then(data => console.log(data))

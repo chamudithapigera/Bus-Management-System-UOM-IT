@@ -68,6 +68,22 @@ public class BusRouteController {
         return "Bus Route with id " +id+ "has been deleted";
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    /* @DeleteMapping("/deleteRoute/{id}")
     String deleteRoute(@PathVariable ObjectId id){
         if (!busRouteRepository.existsById(id)){

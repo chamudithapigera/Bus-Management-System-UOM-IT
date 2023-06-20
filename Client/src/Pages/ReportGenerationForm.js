@@ -27,8 +27,6 @@ export default function ReportGenerationForm() {
           fromDate: fromDate,
           toDate: toDate
         }
-
-
       });
 
       const filteredAttendance = response.data;

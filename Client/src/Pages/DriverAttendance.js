@@ -10,7 +10,7 @@ export default function DriverAttendance() {
   const [attendance, setAttendance] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchColumn, setSearchColumn] = useState("driverID");
-  const [sortColumn, setSortColumn] = useState('driverID');
+  const [sortColumn, setSortColumn] = useState('checkInTime');
   const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {

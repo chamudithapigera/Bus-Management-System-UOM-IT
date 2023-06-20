@@ -19,42 +19,52 @@
 
       .datatableTitle {
         padding-left: 1px;
+
         .searchBarContainer {
           display: flex;
           align-items: center;
           justify-content: flex-end;
           margin-top: 10px;
         }
-        
+
         .searchColumn,
         .searchInput,
         .searchButton {
           height: 30px;
           margin-left: 10px;
-          padding: 5px 10px;
+          //padding: 5px ;
           border: 1px solid #ccc;
           border-radius: 10px;
           outline: none;
           font-size: 14px;
-          //font-weight: bold;
         }
-        
+
         .searchButton {
           background-color: rgb(23, 99, 62);
           color: white;
           border-radius: 10px;
           cursor: pointer;
         }
-        
+
         .searchButton:hover {
           background-color: #45a049;
         }
-        
+
       }
 
-      .delete-turn {
-        padding-top: 10px;
-        padding-left: 1px;
+      .assignDeleteContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .assignContainer {
+        flex: 1;
+      }
+
+      .deleteContainer {
+        margin-left: 10px;
 
         .deleteTurn-btn {
           background-color: rgb(23, 99, 62);
@@ -63,23 +73,18 @@
           font-size: 15px;
           border: none;
           border-radius: 10px;
-          padding-top: 3px;
           padding-bottom: 3px;
-
           text-align: center;
           width: 150px;
-          height: 35px
+          height: 30px
         }
       }
     }
-
   }
 
   table {
-
     border-collapse: collapse;
     width: 100%;
-
   }
 
   th,
@@ -96,10 +101,7 @@
     background-color: #050008;
     color: white;
     position: relative;
-  //cursor: pointer;
- 
   }
- 
 
   tr:nth-child(even) {
     background-color: #f2f2f2;
@@ -128,10 +130,11 @@
       height: 30px;
       cursor: pointer;
     }
-    .btn-outline:hover{
+
+    .btn-outline:hover {
       background-color: #3f7c42;
     }
-    
+
     .sortIcon {
       margin-left: 5px;
       font-size: 16px;
@@ -155,6 +158,6 @@
     font-size: 200px;
     color: rgb(82, 46, 92);
   }
- 
-  
+
+
 }

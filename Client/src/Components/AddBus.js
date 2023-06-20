@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../Css/forms.scss';
 
 export default function AddBus() {
-    //const AddBus = () => {
+
     let navigate = useNavigate()
 
     const [bus, setBus] = useState({
@@ -64,7 +64,7 @@ export default function AddBus() {
                             <input
                                 type={"text"}
                                 className="input"
-                                placeholder='Enter bus ID'
+                                placeholder='e.g. B2'
                                 name='busID'
                                 value={busID}
                                 onChange={(e) => onInputChange(e)}

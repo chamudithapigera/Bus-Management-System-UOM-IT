@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.exception.NotFoundException;
-import com.example.demo.model.Bus;
-import com.example.demo.model.BusRoute;
-import com.example.demo.model.Driver;
 import com.example.demo.model.User;
 import com.example.demo.repository.BusRepository;
 import com.example.demo.repository.UserRepository;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin("http://localhost:3000")
 @RestController

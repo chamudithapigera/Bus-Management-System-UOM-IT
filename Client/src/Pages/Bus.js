@@ -19,7 +19,6 @@ export default function Bus() {
 
   useEffect(() => {
     loadBuses();
-
   }, []);
 
   useEffect(() => {

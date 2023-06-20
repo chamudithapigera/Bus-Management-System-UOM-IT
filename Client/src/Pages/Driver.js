@@ -7,13 +7,15 @@ import Navbar from '../Components/Navbar';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
-
+import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 
 export default function Driver() {
 
   const [Drivers, setDrivers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchColumn, setSearchColumn] = useState("driverId");
+  const [sortColumn, setSortColumn] = useState('driverId');
+  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
     loadDrivers();
@@ -53,6 +55,16 @@ export default function Driver() {
     setDrivers(filteredDrivers);
   };
 
+  const handleSort = (column) => {
+    if (column === sortColumn) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortColumn(column);
+      setSortOrder('asc');
+    }
+  };
+
+
   return (
     <div className='bus'>
       <Sidebar></Sidebar>
@@ -87,16 +99,40 @@ export default function Driver() {
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th scope="col">Driver ID</th>
-                    <th scope="col">Driver Name</th>
-                    <th scope="col">Bus ID</th>
-                    <th scope="col">Phone No</th>
+                    <th scope="col" onClick={() => handleSort('driverId')}>
+                      Driver ID
+                      {sortColumn === 'driverId' && sortOrder === 'asc' && <ArrowUpward />}
+                      {sortColumn === 'driverId' && sortOrder === 'desc' && <ArrowDownward />}
+                    </th>
+                    <th scope="col" onClick={() => handleSort('firstName')}>
+                      Driver Name
+                      {sortColumn === 'firstName' && sortOrder === 'asc' && <ArrowUpward />}
+                      {sortColumn === 'firstName' && sortOrder === 'desc' && <ArrowDownward />}
+                    </th>
+                    <th scope="col" onClick={() => handleSort('busId')}>
+                      Bus ID
+                      {sortColumn === 'busId' && sortOrder === 'asc' && <ArrowUpward />}
+                      {sortColumn === 'busId' && sortOrder === 'desc' && <ArrowDownward />}
+                    </th>
+                    <th scope="col" onClick={() => handleSort('telephone')}>
+                      Phone No
+                      {sortColumn === 'telephone' && sortOrder === 'asc' && <ArrowUpward />}
+                      {sortColumn === 'telephone' && sortOrder === 'desc' && <ArrowDownward />}
+                    </th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  {Drivers.map((driver, index) => (
+                {Drivers
+                    .sort((a, b) => {
+                      if (sortOrder === 'asc') {
+                        return a[sortColumn].localeCompare(b[sortColumn]);
+                      } else {
+                        return b[sortColumn].localeCompare(a[sortColumn]);
+                      }
+                    })
+                  .map((driver, index) => (
                     <tr >
                       <th scope="row" key={index}>{index + 1}</th>
                       <td>{driver.driverId}</td>
