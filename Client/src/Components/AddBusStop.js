@@ -2,11 +2,11 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../Css/forms.scss';
+import { Modal, Button } from 'react-bootstrap';
 
 export default function AddBusRoute() {
 
     let navigate = useNavigate()
-
 
     const [busStop, setBusStop] = useState({
 
@@ -15,6 +15,15 @@ export default function AddBusRoute() {
         busID: ""
 
     });
+
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [error, setError] = useState(null);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+
+    const closeModal = () => {
+        setIsSuccess(false);
+        navigate("/busStop");
+    };
 
     const { busStopID, busStopName, busID } = busStop
 
@@ -26,49 +35,47 @@ export default function AddBusRoute() {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (!busID) {
-            alert("Please enter a value for Bus ID.")
+            showError("Please enter a value for Bus ID.")
         }
         else if (!busStopID) {
-            alert("Please enter a value for Bus Stop ID.")
+            showError("Please enter a value for Bus Stop ID.")
         }
         else if (!/^B\d{1,4}-S\d{1,2}$/.test(busStopID)) {
-            alert("Bus Stop ID should be in the format B#-R#.(e.g., B8-S3) ");
+            showError("Bus Stop ID should be in the format B#-R#.(e.g., B8-S3) ");
         }
         else if (!busStopName) {
-            alert("Please enter a value for Bus Stop Name.");
-        } 
+            showError("Please enter a value for Bus Stop Name.");
+        }
         else if (!/^[A-Za-z ]{1,100}$/.test(busStopName)) {
-            alert("Bus Stop Name should only contain letters and have a maximum length of 100 characters.");
-          }
+            showError("Bus Stop Name should only contain letters and have a maximum length of 100 characters.");
+        }
         else {
             try {
                 await axios.post("http://localhost:8080/api/v1/busStop/addBusStop", busStop)
-                    .then((response) => {
-                        console.log(response.data);
-                        alert("Bus added successfully!");
-                    })
-                navigate("/busStop")
+                setIsSuccess(true);
             } catch (error) {
                 if (error.response && error.response.data && error.response.data.message) {
-                    alert(error.response.data.message);
+                    showError(error.response.data.message);
                 } else {
-                    alert("An error occurred while adding the bus route.");
+                    showError("An error occurred while adding the bus route.");
                 }
             }
-
         }
-
-
     }
+
+    const showError = (errorMessage) => {
+        setError(errorMessage);
+        setShowErrorModal(true);
+    };
 
     return (
         <div className='container1'>
             <div className='detailsBox'>
                 <div >
-                    <h2 className='text-center m-4'>Add details of bus-stops</h2>
+                    <h3>Add details of bus-stops</h3>
                     <form onSubmit={(e) => onSubmit(e)}>
 
-                        <div className='mb-3'>
+                        <div className='mb'>
                             <label htmlFor='busStopID' className='label'>Bus Stop ID</label>
                             <input
                                 type={"text"}
@@ -80,7 +87,7 @@ export default function AddBusRoute() {
                             />
                         </div>
 
-                        <div className='mb-3'>
+                        <div className='mb'>
                             <label htmlFor='busStopName' className='label'>Bus Stop Name</label>
                             <input
                                 type={"text"}
@@ -92,7 +99,7 @@ export default function AddBusRoute() {
                             />
                         </div>
 
-                        <div className='mb-3'>
+                        <div className='mb'>
                             <label htmlFor='busID' className='label'>Bus ID</label>
                             <input
                                 type={"text"}
@@ -109,6 +116,41 @@ export default function AddBusRoute() {
                     </form>
                 </div>
             </div>
+            <Modal
+                show={isSuccess}
+                onHide={() => setIsSuccess(false)}
+                centered
+            >
+                <Modal.Header closeButton style={{ backgroundColor: "#5fb689" }}>
+                    <Modal.Title>Success</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ fontFamily: "sans-serif" }}>
+                    <p>Bus Stop added successfully!</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => closeModal()}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+                show={showErrorModal}
+                onHide={() => setShowErrorModal(false)}
+                centered
+            >
+                <Modal.Header closeButton style={{ backgroundColor: "#4ca1c6e1" }}>
+                    <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ fontFamily: "sans-serif" }}>
+                    <p>{error}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => setShowErrorModal(false)}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

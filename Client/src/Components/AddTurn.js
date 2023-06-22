@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Modal, Button } from 'react-bootstrap';
 import '../Css/table.scss';
 import '../Css/forms.scss';
-
 
 export default function AddTurn() {
 
@@ -12,12 +12,20 @@ export default function AddTurn() {
     const timeRegex = /^(0?[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$/;
     const routeNameRegex = /^[a-z]+(?:-[a-z]+)*$/;
 
-
     const [busTurn, setBusTurn] = useState({
         turnNo: "",
         turnTime: "",
         routeName: ""
     });
+
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [error, setError] = useState(null);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+
+    const closeModal = () => {
+        setIsSuccess(false);
+        navigate("/turn");
+    };
 
     const { turnNo, turnTime, routeName } = busTurn
 
@@ -29,50 +37,50 @@ export default function AddTurn() {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (!turnNo) {
-            alert("Please enter a value for Turn No.")
+            showError("Please enter a value for Turn No.")
         }
         else if (!/^T\d{1,3}$/.test(turnNo)) {
-            alert("Turn No. should be in the format T#, T##, or T###.(e.g., T8))");
+            showError("Turn No. should be in the format T#, T##, or T###.(e.g., T8))");
         }
         else if (!turnTime) {
-            alert("Please enter a value for Turn Time.")
+            showError("Please enter a value for Turn Time.")
         }
         else if (!timeRegex.test(turnTime)) {
-            alert("Turn Time should be in the format HH:MM (e.g., 09:30).");
+            showError("Turn Time should be in the format HH:MM (e.g., 09:30).");
         }
         else if (!routeName) {
-            alert("Please enter a value for Route Name.")
+            showError("Please enter a value for Route Name.")
         }
         else if (
             routeName.length >= 100 || !routeNameRegex.test(routeName)) {
-            alert(
+            showError(
                 "Route Name should only contain simple letters and a hyphen (-), with a maximum length of 100 characters.(e.g., katubedda-moratuwa)"
             );
         }
         else {
-            await axios.post("http://localhost:8080/api/v1/turn/addTurn", busTurn)
-                .then((response) => {
-                    console.log(response.data);
-                    alert("Bus route updated successfully!");
-
-                })
-                .catch((error) => {
-                    console.error(error);
-                    alert("Failed to update bus route");
-                });
-            navigate("/turn")
+            try {
+                await axios.post("http://localhost:8080/api/v1/turn/addTurn", busTurn);
+                setIsSuccess(true);
+            }
+            catch (error) {
+                showError("Failed to update bus turn");
+            }
         }
     }
 
+    const showError = (errorMessage) => {
+        setError(errorMessage);
+        setShowErrorModal(true);
+    };
 
 
     return (
         <div className='container1'>
             <div className='detailsBox'>
-                <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
-                    <h2 className='text-center m-4'>Add details of bus-turns</h2>
+                <div >
+                    <h3 >Add details of bus-turns</h3>
                     <form onSubmit={(e) => onSubmit(e)}>
-                        <div className='mb-3'>
+                        <div className='mb'>
                             <label htmlFor='turnNo' className='label' rm>Turn No</label>
                             <input
                                 type={"text"}
@@ -83,7 +91,7 @@ export default function AddTurn() {
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
-                        <div className='mb-3'>
+                        <div className='mb'>
                             <label htmlFor='turnTime' className='label'>Turn Time</label>
                             <input
                                 type={"text"}
@@ -94,7 +102,7 @@ export default function AddTurn() {
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
-                        <div className='mb-3'>
+                        <div className='mb'>
                             <label htmlFor='routeName' className='label'>Route Name</label>
                             <input
                                 type={"text"}
@@ -112,6 +120,41 @@ export default function AddTurn() {
                     </form>
                 </div>
             </div>
+            <Modal
+                show={isSuccess}
+                onHide={() => setIsSuccess(false)}
+                centered
+            >
+                <Modal.Header closeButton style={{ backgroundColor: "#5fb689" }}>
+                    <Modal.Title>Success</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ fontFamily: "sans-serif" }}>
+                    <p>Bus turn added successfully!</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => closeModal()}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+                show={showErrorModal}
+                onHide={() => setShowErrorModal(false)}
+                centered
+            >
+                <Modal.Header closeButton style={{ backgroundColor: "#4ca1c6e1" }}>
+                    <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ fontFamily: "sans-serif" }}>
+                    <p>{error}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => setShowErrorModal(false)}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 

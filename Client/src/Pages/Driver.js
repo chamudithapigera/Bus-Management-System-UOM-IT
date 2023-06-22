@@ -8,6 +8,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
+import { Modal, Button } from 'react-bootstrap';
 
 export default function Driver() {
 
@@ -16,6 +17,10 @@ export default function Driver() {
   const [searchColumn, setSearchColumn] = useState("driverId");
   const [sortColumn, setSortColumn] = useState('driverId');
   const [sortOrder, setSortOrder] = useState('asc');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedDriverId, setSelectedDriverId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     loadDrivers();
@@ -33,11 +38,27 @@ export default function Driver() {
     setDrivers(result.data);
   };
 
-  const deleteDriver = async (id) => {
-    if (window.confirm("Are you sure you want to delete driver record?")) {
-      await axios.delete(`http://localhost:8080/api/v1/drivers/deleteDriver/${id}`);
-      loadDrivers();
+  const confirmDelete = (id) => {
+    setSelectedDriverId(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleDelete = async () => {
+    if (selectedDriverId) {
+      try {
+        await axios.delete(`http://localhost:8080/api/v1/drivers/deleteDriver/${selectedDriverId}`);
+        setShowDeleteModal(false);
+        setSelectedDriverId(null);
+        loadDrivers();
+      } catch (error) {
+        console.error(error);
+      }
     }
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setSelectedDriverId(null);
   };
 
   const handleSearchTerm = (value) => {
@@ -64,6 +85,20 @@ export default function Driver() {
     }
   };
 
+const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = Drivers.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalPages = Math.ceil(Drivers.length / itemsPerPage);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className='bus'>
@@ -124,7 +159,7 @@ export default function Driver() {
                 </thead>
 
                 <tbody>
-                {Drivers
+                {currentItems
                     .sort((a, b) => {
                       if (sortOrder === 'asc') {
                         return a[sortColumn].localeCompare(b[sortColumn]);
@@ -142,7 +177,7 @@ export default function Driver() {
                       <td>
 
 
-                        <Link className='btn btn-warning mx-2' to={`/viewdriver/${driver.id}`}>
+                        <Link  to={`/viewdriver/${driver.id}`}>
                           <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
                         </Link>
 
@@ -150,7 +185,7 @@ export default function Driver() {
                           <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon ></button>
                         </Link>
 
-                        <button onClick={() => deleteDriver(driver.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
+                        <button onClick={() => confirmDelete(driver.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
 
                       </td>
                     </tr>
@@ -162,7 +197,34 @@ export default function Driver() {
             </div>
           </div>
         </div>
+        <div className="pagination">
+          {pageNumbers.map((pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              className={currentPage === pageNumber ? "active" : ""}
+            >
+              {pageNumber}
+            </button>
+          ))}
+        </div>
       </div>
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
+        <Modal.Header closeButton style={{ backgroundColor: "#c04255" }}>
+          <Modal.Title>Delete Driver</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this driver?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

@@ -12,6 +12,8 @@ export default function DriverAttendance() {
   const [searchColumn, setSearchColumn] = useState("driverID");
   const [sortColumn, setSortColumn] = useState('checkInTime');
   const [sortOrder, setSortOrder] = useState('asc');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     loadAttendance();
@@ -53,6 +55,20 @@ export default function DriverAttendance() {
     }
   };
 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = attendance.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalPages = Math.ceil(attendance.length / itemsPerPage);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className='bus'>
@@ -103,7 +119,7 @@ export default function DriverAttendance() {
                   </tr>
                 </thead>
                 <tbody>
-                  {attendance
+                  {currentItems
                     .sort((a, b) => {
                       if (sortOrder === 'asc') {
                         return a[sortColumn].localeCompare(b[sortColumn]);
@@ -124,6 +140,17 @@ export default function DriverAttendance() {
               </table>
             </div>
           </div>
+        </div>
+        <div className="pagination">
+          {pageNumbers.map((pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              className={currentPage === pageNumber ? "active" : ""}
+            >
+              {pageNumber}
+            </button>
+          ))}
         </div>
       </div>
     </div>

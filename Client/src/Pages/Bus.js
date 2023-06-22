@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../Css/table.scss';
 import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
+import { Modal, Button } from 'react-bootstrap';
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -10,12 +11,15 @@ import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 
 export default function Bus() {
-
   const [buses, setBuses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchColumn, setSearchColumn] = useState("busID");
   const [sortColumn, setSortColumn] = useState('busID');
   const [sortOrder, setSortOrder] = useState('asc');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedBusId, setSelectedBusId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     loadBuses();
@@ -32,11 +36,27 @@ export default function Bus() {
     setBuses(result.data);
   };
 
-  const deleteBus = async (id) => {
-    if (window.confirm("Are you sure you want to delete this bus ?")) {
-      await axios.delete(`http://localhost:8080/api/v1/bus_detail/deleteBus/${id}`);
-      loadBuses();
+  const confirmDelete = (id) => {
+    setSelectedBusId(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleDelete = async () => {
+    if (selectedBusId) {
+      try {
+        await axios.delete(`http://localhost:8080/api/v1/bus_detail/deleteBus/${selectedBusId}`);
+        setShowDeleteModal(false);
+        setSelectedBusId(null);
+        loadBuses();
+      } catch (error) {
+        console.error(error);
+      }
     }
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setSelectedBusId(null);
   };
 
   const handleSearchTerm = (value) => {
@@ -63,6 +83,22 @@ export default function Bus() {
     }
   };
 
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = buses.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalPages = Math.ceil(buses.length / itemsPerPage);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <div className='bus'>
       <Sidebar></Sidebar>
@@ -70,12 +106,12 @@ export default function Bus() {
         <Navbar></Navbar>
 
         <div className='container'>
-          <div >
+          <div>
             <div className='title'>
               Bus details
             </div>
             <div className='datatableTitle'>
-              <Link to="/addbus" ><button type="button" class="btn-outline">Add</button></Link>
+              <Link to="/addbus"><button type="button" class="btn-outline">Add</button></Link>
 
               <div className="searchBarContainer">
                 <input className="searchInput" type="text" placeholder="Search..." onChange={(e) => handleSearchTerm(e.target.value)} />
@@ -89,7 +125,7 @@ export default function Bus() {
             </div>
             <div className="tableBorderShadow">
 
-              <table >
+              <table>
                 <thead>
                   <tr>
                     <th>#</th>
@@ -107,7 +143,7 @@ export default function Bus() {
                   </tr>
                 </thead>
                 <tbody>
-                  {buses
+                  {currentItems
                     .sort((a, b) => {
                       if (sortOrder === 'asc') {
                         return a[sortColumn].localeCompare(b[sortColumn]);
@@ -116,21 +152,21 @@ export default function Bus() {
                       }
                     })
                     .map((bus, index) => (
-                      <tr >
-                        <th scope="row" key={index}>{index + 1}</th>
+                      <tr key={index}>
+                        <th scope="row">{index + 1}</th>
                         <td>{bus.busID}</td>
                         <td>{bus.capacity}</td>
 
                         <td>
-                          <Link className='btn btn-warning mx-2' to={`/viewbus/${bus.id}`} >
+                          <Link to={`/viewbus/${bus.id}`} >
                             <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
                           </Link>
 
-                          <Link className='btn btn-warning mx-2' to={`/updateBus/${bus.id}`}>
+                          <Link to={`/updateBus/${bus.id}`}>
                             <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
                           </Link>
 
-                          <button onClick={() => deleteBus(bus.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
+                          <button onClick={() => confirmDelete(bus.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
                         </td>
                       </tr>
                     ))}
@@ -140,8 +176,34 @@ export default function Bus() {
             </div>
           </div>
         </div>
+        <div className="pagination">
+          {pageNumbers.map((pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              className={currentPage === pageNumber ? "active" : ""}
+            >
+              {pageNumber}
+            </button>
+          ))}
+        </div>
       </div>
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
+        <Modal.Header closeButton style={{ backgroundColor: "#c04255" }}>
+          <Modal.Title>Delete Bus</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this bus?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
-  )
+  );
 }
-

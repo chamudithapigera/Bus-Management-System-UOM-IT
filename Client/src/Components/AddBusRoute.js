@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../Css/forms.scss';
+import { Modal, Button } from 'react-bootstrap';
 
 export default function AddBusRoute() {
 
@@ -18,6 +19,15 @@ export default function AddBusRoute() {
 
     });
 
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [error, setError] = useState(null);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+    
+    const closeModal = () => {
+      setIsSuccess(false);
+      navigate("/busRoute");
+    };
+
     const { routeID, routeNO, routeName, busID } = busRoute
 
     const onInputChange = (e) => {
@@ -28,42 +38,38 @@ export default function AddBusRoute() {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (!busID) {
-            alert("Please enter a value for Bus ID.")
+            showError("Please enter a value for Bus ID.")
         }
         else if (!/^B\d{1,4}$/.test(busID)) {
-            alert("Bus ID should be in the format B#### with a maximum length of 5 characters. (e.g., B8)");
+            showError("Bus ID should be in the format B#### with a maximum length of 5 characters. (e.g., B8)");
         }
         else if (!routeID) {
-            alert("Please enter a value for Bus Route ID.")
+            showError("Please enter a value for Bus Route ID.")
         }
         else if (!/^B\d{1,4}-R\d{1,2}$/.test(routeID)) {
-            alert("Bus Route ID should be in the format B#-R#.(e.g., B8-R3) ");
+            showError("Bus Route ID should be in the format B#-R#.(e.g., B8-R3) ");
         }
         else if (routeNO && (!/^\d{1,3}$/.test(routeNO))) {
-            alert("Route Number should be a number with a maximum of three digits.");
+            showError("Route Number should be a number with a maximum of three digits.");
           } 
         else if (!routeName) {
-            alert("Please enter a value for Route Name.")
+            showError("Please enter a value for Route Name.")
         }
         else if (
             routeName.length >= 100 || !routeNameRegex.test(routeName)) {
-            alert(
+                showError(
                 "Route Name should only contain simple letters and a hyphen (-), with a maximum length of 100 characters.(e.g., katubedda-moratuwa)"
             );
         }
         else {
             try {
                 await axios.post("http://localhost:8080/api/v1/busRoute/addRoute", busRoute)
-                    .then((response) => {
-                        console.log(response.data);
-                        alert("Bus route added successfully!");
-                    })
-                navigate("/busRoute")
+                setIsSuccess(true);
             } catch (error) {
                 if (error.response && error.response.data && error.response.data.message) {
-                    alert(error.response.data.message);
+                    showError(error.response.data.message);
                 } else {
-                    alert("An error occurred while adding the bus route.");
+                    showError("An error occurred while adding the bus route.");
                 }
             }
 
@@ -71,13 +77,18 @@ export default function AddBusRoute() {
 
     }
 
+    const showError = (errorMessage) => {
+        setError(errorMessage);
+        setShowErrorModal(true);
+      };
+
     return (
         <div className='container1'>
             <div className='detailsBox'>
                 <div >
-                    <h2 className='text-center m-4'>Add details of bus-routes</h2>
+                    <h3 >Add details of bus-routes</h3>
                     <form onSubmit={(e) => onSubmit(e)}>
-                        <div className='mb-3'>
+                        <div className='mb'>
                             <label htmlFor='routeID' className='label' rm>Route ID</label>
                             <input
                                 type={"text"}
@@ -88,7 +99,7 @@ export default function AddBusRoute() {
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
-                        <div className='mb-3'>
+                        <div className='mb'>
                             <label htmlFor='routeNO' className='label'>Route NO</label>
                             <input
                                 type={"text"}
@@ -99,7 +110,7 @@ export default function AddBusRoute() {
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
-                        <div className='mb-3'>
+                        <div className='mb'>
                             <label htmlFor='routeName' className='label'>Route Name</label>
                             <input
                                 type={"text"}
@@ -111,7 +122,7 @@ export default function AddBusRoute() {
                             />
                         </div>
 
-                        <div className='mb-3'>
+                        <div className='mb'>
                             <label htmlFor='busID' className='label'>Bus ID</label>
                             <input
                                 type={"text"}
@@ -130,6 +141,41 @@ export default function AddBusRoute() {
                     </form>
                 </div>
             </div>
+            <Modal
+        show={isSuccess}
+        onHide={() => setIsSuccess(false)}
+        centered
+      >
+        <Modal.Header closeButton style={{backgroundColor:"#5fb689"}}>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{fontFamily:"sans-serif"}}>
+          <p>Bus Route added successfully!</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => closeModal()}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal
+        show={showErrorModal}
+        onHide={() => setShowErrorModal(false)}
+        centered
+      >
+        <Modal.Header closeButton style={{backgroundColor:"#4ca1c6e1"}}>
+          <Modal.Title>Error</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{fontFamily:"sans-serif"}}>
+          <p>{error}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => setShowErrorModal(false)}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
         </div>
     )
 }

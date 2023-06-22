@@ -8,6 +8,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
+import { Modal, Button } from 'react-bootstrap';
 
 export default function BusStop() {
 
@@ -16,8 +17,11 @@ export default function BusStop() {
   const [searchColumn, setSearchColumn] = useState("busStopID");
   const [sortColumn, setSortColumn] = useState('busStopID');
   const [sortOrder, setSortOrder] = useState('asc');
-
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedBusStopId, setSelectedBusStopId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  
   useEffect(() => {
     loadBusStops();
 
@@ -34,11 +38,27 @@ export default function BusStop() {
     setBusStops(result.data);
   };
 
-  const deleteBusStops = async (id) => {
-    if (window.confirm("Are you sure you want to delete this bus stop?")) {
-      await axios.delete(`http://localhost:8080/api/v1/busStop/deleteStop/${id}`);
-      loadBusStops();
+  const confirmDelete = (id) => {
+    setSelectedBusStopId(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleDelete = async () => {
+    if (selectedBusStopId) {
+      try {
+        await axios.delete(`http://localhost:8080/api/v1/busStop/deleteStop/${selectedBusStopId}`);
+        setShowDeleteModal(false);
+        setSelectedBusStopId(null);
+        loadBusStops();
+      } catch (error) {
+        console.error(error);
+      }
     }
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setSelectedBusStopId(null);
   };
 
   const handleSearchTerm = (value) => {
@@ -64,6 +84,21 @@ export default function BusStop() {
       setSortOrder('asc');
     }
   };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = BusStops.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalPages = Math.ceil(BusStops.length / itemsPerPage);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className='bus'>
@@ -112,7 +147,7 @@ export default function BusStop() {
                 </thead>
 
                 <tbody>
-                {BusStops
+                {currentItems
                     .sort((a, b) => {
                       if (sortOrder === 'asc') {
                         return a[sortColumn].localeCompare(b[sortColumn]);
@@ -130,21 +165,15 @@ export default function BusStop() {
 
                       <td>
 
-                        <Link
-                          className='btn btn-warning mx-2'
-                          to={`/viewbusstop/${busStop.id}`}
-                        >
+                        <Link  to={`/viewbusstop/${busStop.id}`}  >
                           <button ><RemoveRedEyeRoundedIcon className='icon'></RemoveRedEyeRoundedIcon></button>
                         </Link>
 
-                        <Link
-                          className='btn btn-warning mx-2'
-                          to={`/updateStop/${busStop.id}`}
-                        >
+                        <Link  to={`/updateStop/${busStop.id}`}  >
                           <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon></button>
                         </Link>
 
-                        <button onClick={() => deleteBusStops(busStop.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
+                        <button onClick={() => confirmDelete(busStop.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
                       </td>
                     </tr>
 
@@ -155,7 +184,34 @@ export default function BusStop() {
             </div>
           </div>
         </div>
+        <div className="pagination">
+          {pageNumbers.map((pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              className={currentPage === pageNumber ? "active" : ""}
+            >
+              {pageNumber}
+            </button>
+          ))}
+        </div>
       </div>
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
+        <Modal.Header closeButton style={{ backgroundColor: "#c04255" }}>
+          <Modal.Title>Delete Bus Stop</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this bus stop?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

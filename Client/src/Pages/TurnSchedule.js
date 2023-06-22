@@ -9,6 +9,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
+import { Modal, Button } from 'react-bootstrap';
 
 export default function TurnSchedule() {
 
@@ -17,6 +18,10 @@ export default function TurnSchedule() {
   const [searchColumn, setSearchColumn] = useState("turnNo");
   const [sortColumn, setSortColumn] = useState('routeName');
   const [sortOrder, setSortOrder] = useState('asc');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedTurnId, setSelectedTurnId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     loadBusTurns();
@@ -34,11 +39,27 @@ export default function TurnSchedule() {
     setBusTurns(result.data);
   };
 
-  const deleteTurn = async (id) => {
-    if (window.confirm("Are you sure you want to delete turn?")) {
-      await axios.delete(`http://localhost:8080/api/v1/turn/deleteTurn/${id}`);
-      loadBusTurns();
+  const confirmDelete = (id) => {
+    setSelectedTurnId(id);
+    setShowDeleteModal(true);
+  };
+
+  const handleDelete = async () => {
+    if (selectedTurnId) {
+      try {
+        await axios.delete(`http://localhost:8080/api/v1/turn/deleteTurn/${selectedTurnId}`);
+        setShowDeleteModal(false);
+        setSelectedTurnId(null);
+        loadBusTurns();
+      } catch (error) {
+        console.error(error);
+      }
     }
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setSelectedTurnId(null);
   };
 
   const handleDeleteAllTurns = () => {
@@ -72,6 +93,21 @@ export default function TurnSchedule() {
       setSortOrder('asc');
     }
   };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = busTurns.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalPages = Math.ceil(busTurns.length / itemsPerPage);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className='bus'>
@@ -137,7 +173,7 @@ export default function TurnSchedule() {
                 </thead>
 
                 <tbody>
-                  {busTurns
+                  {currentItems
                     .sort((a, b) => {
                       if (sortOrder === 'asc') {
                         return a[sortColumn].localeCompare(b[sortColumn]);
@@ -160,20 +196,43 @@ export default function TurnSchedule() {
                           <Link to={`/updateTurn/${busTurn.id}`}>
                             <button ><DriveFileRenameOutlineIcon className='icon'></DriveFileRenameOutlineIcon ></button>
                           </Link>
-                          <button onClick={() => deleteTurn(busTurn.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
+                          <button onClick={() => confirmDelete(busTurn.id)}><DeleteForeverIcon className='icon'></DeleteForeverIcon></button>
                         </td>
                       </tr>
-
                     ))}
-
                 </tbody>
               </table>
             </div>
-
-
           </div>
         </div>
+        <div className="pagination">
+          {pageNumbers.map((pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              className={currentPage === pageNumber ? "active" : ""}
+            >
+              {pageNumber}
+            </button>
+          ))}
+        </div>
       </div>
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal} centered>
+        <Modal.Header closeButton style={{ backgroundColor: "#c04255" }}>
+          <Modal.Title>Delete Turn</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this turn?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Modal, Button } from 'react-bootstrap';
 import '../Css/form.scss';
 
 export default function UpdateTurn() {
@@ -18,6 +19,11 @@ export default function UpdateTurn() {
         routeName: ""
     });
 
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [error, setError] = useState(null);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+
     const { turnNo, turnTime, routeName } = busTurn;
 
     const onInputChange = (e) => {
@@ -32,44 +38,53 @@ export default function UpdateTurn() {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (!turnNo) {
-            alert("Please enter a value for Turn No.")
+            showError("Please enter a value for Turn No.")
         }
         else if (!/^T\d{1,3}$/.test(turnNo)) {
-            alert("Turn No. should be in the format T#, T##, or T###.(e.g., T8))");
+            showError("Turn No. should be in the format T#, T##, or T###.(e.g., T8))");
         }
         else if (!turnTime) {
-            alert("Please enter a value for Turn Time.")
+            showError("Please enter a value for Turn Time.")
         }
         else if (!timeRegex.test(turnTime)) {
-            alert("Turn Time should be in the format HH:MM (e.g., 09:30).");
+            showError("Turn Time should be in the format HH:MM (e.g., 09:30).");
         }
         else if (!routeName) {
-            alert("Please enter a value for Route Name.")
+            showError("Please enter a value for Route Name.")
         }
         else if (
             routeName.length >= 100 || !routeNameRegex.test(routeName)) {
-            alert(
+                showError(
                 "Route Name should only contain simple letters and a hyphen (-), with a maximum length of 100 characters."
             );
         }
         else {
-        if (window.confirm("Are you sure you want to update this turn record?")) {
-            await axios.put(`http://localhost:8080/api/v1/turn/${id}`, busTurn)
-                .then((response) => {
-                    console.log(response.data);
-                    alert("Turn updated successfully!");
-                })
-                .catch((error) => {
-                    console.error(error);
-                    alert("Failed to update turn");
-                });
-                navigate('/turn');
+            setShowConfirmationModal(true);
         }
-    }
-        
-
     };
 
+    const handleConfirmUpdate = async () => {
+        setShowConfirmationModal(false);
+        try {
+            await axios.put(`http://localhost:8080/api/v1/turn/${id}`, busTurn);
+            setShowSuccessModal(true);
+        } catch (error) {
+            showError("Failed to update turn ");
+        }
+    };
+
+    const showError = (errorMessage) => {
+        setError(errorMessage);
+        setShowErrorModal(true);
+    };
+
+    const handleCloseModals = () => {
+        setShowConfirmationModal(false);
+        setShowSuccessModal(false);
+        setShowErrorModal(false);
+        navigate('/turn');
+    };
+        
     const loadBusTurns = async () => {
         const result = await axios.get(`http://localhost:8080/api/v1/turn/${id}`);
         setBusTurn(result.data);
@@ -78,8 +93,8 @@ export default function UpdateTurn() {
     return (
         <div className='contrainer'>
             <div className="detailsBox">
-                <div className='col-md-6 0ffset-md-3 border rounded p-4 mt-2 shadow'>
-                    <h2 className='text-center m-4'>Update details of bus-turns</h2>
+                <div >
+                    <h2 >Update details of Turns</h2>
                     <form onSubmit={(e) => onSubmit(e)}>
                         <div className='mb-3'>
                             <label htmlFor='turnNo' className='label' rm>Turn No</label>
@@ -121,7 +136,54 @@ export default function UpdateTurn() {
                     </form>
                 </div>
             </div>
+            <Modal show={showConfirmationModal} onHide={handleCloseModals} centered >
+                <Modal.Header closeButton style={{ backgroundColor: "#5fb689" }}>
+                    <Modal.Title>Confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ fontFamily: "sans-serif" }}>
+                    Are you sure you want to update this turn?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModals}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleConfirmUpdate}>
+                        Confirm
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showSuccessModal} onHide={handleCloseModals} centered>
+                <Modal.Header closeButton style={{ backgroundColor: "#5fb689" }}>
+                    <Modal.Title>Success</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ fontFamily: "sans-serif" }}>
+                    <p>Bus turn updated successfully!</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleCloseModals}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+                show={showErrorModal}
+                onHide={() => setShowErrorModal(false)}
+                centered
+            >
+                <Modal.Header closeButton style={{ backgroundColor: "#4ca1c6e1" }}>
+                    <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ fontFamily: "sans-serif" }}>
+                    <p>{error}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => setShowErrorModal(false)}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
-
 }

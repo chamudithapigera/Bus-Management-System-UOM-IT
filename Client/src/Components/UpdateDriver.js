@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Modal, Button } from 'react-bootstrap';
 import '../Css/form.scss';
 
 export default function UpdateDriver() {
@@ -21,6 +22,11 @@ export default function UpdateDriver() {
 
     });
 
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [error, setError] = useState(null);
+    const [showErrorModal, setShowErrorModal] = useState(false);
+
     const { firstName, lastName, email, password, telephone, driverId, busId } = driver
 
     const onInputChange = (e) => {
@@ -34,19 +40,29 @@ export default function UpdateDriver() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        if (window.confirm("Are you sure you want to update this driver?")) {
-            await axios.put(`http://localhost:8080/api/v1/drivers/update/${id}`, driver)
-                .then((response) => {
-                    console.log(response.data);
-                    alert("Driver updated successfully!");
-                })
-                .catch((error) => {
-                    console.error(error);
-                    alert("Failed to update driver");
-                });
-        }
-        navigate('/driver');
+        setShowConfirmationModal(true);
+    };
 
+    const handleConfirmUpdate = async () => {
+        setShowConfirmationModal(false);
+        try {
+            await axios.put(`http://localhost:8080/api/v1/drivers/update/${id}`, driver);
+            setShowSuccessModal(true);
+        } catch (error) {
+            showError("Failed to update driver ");
+        }
+    };
+
+    const showError = (errorMessage) => {
+        setError(errorMessage);
+        setShowErrorModal(true);
+    };
+
+    const handleCloseModals = () => {
+        setShowConfirmationModal(false);
+        setShowSuccessModal(false);
+        setShowErrorModal(false);
+        navigate('/driver');
     };
 
     const loadDriver = async () => {
@@ -151,6 +167,54 @@ export default function UpdateDriver() {
                     </form>
                 </div>
             </div>
+            <Modal show={showConfirmationModal} onHide={handleCloseModals} centered >
+                <Modal.Header closeButton style={{ backgroundColor: "#5fb689" }}>
+                    <Modal.Title>Confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ fontFamily: "sans-serif" }}>
+                    Are you sure you want to update this driver?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseModals}>
+                        Cancel
+                    </Button>
+                    <Button variant="primary" onClick={handleConfirmUpdate}>
+                        Confirm
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showSuccessModal} onHide={handleCloseModals} centered>
+                <Modal.Header closeButton style={{ backgroundColor: "#5fb689" }}>
+                    <Modal.Title>Success</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ fontFamily: "sans-serif" }}>
+                    <p>Driver updated successfully!</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleCloseModals}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+                show={showErrorModal}
+                onHide={() => setShowErrorModal(false)}
+                centered
+            >
+                <Modal.Header closeButton style={{ backgroundColor: "#4ca1c6e1" }}>
+                    <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{ fontFamily: "sans-serif" }}>
+                    <p>{error}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => setShowErrorModal(false)}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }
