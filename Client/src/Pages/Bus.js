@@ -117,7 +117,7 @@ export default function Bus() {
               Bus details
             </div>
             <div className='datatableTitle'>
-              <button type="button" className="btn-outline" onClick={handleAdd}>
+            <button type="button" className="btn-outline" onClick={handleAdd}>
                 Add
               </button>
 
@@ -214,7 +214,7 @@ export default function Bus() {
       </Modal>
       <Modal show={showAddModal} onHide={() => setShowAddModal(false)} centered>
         <Modal.Header closeButton style={{ backgroundColor: "#5fb689" }}>
-          <Modal.Title>Add details of Bus</Modal.Title>
+          <Modal.Title>Add details of bus</Modal.Title>
         </Modal.Header>
         <Modal.Body >
           <AddBus closeAddModal={() => setShowAddModal(false)} />

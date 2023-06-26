@@ -26,7 +26,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
 
-        <Link to="/login" style={{ textDecoration: "none" }}>
+        <Link to="/" style={{ textDecoration: "none" }}>
         <div>
             <img src={image} className="icontop" />
           </div>

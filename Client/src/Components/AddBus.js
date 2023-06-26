@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import '../Css/forms.scss';
 
+
 export default function AddBus({ closeAddModal }) {
   let navigate = useNavigate();
 
