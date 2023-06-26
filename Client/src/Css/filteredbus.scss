@@ -7,7 +7,7 @@
     }
 
     .containerTable{
-        margin-left: 20px;
+        margin-left: 50px;
         margin-right: 100px;
         margin-top: 20px;
 
@@ -15,6 +15,7 @@
             align-items: center;
             justify-content: center;
             margin-left: 450px;
+            margin-top: 70px;
             color:rgb(25, 60, 108) ;
             font-size: 20px;
             font-weight: bold;
@@ -65,9 +66,30 @@
               margin: 0 ;
             }
           }
+
+          
         
     }
 
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    
+    .pagination button {
+      margin: 0 0.5rem;
+      padding: 0.25rem 0.5rem;
+      background-color: #ffffff;
+      border: 1px solid #dddddd;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    
+    .pagination button.active {
+      background-color: #dddddd;
+    }
     
       
 

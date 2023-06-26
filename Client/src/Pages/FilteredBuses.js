@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import "../Css/filteredbus.scss"
 import Sidebar from "../Components/Sidebar";
 import Navbar from "../Components/Navbar";
@@ -10,6 +10,24 @@ const FilteredBuses = (props) => {
   const location = useLocation();
   const { filteredBuses, busStopName, routeNO } = location.state;
   const navigate = useNavigate();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // You can adjust this number based on your requirements
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredBuses.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalPages = Math.ceil(filteredBuses.length / itemsPerPage);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className="list">
@@ -34,7 +52,7 @@ const FilteredBuses = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {filteredBuses.map((bus, index) => {
+                {currentItems.map((bus, index) => {
                   return (
                     <tr>
                       <th scope="row" key={index}>{index + 1}</th>
@@ -51,7 +69,7 @@ const FilteredBuses = (props) => {
                           const duration = bus.duration;
                           const distance = bus.distance;
                           const arrivalTime = bus.arrivalTime.substring(11, 19);
-                          navigate('/searchbus/viewbus', { state: { busID, routeName, duration, distance, arrivalTime } });
+                          navigate('/searchbus/filteredbus/viewbus', { state: { busID, routeName, duration, distance, arrivalTime } });
                         }}
                         />
                       </td>
@@ -61,6 +79,17 @@ const FilteredBuses = (props) => {
               </tbody>
             </table>
           </div>
+        </div>
+        <div className="pagination">
+          {pageNumbers.map((pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              className={currentPage === pageNumber ? "active" : ""}
+            >
+              {pageNumber}
+            </button>
+          ))}
         </div>
       </div>
     </div>

@@ -36,8 +36,16 @@ function App() {
               <Route index element={<SearchBus />} />
               <Route path="unregfilteredbus" element={<UnRegFilteredBuses />} />
               <Route path="filteredbus" element={<FilteredBuses />} />
-              <Route path="unregviewbus" element={<UnRegViewBus/>}/>
+            </Route>
+
+            <Route path="searchbus/filteredbus">
+              <Route index element={<FilteredBuses />} />
               <Route path="viewbus" element={<ViewBus/>}/>
+            </Route>
+
+            <Route path="searchbus/unregfilteredbus">
+              <Route index element={<UnRegFilteredBuses />} />
+              <Route path="unregviewbus" element={<UnRegViewBus/>}/>
             </Route>
 
             <Route path="notification">
@@ -50,10 +58,7 @@ function App() {
           
             <Route path="profile">
               <Route index element={<Profile />} />
-              <Route path='/profile/:activepage' element={<AccountSettings />} />
-              <Route path="changepassword" element={<ChangePassword />} />
-              <Route path="useraddress" element={<UserAddress />} />
-              <Route path="legalnotice" element={<LegalNotice />} />
+              
 
             </Route>
           

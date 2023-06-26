@@ -1,53 +1,84 @@
-
+import React, { useState } from "react";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import "../Css/home.scss";
-//import "../Css/filteredbus.scss"
 import image2 from "../Css/BUS_MANAGEMENT_SYSTEM.jpeg";
-import { useLocation,Link,useNavigate } from 'react-router-dom';
-import '../Css/table.scss';
-import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
+import "../Css/table.scss";
+import RemoveRedEyeRoundedIcon from "@mui/icons-material/RemoveRedEyeRounded";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-
-
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 
 const UnRegFilteredBuses = () => {
-
-  //By calling useLocation(), access the location object and extract the state property from it
   const location = useLocation();
-  //previous route passed these values as part of the state when navigating.
   const { filteredBuses, busStopName, routeNO } = location.state;
   const navigate = useNavigate();
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // You can adjust this number based on your requirements
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredBuses.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalPages = Math.ceil(filteredBuses.length / itemsPerPage);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div className="home">
       <div className="homeContainer">
         <div className="items">
-        <div className="item">
-        <div>
-          {/* When the link is clicked, it will navigate to the specified route */}
-        <Link to="/" style={{ textDecoration: "none" }}>
-            <img src={image2} className="icontop" />
-            </Link>
-          </div>
-          <div className="name"><p>TRAVO</p></div>
-        </div>
-        <div className="item">
-            <ChatBubbleOutlineOutlinedIcon className="icon"
-            onClick={()=> {navigate('/chat')}} />
-            <div className="counter">2</div>
-          </div>
-        <div className="item">
-            <button  onClick={()=> {navigate('/login')}}><span></span>Login</button>
+          <div className="item">
+            <div>
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <img src={image2} className="icontop" />
+              </Link>
+            </div>
+            <div className="name">
+              <p>TRAVO</p>
+            </div>
           </div>
           <div className="item">
-            <button  onClick={()=> {navigate('/register')}}><span></span>Sign Up</button>
+            <ChatBubbleOutlineOutlinedIcon
+              className="icon"
+              onClick={() => {
+                navigate("/chat");
+              }}
+            />
+            <div className="counter">2</div>
+          </div>
+          <div className="item">
+            <button onClick={() => navigate("/login")}>
+              <span></span>Login
+            </button>
+          </div>
+          <div className="item">
+            <button onClick={() => navigate("/register")}>
+              <span></span>Sign Up
+            </button>
           </div>
         </div>
-       
-        <div className='containerTable'>
-          <p className='text'>Available Buses</p>
+
+        <div className="containerTable">
+          <div className="backButton" >
+            <ArrowBackIosNewRoundedIcon
+              onClick={goBack}
+            />
+          </div>
+          <p className="text">Available Buses</p>
           <div>
             <table className="table">
+              {/* Table content */}
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -61,8 +92,8 @@ const UnRegFilteredBuses = () => {
                 </tr>
               </thead>
               <tbody>
-                
-                {filteredBuses.map((bus, index) => {
+
+                {currentItems.map((bus, index) => {
                   //generates table rows dynamically based on the data
                   return (
                     <tr>
@@ -82,7 +113,7 @@ const UnRegFilteredBuses = () => {
                           const duration = bus.duration;
                           const distance = bus.distance;
                           const arrivalTime = bus.arrivalTime.substring(11, 19);
-                          navigate('/searchbus/unregviewbus', { state: { busID, routeName, duration, distance, arrivalTime } });
+                          navigate('/searchbus/unregfilteredbus/unregviewbus', { state: { busID, routeName, duration, distance, arrivalTime } });
                         }}
                         />
                       </td>
@@ -93,15 +124,20 @@ const UnRegFilteredBuses = () => {
             </table>
           </div>
         </div>
-            
+        <div className="pagination">
+          {pageNumbers.map((pageNumber) => (
+            <button
+              key={pageNumber}
+              onClick={() => handlePageChange(pageNumber)}
+              className={currentPage === pageNumber ? "active" : ""}
+            >
+              {pageNumber}
+            </button>
+          ))}
+        </div>
       </div>
-
-      
-      
     </div>
   );
 };
 
 export default UnRegFilteredBuses;
-
-

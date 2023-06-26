@@ -67,6 +67,7 @@ public class BusLocationService {
         }
     }
 
+    //calculate the duration using public transit options such as buses, trains, trams, or subways
     private int calculateDuration(double startLongitude, double startLatitude, double endLongitude, double endLatitude) {
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey(googleMapsApiKey)
@@ -85,7 +86,5 @@ public class BusLocationService {
             throw new RuntimeException("Failed to calculate duration", e);
         }
     }
-
-
 
 }

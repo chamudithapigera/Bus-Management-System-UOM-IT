@@ -5,18 +5,33 @@ import image from "../Css/Bus_background.png"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import { Modal, Button } from 'react-bootstrap';
+import { useState } from "react";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 
 const UnRegViewBus = () => {
   const location = useLocation();
   const { busID, routeName, duration, distance, arrivalTime } = location.state;
   const navigate = useNavigate();
+  const [isSuccess, setIsSuccess] = useState(false);
 
+
+  const closeModal = () => {
+    setIsSuccess(false)
+    navigate("/login");
+  };
+
+
+  const goBack = () => {
+    navigate(-1);
+  };
 
   const checkUserRegistration = () => {
-    window.alert("Please LOGIN to enable notifications.");
-    navigate('/login');
+  //  window.alert("Please LOGIN to enable notifications.");
+    setIsSuccess(true);
+ //   navigate('/login');
   };
 
   return (
@@ -47,6 +62,11 @@ const UnRegViewBus = () => {
         <div className="imageWrapper">
           <img src={image} alt="Background Image" />
           <div className="imageOverlay">
+          <div className="backButton" >
+          <ArrowBackIosNewRoundedIcon
+              onClick={goBack}
+            />
+          </div>
             <div className="detailsBox">
               <table>
                 <tr className="row1">
@@ -72,7 +92,23 @@ const UnRegViewBus = () => {
 
       </div>
 
-
+      <Modal
+        show={isSuccess}
+        onHide={() => setIsSuccess(false)}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Error</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Please LOGIN to enable notifications !</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => closeModal()}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
     </div>
   );

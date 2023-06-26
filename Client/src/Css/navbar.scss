@@ -9,10 +9,30 @@
 
   .wrapper {
     width: 100%;
-    padding: 20px;
+//    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .search{
+      //align-items: center;
+      display: flex;
+      margin-top: 5px;
+
+      .iconHome{
+        background-color: #8d8c8c;
+        border-radius: 15px;
+        padding: 1px;
+        font-size: 28px;
+      }
+
+      .currentPage{
+        margin-left: 5px;
+        margin-top: 3px;
+        font-size: 17px;
+        
+      }
+    }
 
     .items {
       display: flex;
@@ -23,6 +43,8 @@
         align-items: center;
         margin-right: 20px;
         position: relative;
+
+       
 
         .icon {
             font-size: 25px;

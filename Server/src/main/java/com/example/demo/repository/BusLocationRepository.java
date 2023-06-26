@@ -20,7 +20,5 @@ public interface BusLocationRepository extends MongoRepository<BusLocation, Stri
   })
   List<BusLocation> findLatestLocations();
 
-
-
 }
 

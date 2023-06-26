@@ -78,7 +78,7 @@ const AccountSettings = () => {
               onClick={() => isEditing && document.getElementById('imageInput').click()}
             />
           </div>
-          <div className="details">
+          <div className="details" >
             {isEditing ? (
               <>
                 <input

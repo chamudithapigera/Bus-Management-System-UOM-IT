@@ -31,15 +31,10 @@
         color: #999;
 
         .search {
-            border-color: gray;
-
-            input {
-
-                &::placeholder {
-                    font-size: 14px;
-                    color: gray;
-                }
-            }
+            .iconHome{
+                background-color: #8d8c8c;
+                color: #000;
+              }
         }
 
         .item{
@@ -68,7 +63,38 @@
         ul {
             li {
 
-                &:hover {
+                .dropdown {
+          
+
+                    a.active {
+                      background-color: #333;
+                      color: #000;
+                    }
+
+                    .dropdown-content{
+                        //background-color: #02451e;
+            
+                        .dropdown-item{
+                          background-color: #1c1e1d;
+                          padding-right: 1px;
+                          margin-left: 25px;
+                          margin-bottom: 5px;
+                          margin-top: 5px;
+                          padding-right: 0px;
+                          font-size: 13px;
+                          border-radius: 10px;
+                          justify-content: center;
+                          color: #8b8b8b;
+                        }
+                      }
+                }
+
+                a.active {
+                    background-color: #333;
+                    color: #000;
+                  }
+
+                a:hover {
                     background-color: #333;
                 }
 

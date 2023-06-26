@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react"
 import axios from "axios"
 import { useNavigate, Link } from "react-router-dom"
 import '../Css/login.scss'
+import { Modal, Button } from 'react-bootstrap';
 import image from '../Css/img_avatar2.png'
 import { UserContext } from '../Components/UserContext';
 
@@ -13,6 +14,12 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { setUserData } = useContext(UserContext);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const closeModal = () => {
+    setIsSuccess(false)
+    navigate("/searchbus");
+  };
 
   async function login(event) {
     event.preventDefault();
@@ -30,7 +37,8 @@ function Login() {
       });
 
       if (res.data == "passenger") {
-        alert("Login Successfully !");
+        //alert("Login Successfully !");
+        setIsSuccess(true);
 
         // Fetch the user's name after login
         const userRes = await axios.get(`http://localhost:8080/api/v1/passenger/users/${email}`);
@@ -47,7 +55,7 @@ console.log(userRes.data);
         
         });
 
-        navigate('/searchbus', { state: { userName1, userName2} });
+       // navigate('/searchbus', { state: { userName1, userName2} });
       }
       else if(res.data == "driver"){
         alert("Login Successfully !");
@@ -117,6 +125,23 @@ console.log(userRes.data);
 
         </form>
 
+        <Modal
+        show={isSuccess}
+        onHide={() => setIsSuccess(false)}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Success</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Login successfully!</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => closeModal()}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
       </div>
     </div>
 
