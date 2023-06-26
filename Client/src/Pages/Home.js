@@ -16,27 +16,31 @@ const Home = () => {
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
-        <div className='widgets-container' >
-          <div className='widgets-turn-attendance'>
-            <div className='widgets-turn'>
-              <WidgetTurn />
-            </div>
-            <div>
-              <WidgetDriverAttendance />
-            </div>
+        <div className='body'>
+          <div className='heading'>
+            Bus Depot Detail
           </div>
-          <div className='widgets-bus-driver'>
-            <div className='widgets-driver'>
-              <WidgetDriver />
+          <div className='widgets-container' >
+            <div className='widgets-turn-attendance'>
+              <div className='widgets-turn'>
+                <WidgetTurn />
+              </div>
+              <div>
+                <WidgetDriverAttendance />
+              </div>
             </div>
-            <div>
-              <WidgetBus />
+            <div className='widgets-bus-driver'>
+              <div className='widgets-driver'>
+                <WidgetDriver />
+              </div>
+              <div>
+                <WidgetBus />
+              </div>
             </div>
-          </div>
-        </div >
+          </div >
+        </div>
       </div>
     </div>
-
   );
 };
 

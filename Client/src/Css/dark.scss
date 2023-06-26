@@ -301,5 +301,20 @@
     }
 
 
-
+    .home {
+        display: flex;
+      
+      
+        .homeContainer {
+          .body {
+            .heading {
+              color: #b9b0ba;
+            }
+            .widgets-container {
+              -webkit-box-shadow: -2px -5px 18px -8px #959393;
+              box-shadow: -2px -5px 18px -8px #bcb7b7;
+            }
+          }
+        }
+      }
 }

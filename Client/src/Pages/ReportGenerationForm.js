@@ -53,12 +53,13 @@ export default function ReportGenerationForm() {
         </div>
         <div responsive ref={componentRef} className="imageWrapper">
           {reportActive && (
-            <div className="detailsBox">
-              <div className='h'>
+            <div className='body'>
+              <div className='title'>
                 <h1>Report of Drivers</h1>
               </div>
+              <div className="detailsBox">
               <div className='date'>
-                <div>
+                <div className='date1'>
                   <label className='fromDate'>From: </label>
                   <input className='fromInput'
                     type="date"
@@ -66,7 +67,7 @@ export default function ReportGenerationForm() {
                     onChange={(e) => setFromDate(e.target.value)}
                   />
                 </div>
-                <div>
+                <div className='date2'>
                   <label className='toDate'>To: </label>
                   <input className='toInput'
                     type="date"
@@ -79,6 +80,7 @@ export default function ReportGenerationForm() {
                 </div>
               </div>
             </div>
+            </div>
           )}
 
           {tableActive && (
@@ -88,7 +90,7 @@ export default function ReportGenerationForm() {
                   Driver Attendance
                 </div>
                 <div className="tableBorderShadow">
-                  <table >
+                  <table className="report-table">
 
                     <thead>
                       <tr>

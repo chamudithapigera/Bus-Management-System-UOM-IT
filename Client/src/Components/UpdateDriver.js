@@ -40,7 +40,18 @@ export default function UpdateDriver() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        setShowConfirmationModal(true);
+        if (!busId) {
+            showError("Please enter a value for Bus ID.")
+          }
+          else if (!/^B\d{1,4}$/.test(busId)) {
+            showError("Bus ID should be in the format B#### with a maximum length of 5 characters. (e.g., B8)");
+          }
+          else if (!driverId) {
+            showError("Please enter a value for driver ID.")
+          }
+          else {
+            setShowConfirmationModal(true);
+          }
     };
 
     const handleConfirmUpdate = async () => {

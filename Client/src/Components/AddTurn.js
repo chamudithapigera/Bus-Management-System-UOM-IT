@@ -5,7 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 import '../Css/table.scss';
 import '../Css/forms.scss';
 
-export default function AddTurn() {
+export default function AddTurn({closeAddModal}) {
 
     let navigate = useNavigate()
 
@@ -60,7 +60,7 @@ export default function AddTurn() {
         else {
             try {
                 await axios.post("http://localhost:8080/api/v1/turn/addTurn", busTurn);
-                setIsSuccess(true);
+                closeAddModal();
             }
             catch (error) {
                 showError("Failed to update bus turn");
@@ -76,9 +76,8 @@ export default function AddTurn() {
 
     return (
         <div className='container1'>
-            <div className='detailsBox'>
+            <div >
                 <div >
-                    <h3 >Add details of bus-turns</h3>
                     <form onSubmit={(e) => onSubmit(e)}>
                         <div className='mb'>
                             <label htmlFor='turnNo' className='label' rm>Turn No</label>
@@ -113,10 +112,7 @@ export default function AddTurn() {
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>
-
                         <button type="submit" className="button"  >Submit</button>
-                        <Link to="/turn" style={{ textDecoration: "none" }}><button>Cancel</button></Link>
-
                     </form>
                 </div>
             </div>

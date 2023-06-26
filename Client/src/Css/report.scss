@@ -5,10 +5,42 @@
   .busContainer {
     flex: 5;
 
+    .body {
+      display: flex;
+      flex-direction: column;
+      .title {
+        width: 100%;
+        font-size: 20px;
+        color: rgb(82, 46, 92);
+      
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bolder;
+      }
+
+      .detailsBox {
+     margin-top:10px ;
+        display: flex;
+        justify-content: space-between;
+        flex: 1;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        -webkit-box-shadow: -2px -5px 18px -8px #dbe6e2;
+        box-shadow: -2px -5px 18px -8px #030b08;
+        border-radius: 15px;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
     .print {
       padding-top: 10px;
       padding-left: 1px;
       padding-bottom: 2px;
+
       .print-btn {
         background-color: rgb(23, 99, 62);
         color: #cac4c4;
@@ -23,19 +55,10 @@
         height: 35px
       }
     }
-    
-  }
-
-  .detailsBox {
-    margin-top: 100px;
-    margin-left: 200px;
-    margin-right: 200px;
-    background-color: rgb(174, 227, 203);
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
   }
+
+
 
   .cancel {
     padding-top: 10px;
@@ -55,11 +78,7 @@
     }
   }
 
-  .h {
-    text-align: center;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-  }
+
 
   .button {
     background-color: #052752;
@@ -78,25 +97,34 @@
     }
   }
 
+
+ 
+  
   .date {
     text-align: left;
+
+  
 
   }
 
   .toDate {
+    font-weight: bold;
     color: #000000;
     text-align: center;
     margin-top: 1rem;
     margin-bottom: 2rem;
-    font-size: 1rem;
+    font-size: 20px;
+    color: rgb(82, 46, 92);
   }
 
   .fromDate {
-    color: #000000;
+    font-weight: bold;
     text-align: center;
     padding-top: 1rem;
     margin-bottom: 2rem;
-    font-size: 1rem;
+
+    font-size: 20px;
+    color: rgb(82, 46, 92);
   }
 
   .fromInput {
@@ -109,7 +137,7 @@
   }
 
   .toInput {
-    color: #000000;
+    
     text-align: center;
     margin-top: 1rem;
     margin-bottom: 2rem;
@@ -118,5 +146,28 @@
   }
 
 
+ 
 
+
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.report-table th,
+.report-table td {
+  color: #000000;
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.report-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}
+
+.title {
+  color: #000000;
 }

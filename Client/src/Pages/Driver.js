@@ -20,7 +20,7 @@ export default function Driver() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedDriverId, setSelectedDriverId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
 
   useEffect(() => {
     loadDrivers();

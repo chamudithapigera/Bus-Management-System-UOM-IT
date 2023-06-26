@@ -29,6 +29,7 @@ import ViewBusTurn from './Components/ViewTurn';
 import ViewDriver from './Components/ViewDriver';
 import Register from './Components/Register';
 import Chat from './Pages/Chat';
+import Login from './Pages/Login';
 
 function App() {
   const {darkMode}= useContext(DarkModeContext);
@@ -65,6 +66,7 @@ function App() {
             <Route exact path="/viewbusturn/:id" element={<ViewBusTurn/>} />
             <Route exact path="/viewdriver/:id" element={<ViewDriver/>} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/login" element={<Login />} />
 
         </Route>
       </Routes>

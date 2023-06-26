@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import '../Css/forms.scss';
 
-export default function AddBus() {
+export default function AddBus({ closeAddModal }) {
   let navigate = useNavigate();
 
   const [bus, setBus] = useState({
@@ -38,7 +38,7 @@ export default function AddBus() {
     } else {
       try {
         await axios.post("http://localhost:8080/api/v1/bus_detail/addBus", bus);
-        setIsSuccess(true);
+        closeAddModal();
       } catch (error) {
         if (error.response && error.response.data && error.response.data.message) {
           showError(error.response.data.message);
@@ -56,9 +56,9 @@ export default function AddBus() {
 
   return (
     <div className='container1'>
-      <div className='detailsBox'>
+      <div >
         <div>
-          <h3>Add details of buses</h3>
+          
           <form onSubmit={(e) => onSubmit(e)}>
             <div className='mb'>
               <label htmlFor='busID' className='label'>Bus ID</label>
@@ -85,7 +85,7 @@ export default function AddBus() {
             </div>
 
             <button type="submit" className="button">Submit</button>
-            <Link style={{ textDecoration: "none" }} to="/bus">Cancel</Link>
+           
           </form>
         </div>
       </div>

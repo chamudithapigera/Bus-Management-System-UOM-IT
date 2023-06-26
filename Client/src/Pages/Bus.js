@@ -9,6 +9,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
+import AddBus from '../Components/AddBus';
 
 export default function Bus() {
   const [buses, setBuses] = useState([]);
@@ -19,7 +20,8 @@ export default function Bus() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedBusId, setSelectedBusId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
+  const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
     loadBuses();
@@ -99,6 +101,10 @@ export default function Bus() {
     pageNumbers.push(i);
   }
 
+  const handleAdd = () => {
+    setShowAddModal(true);
+  };
+
   return (
     <div className='bus'>
       <Sidebar></Sidebar>
@@ -111,7 +117,9 @@ export default function Bus() {
               Bus details
             </div>
             <div className='datatableTitle'>
-              <Link to="/addbus"><button type="button" class="btn-outline">Add</button></Link>
+              <button type="button" className="btn-outline" onClick={handleAdd}>
+                Add
+              </button>
 
               <div className="searchBarContainer">
                 <input className="searchInput" type="text" placeholder="Search..." onChange={(e) => handleSearchTerm(e.target.value)} />
@@ -203,6 +211,14 @@ export default function Bus() {
             Delete
           </Button>
         </Modal.Footer>
+      </Modal>
+      <Modal show={showAddModal} onHide={() => setShowAddModal(false)} centered>
+        <Modal.Header closeButton style={{ backgroundColor: "#5fb689" }}>
+          <Modal.Title>Add details of Bus</Modal.Title>
+        </Modal.Header>
+        <Modal.Body >
+          <AddBus closeAddModal={() => setShowAddModal(false)} />
+        </Modal.Body>
       </Modal>
     </div>
   );

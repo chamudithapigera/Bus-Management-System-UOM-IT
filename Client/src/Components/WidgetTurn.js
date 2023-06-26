@@ -24,7 +24,9 @@ const WidgetTurn = () => {
                 <span className="title">No of Turns</span>
             </div>
             <div className="right">
+          
                 <FactCheckRoundedIcon />
+         
                 <span className="counter">{turn}</span>
             </div>
         </div>

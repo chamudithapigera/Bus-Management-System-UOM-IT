@@ -9,6 +9,7 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import { ArrowUpward, ArrowDownward } from '@mui/icons-material';
 import { Modal, Button } from 'react-bootstrap';
+import AddBusStop from '../Components/AddBusStop'
 
 export default function BusStop() {
 
@@ -20,7 +21,8 @@ export default function BusStop() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedBusStopId, setSelectedBusStopId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
+  const [showAddModal, setShowAddModal] = useState(false);
   
   useEffect(() => {
     loadBusStops();
@@ -100,6 +102,10 @@ export default function BusStop() {
     pageNumbers.push(i);
   }
 
+  const handleAdd = () => {
+    setShowAddModal(true);
+  };
+
   return (
     <div className='bus'>
       <Sidebar></Sidebar>
@@ -112,9 +118,9 @@ export default function BusStop() {
             </div>
             <div className='datatableTitle'>
 
-              <Link to="/addStop" >
-                <button type="button" class="btn-outline">Add</button>
-              </Link>
+            <button type="button" className="btn-outline" onClick={handleAdd}>
+                Add
+              </button>
 
               <div className="searchBarContainer">
                 <input className="searchInput" type="text" placeholder="Search..." onChange={(e) => handleSearchTerm(e.target.value)} />
@@ -211,6 +217,14 @@ export default function BusStop() {
             Delete
           </Button>
         </Modal.Footer>
+      </Modal>
+      <Modal show={showAddModal} onHide={() => setShowAddModal(false)} centered>
+        <Modal.Header closeButton style={{ backgroundColor: "#5fb689" }}>
+          <Modal.Title>Add details of bus-stops</Modal.Title>
+        </Modal.Header>
+        <Modal.Body >
+          <AddBusStop closeAddModal={() => setShowAddModal(false)} />
+        </Modal.Body>
       </Modal>
     </div>
   )
