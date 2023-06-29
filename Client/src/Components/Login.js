@@ -5,6 +5,7 @@ import '../Css/login.scss'
 import { Modal, Button } from 'react-bootstrap';
 import image from '../Css/img_avatar2.png'
 import { UserContext } from '../Components/UserContext';
+import { alignPropType } from "react-bootstrap/esm/types";
 
 
 
@@ -133,11 +134,11 @@ console.log(userRes.data);
         <Modal.Header closeButton>
           <Modal.Title>Success</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="text-center">
           <p>Login successfully!</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={() => closeModal()}>
+          <Button variant="success" onClick={() => closeModal()}>
             OK
           </Button>
         </Modal.Footer>

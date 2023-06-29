@@ -3,6 +3,8 @@ import '../Css/accountsettings.scss';
 import { UserContext } from '../Components/UserContext';
 import { ProfileImageContext } from '../Components/ProfileImageContext';
 import axios from 'axios';
+import { Modal, Button } from 'react-bootstrap';
+
 
 const AccountSettings = () => {
   const { userData } = useContext(UserContext);
@@ -11,15 +13,29 @@ const AccountSettings = () => {
   const concatenatedUserName = `${userName1} ${userName2}`;
   const { profileImage, setProfileImage } = useContext(ProfileImageContext);
 
+
   const [name, setName] = useState(concatenatedUserName);
   const [email1, setEmail] = useState(email);
   const [phone1, setPhone] = useState(phone);
   const [country, setCountry] = useState('Sri Lanka');
   const [image, setImage] = useState(profileImage);
   const [isEditing, setIsEditing] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const closeModal = () => {
+    setIsSuccess(false);
+    setIsEditing(false);//indicating that the user has finished editing the profile
+  };
+
+  const handleAlertModalClose = () => {
+    setIsSuccess(false);
+  
+  };
 
   //updating the user details by making a PUT request to the backend API endpoint
   const handleSave = async () => {
+    setIsSuccess(true);
+
     try {
       const updatedDetails = {
         email: email1,
@@ -28,12 +44,14 @@ const AccountSettings = () => {
 
       //The updatedDetails object is passed as the request payload
       await axios.put(`http://localhost:8080/api/v1/passenger/${email}`, updatedDetails);
+      setIsSuccess(true);
 
-      setIsEditing(false);//indicating that the user has finished editing the profile
     } catch (error) {
       console.error(error);
     }
   };
+
+
 
   //change profile picture( 'e' is a parameter which contains information about the selected file)
   const handleImageChange = (e) => {
@@ -57,9 +75,9 @@ const AccountSettings = () => {
     }
   };
 
-  
+
   return (
-    <div className='accountsettings'>
+    <div className="accountsettings">
       <div className="top">
         <div className="left">
           {!isEditing && (
@@ -133,6 +151,26 @@ const AccountSettings = () => {
             )}
           </div>
         </div>
+        <Modal
+          show={isSuccess}
+          onHide={() => setIsSuccess(false)}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Success</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="text-center">
+            <p>Profile Updated Successfully!</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="dark" onClick={handleAlertModalClose}>
+              Cancel
+            </Button>
+            <Button variant="success" onClick={() => closeModal()}>
+              OK
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div>
   );

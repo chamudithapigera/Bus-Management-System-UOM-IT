@@ -100,11 +100,11 @@ const UnRegViewBus = () => {
         <Modal.Header closeButton>
           <Modal.Title>Error</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="text-center">
           <p>Please LOGIN to enable notifications !</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={() => closeModal()}>
+          <Button variant="danger" onClick={() => closeModal()}>
             OK
           </Button>
         </Modal.Footer>

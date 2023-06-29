@@ -6,6 +6,10 @@
     flex: 5;
   }
 
+  .text-center {
+    align-items: center;
+  }
+
   .imageWrapper {
     margin: 15px;
     flex: 1;
@@ -28,7 +32,7 @@
       padding: 20px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
-      
+
     }
 
     .route-name {
@@ -38,15 +42,15 @@
     }
 
 
-    .row2{
+    .row2 {
       background-color: rgb(174, 227, 203);
-      
+
       .distance {
         padding-left: 40px;
         font-size: 15px;
         color: #100e0e;
-       
-        
+
+
         font-weight: bold;
       }
 
@@ -65,7 +69,7 @@
         font-weight: bold;
         padding-left: 40px;
       }
-  
+
     }
 
 
@@ -96,4 +100,111 @@
 
 
   }
+}
+
+@media screen and (max-width: 1480px) {
+  .viewbus {
+    display: flex;
+    width: 100%;
+
+    .viewbusContainer {
+      flex: 5;
+    }
+
+    .text-center {
+      align-items: center;
+    }
+
+    .imageWrapper {
+      margin: 15px;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .imageOverlay {
+        position: absolute;
+width: 76vw;        
+height: 670px;
+        background-color: rgba(67, 224, 67, 0.5);
+        /* change the color and opacity as needed */
+      }
+
+      .detailsBox {
+        margin: 30vh 15vw;
+        background-color: rgb(174, 227, 203);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+
+      }
+
+      .route-name {
+        font-size: 30px;
+        font-weight: bold;
+        color: #333;
+      }
+
+
+      .row2 {
+        background-color: rgb(174, 227, 203);
+
+        .distance {
+          padding-left: 40px;
+          font-size: 15px;
+          color: #100e0e;
+
+
+          font-weight: bold;
+        }
+
+        .arrival-time {
+          font-size: 15px;
+          color: #191717;
+          margin-left: 70px;
+          font-weight: bold;
+          padding-left: 40px;
+        }
+
+        .duration {
+          font-size: 15px;
+          color: #161313;
+          margin-left: 320px;
+          font-weight: bold;
+          padding-left: 40px;
+        }
+
+      }
+
+
+      .icon-wrapper {
+        margin-left: 5px;
+
+      }
+
+      .icon {
+        width: 60px;
+        height: 60px;
+      }
+
+    }
+
+    img {
+      width: 100%;
+      height: 670px;
+    }
+
+
+
+    .contentWrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+
+    }
+  }
+
 }

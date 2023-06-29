@@ -32,8 +32,7 @@ const ViewBus = () => {
 
   const handleInput2ModalClose = () => {
     setIsInputModalOpen(false);
-    
-
+  
   };
 
   const handleInputModalClose = () => {
@@ -101,11 +100,11 @@ const ViewBus = () => {
           <Modal.Header closeButton>
             <Modal.Title>Success</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="text-center">
             <p>Notification is ON !</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handleAlertModalClose}>
+            <Button variant="success" onClick={handleAlertModalClose}>
               OK
             </Button>
           </Modal.Footer>
@@ -114,7 +113,7 @@ const ViewBus = () => {
           <Modal.Header closeButton>
             <Modal.Title>Notification</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body >
             <Form.Group controlId="notifyDistance">
               <Form.Label>Enter the distance to receive the bus arrival notification (km)</Form.Label>
               <Form.Control
@@ -126,7 +125,7 @@ const ViewBus = () => {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handleInput2ModalClose}>
+            <Button variant="dark" onClick={handleInput2ModalClose}>
               Cancel
             </Button>
             <Button variant="success" onClick={handleInputModalClose}>
@@ -136,13 +135,13 @@ const ViewBus = () => {
         </Modal>
         <Modal show={isAlert2ModalOpen} onHide={handleAlert2ModalClose} centered>
           <Modal.Header closeButton>
-            <Modal.Title>Alert</Modal.Title>
+            <Modal.Title>Warning</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <p>Please register to enable notifications.</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handleAlert2ModalClose}>
+            <Button variant="danger" onClick={handleAlert2ModalClose}>
               OK
             </Button>
           </Modal.Footer>

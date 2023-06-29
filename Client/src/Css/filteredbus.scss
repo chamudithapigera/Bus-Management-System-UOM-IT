@@ -92,6 +92,103 @@
     }
     
       
+}
 
+@media screen and (max-width: 1480px) {
+  .list{
+    display: flex;
+    width: 100%;
+
+    .listContainer{
+        flex: 5;
+    }
+
+    .containerTable{
+        margin-left: 50px;
+        margin-right: 100px;
+        margin-top: 20px;
+
+        .text{
+            align-items: center;
+            justify-content: center;
+            margin-left: 28vw;
+            margin-top: 70px;
+            color:rgb(25, 60, 108) ;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .table {
+            width: 100%;
+           border-collapse: collapse;
+            margin: 10px;
+
+            
+          
+            td {
+              padding: 15px;
+              text-align: left;
+              color: black;
+
+              button{
+                padding: 0px 5px;
+                border-radius: 5px;
+                margin: 2px 1px;
+                color: #0b5323;
+                border: 1px dotted rgb(24, 130, 104);
+                
+            }
+              
+            }
+
+            
+          
+            th {
+              background-color: #7bd198;
+              font-weight: bold;
+              font-size: 15px;
+              color: black;
+              text-align: left;
+              border-bottom: 1px solid #211c1c;
+            }
+          
+          
+            ul {
+              margin: 0;
+              padding: 0;
+              list-style: none;
+            }
+          
+            li {
+              margin: 0 ;
+            }
+          }
+
+          
+        
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
     
+    .pagination button {
+      margin: 0 0.5rem;
+      padding: 0.25rem 0.5rem;
+      background-color: #ffffff;
+      border: 1px solid #dddddd;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    
+    .pagination button.active {
+      background-color: #dddddd;
+    }
+    
+      
+}
+
 }

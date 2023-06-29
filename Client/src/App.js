@@ -6,10 +6,6 @@ import Notification from "./Pages/Notification";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Settings from "./Pages/Settings";
 import Profile from "./Pages/Profile";
-import AccountSettings from "./Components/AccountSettings";
-import ChangePassword from "./Components/ChangePassword";
-import LegalNotice from "./Components/LegalNotice";
-import UserAddress from "./Components/UserAddress";
 import { DarkModeContext } from "./Components/darkModeContext";
 import "./Css/dark.scss"
 import { useContext } from "react";
@@ -18,7 +14,6 @@ import Register from "./Components/Register";
 import Home from "./Pages/Home";
 import UnRegFilteredBuses from "./Pages/UnRegFilteredBuses";
 import UnRegViewBus from "./Pages/UnRegViewBus";
-
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -58,8 +53,6 @@ function App() {
           
             <Route path="profile">
               <Route index element={<Profile />} />
-              
-
             </Route>
           
           </Route>

@@ -30,8 +30,6 @@ public class BusLocationService {
 
     @Value("${google.maps.api.key}")
     private String googleMapsApiKey; // API key for accessing the Google Maps API
-
-
     public List<BusLocationWithDistanceAndDuration> getNearbyBuses(double longitude, double latitude) {
         int distanceInMeters = 6000;
         List<BusLocation> latestLocations = busLocationRepository.findLatestLocations();
