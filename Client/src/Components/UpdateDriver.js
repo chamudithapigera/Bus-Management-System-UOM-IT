@@ -49,6 +49,7 @@ export default function UpdateDriver() {
           else if (!driverId) {
             showError("Please enter a value for driver ID.")
           }
+          
           else {
             setShowConfirmationModal(true);
           }
@@ -116,7 +117,7 @@ export default function UpdateDriver() {
                         <div className='mb-3'>
                             <label htmlFor='email' className='label'>Email</label>
                             <input
-                                type={"text"}
+                                type={"email"}
                                 className="input"
                                 placeholder='Enter email '
                                 name='email'
