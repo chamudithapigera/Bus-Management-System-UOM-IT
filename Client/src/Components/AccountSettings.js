@@ -29,7 +29,6 @@ const AccountSettings = () => {
 
   const handleAlertModalClose = () => {
     setIsSuccess(false);
-  
   };
 
   //updating the user details by making a PUT request to the backend API endpoint

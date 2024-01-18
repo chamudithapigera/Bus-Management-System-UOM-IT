@@ -9,7 +9,7 @@ import {
   InputLeftElement,
   SkeletonText,
 } from '@chakra-ui/react';
-import { useGeolocated } from 'react-geolocated';
+
 import {
   useJsApiLoader,
   GoogleMap,

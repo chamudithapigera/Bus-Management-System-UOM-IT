@@ -1,11 +1,8 @@
 import "../Css/navbar.scss";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../Components/darkModeContext"
 import { useContext } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -20,6 +17,7 @@ const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
   const location = useLocation();
 
+  //Determining whether the current page is related to filtered buses to apply highlighting.
   const isFilteredBusesPage =
     location.pathname.includes("filteredbus") ||
     location.pathname.includes("viewbus");
@@ -98,7 +96,9 @@ const Navbar = () => {
 
 
         </div>
+        
       </div>
+      {/* Highlighting the current page segment*/}
       <style>{`
         .navbar .currentPage span.highlighted {
           color: gray;

@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import '../Css/table.scss';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 
-const FilteredBuses = (props) => {
+const FilteredBuses = () => {
   const location = useLocation();
   const { filteredBuses, busStopName, routeNO } = location.state;
   const navigate = useNavigate();

@@ -6,6 +6,8 @@ import image from '../Css/img_avatar2.png'
 
 
 function Register() {
+
+  
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,11 +17,13 @@ function Register() {
 
 
   async function save(event) {
+    
     event.preventDefault();
 
     // Check if any field is empty
     if (firstname.trim() === "" || lastname.trim() === "" || email.trim() === "" || password.trim() === "" || telephone.trim() === "") {
       alert("Please fill in all fields");
+      
       return;
     }
 

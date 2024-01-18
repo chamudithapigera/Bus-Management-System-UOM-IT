@@ -5,7 +5,7 @@ import '../Css/login.scss'
 import { Modal, Button } from 'react-bootstrap';
 import image from '../Css/img_avatar2.png'
 import { UserContext } from '../Components/UserContext';
-import { alignPropType } from "react-bootstrap/esm/types";
+
 
 
 
@@ -15,7 +15,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { setUserData } = useContext(UserContext);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);//controls whether the modal is visible
+
 
   const closeModal = () => {
     setIsSuccess(false)
@@ -70,8 +71,8 @@ console.log(userRes.data);
         alert("Incorrect Email and Password not match");
       }
 
-
     }
+
 
     catch (err) {
       alert(err);
@@ -125,6 +126,7 @@ console.log(userRes.data);
           </div>
 
         </form>
+       
 
         <Modal
         show={isSuccess}
